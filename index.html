@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agentic Enterprise Adoption with Agentforce</title>
+<style>
+:root{--b:#0176d3;--bd:#014486;--bk:#032d60;--bl:#1b96ff;--blr:#d8edff;--td:#181818;--ts:#444;--tw:#706e6b;--pg:#f3f3f3;--sf:#fff;--sa:#fafaf9;--hl:#eef4ff;--br:#e5e5e5;--bs:#c9c9c9;--bi:#747474;--ok:#2e844a;--okl:#cdefc2;--okb:#f3faf0;--wn:#dd7a01;--wnl:#fef0cd;--wnb:#fffbf0;--er:#ea001e;--af:#7526e5;--afl:#ede3fb;--afd:#5a1ba9;--mk:#e3066a;--mkl:#fde8ef;--f:'Salesforce Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;--rm:.25rem;--rl:.5rem;--sc:0 2px 2px 0 rgba(0,0,0,.1);--so:0 2px 8px 0 rgba(0,0,0,.16)}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--f);font-size:.8125rem;color:var(--td);background:var(--pg);line-height:1.5;-webkit-font-smoothing:antialiased}
+.gh{background:var(--bk);height:48px;display:flex;align-items:center;padding:0 1rem;position:sticky;top:0;z-index:100}
+.gh__logo{display:flex;align-items:center;gap:.5rem;margin-right:1rem}
+.gh__logo svg{width:28px;height:20px}
+.gh__logo-text{color:#fff;font-size:.875rem;font-weight:700;letter-spacing:.02em}
+.gh__logo-sub{color:rgba(255,255,255,.7);font-size:.6875rem;font-weight:400;margin-left:.25rem}
+.gh__nav{display:flex;gap:2px;flex:1;overflow-x:auto}
+.gh__ni{color:rgba(255,255,255,.85);font-size:.75rem;font-weight:400;padding:0 .75rem;height:48px;display:flex;align-items:center;border:none;background:none;cursor:pointer;font-family:var(--f);position:relative;transition:color .15s,background .15s;white-space:nowrap}
+.gh__ni:hover{color:#fff;background:rgba(255,255,255,.1)}
+.gh__ni.on{color:#fff;font-weight:700}
+.gh__ni.on::after{content:"";position:absolute;bottom:0;left:.75rem;right:.75rem;height:3px;background:var(--bl);border-radius:3px 3px 0 0}
+.gh__trail{display:flex;align-items:center;gap:.75rem;margin-left:auto}
+.gh__badge{background:var(--af);color:#fff;font-size:.5625rem;font-weight:700;padding:2px 8px;border-radius:10px;letter-spacing:.05em;text-transform:uppercase}
+.tabs{background:var(--sf);border-bottom:1px solid var(--br);padding:0 1.5rem;display:flex;align-items:flex-end}
+.tab{padding:.75rem 1rem;border:none;background:none;cursor:pointer;font-size:.8125rem;font-weight:400;color:var(--ts);font-family:var(--f);border-bottom:3px solid transparent;margin-bottom:-1px;transition:all .15s}
+.tab:hover{color:var(--b)}.tab.on{color:var(--b);font-weight:700;border-bottom-color:var(--b)}
+.tabs .sp{flex:1}
+.bg{display:flex;gap:4px;padding-bottom:6px}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:0 1rem;height:32px;border:1px solid var(--bs);border-radius:var(--rm);background:var(--sf);color:var(--td);font-size:.75rem;font-weight:400;font-family:var(--f);cursor:pointer;transition:background .15s;white-space:nowrap}
+.btn:hover{background:var(--sa)}
+.ct{max-width:1440px;margin:0 auto;padding:1.5rem}
+.vw{display:none}.vw.on{display:block}
+.inp{flex:1;max-width:420px;padding:0 1rem;height:36px;border:1px solid var(--bi);border-radius:var(--rm);font-size:.8125rem;font-family:var(--f);color:var(--td);background:var(--sf);outline:none}
+.inp:focus{border-color:var(--b);box-shadow:0 0 0 1px var(--b)}
+/* Tree */
+.tr{font-size:.8125rem}.tn{margin-left:0}.tn .tc{margin-left:1.5rem;overflow:hidden;transition:max-height .25s ease}
+.tn.cl>.tc{max-height:0!important}
+.th{display:flex;align-items:center;gap:.5rem;padding:.5rem 1rem;margin:1px 0;border-radius:var(--rm);cursor:pointer;transition:background .15s;min-height:40px;border-left:3px solid transparent}
+.th:hover{background:var(--hl)}
+.cv{width:16px;height:16px;display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--tw);transition:transform .2s;flex-shrink:0}
+.tn.cl>.th .cv{transform:rotate(-90deg)}.cv.em{visibility:hidden}
+.rl{font-weight:600;flex:1;color:var(--td)}.sl{font-weight:400;font-size:.75rem;color:var(--tw);margin-left:.5rem}
+.cnt{padding:1px 8px;border-radius:10px;font-size:.625rem;font-weight:700;background:var(--blr);color:var(--bd)}
+.nL1>.th{background:var(--bk);color:#fff;border-left-color:transparent}.nL1>.th .rl,.nL1>.th .sl{color:#fff}.nL1>.th .sl{opacity:.7}.nL1>.th .cv{color:rgba(255,255,255,.7)}.nL1>.th .cnt{background:rgba(255,255,255,.2);color:#fff}.nL1>.th:hover{background:#04396e}
+.nL2>.th{background:var(--b);color:#fff;border-left-color:transparent}.nL2>.th .rl,.nL2>.th .sl{color:#fff}.nL2>.th .sl{opacity:.7}.nL2>.th .cv{color:rgba(255,255,255,.7)}.nL2>.th .cnt{background:rgba(255,255,255,.2);color:#fff}.nL2>.th:hover{background:var(--bd)}
+.nL3>.th{background:var(--blr);border-left-color:var(--b)}.nL3>.th .rl{color:var(--bd)}
+.nL4>.th{background:var(--hl);border-left-color:var(--bl)}
+.nL5>.th{background:var(--sa);border-left-color:var(--br)}
+/* Agent Card */
+.ac{background:var(--sf);border:1px solid var(--br);border-left:3px solid var(--af);border-radius:var(--rm);padding:.75rem 1rem;margin:2px 0 2px 1.5rem;cursor:pointer;display:flex;align-items:center;gap:.75rem;transition:box-shadow .15s}
+.ac:hover{box-shadow:var(--sc);border-left-color:var(--afd)}
+.ac__i{width:32px;height:32px;border-radius:var(--rm);background:var(--afl);color:var(--af);display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0;font-weight:700}
+.ac__b{flex:1;min-width:0}.ac__n{font-size:.8125rem;font-weight:700;color:var(--afd);line-height:1.3}
+.ac__p{font-size:.75rem;color:var(--tw);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ac__bd{display:flex;gap:4px;flex-shrink:0;flex-wrap:wrap}
+/* Badges */
+.bd{display:inline-block;padding:2px 8px;border-radius:1rem;font-size:.625rem;font-weight:700;line-height:1.6;white-space:nowrap;text-transform:uppercase;letter-spacing:.03em}
+.bd-au{background:var(--okb);color:var(--ok);border:1px solid var(--okl)}
+.bd-ap{background:var(--wnb);color:var(--wn);border:1px solid var(--wnl)}
+.bd-as{background:var(--hl);color:var(--b);border:1px solid var(--blr)}
+.bd-hy{background:var(--afl);color:var(--af);border:1px solid #d4c2f0}
+.bd-ps{background:var(--okb);color:var(--ok);border:1px solid var(--okl)}
+.bd-pl{background:var(--wnb);color:var(--wn);border:1px solid var(--wnl)}
+/* Modal */
+.mo{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:200;display:none;align-items:flex-start;justify-content:center;padding:3rem 1.5rem}
+.mo.op{display:flex}
+.md{background:var(--sf);border-radius:var(--rl);max-width:640px;width:100%;max-height:80vh;overflow:hidden;display:flex;flex-direction:column;box-shadow:var(--so)}
+.md__h{padding:1rem 1.5rem;border-bottom:1px solid var(--br);display:flex;align-items:center;gap:.75rem;flex-shrink:0}
+.md__hi{width:40px;height:40px;border-radius:var(--rm);background:var(--afl);color:var(--af);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;flex-shrink:0}
+.md__t{font-size:1rem;font-weight:700;flex:1}.md__x{width:28px;height:28px;border:none;background:none;color:var(--tw);cursor:pointer;font-size:20px;display:flex;align-items:center;justify-content:center;border-radius:var(--rm)}
+.md__x:hover{background:var(--sa)}.md__bd{padding:1.5rem;overflow-y:auto;flex:1}
+.md__f{margin-bottom:1rem;padding-bottom:1rem;border-bottom:1px solid var(--br)}.md__f:last-child{border-bottom:none;margin-bottom:0}
+.md__fl{font-size:.625rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--tw);margin-bottom:2px}
+.md__fv{font-size:.8125rem;color:var(--td);line-height:1.6}
+.md__bds{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:2px}
+/* Card */
+.cd{background:var(--sf);border:1px solid var(--br);border-radius:var(--rm);margin-bottom:1.5rem;box-shadow:var(--sc)}
+.cd__h{padding:.75rem 1rem;border-bottom:1px solid var(--br);display:flex;align-items:center;gap:.5rem}
+.cd__hi{width:28px;height:28px;border-radius:var(--rm);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+.cd__hi.svc{background:var(--blr);color:var(--b)}.cd__hi.sal{background:var(--afl);color:var(--af)}.cd__hi.mkt{background:var(--mkl);color:var(--mk)}
+.cd__t{font-size:.875rem;font-weight:700}.cd__bd{padding:0}
+.cd--intro{border-left:3px solid var(--b)}.cd--intro .cd__bd{padding:1rem}
+.cd--intro h3{font-size:.875rem;font-weight:700;margin-bottom:2px}.cd--intro p{font-size:.8125rem;color:var(--tw);line-height:1.6}
+/* Table */
+.tb{width:100%;border-collapse:separate;border-spacing:0;font-size:.8125rem}
+.tb th{background:var(--sa);padding:.5rem .75rem;text-align:left;font-size:.625rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--tw);border-bottom:1px solid var(--br);white-space:nowrap}
+.tb td{padding:.5rem .75rem;border-bottom:1px solid var(--br);vertical-align:top}
+.tb tbody tr:hover td{background:var(--hl)}
+.tb .money{text-align:right;font-variant-numeric:tabular-nums}.tb .sav{color:var(--ok);font-weight:700}
+.tb input[type="number"]{width:88px;padding:0 .5rem;height:30px;border:1px solid var(--bi);border-radius:var(--rm);font-size:.8125rem;font-family:var(--f);text-align:right;color:var(--td);outline:none}
+.tb input[type="number"]:focus{border-color:var(--b);box-shadow:0 0 0 1px var(--b)}
+/* Summary */
+.sg{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1rem;margin-top:1.5rem}
+.sc{background:var(--sf);border:1px solid var(--br);border-radius:var(--rm);padding:1.5rem;box-shadow:var(--sc);position:relative;overflow:hidden}
+.sc::before{content:"";position:absolute;top:0;left:0;right:0;height:3px}
+.sc.svc::before{background:var(--b)}.sc.sal::before{background:var(--af)}.sc.cmb::before{background:linear-gradient(90deg,var(--b),var(--af))}
+.sc__l{font-size:.625rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--tw);margin-bottom:1rem}
+.sc__r{display:flex;justify-content:space-between;padding:2px 0;font-size:.8125rem}.sc__r .l{color:var(--tw)}.sc__r .v{font-weight:700;font-variant-numeric:tabular-nums}
+.sc__r.hi{font-size:1.25rem;margin-top:.75rem;padding-top:.75rem;border-top:1px solid var(--br)}.sc__r.hi .v{color:var(--ok)}
+.pb{margin-top:.75rem;background:var(--br);border-radius:var(--rl);height:8px;overflow:hidden}
+.pb__f{height:100%;border-radius:var(--rl);background:var(--ok);transition:width .4s ease}
+.nt{margin-top:1.5rem;padding:1rem;background:var(--wnb);border:1px solid var(--wnl);border-left:3px solid var(--wn);border-radius:var(--rm);font-size:.75rem;color:var(--ts);line-height:1.6}
+.nt strong{color:var(--wn)}
+/* Journey */
+.jm{overflow-x:auto;padding-bottom:1rem}
+.jg{display:grid;grid-template-columns:140px repeat(8,minmax(180px,1fr));gap:0;min-width:1600px}
+.jsh{padding:.75rem .5rem;text-align:center;border:1px solid var(--br);border-left:none;font-weight:700;font-size:.75rem;color:#fff;position:sticky;top:0;z-index:2}
+.jsh:first-child{border-left:1px solid var(--br)}.jsh .sn{font-size:.625rem;opacity:.8;display:block;margin-bottom:2px}
+.jfn{font-size:.625rem;font-weight:400;opacity:.85;display:block;margin-top:2px}
+.smk{background:var(--mk)}.ssl{background:var(--b)}.ssv{background:var(--af)}.sdg{background:#455a64}
+.swl{padding:.6rem .5rem;font-size:.6875rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--tw);background:var(--sa);border:1px solid var(--br);display:flex;align-items:center;position:sticky;left:0;z-index:1}
+.swc{padding:.5rem;border:1px solid var(--br);border-left:none;background:var(--sf);font-size:.75rem;color:var(--ts);line-height:1.5}
+.swc ul{list-style:none;padding:0;margin:0}.swc li{padding:2px 0}.swc li::before{content:"";display:inline-block;width:4px;height:4px;border-radius:50%;margin-right:6px;vertical-align:middle}
+.spa li::before{background:var(--er)}.sch li::before{background:var(--b)}.sca li::before{background:var(--tw)}
+.jp{display:inline-block;padding:3px 8px;border-radius:10px;font-size:.6875rem;font-weight:600;margin:2px;cursor:pointer;transition:all .15s;border:1px solid transparent;line-height:1.4}
+.jp:hover{transform:translateY(-1px);box-shadow:var(--sc)}
+.jp--a{background:var(--afl);color:var(--afd);border-color:#d4c2f0}.jp--a:hover{background:var(--af);color:#fff}
+.jp--r{background:var(--hl);color:var(--bd);border-color:var(--blr)}.jp--r:hover{background:var(--b);color:#fff}
+.jp--n{background:var(--sa);color:var(--tw);cursor:default;border-color:var(--br)}.jp--n:hover{transform:none;box-shadow:none}
+/* Data Req */
+.dr-grid{display:grid;grid-template-columns:200px 1fr 1fr 1fr;gap:0;border:1px solid var(--br);border-radius:var(--rm);overflow:hidden;margin-bottom:1.5rem}
+.dr-hdr{background:var(--bk);color:#fff;padding:.5rem .75rem;font-weight:700;font-size:.6875rem;text-transform:uppercase;letter-spacing:.04em;border-right:1px solid rgba(255,255,255,.2)}
+.dr-hdr:last-child{border-right:none}
+.dr-agent{background:var(--sa);padding:.5rem .75rem;font-weight:700;font-size:.8125rem;color:var(--afd);border-bottom:1px solid var(--br);border-right:1px solid var(--br);cursor:pointer;display:flex;align-items:center;gap:.5rem}
+.dr-agent:hover{background:var(--hl)}
+.dr-cell{padding:.4rem .75rem;font-size:.75rem;border-bottom:1px solid var(--br);border-right:1px solid var(--br);color:var(--ts);line-height:1.5}
+.dr-cell:last-child{border-right:none}
+.dr-cell ul{list-style:none;padding:0;margin:0}.dr-cell li{padding:1px 0;display:flex;align-items:flex-start;gap:4px}
+.dr-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;margin-top:5px}
+.dr-rt{background:var(--er)}.dr-nrt{background:var(--wn)}.dr-bt{background:var(--b)}
+.dr-legend{display:flex;gap:1.5rem;margin-bottom:1rem;font-size:.75rem;color:var(--ts);align-items:center}
+.dr-legend span{display:flex;align-items:center;gap:4px}
+/* Telemetry slides */
+.tel-slide{background:var(--sf);border:1px solid var(--br);border-radius:var(--rm);margin-bottom:1.5rem;box-shadow:var(--sc);overflow:hidden}
+.tel-slide__h{padding:1rem 1.5rem;display:flex;align-items:center;gap:.75rem;cursor:pointer;transition:background .15s}
+.tel-slide__h:hover{background:var(--hl)}
+.tel-slide__icon{width:36px;height:36px;border-radius:var(--rm);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;color:#fff}
+.tel-slide__icon.svc{background:var(--b)}.tel-slide__icon.sal{background:var(--af)}.tel-slide__icon.mkt{background:var(--mk)}.tel-slide__icon.gov{background:var(--bk)}
+.tel-slide__title{font-size:1rem;font-weight:700;flex:1}
+.tel-slide__chev{font-size:12px;color:var(--tw);transition:transform .2s}
+.tel-slide.cl .tel-slide__chev{transform:rotate(-90deg)}
+.tel-slide__body{padding:0 1.5rem 1.5rem;overflow:hidden;transition:max-height .3s}
+.tel-slide.cl .tel-slide__body{max-height:0!important;padding:0 1.5rem}
+.tel-metric{display:grid;grid-template-columns:200px 1fr 180px 200px;gap:0;border:1px solid var(--br);border-radius:var(--rm);overflow:hidden;margin-top:.75rem}
+.tel-metric__hdr{background:var(--sa);padding:.4rem .75rem;font-size:.625rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--tw);border-bottom:1px solid var(--br);border-right:1px solid var(--br)}
+.tel-metric__hdr:last-child{border-right:none}
+.tel-metric__cell{padding:.5rem .75rem;font-size:.75rem;border-bottom:1px solid var(--br);border-right:1px solid var(--br);color:var(--ts);line-height:1.5}
+.tel-metric__cell:last-child{border-right:none}
+.tel-metric__cell:first-child{font-weight:600;color:var(--td)}
+.tel-metric__cell.good{color:var(--ok);font-weight:600}
+
+@media(max-width:900px){.gh{padding:0 .5rem}.ct{padding:1rem}.sg{grid-template-columns:1fr}.gh__badge{display:none}}
+@media print{.gh,.tabs,.nt{display:none}.cd{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header class="gh">
+  <div class="gh__logo">
+    <svg viewBox="0 0 24 17" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10.13 2.06c.95-1 2.27-1.62 3.73-1.62 1.77 0 3.33.9 4.26 2.27a5.14 5.14 0 0 1 2.3-.55c2.86 0 5.18 2.36 5.18 5.27s-2.32 5.27-5.18 5.27c-.36 0-.72-.04-1.06-.11a4.46 4.46 0 0 1-3.88 2.3 4.4 4.4 0 0 1-2.1-.53 4.96 4.96 0 0 1-4.36 2.62 5 5 0 0 1-4.64-3.2 3.87 3.87 0 0 1-.68.06C1.83 13.84 0 11.97 0 9.67c0-1.6.89-2.99 2.2-3.67a4.33 4.33 0 0 1-.15-1.13c0-2.7 2.15-4.87 4.8-4.87 1.37 0 2.6.58 3.48 1.51" fill="#ffffff"/></svg>
+    <span class="gh__logo-text">Agentic Enterprise Adoption<span class="gh__logo-sub">with Agentforce</span></span>
+  </div>
+  <nav class="gh__nav">
+    <button class="gh__ni on" onclick="sT('journey',this)">Customer Journeys</button>
+    <button class="gh__ni" onclick="sT('orgchart',this)">Enterprise Agentic Functions</button>
+    <button class="gh__ni" onclick="sT('calculator',this)">Value Calculator</button>
+    <button class="gh__ni" onclick="sT('datareq',this)">Agent Data Requirements</button>
+    <button class="gh__ni" onclick="sT('telemetry',this)">Agent Telemetry</button>
+  </nav>
+  <div class="gh__trail"><span class="gh__badge">B2C Telco</span></div>
+</header>
+
+<!-- TAB 1: CUSTOMER JOURNEYS -->
+<div id="vw-journey" class="vw on">
+  <div class="tabs"><button class="tab on" disabled>Customer Journey Map</button><div class="sp"></div></div>
+  <div class="ct">
+    <div class="cd cd--intro" style="border-left-color:var(--af)"><div class="cd__bd"><h3>B2C Telco Customer Journey Map</h3><p>Horizontal view of the customer lifecycle across Marketing, Sales, and Service. Click any <strong style="color:var(--af)">agent</strong> or <strong style="color:var(--b)">role</strong> pill to navigate to its position in the Org Chart.</p></div></div>
+    <div class="jm"><div class="jg" id="jg"></div></div>
+  </div>
+</div>
+
+<!-- TAB 2: ENTERPRISE AGENTIC FUNCTIONS -->
+<div id="vw-orgchart" class="vw">
+  <div class="tabs">
+    <button class="tab on" onclick="sOV('service',this)">Service</button>
+    <button class="tab" onclick="sOV('sales',this)">Sales</button>
+    <button class="tab" onclick="sOV('marketing',this)">Marketing</button>
+    <button class="tab" onclick="sOV('all',this)">Combined</button>
+    <div class="sp"></div>
+    <div class="bg"><button class="btn" onclick="eA()">Expand All</button><button class="btn" onclick="cA()">Collapse All</button></div>
+  </div>
+  <div class="ct">
+    <div style="display:flex;gap:.75rem;margin-bottom:1.5rem;align-items:center"><input type="text" class="inp" id="os" placeholder="Search roles or agents..." oninput="fT()"></div>
+    <div id="ot" class="tr"></div>
+  </div>
+</div>
+
+<!-- TAB 3: VALUE CALCULATOR -->
+<div id="vw-calculator" class="vw">
+  <div class="tabs">
+    <button class="tab on" onclick="sCV('both',this)">Service &amp; Sales</button>
+    <button class="tab" onclick="sCV('service',this)">Service Only</button>
+    <button class="tab" onclick="sCV('sales',this)">Sales Only</button>
+    <div class="sp"></div><div class="bg"><button class="btn" onclick="rC()">Reset Defaults</button></div>
+  </div>
+  <div class="ct">
+    <div class="cd cd--intro"><div class="cd__bd"><h3>FTE Cost-Out Calculator</h3><p>Enter FTEs per role, adjust cost and automatable % to model savings from Agentforce deployment.</p></div></div>
+    <div id="cs" class="cd"><div class="cd__h"><div class="cd__hi svc">&#9742;</div><span class="cd__t">Service Roles</span></div><div class="cd__bd"><table class="tb"><thead><tr><th>Role</th><th>Agent(s)</th><th>HITL</th><th>FTEs</th><th>Cost/FTE</th><th>Auto%</th><th>Current</th><th>Projected</th><th>Savings</th></tr></thead><tbody id="csb"></tbody></table></div></div>
+    <div id="cl" class="cd"><div class="cd__h"><div class="cd__hi sal">&#128176;</div><span class="cd__t">Sales Roles</span></div><div class="cd__bd"><table class="tb"><thead><tr><th>Role</th><th>Agent(s)</th><th>HITL</th><th>FTEs</th><th>Cost/FTE</th><th>Auto%</th><th>Current</th><th>Projected</th><th>Savings</th></tr></thead><tbody id="clb"></tbody></table></div></div>
+    <div class="sg" id="csu"></div>
+    <div class="nt"><strong>Note:</strong> Automatable percentages are illustrative estimates. Figures represent capacity displacement, not necessarily headcount elimination.</div>
+  </div>
+</div>
+
+<!-- TAB 4: AGENT DATA REQUIREMENTS -->
+<div id="vw-datareq" class="vw">
+  <div class="tabs">
+    <button class="tab on" onclick="sDV('service',this)">Service</button>
+    <button class="tab" onclick="sDV('sales',this)">Sales</button>
+    <button class="tab" onclick="sDV('marketing',this)">Marketing</button>
+    <div class="sp"></div>
+  </div>
+  <div class="ct">
+    <div class="cd cd--intro" style="border-left-color:var(--af)"><div class="cd__bd"><h3>Agent Data Requirements</h3><p>Each agent's data needs classified by freshness: <strong style="color:var(--er)">Real-time</strong> (sub-second to seconds), <strong style="color:var(--wn)">Near-real-time</strong> (minutes to 1 hour), <strong style="color:var(--b)">Batch</strong> (daily/weekly). Click an agent name to view full details. Data integration powered by Salesforce Data Cloud and MuleSoft.</p></div></div>
+    <div class="dr-legend">
+      <span><span class="dr-dot dr-rt"></span> Real-time (sub-second)</span>
+      <span><span class="dr-dot dr-nrt"></span> Near-real-time (minutes)</span>
+      <span><span class="dr-dot dr-bt"></span> Batch (daily/weekly)</span>
+    </div>
+    <div id="drg"></div>
+  </div>
+</div>
+
+<!-- TAB 5: AGENT TELEMETRY -->
+<div id="vw-telemetry" class="vw">
+  <div class="tabs"><button class="tab on" disabled>Agent Telemetry & Governance</button><div class="sp"></div></div>
+  <div class="ct">
+    <div class="cd cd--intro" style="border-left-color:var(--bk)"><div class="cd__bd"><h3>Agent Telemetry & Governance Dashboard</h3><p>Enterprise metrics to ensure agents work productively and don't drift. Organized by business function with benchmarks and drift detection guidance. Click each section to expand.</p></div></div>
+    <div id="telg"></div>
+  </div>
+</div>
+
+<!-- MODAL -->
+<div class="mo" id="modal" onclick="if(event.target===this)xM()"><div class="md"><div class="md__h"><div class="md__hi">Af</div><span class="md__t" id="mt"></span><button class="md__x" onclick="xM()">&times;</button></div><div class="md__bd" id="mb"></div></div></div>
+
+<script>
+// ═══ AGENT DATA (compact keys) ═══
+const A={
+opsAnalytics:{name:"Operations Analytics Agent",purpose:"Real-time and trending view of contact center performance for Director decision-making.",tasks:"Aggregate KPIs (CSAT, NPS, FCR, AHT, cost-per-contact), identify trends/anomalies, generate exec dashboards.",triggers:"Daily review, weekly briefing, monthly business review, KPI breach.",systems:"BI/analytics, CRM, WFM, telephony/ACD, QA.",keyData:"Contact volumes, resolution rates, CSAT/NPS, AHT by queue, cost-per-contact, vendor SLA.",kpis:"Dashboard accuracy, insight-to-action time, anomaly detection rate.",hitl:"Assistive",priority:"Near-term Service",
+dr:{rt:["Live queue depth & service levels","Real-time agent states & adherence","Current abandonment rate"],nrt:["Intraday contact volume vs forecast","Today's AHT/FCR by queue","Today's QA scores aggregated"],bt:["Monthly KPI trends & benchmarks","Vendor SLA performance reports","Historical volume patterns"]}},
+volumeDriver:{name:"Volume Driver Analysis Agent",purpose:"Identify why customers contact the center and surface systemic issues.",tasks:"Classify contact reasons, correlate spikes to events, quantify avoidable contacts.",triggers:"Weekly volume review, post-event analysis.",systems:"Transcript analytics, CRM, billing logs, network incidents.",keyData:"Contact reason taxonomy, volume by reason, repeat-contact patterns.",kpis:"Avoidable contact rate, root-cause accuracy, volume reduction.",hitl:"Assistive",priority:"",
+dr:{rt:[],nrt:["Today's contact reason distribution","Recent billing system event correlation","Active outage-to-contact mapping"],bt:["Monthly contact reason trends","Product launch impact analysis","Avoidable contact rate history"]}},
+voiceOfCustomer:{name:"Voice of Customer Agent",purpose:"Synthesize feedback from surveys, social, complaints, and focus groups.",tasks:"Aggregate verbatims, cluster themes, identify emerging pain points, track sentiment.",triggers:"Post-survey, focus group, quarterly VoC, sentiment shift.",systems:"Survey platform, NPS, social listening, transcript analytics.",keyData:"Survey responses, NPS verbatims, social mentions, focus group transcripts.",kpis:"Theme identification accuracy, emerging issue lead time.",hitl:"Assistive",priority:"",
+dr:{rt:[],nrt:["Social media sentiment (hourly refresh)","Today's NPS/CSAT survey responses"],bt:["Monthly NPS/CSAT aggregates","Focus group transcript analysis","Complaint theme trends (quarterly)"]}},
+workforcePlanning:{name:"Workforce Planning Agent",purpose:"Support strategic capacity planning and headcount decisions.",tasks:"Forecast volumes, model staffing scenarios, identify gaps, project automation impact.",triggers:"Monthly capacity review, annual budget, seasonal planning.",systems:"WFM, forecasting, HR/headcount, finance.",keyData:"Historical volumes, seasonality, attrition, shrinkage, deflection rates.",kpis:"Forecast accuracy, staffing variance.",hitl:"Assistive",priority:"",
+dr:{rt:[],nrt:["Intraday volume actuals vs forecast"],bt:["Historical volume patterns (12-24 months)","Attrition rates & ramp times","Automation deflection rates","Budget constraints & headcount caps"]}},
+networkPerf:{name:"Network Performance Analytics Agent",purpose:"Visibility into how network quality drives tech support demand.",tasks:"Correlate network events with contact volume, identify chronic areas, quantify truck-roll drivers.",triggers:"Weekly ops review, post-outage analysis.",systems:"Network mgmt, outage mgmt, CRM, BI, field dispatch.",keyData:"Network alarms, outage history, contact-to-outage correlation, truck-roll rates.",kpis:"Correlation accuracy, proactive identification, truck-roll reduction.",hitl:"Assistive",priority:"",
+dr:{rt:["Active network alarms (SNMP/gNMI)","Current outage status by site"],nrt:["Outage-to-contact correlation (15-min refresh)","Recent truck-roll dispatch status"],bt:["Network quality trends by region","Equipment failure rate analysis","Coverage maps & RF propagation models"]}},
+techOpsInsights:{name:"Technical Operations Insights Agent",purpose:"Understand escalation patterns and optimize tiered support.",tasks:"Analyze Tier 1/2 flows, identify training gaps, surface repeat failures.",triggers:"Monthly escalation review, KB audit.",systems:"CRM, case mgmt, knowledge, QA, LMS.",keyData:"Escalation rates, repeat-step rates, KB usage.",kpis:"Escalation reduction, Tier 1 improvement.",hitl:"Assistive",priority:"",
+dr:{rt:[],nrt:["Today's escalation rates by issue type"],bt:["Monthly escalation flow analysis","KB article usage & gap analysis","Training completion vs performance correlation"]}},
+churnAnalytics:{name:"Churn Analytics & Forecasting Agent",purpose:"Strategic visibility into churn drivers and retention ROI.",tasks:"Model churn propensity, identify leading indicators, forecast scenarios.",triggers:"Monthly churn review, quarterly evaluation.",systems:"CRM, churn model, retention analytics, finance.",keyData:"Churn by segment, save acceptance, post-save churn, LTV.",kpis:"Forecast accuracy, program ROI, early-warning lead time.",hitl:"Assistive",priority:"",
+dr:{rt:[],nrt:["Updated churn propensity scores (hourly refresh)"],bt:["Monthly churn rates by segment/reason","Save program ROI analysis","Competitive pricing & market share data","NPS by customer segment"]}},
+retentionProgramPerf:{name:"Retention Program Performance Agent",purpose:"Evaluate whether retention offers work and where they leak margin.",tasks:"Compare save rate by offer, measure post-save churn, flag leakage.",triggers:"Weekly save review, monthly margin analysis.",systems:"CRM, retention offers, finance/margin, QA.",keyData:"Save outcomes, discount depth, post-save churn, margin per save.",kpis:"Save rate by offer, margin retention, leakage rate.",hitl:"Assistive",priority:"",
+dr:{rt:[],nrt:["Today's save outcomes & discount values"],bt:["30/60/90-day post-save churn rates","Offer portfolio ROI analysis","Rep-level save economics"]}},
+billingResolution:{name:"Billing Resolution Agent",purpose:"Help supervisors resolve escalated billing disputes.",tasks:"Pull billing history, identify dispute root cause, validate credit eligibility, recommend amount.",triggers:"Escalated dispute, credit above threshold, multi-cycle dispute.",systems:"CRM, billing, payments, case mgmt, policy rules.",keyData:"Full billing history, charges, credits, adjustments, plan history, prior disputes.",kpis:"Resolution rate, credit accuracy, policy compliance.",hitl:"Approval-based",priority:"Near-term Service",
+dr:{rt:["Current billing balance & payment due","Active autopay status","Installment plan balances","Promotional credit status"],nrt:["Recent payment attempts & failures","Today's billing adjustments","Recent interaction notes"],bt:["12-24 month invoice history","Historical dispute patterns","Policy threshold rules"]}},
+paymentException:{name:"Payment Exception Agent",purpose:"Help supervisors handle payment exceptions and hardship cases.",tasks:"Present payment history, evaluate hardship, recommend plan, assess restoration.",triggers:"Agent escalation, hardship, service restoration, late-fee waiver.",systems:"Billing, payments, collections, CRM, policy.",keyData:"Balance, payment history, autopay, collections stage, hardship indicators.",kpis:"Exception resolution rate, delinquency save, compliance.",hitl:"Approval-based",priority:"",
+dr:{rt:["Current balance & past-due amount","Collection stage & suspension status","Last payment date/method/amount"],nrt:["Recent payment arrangement history","Hardship indicators (recent contacts, social data)"],bt:["Full payment history (12 months)","Policy exception rules & thresholds","Collections workflow rules"]}},
+supervisorQueue:{name:"Supervisor Queue & Coaching Agent",purpose:"Real-time queue visibility and coaching triggers.",tasks:"Monitor queues, flag spikes, identify coaching needs, recommend staffing adjustments.",triggers:"Queue breach, AHT spike, abandonment, adherence violation.",systems:"WFM, telephony/ACD, QA, CRM.",keyData:"Queue stats, adherence, transcripts, agent performance.",kpis:"Service level, occupancy, coaching-trigger rate.",hitl:"Assistive",priority:"",
+dr:{rt:["Live queue depth by skill group","Real-time agent states (available/busy/ACW)","Real-time adherence (RTA)","Current service level & ASA","Live sentiment alerts from active calls"],nrt:["Intraday volume reforecast","Today's agent AHT & FCR","Today's QA evaluation scores"],bt:["Weekly/monthly KPI trends","Agent skill profiles & certifications","Scheduled shifts & planned shrinkage"]}},
+interactionQA:{name:"Interaction QA Agent",purpose:"Auto-score interactions for compliance and quality.",tasks:"Summarize calls, identify policy violations, score quality, recommend coaching.",triggers:"Post-interaction, compliance audit.",systems:"Transcripts, QA platform, CRM, compliance rules.",keyData:"Transcripts, policy library, QA rubric, outcomes.",kpis:"QA score, violation rate, false-positive rate.",hitl:"Approval-based",priority:"",
+dr:{rt:[],nrt:["Completed interaction transcripts (streaming)","Post-interaction disposition codes"],bt:["Policy library & regulatory requirements","QA rubric & scoring criteria","Historical QA score distributions"]}},
+techEscalation:{name:"Tech Escalation Summary Agent",purpose:"Reduce handoff loss on escalations.",tasks:"Summarize diagnostics, capture symptoms, tag root cause.",triggers:"Transfer from care to advanced tech.",systems:"CRM, diagnostics, case system, transcripts.",keyData:"Prior troubleshooting, telemetry, transcript summary.",kpis:"Repeat-step rate, escalation quality.",hitl:"Assistive",priority:"",
+dr:{rt:["Current interaction transcript","Active diagnostic results","Customer authentication state"],nrt:["Prior troubleshooting steps (from case notes)","Recent device/network telemetry"],bt:["Known issue database","Device troubleshooting decision trees"]}},
+techQueuePriority:{name:"Tech Queue Prioritization Agent",purpose:"Prioritize tech cases by impact and risk.",tasks:"Rank by severity, VIP status, churn risk, repeat-failure.",triggers:"Queue backlog, event surge.",systems:"Case platform, network events, customer-value model.",keyData:"Severity, failed contacts, customer value, SLA status.",kpis:"Backlog aging, high-risk response time.",hitl:"Assistive",priority:"",
+dr:{rt:["Live tech support queue with case metadata","Active outage severity by site","SLA clock status per case"],nrt:["Updated churn risk scores","Repeat-contact count per customer"],bt:["Customer value tier assignments","SLA policy definitions"]}},
+saveOffer:{name:"Save Offer Recommendation Agent",purpose:"Select the right retention offer.",tasks:"Score churn, identify root cause, rank offers, enforce governance.",triggers:"Cancel inquiry, port-out, rejected initial offer.",systems:"CRM, retention offers, pricing, usage, margin.",keyData:"Churn propensity, tenure, complaints, prior offers, discount rules.",kpis:"Save rate, margin impact, leakage.",hitl:"Approval-based",priority:"Near-term Service",
+dr:{rt:["Current call context & cancel reason","Authorized offer menu with eligibility","Contract terms & device payoff amount"],nrt:["Updated churn propensity score","Recent interaction & complaint history","Recent competitive offers detected"],bt:["Historical save outcomes by offer type","Discount governance rules","Customer LTV & margin contribution"]}},
+retentionSuperPerf:{name:"Retention Supervisor Performance Agent",purpose:"Manage save quality across the team.",tasks:"Compare reps on save rate, discount depth, post-save churn.",triggers:"Daily review, leakage alert.",systems:"Workforce analytics, CRM, offers, finance.",keyData:"Save outcomes by rep, discounts, downstream churn.",kpis:"Save rate, leakage, compliance.",hitl:"Assistive",priority:"",
+dr:{rt:[],nrt:["Today's save outcomes by rep","Intraday discount values granted"],bt:["30/60/90 post-save churn by rep","Monthly discount leakage analysis","Coaching action completion rates"]}},
+sentimentDefection:{name:"Sentiment & Defection Risk Agent",purpose:"Surface likely defectors for proactive intervention.",tasks:"Monitor negative patterns, score risk, recommend outreach.",triggers:"Repeated contacts, low CSAT, social complaints.",systems:"CRM, NPS, transcript analytics, social.",keyData:"Sentiment, complaint tags, repeat-contact count.",kpis:"Early-risk identification, proactive conversion.",hitl:"Assistive",priority:"",
+dr:{rt:[],nrt:["Real-time sentiment from active interactions","Social media mention alerts","Repeat-contact count (rolling 48-hour)"],bt:["NPS/CSAT survey aggregates","Complaint theme analysis","Churn prediction model outputs"]}},
+careCopilot:{name:"Care Copilot",purpose:"Accelerate assisted-service handling.",tasks:"Retrieve context, suggest next action, draft responses, auto-populate ACW.",triggers:"Authenticated live interaction.",systems:"CRM, billing, knowledge, case notes.",keyData:"Account profile, billing, products, interaction history.",kpis:"AHT reduction, FCR, adoption.",hitl:"Assistive",priority:"Near-term Service",
+dr:{rt:["Customer identity & auth state","Current billing balance & plan details","Active service status per line","Current interaction channel & context","Knowledge base articles (indexed)"],nrt:["Recent interaction history (48h)","Recent case notes & dispositions","Updated product holdings"],bt:["Full account profile & tenure","Historical interaction summary","Policy & procedure library"]}},
+careTriage:{name:"Care Triage Agent",purpose:"Classify and route inbound contacts.",tasks:"Detect intent, assist auth, score priority, generate transfer summary.",triggers:"New inbound call/chat/social.",systems:"IVR/chat, CRM, identity, routing.",keyData:"Identity, account status, prior contacts, sentiment.",kpis:"Routing accuracy, auth success.",hitl:"Fully autonomous",priority:"",
+dr:{rt:["Inbound channel & ANI/caller ID","IVR path selections","Customer identity lookup","Active outage in customer's area"],nrt:["Recent contact count (48h)","Last interaction summary & sentiment"],bt:["Contact reason taxonomy","Routing rules & skill group definitions"]}},
+orderStatus:{name:"Order Status Agent",purpose:"Deflect order tracking inquiries.",tasks:"Check order stage, shipment, activation, appointment date.",triggers:"Order inquiry.",systems:"OMS, shipping, activation, CRM.",keyData:"Order ID, shipping status, activation status.",kpis:"Self-service completion, containment.",hitl:"Fully autonomous",priority:"Near-term Service",
+dr:{rt:["Order status (real-time from OMS)","Shipping tracking (carrier API)","Activation status & error codes","Port-in status & FOC date"],nrt:["Recent order modifications"],bt:["Order type definitions","Fulfillment SLA targets"]}},
+channelResponse:{name:"Channel Response Agent",purpose:"Draft channel-appropriate responses.",tasks:"Compose replies, adapt tone, insert status, recommend escalation.",triggers:"Inbound chat/social case.",systems:"Digital service, CRM, knowledge, moderation.",keyData:"Channel history, account status, response patterns.",kpis:"Response time, containment, CSAT.",hitl:"Assistive",priority:"",
+dr:{rt:["Inbound message content & channel","Customer identity & account status","Active case context"],nrt:["Channel conversation history","Recent account changes"],bt:["Brand voice guidelines","Approved response templates","Moderation rules & compliance policies"]}},
+advTechCopilot:{name:"Advanced Tech Copilot",purpose:"Support complex multistep troubleshooting.",tasks:"Suggest root causes, next diagnostic, customer-safe explanations.",triggers:"Live advanced tech interaction.",systems:"Diagnostics, CRM, knowledge, incidents.",keyData:"Diagnostics, known incidents, device history.",kpis:"Resolution quality, AHT.",hitl:"Assistive",priority:"",
+dr:{rt:["Real-time device diagnostics (signal, firmware)","Active network alarms at serving site","Current provisioning/HLR status","Live speed test results"],nrt:["Recent CDRs (24h) showing failures","Trouble ticket status for area","Recent device diagnostic history"],bt:["Device compatibility & known issues DB","Network coverage baselines","Troubleshooting decision trees"]}},
+outageHealth:{name:"Outage & Service Health Agent",purpose:"Resolve/explain network events during interactions.",tasks:"Identify outage, correlate data, provide ETA, suppress truck-roll.",triggers:"Service down, outage complaint.",systems:"Outage mgmt, network assurance, CRM, incidents.",keyData:"Outage map, service address, alarms, maintenance windows.",kpis:"Containment, ETA accuracy, truck-roll avoidance.",hitl:"Fully autonomous",priority:"Near-term Service",
+dr:{rt:["Active outage tickets with affected area polygons","Cell site alarm status (streaming)","Maintenance window schedule","Customer service address & serving site"],nrt:["Estimated restoration time updates","Affected subscriber count","Historical outage pattern for area"],bt:["Network topology & site database","Outage communication templates"]}},
+deviceTroubleshoot:{name:"Device Troubleshooting Agent",purpose:"Guide through device/connectivity issues.",tasks:"Run troubleshooting tree, identify issue, suggest fixes.",triggers:"Device issue, Wi-Fi complaint, activation failure.",systems:"Device mgmt, network diagnostics, CRM, knowledge.",keyData:"Device model, firmware, diagnostics, signal quality.",kpis:"Resolution rate, truck-roll avoidance.",hitl:"Hybrid",priority:"",
+dr:{rt:["Device model, IMEI, firmware version","Current signal metrics (RSRP/RSRQ/SINR)","SIM/eSIM activation state","Remote diagnostic commands"],nrt:["Recent device error logs","Prior troubleshooting steps attempted","Recent CDRs showing data/call failures"],bt:["Device-specific troubleshooting guides","Known firmware issues database","Device compatibility matrix"]}},
+retentionCopilot:{name:"Retention Copilot",purpose:"Help reps navigate save conversations.",tasks:"Surface churn summary, recommend script, show offers.",triggers:"Cancel/save interaction.",systems:"CRM, retention offers, knowledge, policy.",keyData:"Churn score, prior interactions, eligible offers.",kpis:"Save conversion, time-to-offer.",hitl:"Assistive",priority:"",
+dr:{rt:["Current call context & stated cancel reason","Eligible retention offer menu","Contract & device payoff details"],nrt:["Churn propensity score","Recent interaction & complaint summary","Prior save offers extended"],bt:["Save script library","Objection handling playbook","Offer economics & margin data"]}},
+storeTraffic:{name:"Store Traffic & Conversion Agent",purpose:"Improve in-store conversion and staffing.",tasks:"Correlate footfall/conversion; flag underperforming windows.",triggers:"Conversion drop, staffing mismatch.",systems:"POS, appointments, WFM, CRM.",keyData:"Traffic, transactions, inventory, staffing.",kpis:"Conversion, attach rate, wait time.",hitl:"Assistive",priority:"",dr:{rt:["Live footfall counter","Current queue/wait time"],nrt:["Intraday conversion by hour","Today's staffing vs plan"],bt:["Weekly conversion trends","Inventory levels","Campaign calendar"]}},
+retailCopilot:{name:"Retail Associate Copilot",purpose:"Guide associates during sales.",tasks:"Check eligibility, recommend plans, prepare quote/order.",triggers:"In-store interaction.",systems:"CRM, catalog, pricing, eligibility, OMS, POS.",keyData:"Account, eligibility, inventory, promo rules.",kpis:"Conversion, upsell rate, order accuracy.",hitl:"Assistive",priority:"Near-term Sales",
+dr:{rt:["Customer account & line eligibility","Real-time product catalog & pricing","Device inventory (store & nearby)","Credit check results","Active promotions & qualification rules"],nrt:["Recent usage patterns (30-day)","Trade-in device valuation"],bt:["Financing rules & terms","Disclosure requirements","Commission structures"]}},
+accessoryBundle:{name:"Accessory & Bundle Agent",purpose:"Increase attach rate and ARPU.",tasks:"Suggest add-ons, accessories, bundles.",triggers:"Quote creation, device selection.",systems:"Catalog, promos, POS.",keyData:"Chosen device, household products, promo eligibility.",kpis:"Attach rate, bundle penetration.",hitl:"Assistive",priority:"",dr:{rt:["Selected device & plan","Current household products"],nrt:["Accessory inventory availability"],bt:["Bundle rules & compatibility","Attachment rate benchmarks"]}},
+digitalConversion:{name:"Digital Conversion Optimization Agent",purpose:"Improve online funnel conversion.",tasks:"Identify drop-offs, recommend content/offers, trigger nudges.",triggers:"Cart abandonment, checkout hesitation.",systems:"Web analytics, CDP/CRM, commerce, chat.",keyData:"Clickstream, cart, campaign source, eligibility.",kpis:"Cart recovery, checkout conversion.",hitl:"Assistive",priority:"",dr:{rt:["Live session clickstream","Cart contents & checkout state","Visitor identity (known/anonymous)"],nrt:["Session replay patterns","A/B test variant assignments"],bt:["Funnel conversion benchmarks","Campaign performance history"]}},
+planRecommendation:{name:"Plan Recommendation Agent",purpose:"Match users to the right plan online.",tasks:"Infer needs, compare plans, surface bundles.",triggers:"Plan browse, comparison page.",systems:"Catalog, pricing, recommendation engine.",keyData:"Plan catalog, promos, usage profile.",kpis:"Recommendation acceptance, conversion uplift.",hitl:"Hybrid",priority:"Near-term Sales",dr:{rt:["Available plans & current pricing","Visitor browsing behavior","Current plan (if existing customer)"],nrt:["Usage patterns (if known customer)","Household product holdings"],bt:["Plan comparison rules","Recommendation model weights","Regional availability"]}},
+promoEligibility:{name:"Promo Eligibility Agent",purpose:"Reduce offer confusion and fallout.",tasks:"Validate promo rules, explain requirements.",triggers:"Promo selection, checkout validation failure.",systems:"Pricing, promo engine, identity, order validation.",keyData:"Promo terms, line status, trade-in rules.",kpis:"Fallout rate, order completion.",hitl:"Fully autonomous",priority:"Near-term Sales",dr:{rt:["Promotion rules & eligibility criteria","Customer line & account status","Credit class & financing eligibility","Trade-in device valuation (real-time API)"],nrt:["Port-in validation status"],bt:["Full promotion terms & conditions","Historical promo fallout patterns"]}},
+checkoutSupport:{name:"Checkout Support Agent",purpose:"Reduce digital order abandonment.",tasks:"Answer checkout questions, recover failed steps.",triggers:"Stalled checkout, payment decline.",systems:"Commerce, payments, shipping, OMS.",keyData:"Cart, financing, shipping options, error codes.",kpis:"Checkout completion, abandonment rate.",hitl:"Hybrid",priority:"",dr:{rt:["Cart contents & checkout step","Payment processing status & error codes","Shipping options & delivery estimates"],nrt:["Session error history","Recent cart modifications"],bt:["FAQ & checkout help content","Payment method rules"]}},
+digitalFallout:{name:"Digital Order Fallout Agent",purpose:"Catch and remediate failed orders.",tasks:"Diagnose fallout, request missing info, resubmit.",triggers:"Order fallout, validation failure.",systems:"OMS, fraud/ID, activation, CRM.",keyData:"Exception codes, KYC, device eligibility.",kpis:"Fallout rate, recovery rate.",hitl:"Approval-based",priority:"Near-term Sales",dr:{rt:["Order exception codes & error details","KYC/identity verification status","Activation system status"],nrt:["Recent order fallout queue","Fraud screening results"],bt:["Order validation rules","Fallout pattern analysis","Recovery workflow playbooks"]}},
+callCoaching:{name:"Call Coaching & Objection Agent",purpose:"Improve telesales rep effectiveness.",tasks:"Live prompts, objection handling, post-call coaching.",triggers:"Live telesales call.",systems:"Telephony, transcripts, CRM, catalog.",keyData:"Live transcript, customer profile, offer rules.",kpis:"Conversion lift, compliance.",hitl:"Assistive",priority:"",dr:{rt:["Live call transcript (streaming)","Customer account context","Product catalog & current offers"],nrt:["Customer's recent interactions"],bt:["Objection handling playbook","Competitive battle cards","Compliance disclosure scripts"]}},
+telesalesPerf:{name:"Telesales Performance Agent",purpose:"Help supervisors manage conversion and quality.",tasks:"Rank reps, flag leakage, identify coaching needs.",triggers:"Daily review.",systems:"QA, telephony, CRM, sales dashboards.",keyData:"Call outcomes, conversions, QA scores.",kpis:"Conversion, revenue/call.",hitl:"Assistive",priority:"",dr:{rt:[],nrt:["Intraday rep conversion rates","Today's call outcomes & dispositions"],bt:["Weekly/monthly rep performance trends","QA score distributions","Revenue per call benchmarks"]}},
+telesalesCopilot:{name:"Telesales Copilot",purpose:"Speed up acquisition and upgrade sales.",tasks:"Recommend plans/devices, quote price, create order.",triggers:"Inbound acquisition/upgrade call.",systems:"CRM, catalog, CPQ, OMS, payments.",keyData:"Account, eligibility, promos, device stock.",kpis:"Quote-to-order conversion, AHT.",hitl:"Assistive",priority:"Near-term Sales",dr:{rt:["Customer account & eligibility","Real-time pricing & promotions","Device inventory & availability","Credit check results","Financing options & terms"],nrt:["Recent usage patterns","Trade-in valuation"],bt:["Disclosure requirements","Commission structures"]}},
+upgradeEligibility:{name:"Upgrade Eligibility Agent",purpose:"Identify the best upgrade path.",tasks:"Check eligibility, trade-in value, financing.",triggers:"Upgrade inquiry.",systems:"Eligibility, device lifecycle, inventory, pricing.",keyData:"Tenure, installment status, trade-in value.",kpis:"Upgrade conversion, attach rate.",hitl:"Assistive",priority:"",dr:{rt:["Device payment plan status & balance","Upgrade eligibility date","Trade-in value (real-time API)","Current device inventory"],nrt:["Recent usage patterns"],bt:["Device lifecycle data","Financing rules","Historical upgrade patterns"]}},
+crossSellUpsell:{name:"Cross-sell / Upsell Agent",purpose:"Monetize interactions with add-on recommendations.",tasks:"Recommend add-a-line, home internet, bundles.",triggers:"Eligible account, quote flow.",systems:"CRM, recommendation engine, catalog, promos.",keyData:"Household, current products, propensity.",kpis:"Attach rate, incremental ARPU.",hitl:"Assistive",priority:"",dr:{rt:["Current household product inventory","Active promotions for cross-sell"],nrt:["Propensity model scores (upgrade, cross-sell)","Recent white-space analysis"],bt:["Campaign rules & targeting criteria","Historical cross-sell acceptance rates"]}},
+quoteGovernance:{name:"Quote & Order Governance Agent",purpose:"Reduce order errors across channels.",tasks:"Validate completeness, check compliance, flag risks.",triggers:"Pre-submit quote/order.",systems:"Catalog, pricing, OMS, compliance.",keyData:"Product rules, pricing, promo terms.",kpis:"Order accuracy, fallout rate.",hitl:"Approval-based",priority:"",dr:{rt:["Quote/order line items","Pricing validation rules","Promo compliance checks"],nrt:["Recent order exception patterns"],bt:["Product dependency rules","Promo terms & conditions","Channel-specific compliance rules"]}},
+offerPerformance:{name:"Offer Performance Agent",purpose:"Evaluate offer effectiveness by channel.",tasks:"Compare uptake, margin impact, abuse patterns.",triggers:"Campaign launch, weekly review.",systems:"Pricing, sales analytics, finance.",keyData:"Promo usage, conversion, discount depth.",kpis:"Offer ROI, abuse rate.",hitl:"Assistive",priority:"",dr:{rt:[],nrt:["Intraday offer uptake rates"],bt:["Weekly offer performance by channel","Margin impact analysis","Abuse/fraud pattern detection","Historical offer ROI"]}},
+channelOptimization:{name:"Channel Optimization Agent",purpose:"Compare channel performance and reallocate focus.",tasks:"Identify underperformance, diagnose funnels.",triggers:"Weekly business review.",systems:"Enterprise analytics, commerce, POS, telephony.",keyData:"Conversion by channel, CAC, ARPU.",kpis:"Channel conversion, CAC efficiency.",hitl:"Assistive",priority:"",dr:{rt:[],nrt:["Intraday channel conversion rates"],bt:["Weekly channel performance comparison","CAC by channel","ARPU & attach rate trends","Assisted vs self-service mix"]}},
+// MARKETING
+brandPerformance:{name:"Brand Performance Agent",purpose:"Track brand health and campaign impact.",tasks:"Monitor awareness/favorability, track social sentiment, analyze competitive SOV.",triggers:"Post-campaign, quarterly brand review.",systems:"Brand tracking, social listening, surveys, competitive intel.",keyData:"Awareness, favorability, NPS, social sentiment, SOV.",kpis:"Brand lift, sentiment trend.",hitl:"Assistive",priority:"",dr:{rt:[],nrt:["Social media sentiment (hourly)","Real-time social mention volume"],bt:["Quarterly brand tracking surveys","Competitive share of voice analysis","Campaign brand lift studies"]}},
+campaignPerformance:{name:"Campaign Performance Agent",purpose:"Measure and optimize advertising campaigns.",tasks:"Aggregate metrics, A/B test creative, recommend budget shifts.",triggers:"Campaign launch, weekly review.",systems:"Ad platforms, media agency, attribution.",keyData:"Impressions, reach, CTR, CPM, CPA, creative variants.",kpis:"Campaign ROI, CPA efficiency.",hitl:"Assistive",priority:"",dr:{rt:["Live campaign delivery metrics (impressions, spend)"],nrt:["Intraday CTR/CPA by channel","Creative performance comparisons"],bt:["Weekly campaign ROI analysis","Historical CPA benchmarks","Media mix model outputs"]}},
+mediaMix:{name:"Media Mix Optimization Agent",purpose:"Optimize media spend allocation.",tasks:"Run MMM, recommend budget shifts, forecast volume.",triggers:"Quarterly planning, budget reallocation.",systems:"MMM platform, ad platforms, finance.",keyData:"Spend by channel, attribution, conversions, CPAs.",kpis:"Marketing efficiency ratio, channel ROAS.",hitl:"Assistive",priority:"",dr:{rt:[],nrt:[],bt:["Marketing mix model outputs (monthly rebuild)","Spend & conversion data by channel","Incrementality test results","Budget constraints & targets"]}},
+acquisitionCampaign:{name:"Acquisition Campaign Agent",purpose:"Optimize digital acquisition in real-time.",tasks:"Adjust bids, pause underperformers, scale winners.",triggers:"Daily review, CPA breach.",systems:"Google Ads, Meta Ads, DSP, analytics.",keyData:"Keyword/audience performance, CPA, quality scores.",kpis:"Digital CPA, conversion volume, ROAS.",hitl:"Hybrid",priority:"",dr:{rt:["Live bid landscape & auction data","Real-time spend pacing","Conversion event stream"],nrt:["Intraday CPA by campaign/ad group","Audience performance shifts"],bt:["Historical keyword performance","Audience overlap analysis","Quality score trends"]}},
+contentPerformance:{name:"Content & SEO Agent",purpose:"Optimize organic content strategy.",tasks:"Track rankings, identify gaps, analyze competitor SEO.",triggers:"Weekly ranking review, content planning.",systems:"SEO platform, CMS, web analytics.",keyData:"Rankings, organic traffic, competitor rankings.",kpis:"Organic traffic growth, ranking improvements.",hitl:"Assistive",priority:"",dr:{rt:[],nrt:[],bt:["Weekly keyword ranking snapshots","Monthly organic traffic analysis","Content gap analysis","Competitor SEO strategy changes"]}},
+conversionOptimization:{name:"Conversion Optimization Agent",purpose:"Improve website conversion rates.",tasks:"Identify drop-offs, recommend A/B tests, personalize pages.",triggers:"Conversion drop, new campaign, quarterly CRO.",systems:"A/B testing, web analytics, CMS, CDP.",keyData:"Funnel metrics, test results, segment performance.",kpis:"Conversion rate, test velocity, revenue/visitor.",hitl:"Hybrid",priority:"",dr:{rt:["Live funnel conversion rates","Active A/B test variant performance"],nrt:["Session-level conversion paths","Page load performance metrics"],bt:["Historical conversion benchmarks","Completed test results & learnings","Segment performance analysis"]}},
+attributionAnalytics:{name:"Marketing Attribution Agent",purpose:"Cross-channel attribution for budget decisions.",tasks:"Run MTA models, compare MTA vs MMM, identify high-value paths.",triggers:"Monthly review, budget planning.",systems:"Attribution platform, ad platforms, CRM, data warehouse.",keyData:"Touchpoint data, conversion paths, channel interactions.",kpis:"Attribution accuracy, path insights.",hitl:"Assistive",priority:"",dr:{rt:[],nrt:["Recent conversion path data"],bt:["Monthly multi-touch attribution model outputs","Channel interaction analysis","Incrementality study results","Time-to-convert analysis"]}},
+journeyOrchestration:{name:"Journey Orchestration Agent",purpose:"Automate lifecycle communications.",tasks:"Trigger right message at right time, select channel, personalize, manage frequency.",triggers:"Customer events (activation, first bill, churn signal).",systems:"Marketing Cloud, CRM, CDP, email/SMS.",keyData:"Lifecycle stage, engagement history, preferences, event triggers.",kpis:"Open/click rates, journey completion, opt-out rate.",hitl:"Hybrid",priority:"Near-term Marketing",dr:{rt:["Customer event triggers (activation, payment, etc.)","Channel preference & opt-in status","Frequency cap status"],nrt:["Recent engagement signals (opens, clicks)","Updated segment membership"],bt:["Journey flow definitions","Content template library","Historical engagement benchmarks"]}},
+audienceSegmentation:{name:"Audience Segmentation Agent",purpose:"Build and maintain dynamic customer segments.",tasks:"Create segments, identify micro-segments, recommend lookalikes.",triggers:"Campaign planning, quarterly refresh.",systems:"CDP, CRM, data warehouse, marketing automation.",keyData:"Demographics, behaviors, transactions, propensity scores.",kpis:"Segment performance lift, data freshness.",hitl:"Assistive",priority:"",dr:{rt:[],nrt:["Real-time behavioral event stream","Updated propensity scores"],bt:["Customer demographic & transaction data","Segment definition rules","Lookalike model outputs","Historical segment performance"]}},
+loyaltyEngagement:{name:"Loyalty Engagement Agent",purpose:"Optimize loyalty program engagement.",tasks:"Analyze redemption, recommend personalized offers, identify disengaged.",triggers:"Weekly engagement review, program refresh.",systems:"Loyalty platform, CRM, partner APIs.",keyData:"Redemption data, engagement frequency, partner offers.",kpis:"Engagement rate, redemption rate, program ROI.",hitl:"Assistive",priority:"",dr:{rt:["Member point balance & tier status"],nrt:["Recent redemption activity","Partner offer availability"],bt:["Monthly engagement trend analysis","Program ROI calculations","Disengaged member identification"]}},
+nextBestAction:{name:"Next-Best-Action Agent",purpose:"Determine optimal next communication or offer.",tasks:"Score propensity, select offer, determine channel/time, enforce rules.",triggers:"Real-time interaction, scheduled outreach.",systems:"Decision engine, CRM, CDP, marketing automation.",keyData:"Propensity scores, offer eligibility, interaction history, preferences.",kpis:"Offer acceptance, incremental revenue.",hitl:"Hybrid",priority:"",dr:{rt:["Customer context (current interaction or trigger event)","Offer eligibility rules","Frequency cap & suppression status","Channel availability"],nrt:["Updated propensity scores (upgrade, churn, cross-sell)","Recent interaction history"],bt:["Business rules & prioritization logic","Historical offer acceptance rates","Margin & economics per offer"]}}
+};
+
+// ORG TREES (same structure as before — abbreviated for space)
+const O={
+service:{role:"Chief Customer Officer / EVP Customer Operations",level:"L1",agents:[],children:[{role:"VP Customer Care / Service",level:"L2",agents:[],children:[
+{role:"Director, Care",level:"L3",subtitle:"Strategic: reporting, analytics, VoC, workforce planning",agents:[A.opsAnalytics,A.volumeDriver,A.voiceOfCustomer,A.workforcePlanning],children:[
+{role:"CC Supervisor, Care",level:"L4",subtitle:"Day-to-day: escalations, credit approvals, queue mgmt, QA",agents:[A.billingResolution,A.paymentException,A.supervisorQueue,A.interactionQA],children:[
+{role:"Frontline Care Rep",level:"L5",subtitle:"Standard billing, account changes, guided resolution",agents:[A.careCopilot,A.careTriage,A.orderStatus],children:[]},
+{role:"Chat / Messaging / Social Rep",level:"L5",subtitle:"Digital channel response",agents:[A.channelResponse],children:[]}]}]},
+{role:"Director, Advanced Technical Support",level:"L3",subtitle:"Strategic: network analysis, escalation optimization",agents:[A.networkPerf,A.techOpsInsights],children:[
+{role:"CC Supervisor, Adv. Technical Support",level:"L4",subtitle:"Day-to-day: escalation triage, queue prioritization",agents:[A.techEscalation,A.techQueuePriority],children:[
+{role:"Advanced Technical Support Rep",level:"L5",subtitle:"Complex troubleshooting, outage resolution",agents:[A.advTechCopilot,A.outageHealth,A.deviceTroubleshoot],children:[]}]}]},
+{role:"Director, Retention",level:"L3",subtitle:"Strategic: churn forecasting, program ROI",agents:[A.churnAnalytics,A.retentionProgramPerf],children:[
+{role:"CC Supervisor, Retention",level:"L4",subtitle:"Day-to-day: save approvals, discount governance",agents:[A.saveOffer,A.retentionSuperPerf,A.sentimentDefection],children:[
+{role:"Retention / Loyalty Rep",level:"L5",subtitle:"Save conversations, scripted retention",agents:[A.retentionCopilot],children:[]}]}]}
+]}]},
+sales:{role:"Chief Revenue Officer / EVP Consumer Sales",level:"L1",agents:[],children:[
+{role:"VP Retail Sales",level:"L2",agents:[],children:[{role:"Regional Retail Director",level:"L3",agents:[],children:[{role:"Retail Store Manager",level:"L4",agents:[A.storeTraffic],children:[{role:"Retail Sales Supervisor / ASM",level:"L4",agents:[],children:[{role:"Retail Sales Associate",level:"L5",agents:[A.retailCopilot,A.accessoryBundle],children:[]}]}]}]}]},
+{role:"VP Digital Sales",level:"L2",agents:[],children:[{role:"Director of Digital Sales",level:"L3",agents:[A.digitalConversion],children:[
+{role:"Digital Merchandising / Conversion Mgr",level:"L4",agents:[A.planRecommendation,A.promoEligibility],children:[]},
+{role:"Ecommerce Product Manager",level:"L4",agents:[A.checkoutSupport],children:[]},
+{role:"Digital Sales Ops Manager",level:"L4",agents:[A.digitalFallout],children:[]}]}]},
+{role:"VP Telesales / Inside Sales",level:"L2",agents:[],children:[{role:"Telesales Director",level:"L3",agents:[],children:[{role:"Telesales Supervisor",level:"L4",agents:[A.callCoaching,A.telesalesPerf],children:[
+{role:"Inbound Sales Rep",level:"L5",agents:[A.telesalesCopilot],children:[]},
+{role:"Upgrade / Retention Sales Specialist",level:"L5",agents:[A.upgradeEligibility,A.crossSellUpsell],children:[]}]}]}]},
+{role:"Cross-channel Sales",level:"L2",agents:[],children:[
+{role:"Sales Ops / Commercial Ops Manager",level:"L4",agents:[A.quoteGovernance],children:[]},
+{role:"Promotions / Offer Strategy Manager",level:"L4",agents:[A.offerPerformance],children:[]},
+{role:"Channel Performance Manager",level:"L4",agents:[A.channelOptimization],children:[]}]}]},
+marketing:{role:"CMO / SVP Marketing",level:"L1",agents:[],children:[
+{role:"VP Brand & Communications",level:"L2",agents:[],children:[
+{role:"Director, Brand Strategy",level:"L3",agents:[A.brandPerformance],children:[]},
+{role:"Director, Advertising & Creative",level:"L3",agents:[A.campaignPerformance],children:[]},
+{role:"Director, Media Planning & Buying",level:"L3",agents:[A.mediaMix],children:[]}]},
+{role:"VP Digital Marketing / Growth",level:"L2",agents:[],children:[
+{role:"Director, Performance Marketing",level:"L3",agents:[A.acquisitionCampaign],children:[]},
+{role:"Director, SEO & Content",level:"L3",agents:[A.contentPerformance],children:[]},
+{role:"Director, Web & Conversion Optimization",level:"L3",agents:[A.conversionOptimization],children:[]},
+{role:"Director, Marketing Analytics",level:"L3",agents:[A.attributionAnalytics],children:[]}]},
+{role:"VP CRM & Lifecycle Marketing",level:"L2",agents:[],children:[
+{role:"Director, Lifecycle Marketing",level:"L3",agents:[A.journeyOrchestration],children:[]},
+{role:"Director, CRM & Marketing Automation",level:"L3",agents:[A.audienceSegmentation],children:[]},
+{role:"Director, Loyalty & Rewards",level:"L3",agents:[A.loyaltyEngagement],children:[]},
+{role:"Director, Personalization",level:"L3",agents:[A.nextBestAction],children:[]}]}]}
+};
+
+// JOURNEYS
+const J=[
+{name:"Awareness & Consideration",fn:"Marketing",sc:"smk",actions:["See TV/digital/social ads","Research plans & coverage","Compare carriers online","Read reviews, ask friends","Use coverage checker"],channels:["TV / CTV / Streaming","Paid search & social","SEO / organic content","Influencer / social","Retail signage"],pains:["Confusing plan structures","Hidden fees perception","Too many plan tiers","Distrust of promos","Coverage anxiety"],agents:[A.brandPerformance,A.campaignPerformance,A.mediaMix,A.acquisitionCampaign,A.contentPerformance,A.conversionOptimization],roles:["Director, Brand Strategy","Director, Advertising & Creative","Director, Performance Marketing","Director, Web & Conversion Optimization"]},
+{name:"Acquisition & Purchase",fn:"Sales",sc:"ssl",actions:["Select plan","Choose device","Evaluate trade-in","Apply promotions","Credit check","Port number","Checkout"],channels:["Retail store","Website / app","Telesales","Authorized dealers"],pains:["Plan complexity","Credit check friction","Long in-store waits","Trade-in disappointment","Checkout sticker shock","Porting anxiety"],agents:[A.retailCopilot,A.telesalesCopilot,A.planRecommendation,A.promoEligibility,A.checkoutSupport,A.quoteGovernance],roles:["Retail Sales Associate","Inbound Sales Rep","Digital Merchandising / Conversion Mgr"]},
+{name:"Onboarding & Activation",fn:"Sales",sc:"ssl",actions:["Device setup","SIM / eSIM activation","Account creation","Download app","Set up autopay","Activate perks"],channels:["Retail store","Welcome emails","Welcome SMS","Carrier app"],pains:["Activation delays","First-bill shock","Promo credit confusion","Data transfer issues","Feature confusion"],agents:[A.journeyOrchestration,A.retailCopilot,A.orderStatus,A.digitalFallout],roles:["Retail Sales Associate","Director, Lifecycle Marketing","Digital Sales Ops Manager"]},
+{name:"Billing & Payments",fn:"Service",sc:"ssv",actions:["Receive & review bill","Pay bill","Manage autopay","Dispute charges","Request credit","Payment plan"],channels:["Carrier app","Website","Phone / IVR","Chat","Store"],pains:["Bill shock","Proration confusion","Tax/fee opacity","Payment tracking","Autopay failures","Credit timing"],agents:[A.billingResolution,A.paymentException,A.careCopilot,A.orderStatus,A.supervisorQueue],roles:["Frontline Care Rep","CC Supervisor, Care","Director, Care"]},
+{name:"Technical Support",fn:"Service",sc:"ssv",actions:["Troubleshoot device","Report network issue","Check outage status","File insurance claim"],channels:["Self-service / app","AI chatbot","Live chat","Phone","Store","Social"],pains:["Long hold times","Repeating information","IVR frustration","Unresolved first contact","Scripted troubleshooting"],agents:[A.outageHealth,A.deviceTroubleshoot,A.advTechCopilot,A.careTriage,A.techEscalation],roles:["Advanced Technical Support Rep","CC Supervisor, Adv. Technical Support","Director, Advanced Technical Support"]},
+{name:"Retention & Loyalty",fn:"Service",sc:"ssv",actions:["Evaluate competitor offers","Call to cancel","Receive save offer","Redeem loyalty rewards"],channels:["Phone (retention)","Chat","Proactive outreach","Loyalty portal","Email / SMS"],pains:["New vs existing disparity","Hard to reach save team","Inconsistent offers","Weak loyalty rewards","Lock-in resentment"],agents:[A.saveOffer,A.retentionCopilot,A.sentimentDefection,A.churnAnalytics,A.loyaltyEngagement,A.nextBestAction],roles:["Retention / Loyalty Rep","CC Supervisor, Retention","Director, Retention","Director, Loyalty & Rewards"]},
+{name:"Upgrade & Cross-sell",fn:"Sales + Service",sc:"ssl",actions:["Check upgrade eligibility","Select new device","Evaluate trade-in","Add lines / bundles","Accept cross-sell"],channels:["Carrier app","Email / SMS","Retail store","Telesales","Website"],pains:["Confusing eligibility","Trade-in friction","Losing promo on change","Upselling pressure","36-month reset"],agents:[A.upgradeEligibility,A.crossSellUpsell,A.retailCopilot,A.telesalesCopilot,A.accessoryBundle,A.journeyOrchestration],roles:["Upgrade / Retention Sales Specialist","Retail Sales Associate","Director, Lifecycle Marketing"]},
+{name:"Usage & Self-Service",fn:"Digital",sc:"sdg",actions:["Check data usage","Pay bill in app","Manage account","Use troubleshoot tools","Browse upgrades"],channels:["Carrier app","Website","AI chatbot","Push notifications"],pains:["Limited complex self-service","App UX issues","Chatbot limitations","Features buried in menus","Cross-channel inconsistency"],agents:[A.careTriage,A.orderStatus,A.planRecommendation,A.conversionOptimization],roles:["(Digital properties — no org chart)"]}
+];
+
+// CALC ROLES
+const CR={service:[
+{role:"Director, Care",agents:"Ops Analytics, Volume Driver, VoC, WFP",hitl:"Assistive",dF:3,dC:140000,dP:30},
+{role:"Director, Adv. Tech",agents:"Network Perf, Tech Ops",hitl:"Assistive",dF:2,dC:145000,dP:25},
+{role:"Director, Retention",agents:"Churn Analytics, Retention Perf",hitl:"Assistive",dF:2,dC:140000,dP:25},
+{role:"CC Supervisor, Care",agents:"Billing Resolution, Payment, Queue, QA",hitl:"Approval / Assistive",dF:25,dC:78000,dP:35},
+{role:"CC Supervisor, Adv Tech",agents:"Tech Escalation, Queue Priority",hitl:"Assistive",dF:10,dC:82000,dP:25},
+{role:"CC Supervisor, Retention",agents:"Save Offer, Retention Perf, Sentiment",hitl:"Approval / Assistive",dF:8,dC:80000,dP:30},
+{role:"Frontline Care Rep",agents:"Care Copilot, Triage, Order Status",hitl:"Assistive / Autonomous",dF:200,dC:55000,dP:35},
+{role:"Chat / Social Rep",agents:"Channel Response",hitl:"Assistive",dF:80,dC:52000,dP:30},
+{role:"Adv Tech Support Rep",agents:"Tech Copilot, Outage, Device",hitl:"Assistive / Hybrid",dF:60,dC:65000,dP:30},
+{role:"Retention / Loyalty Rep",agents:"Retention Copilot",hitl:"Assistive",dF:50,dC:58000,dP:25}],
+sales:[
+{role:"Retail Sales Associate",agents:"Retail Copilot, Accessory",hitl:"Assistive",dF:300,dC:48000,dP:30},
+{role:"Retail Supervisor",agents:"(Store Traffic)",hitl:"Assistive",dF:40,dC:62000,dP:15},
+{role:"Digital Merch Mgr",agents:"Plan Rec, Promo Eligibility",hitl:"Hybrid / Autonomous",dF:6,dC:95000,dP:45},
+{role:"Ecommerce PM",agents:"Checkout Support",hitl:"Hybrid",dF:4,dC:105000,dP:40},
+{role:"Digital Sales Ops",agents:"Order Fallout",hitl:"Approval-based",dF:5,dC:90000,dP:40},
+{role:"Inbound Sales Rep",agents:"Telesales Copilot",hitl:"Assistive",dF:100,dC:50000,dP:30},
+{role:"Upgrade Specialist",agents:"Upgrade, Cross-sell",hitl:"Assistive",dF:40,dC:55000,dP:30},
+{role:"Telesales Supervisor",agents:"Coaching, Telesales Perf",hitl:"Assistive",dF:12,dC:75000,dP:25},
+{role:"Sales Ops Mgr",agents:"Quote Governance",hitl:"Approval-based",dF:3,dC:100000,dP:35},
+{role:"Promos Mgr",agents:"Offer Performance",hitl:"Assistive",dF:2,dC:105000,dP:25},
+{role:"Channel Perf Mgr",agents:"Channel Optimization",hitl:"Assistive",dF:2,dC:100000,dP:25}]};
+
+// TELEMETRY DATA
+const TEL=[
+{title:"Service — Care, Technical Support, Retention",icon:"svc",metrics:[
+{name:"Containment Rate",desc:"% of interactions fully resolved by agent without human intervention",good:"65-85% (telco benchmark); track by intent category",drift:"Alert when any intent drops >5pts below 4-week rolling baseline"},
+{name:"Verified Resolution Rate",desc:"Confirmed resolution via surveys, no-callback within 48h, or QA review",good:"Within 10pts of raw containment; re-contact rate <15%",drift:"Gap widening between raw containment and verified resolution"},
+{name:"Escalation Quality Score",desc:"Rubric score for handoff completeness: context, issue ID, sentiment, history",good:"4+/5 rubric; post-escalation AHT ≤ direct-to-human AHT",drift:"Median drops below 3.5/5 or 'poor' escalations exceed 15%"},
+{name:"Resolution Accuracy",desc:"Factual correctness of agent's proposed resolution or action",good:"85%+ goal accuracy; 99%+ for billing/credit actions",drift:"Run daily golden-dataset evals; track by intent category"},
+{name:"CSAT / NPS Delta",desc:"Satisfaction gap between AI-handled and human-handled interactions",good:"AI CSAT within 5-10% of human CSAT; gap trending closed",drift:"AI CSAT drops >5% below baseline or gap widens >3pts"},
+{name:"Compliance & Policy Adherence",desc:"Consistency with regulatory disclosures, credit limits, escalation rules",good:"100% on mandatory disclosures; 99%+ internal policy adherence",drift:"Automated 100% compliance check; red-team monthly"},
+{name:"Credit / Discount Governance",desc:"Financial controls on AI-issued credits, discounts, and retention offers",good:"Within 10% of approved matrix; daily total within budget",drift:"Daily total exceeds 115% budget; avg credit deviates >$2 from target"},
+{name:"Hallucination Rate",desc:"% of responses with fabricated information (policies, prices, procedures)",good:"Below 2% for customer-facing agents",drift:"Daily automated eval against golden dataset; alert on any increase"},
+{name:"Human Override Rate & Reasons",desc:"Frequency and reasons humans override or correct agent actions",good:"Declining trend; <10% override rate for mature agents",drift:"Rising override rate or new override reason categories emerging"}]},
+{title:"Sales — Retail, Digital, Telesales",icon:"sal",metrics:[
+{name:"Quote / Order Accuracy",desc:"% of agent-generated quotes and orders that pass validation without errors",good:"95%+ first-pass accuracy; <3% fallout rate",drift:"Track by channel and order type; alert on fallout rate increase"},
+{name:"Conversion Impact",desc:"Conversion rate lift attributable to agent assistance vs. unassisted baseline",good:"10-20% conversion lift; controlled A/B measurement",drift:"Declining lift over time; compare agent-assisted vs control weekly"},
+{name:"Recommendation Relevance",desc:"% of plan/device/bundle recommendations accepted by customers",good:"25-40% acceptance rate; declining skip/dismiss rate",drift:"Acceptance rate dropping while recommendation volume stays constant"},
+{name:"Discount Governance",desc:"Agent adherence to approved discount matrices and promotional rules",good:"100% compliance with promo eligibility rules",drift:"Any unauthorized discount application; promo exception rate rising"},
+{name:"Disclosure Compliance",desc:"Completion of required disclosures (terms, fees, financing, trade-in conditions)",good:"100% mandatory disclosure completion",drift:"Automated audit of 100% of transactions; flag any omission"},
+{name:"Cross-sell / Upsell Acceptance",desc:"Rate at which cross-sell recommendations are accepted",good:"15-25% acceptance; positive ARPU impact without churn increase",drift:"Acceptance declining or post-sale churn increasing for cross-sold customers"}]},
+{title:"Marketing — Brand, Digital, CRM/Lifecycle",icon:"mkt",metrics:[
+{name:"Campaign Optimization Accuracy",desc:"% of agent bid/budget recommendations that improve CPA or ROAS",good:"70%+ of recommendations adopted improve performance",drift:"Track recommendation-to-outcome correlation weekly"},
+{name:"Segmentation Quality",desc:"Performance lift of agent-created segments vs. manual segments",good:"10-15% performance lift; <5% segment overlap",drift:"Segment performance lift declining; segment definitions becoming stale"},
+{name:"Journey Completion Rate",desc:"% of customers completing lifecycle communication journeys as designed",good:"60-70% welcome journey completion; <2% opt-out rate",drift:"Completion rate dropping or opt-out rate rising"},
+{name:"Personalization Relevance",desc:"Engagement lift from personalized vs. generic content",good:"2-3x engagement lift; declining unsubscribe rate",drift:"Engagement lift narrowing; unsubscribe rate increasing"},
+{name:"Attribution Model Accuracy",desc:"Alignment between attribution model predictions and actual outcomes",good:"Model predictions within 15% of actual channel contribution",drift:"Growing divergence between predicted and actual; recalibrate quarterly"},
+{name:"NBO Acceptance Rate",desc:"% of Next-Best-Action / Next-Best-Offer recommendations accepted",good:"20-30% acceptance; positive incremental revenue",drift:"Acceptance declining while volume constant; offers becoming repetitive"}]},
+{title:"Cross-functional Governance",icon:"gov",metrics:[
+{name:"Data Freshness Monitoring",desc:"Whether each data feed meets its SLA (real-time <5s, NRT <15min, batch <24h)",good:"99%+ data freshness SLA compliance across all feeds",drift:"Any feed missing SLA >3 consecutive intervals"},
+{name:"Model Drift Detection",desc:"Statistical divergence of model inputs/outputs from training distribution",good:"KL divergence and PSI within acceptable bounds; retrain triggers defined",drift:"Automated monitoring of input feature distributions; alert on statistical shift"},
+{name:"Bias Monitoring",desc:"Outcome fairness across customer segments (demographics, tenure, value tier)",good:"No statistically significant outcome disparities across protected groups",drift:"Quarterly bias audits; continuous monitoring of outcomes by segment"},
+{name:"PII / Data Handling Compliance",desc:"Agent adherence to data minimization, masking, and access controls",good:"Zero PII exposure in logs/transcripts; 100% masking compliance",drift:"Automated PII scanning of all agent outputs and logs"},
+{name:"Token Usage & Cost",desc:"LLM token consumption and associated cost per interaction",good:"Declining cost per resolution; within budget allocation",drift:"Cost per interaction rising without quality improvement"},
+{name:"Latency & Availability",desc:"Agent response time and uptime SLA",good:"P95 response <3s; 99.9% availability",drift:"Response time degradation; increasing timeout/error rates"},
+{name:"Error Rate & Failure Modes",desc:"% of interactions with agent errors, tool call failures, or crashes",good:"<1% error rate; classified failure taxonomy maintained",drift:"New failure modes emerging; error rate trending up"},
+{name:"Feedback Loop Health",desc:"Whether human corrections are being incorporated into agent improvement",good:"90%+ of corrections reviewed within 7 days; retraining cycle <30 days",drift:"Growing backlog of unincorporated corrections; same errors recurring"}]}
+];
+
+// ═══ APP LOGIC ═══
+let cCV='both',cOV='service',cDV='service';
+
+function sT(t,b){document.querySelectorAll('.gh__ni').forEach(x=>x.classList.remove('on'));b.classList.add('on');document.querySelectorAll('.vw').forEach(v=>v.classList.remove('on'));document.getElementById('vw-'+t).classList.add('on')}
+function sOV(v,b){b.parentElement.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));b.classList.add('on');cOV=v;rOT(v)}
+function sCV(v,b){b.parentElement.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));b.classList.add('on');cCV=v;document.getElementById('cs').style.display=(v==='both'||v==='service')?'':'none';document.getElementById('cl').style.display=(v==='both'||v==='sales')?'':'none';rCC()}
+function sDV(v,b){b.parentElement.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));b.classList.add('on');cDV=v;bDR()}
+
+function gHC(h){if(!h)return'';var l=h.toLowerCase();return l.includes('autonomous')?'bd-au':l.includes('approval')?'bd-ap':l.includes('hybrid')?'bd-hy':l.includes('assistive')?'bd-as':''}
+function gPC(p){return!p?'':p.includes('Service')?'bd-ps':p.includes('Sales')?'bd-pl':p.includes('Marketing')?'bd-hy':''}
+
+// TREE
+function rN(n,s){var hC=n.children&&n.children.length,hA=n.agents&&n.agents.length,hX=hC||hA;
+var m=!s||n.role.toLowerCase().includes(s)||(n.agents||[]).some(a=>a.name.toLowerCase().includes(s)||a.purpose.toLowerCase().includes(s));
+var cm=(n.children||[]).some(c=>nM(c,s));if(s&&!m&&!cm)return'';
+var h='<div class="tn nL'+n.level[1]+'" data-role="'+n.role+'">';
+h+='<div class="th" onclick="tN(this)"><span class="cv '+(hX?'':'em')+'">'+(hX?'&#9660;':'')+'</span><span class="rl">'+n.role;
+if(n.subtitle)h+='<span class="sl">'+n.subtitle+'</span>';
+h+='</span>';if(hA)h+='<span class="cnt">'+n.agents.length+'</span>';h+='</div>';
+if(hX){h+='<div class="tc" style="max-height:9999px">';
+(n.agents||[]).forEach(function(a){if(s&&!a.name.toLowerCase().includes(s)&&!a.purpose.toLowerCase().includes(s)&&!m)return;
+h+='<div class="ac" onclick="oA(\''+a.name.replace(/'/g,"\\'")+'\')">';
+h+='<div class="ac__i">Af</div><div class="ac__b"><div class="ac__n">'+a.name+'</div><div class="ac__p">'+a.purpose+'</div></div>';
+h+='<div class="ac__bd">';if(a.hitl)h+='<span class="bd '+gHC(a.hitl)+'">'+a.hitl.split('.')[0].split(',')[0].trim()+'</span>';
+if(a.priority)h+='<span class="bd '+gPC(a.priority)+'">'+a.priority+'</span>';h+='</div></div>'});
+(n.children||[]).forEach(function(c){h+=rN(c,s)});h+='</div>'}return h+'</div>'}
+function nM(n,t){if(!t)return true;if(n.role.toLowerCase().includes(t))return true;if((n.agents||[]).some(a=>a.name.toLowerCase().includes(t)||a.purpose.toLowerCase().includes(t)))return true;return(n.children||[]).some(c=>nM(c,t))}
+function rOT(v){var c=document.getElementById('ot'),s=document.getElementById('os').value.toLowerCase().trim(),h='';
+if(v==='service'||v==='all')h+=rN(O.service,s);if(v==='sales'||v==='all')h+=rN(O.sales,s);if(v==='marketing'||v==='all')h+=rN(O.marketing,s);c.innerHTML=h}
+function tN(h){h.parentElement.classList.toggle('cl')}
+function eA(){document.querySelectorAll('.tn').forEach(n=>n.classList.remove('cl'))}
+function cA(){document.querySelectorAll('.tn').forEach(n=>{if(n.querySelector('.tc'))n.classList.add('cl')})}
+function fT(){rOT(cOV)}
+
+// MODAL
+function oA(name){var a=Object.values(A).find(x=>x.name===name);if(!a)return;
+document.getElementById('mt').textContent=a.name;
+var fs=[{l:'Purpose',v:a.purpose},{l:'Tasks',v:a.tasks},{l:'Triggers',v:a.triggers},{l:'Systems',v:a.systems},{l:'Key Data',v:a.keyData},{l:'KPIs',v:a.kpis}];
+var h='';fs.forEach(f=>{h+='<div class="md__f"><div class="md__fl">'+f.l+'</div><div class="md__fv">'+f.v+'</div></div>'});
+h+='<div class="md__f"><div class="md__fl">Classification</div><div class="md__bds">';
+if(a.hitl)h+='<span class="bd '+gHC(a.hitl)+'">'+a.hitl+'</span>';if(a.priority)h+='<span class="bd '+gPC(a.priority)+'">'+a.priority+'</span>';h+='</div></div>';
+document.getElementById('mb').innerHTML=h;document.getElementById('modal').classList.add('op')}
+function xM(){document.getElementById('modal').classList.remove('op')}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')xM()});
+
+// NAV TO ORG
+function nR(r){document.querySelectorAll('.gh__ni').forEach(b=>b.classList.remove('on'));document.querySelectorAll('.gh__ni')[1].classList.add('on');
+document.querySelectorAll('.vw').forEach(v=>v.classList.remove('on'));document.getElementById('vw-orgchart').classList.add('on');
+var f=fIT(O.service,r)?'service':fIT(O.sales,r)?'sales':fIT(O.marketing,r)?'marketing':'all';
+var ts=document.querySelectorAll('#vw-orgchart .tab');ts.forEach(t=>t.classList.remove('on'));
+ts[f==='service'?0:f==='sales'?1:f==='marketing'?2:3].classList.add('on');cOV=f;rOT(f);eA();
+setTimeout(()=>{var n=document.querySelector('[data-role="'+r+'"]');if(n){n.scrollIntoView({behavior:'smooth',block:'center'});var h=n.querySelector('.th');h.style.boxShadow='0 0 0 3px var(--af)';setTimeout(()=>h.style.boxShadow='',2000)}},100)}
+function nA(name){var r=fAR(O.service,name)||fAR(O.sales,name)||fAR(O.marketing,name);if(r)nR(r);setTimeout(()=>oA(name),400)}
+function fIT(n,r){if(n.role===r)return true;return(n.children||[]).some(c=>fIT(c,r))}
+function fAR(n,a){if((n.agents||[]).some(x=>x.name===a))return n.role;for(var c of(n.children||[])){var r=fAR(c,a);if(r)return r}return null}
+
+// JOURNEY MAP
+function bJM(){var g=document.getElementById('jg'),h='';
+h+='<div class="swl" style="background:var(--bk);color:#fff;font-weight:700">Stage</div>';
+J.forEach((j,i)=>{h+='<div class="jsh '+j.sc+'"><span class="sn">'+('0'+(i+1)).slice(-2)+'</span>'+j.name+'<span class="jfn">'+j.fn+'</span></div>'});
+h+='<div class="swl">Customer Actions</div>';J.forEach(j=>{h+='<div class="swc sca"><ul>'+j.actions.map(a=>'<li>'+a+'</li>').join('')+'</ul></div>'});
+h+='<div class="swl">Channels</div>';J.forEach(j=>{h+='<div class="swc sch"><ul>'+j.channels.map(c=>'<li>'+c+'</li>').join('')+'</ul></div>'});
+h+='<div class="swl">Pain Points</div>';J.forEach(j=>{h+='<div class="swc spa"><ul>'+j.pains.map(p=>'<li>'+p+'</li>').join('')+'</ul></div>'});
+h+='<div class="swl">Agentforce Agents</div>';J.forEach(j=>{h+='<div class="swc">';j.agents.forEach(a=>{h+='<span class="jp jp--a" onclick="nA(\''+a.name.replace(/'/g,"\\'")+'\')">'+a.name.replace(/ Agent$/,'')+'</span>'});h+='</div>'});
+h+='<div class="swl">Org Roles</div>';J.forEach(j=>{h+='<div class="swc">';j.roles.forEach(r=>{h+=r.startsWith('(')?'<span class="jp jp--n">'+r+'</span>':'<span class="jp jp--r" onclick="nR(\''+r.replace(/'/g,"\\'")+'\')">'+r+'</span>'});h+='</div>'});
+g.innerHTML=h}
+
+// DATA REQUIREMENTS
+function bDR(){var c=document.getElementById('drg'),h='';
+var agents=cDV==='service'?[A.opsAnalytics,A.volumeDriver,A.voiceOfCustomer,A.workforcePlanning,A.billingResolution,A.paymentException,A.supervisorQueue,A.interactionQA,A.networkPerf,A.techOpsInsights,A.techEscalation,A.techQueuePriority,A.advTechCopilot,A.outageHealth,A.deviceTroubleshoot,A.churnAnalytics,A.retentionProgramPerf,A.saveOffer,A.retentionSuperPerf,A.sentimentDefection,A.careCopilot,A.careTriage,A.orderStatus,A.channelResponse,A.retentionCopilot]:
+cDV==='sales'?[A.storeTraffic,A.retailCopilot,A.accessoryBundle,A.digitalConversion,A.planRecommendation,A.promoEligibility,A.checkoutSupport,A.digitalFallout,A.callCoaching,A.telesalesPerf,A.telesalesCopilot,A.upgradeEligibility,A.crossSellUpsell,A.quoteGovernance,A.offerPerformance,A.channelOptimization]:
+[A.brandPerformance,A.campaignPerformance,A.mediaMix,A.acquisitionCampaign,A.contentPerformance,A.conversionOptimization,A.attributionAnalytics,A.journeyOrchestration,A.audienceSegmentation,A.loyaltyEngagement,A.nextBestAction];
+
+h+='<div class="dr-grid"><div class="dr-hdr">Agent</div><div class="dr-hdr">Real-time</div><div class="dr-hdr">Near-real-time</div><div class="dr-hdr">Batch</div>';
+agents.forEach(a=>{if(!a.dr)return;
+h+='<div class="dr-agent" onclick="oA(\''+a.name.replace(/'/g,"\\'")+'\')"><span style="color:var(--af);font-size:11px;font-weight:700">Af</span> '+a.name+'</div>';
+['rt','nrt','bt'].forEach(k=>{h+='<div class="dr-cell"><ul>';(a.dr[k]||[]).forEach(d=>{h+='<li><span class="dr-dot dr-'+(k==='rt'?'rt':k==='nrt'?'nrt':'bt')+'"></span>'+d+'</li>'});
+if(!a.dr[k]||!a.dr[k].length)h+='<li style="color:var(--br)">—</li>';h+='</ul></div>'})});
+h+='</div>';c.innerHTML=h}
+
+// TELEMETRY
+function bTel(){var c=document.getElementById('telg'),h='';
+TEL.forEach(s=>{
+h+='<div class="tel-slide" onclick="this.classList.toggle(\'cl\')">';
+h+='<div class="tel-slide__h"><div class="tel-slide__icon '+s.icon+'">&#9881;</div><span class="tel-slide__title">'+s.title+'</span><span class="tel-slide__chev">&#9660;</span></div>';
+h+='<div class="tel-slide__body" style="max-height:9999px">';
+h+='<div class="tel-metric"><div class="tel-metric__hdr">Metric</div><div class="tel-metric__hdr">What It Measures</div><div class="tel-metric__hdr">Target / Benchmark</div><div class="tel-metric__hdr">Drift Detection</div>';
+s.metrics.forEach(m=>{
+h+='<div class="tel-metric__cell">'+m.name+'</div>';
+h+='<div class="tel-metric__cell">'+m.desc+'</div>';
+h+='<div class="tel-metric__cell good">'+m.good+'</div>';
+h+='<div class="tel-metric__cell">'+m.drift+'</div>'});
+h+='</div></div></div>'});
+c.innerHTML=h}
+
+// CALCULATOR
+function bCT(id,rs,k){var tb=document.getElementById(id),h='';
+rs.forEach((r,i)=>{var d=k+'_'+i;h+='<tr><td style="font-weight:600;min-width:160px">'+r.role+'</td><td style="color:var(--tw);font-size:.75rem;max-width:180px">'+r.agents+'</td><td><span class="bd '+gHC(r.hitl)+'">'+r.hitl+'</span></td>';
+h+='<td><input type="number" id="f'+d+'" value="'+r.dF+'" min="0" oninput="rCC()"></td><td><input type="number" id="c'+d+'" value="'+r.dC+'" min="0" step="1000" oninput="rCC()"></td><td><input type="number" id="p'+d+'" value="'+r.dP+'" min="0" max="100" oninput="rCC()"></td>';
+h+='<td class="money" id="x'+d+'"></td><td class="money" id="y'+d+'"></td><td class="money sav" id="z'+d+'"></td></tr>'});tb.innerHTML=h}
+function rCC(){var t={service:{c:0,p:0},sales:{c:0,p:0}};
+['service','sales'].forEach(k=>{CR[k].forEach((r,i)=>{var d=k+'_'+i,f=+(document.getElementById('f'+d).value)||0,c=+(document.getElementById('c'+d).value)||0,p=+(document.getElementById('p'+d).value)||0;
+var cur=f*c,proj=cur*(1-p/100);document.getElementById('x'+d).textContent=fM(cur);document.getElementById('y'+d).textContent=fM(proj);document.getElementById('z'+d).textContent=fM(cur-proj);t[k].c+=cur;t[k].p+=proj})});
+var h='';if(cCV!=='sales')h+=sCard('Service','svc',t.service.c,t.service.p);if(cCV!=='service')h+=sCard('Sales','sal',t.sales.c,t.sales.p);
+if(cCV==='both')h+=sCard('Combined','cmb',t.service.c+t.sales.c,t.service.p+t.sales.p);document.getElementById('csu').innerHTML=h}
+function sCard(l,cl,c,p){var s=c-p,pc=c>0?s/c*100:0;return'<div class="sc '+cl+'"><div class="sc__l">'+l+'</div><div class="sc__r"><span class="l">Current Annual Cost</span><span class="v">'+fM(c)+'</span></div><div class="sc__r"><span class="l">Projected with Agents</span><span class="v">'+fM(p)+'</span></div><div class="sc__r hi"><span class="l">Annual Savings</span><span class="v">'+fM(s)+' ('+pc.toFixed(1)+'%)</span></div><div class="pb"><div class="pb__f" style="width:'+Math.min(pc,100)+'%"></div></div></div>'}
+function fM(n){return n>=1e6?'$'+(n/1e6).toFixed(2)+'M':n>=1e3?'$'+(n/1e3).toFixed(0)+'K':'$'+n.toFixed(0)}
+function rC(){['service','sales'].forEach(k=>{CR[k].forEach((r,i)=>{var d=k+'_'+i;document.getElementById('f'+d).value=r.dF;document.getElementById('c'+d).value=r.dC;document.getElementById('p'+d).value=r.dP})});rCC()}
+
+// INIT
+bJM();rOT('service');bCT('csb',CR.service,'service');bCT('clb',CR.sales,'sales');rCC();bDR();bTel();
+</script>
+</body>
+</html>
