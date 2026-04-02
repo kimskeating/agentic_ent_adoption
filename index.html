@@ -296,6 +296,57 @@ body{font-family:var(--f);font-size:.8125rem;color:var(--td);background:var(--pg
 .tdb-expand__body{padding:0 1rem 1rem;overflow:hidden;transition:max-height .3s}
 .tdb-expand.cl .tdb-expand__body{max-height:0!important;padding:0 1rem}
 
+/* White Dashboard */
+.tdb-w{background:var(--sf);border-radius:var(--rl);padding:1.5rem;color:var(--td)}
+.tdb-w .tdb-kpi{display:flex;gap:.75rem;margin-bottom:1.25rem;flex-wrap:wrap}
+.tdb-w .tdb-kpi__card{flex:1;min-width:140px;background:var(--sf);border:1px solid var(--br);border-radius:var(--rl);padding:1rem;border-top:3px solid var(--bs);position:relative;overflow:hidden}
+.tdb-w .tdb-kpi__card.ok{border-top-color:#22c55e}.tdb-w .tdb-kpi__card.wn{border-top-color:#f59e0b}.tdb-w .tdb-kpi__card.cr{border-top-color:#ef4444}.tdb-w .tdb-kpi__card.info{border-top-color:var(--b)}
+.tdb-w .tdb-kpi__label{font-size:.625rem;text-transform:uppercase;letter-spacing:.06em;color:var(--tw);margin-bottom:4px}
+.tdb-w .tdb-kpi__val{font-size:1.5rem;font-weight:700;color:var(--td);font-variant-numeric:tabular-nums}
+.tdb-w .tdb-kpi__trend{font-size:.6875rem;display:flex;align-items:center;gap:3px;margin-top:2px}
+.tdb-w .tdb-kpi__trend.up{color:#22c55e}.tdb-w .tdb-kpi__trend.up::before{content:"\25B2";font-size:8px}
+.tdb-w .tdb-kpi__trend.dn{color:#ef4444}.tdb-w .tdb-kpi__trend.dn::before{content:"\25BC";font-size:8px}
+.tdb-w .tdb-kpi__spark{display:flex;align-items:flex-end;gap:2px;height:24px;position:absolute;bottom:8px;right:8px;opacity:.4}
+.tdb-w .tdb-kpi__spark-bar{width:3px;border-radius:1px}
+.tdb-w .tdb-section{margin-bottom:1.25rem}
+.tdb-w .tdb-section__hdr{font-size:.6875rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--tw);margin-bottom:.5rem;display:flex;align-items:center;gap:.5rem;padding-bottom:.5rem;border-bottom:1px solid var(--br)}
+.tdb-w .tdb-health{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:.5rem;margin-bottom:1.25rem}
+.tdb-w .tdb-health__card{background:var(--sf);border:1px solid var(--br);border-radius:var(--rm);padding:.625rem .75rem;display:flex;align-items:center;gap:.5rem;border-left:3px solid var(--br)}
+.tdb-w .tdb-health__card.ok{border-left-color:#22c55e}.tdb-w .tdb-health__card.wn{border-left-color:#f59e0b}.tdb-w .tdb-health__card.cr{border-left-color:#ef4444}
+.tdb-w .tdb-health__name{font-size:.7rem;font-weight:600;flex:1;color:var(--td);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tdb-w .tdb-health__stat{font-size:.625rem;color:var(--tw)}
+.tdb-w .tdb-metrics{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:.75rem}
+.tdb-w .tdb-metric{background:var(--sf);border:1px solid var(--br);border-radius:var(--rl);padding:1rem;display:flex;flex-direction:column;gap:.5rem}
+.tdb-w .tdb-metric__top{display:flex;align-items:flex-start;justify-content:space-between}
+.tdb-w .tdb-metric__info{flex:1}
+.tdb-w .tdb-metric__name{font-size:.75rem;font-weight:600;color:var(--td)}
+.tdb-w .tdb-metric__desc{font-size:.625rem;color:var(--tw);margin-top:2px}
+.tdb-w .tdb-monthly__bars{display:flex;align-items:flex-end;gap:3px;height:48px;position:relative}
+.tdb-w .tdb-monthly__bar{flex:1;min-width:0;border-radius:2px 2px 0 0;transition:height .4s}
+.tdb-w .tdb-monthly__target{position:absolute;left:0;right:0;border-top:2px dashed var(--td);opacity:.3}
+.tdb-w .tdb-monthly__target-label{position:absolute;right:0;top:-12px;font-size:.5625rem;color:var(--tw)}
+.tdb-w .tdb-monthly__labels{display:flex;justify-content:space-between;font-size:.5rem;color:var(--tw);margin-top:2px}
+.tdb-w .tdb-heatmap{display:grid;grid-template-columns:repeat(12,1fr);gap:2px}
+.tdb-w .tdb-hm-cell{aspect-ratio:1.5;border-radius:2px;min-height:8px}
+.tdb-w .tdb-avt__bar-wrap{flex:1;height:10px;background:var(--sa);border-radius:5px;overflow:hidden;position:relative}
+.tdb-w .tdb-avt__bar{height:100%;border-radius:5px;transition:width .6s}
+.tdb-w .tdb-avt__marker{position:absolute;top:-2px;width:2px;height:14px;background:var(--td);border-radius:1px;opacity:.5}
+.tdb-w .tdb-chv{margin-left:auto;font-size:10px;color:var(--tw);transition:transform .2s}
+/* KPI Definitions table */
+.tel-def{background:var(--sf);border:1px solid var(--br);border-radius:var(--rl);margin-bottom:1.25rem;overflow:hidden;box-shadow:var(--sc)}
+.tel-def__hdr{padding:.75rem 1rem;display:flex;align-items:center;gap:.5rem;cursor:pointer;border-bottom:1px solid var(--br);transition:background .15s}
+.tel-def__hdr:hover{background:var(--hl)}
+.tel-def__icon{width:28px;height:28px;border-radius:var(--rm);display:flex;align-items:center;justify-content:center;font-size:14px;color:#fff;flex-shrink:0}
+.tel-def__icon.svc{background:var(--b)}.tel-def__icon.sal{background:var(--af)}.tel-def__icon.mkt{background:var(--mk)}.tel-def__icon.gov{background:var(--bk)}
+.tel-def__title{font-size:.8125rem;font-weight:700;flex:1;color:var(--td)}
+.tel-def__chev{font-size:10px;color:var(--tw);transition:transform .2s}
+.tel-def.cl .tel-def__chev{transform:rotate(-90deg)}
+.tel-def__body{overflow:hidden;transition:max-height .3s}
+.tel-def.cl .tel-def__body{max-height:0!important}
+.tel-def .tb td:first-child{font-weight:600;color:var(--td);min-width:160px}
+.tel-def .tb .good{color:var(--ok);font-weight:600;font-size:.75rem}
+.tel-def .tb .drift{color:var(--wn);font-size:.75rem}
+
 /* ROI Calculator */
 .roi-exec{background:#0f172a;border-radius:var(--rl);padding:1.5rem;color:#f8fafc;margin-bottom:1.5rem}
 .roi-exec__title{font-size:1rem;font-weight:700;margin-bottom:1rem;display:flex;align-items:center;gap:.5rem}
@@ -431,6 +482,11 @@ body{font-family:var(--f);font-size:.8125rem;color:var(--td);background:var(--pg
 
 <!-- TAB 5: AGENT TELEMETRY -->
 <div id="vw-telemetry" class="vw">
+  <div class="tabs">
+    <button class="tab on" onclick="sTelV('definitions',this)">KPI Definitions</button>
+    <button class="tab" onclick="sTelV('dashboard',this)">Live Dashboard</button>
+    <div class="sp"></div>
+  </div>
   <div class="ct" id="tel-ct" style="max-width:1440px"></div>
 </div>
 
@@ -902,7 +958,8 @@ h+='</div></div></div>'});
 c.innerHTML=h}
 
 // TELEMETRY DASHBOARD
-// Telemetry - single dashboard view
+var telView='definitions';
+function sTelV(v,b){b.parentElement.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));b.classList.add('on');telView=v;bTel()}
 
 // Simulated live data
 function rnd(min,max){return Math.floor(Math.random()*(max-min+1))+min}
@@ -913,7 +970,7 @@ function statusCls(v,g,w){return v>=g?'ok':v>=w?'wn':'cr'}
 function statusLabel(v,g,w){return v>=g?'Healthy':v>=w?'Degraded':'Critical'}
 function gaugeRot(v){return(v*1.8-90)}
 function ringStyle(v,g,w){return'--pv:'+v+';--ring-color:'+(v>=g?'#22c55e':v>=w?'#f59e0b':'#ef4444')}
-function hmColor(v){var h=v>=90?'#22c55e':v>=70?'#4ade80':v>=50?'#fbbf24':v>=30?'#f97316':'#ef4444';return'background:'+h+';opacity:'+(0.4+v/100*0.6)}
+function hmColor(v){var h=v>=90?'#22c55e':v>=70?'#4ade80':v>=50?'#fbbf24':v>=30?'#f97316':'#ef4444';return'background:'+h+';opacity:'+(0.3+v/100*0.7)}
 
 // Agent health data (simulated)
 var AGENTS_HEALTH=[
@@ -968,7 +1025,22 @@ function avtBar(actual,target,max,unit,inv){
 
 function bTel(){
 var c=document.getElementById('tel-ct');if(!c)return;
-var h='<div class="tdb">';
+var h='';
+
+if(telView==='definitions'){
+// ══ KPI DEFINITIONS TAB ══
+h+='<div class="cd cd--intro" style="border-left-color:var(--bk)"><div class="cd__bd"><h3>Agent Telemetry & Governance — KPI Definitions</h3><p>Enterprise metrics to ensure agents work productively and don\'t drift. Organized by business function with benchmarks and drift detection guidance.</p></div></div>';
+TEL.forEach(function(s){
+h+='<div class="tel-def"><div class="tel-def__hdr" onclick="this.parentElement.classList.toggle(\'cl\')"><div class="tel-def__icon '+s.icon+'">&#9881;</div><span class="tel-def__title">'+s.title+'</span><span class="tel-def__chev">&#9660;</span></div>';
+h+='<div class="tel-def__body" style="max-height:9999px"><table class="tb"><thead><tr><th>Metric</th><th>What It Measures</th><th>Target / Benchmark</th><th>Drift Detection</th></tr></thead><tbody>';
+s.metrics.forEach(function(m){
+h+='<tr><td>'+m.name+'</td><td style="font-size:.75rem;color:var(--ts)">'+m.desc+'</td><td class="good">'+m.good+'</td><td class="drift">'+m.drift+'</td></tr>'});
+h+='</tbody></table></div></div>'});
+c.innerHTML=h;return;
+}
+
+// ══ LIVE DASHBOARD TAB (white theme) ══
+h+='<div class="tdb-w">';
 
 // ── 1. KPI STRIP (always visible) ──
 var tA=AGENTS_HEALTH.length,okA=AGENTS_HEALTH.filter(a=>a.status==='ok').length;
@@ -976,7 +1048,7 @@ var avgC=Math.round(AGENTS_HEALTH.reduce((s,a)=>s+a.containment,0)/tA);
 var avgL=(AGENTS_HEALTH.reduce((s,a)=>s+a.latency,0)/tA).toFixed(1);
 var avgE=(AGENTS_HEALTH.reduce((s,a)=>s+a.errors,0)/tA).toFixed(1);
 var sp1=spark(8,60,95),sp2=spark(8,5,25),sp3=spark(8,30,80),sp4=spark(8,40,90);
-h+='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.75rem"><div style="font-size:1rem;font-weight:700;color:#f8fafc">Agent Telemetry Dashboard</div><div style="font-size:.625rem;color:#64748b">Last updated: just now</div></div>';
+h+='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.75rem"><div style="font-size:1rem;font-weight:700;color:var(--td)">Agent Telemetry Dashboard</div><div style="font-size:.625rem;color:var(--tw)">Last updated: just now</div></div>';
 h+='<div class="tdb-kpi">';
 h+='<div class="tdb-kpi__card '+(okA>=tA-2?'ok':'wn')+'"><div class="tdb-kpi__label">Fleet Health</div><div class="tdb-kpi__val">'+okA+'/'+tA+'</div><div class="tdb-kpi__trend '+(okA>=tA-2?'up':'dn')+'">Target: '+tA+'/'+tA+'</div><div class="tdb-kpi__spark">'+sp1.map(v=>'<div class="tdb-kpi__spark-bar" style="height:'+barH(v,100,24)+'px;background:#22c55e"></div>').join('')+'</div></div>';
 h+='<div class="tdb-kpi__card '+(avgC>=75?'ok':'wn')+'"><div class="tdb-kpi__label">Containment</div><div class="tdb-kpi__val">'+avgC+'%</div><div class="tdb-kpi__trend '+(avgC>=75?'up':'dn')+'">Target: 75%</div><div class="tdb-kpi__spark">'+sp3.map(v=>'<div class="tdb-kpi__spark-bar" style="height:'+barH(v,100,24)+'px;background:#3b82f6"></div>').join('')+'</div></div>';
@@ -1026,10 +1098,10 @@ h+='</div></div>';
 h+='<div class="tdb-section"><div class="tdb-section__hdr" style="cursor:pointer" onclick="var b=this.nextElementSibling;b.style.display=b.style.display===\'none\'?\'grid\':\'none\';this.querySelector(\'.tdb-chv\').style.transform=b.style.display===\'none\'?\'rotate(-90deg)\':\'\'"><span class="tdb-section__hdr-icon">&#128200;</span> Data Pipeline Freshness — 12 Hours<span class="tdb-chv" style="margin-left:auto;font-size:10px;color:#64748b;transition:transform .2s">&#9660;</span></div>';
 h+='<div style="display:grid;grid-template-columns:140px 1fr;gap:.5rem;align-items:center">';
 ["Customer Profile","Billing & Balance","Payment History","Order & Activation","Network Status","Device & SIM","Interaction History","Queue & Workforce","Product Catalog","Churn Scores","Campaign Data","Segments"].forEach(p=>{
-h+='<div style="font-size:.7rem;color:#94a3b8;text-align:right;padding-right:.5rem">'+p+'</div><div class="tdb-heatmap">';
+h+='<div style="font-size:.7rem;color:var(--tw);text-align:right;padding-right:.5rem">'+p+'</div><div class="tdb-heatmap">';
 for(var i=0;i<12;i++){var v=rnd(60,100);h+='<div class="tdb-hm-cell" style="'+hmColor(v)+'" title="'+v+'%"></div>'}
 h+='</div>'});
-h+='<div style="font-size:.7rem;color:#64748b;text-align:right"></div><div class="tdb-heatmap"><div class="tdb-hm-label" style="display:flex;justify-content:space-between"><span>12h ago</span><span>6h</span><span>Now</span></div></div>';
+h+='<div style="font-size:.7rem;color:var(--tw);text-align:right"></div><div class="tdb-heatmap"><div class="tdb-hm-label" style="display:flex;justify-content:space-between;font-size:.5625rem;color:var(--tw)"><span>12h ago</span><span>6h</span><span>Now</span></div></div>';
 h+='</div></div>';
 
 // ── 5. THROUGHPUT & ERRORS (collapsible, default open) ──
@@ -1042,7 +1114,7 @@ for(var i=0;i<24;i++){var v=rnd(800,3200);var vc=v>=2000?'#22c55e':v>=1500?'#f59
 h+='</div></div></div>';
 h+='<div class="tdb-metric"><div class="tdb-metric__top"><div class="tdb-metric__info"><div class="tdb-metric__name">Error Breakdown</div><div class="tdb-metric__desc">Target: each &lt;0.5%</div></div></div>';
 [{n:'Tool call failure',v:38,c:'#ef4444'},{n:'Timeout',v:22,c:'#f59e0b'},{n:'Hallucination',v:15,c:'#f97316'},{n:'Policy violation',v:12,c:'#a855f7'},{n:'Auth failure',v:8,c:'#6366f1'},{n:'Other',v:5,c:'#64748b'}].forEach(e=>{
-h+='<div style="display:flex;align-items:center;gap:.5rem;margin-top:4px"><span style="font-size:.65rem;color:#94a3b8;width:90px;text-align:right">'+e.n+'</span><div style="flex:1;height:8px;background:#334155;border-radius:4px;overflow:hidden"><div style="height:100%;width:'+e.v+'%;background:'+e.c+';border-radius:4px"></div></div><span style="font-size:.65rem;color:#e2e8f0;width:28px">'+e.v+'%</span></div>'});
+h+='<div style="display:flex;align-items:center;gap:.5rem;margin-top:4px"><span style="font-size:.65rem;color:var(--tw);width:90px;text-align:right">'+e.n+'</span><div style="flex:1;height:8px;background:var(--br);border-radius:4px;overflow:hidden"><div style="height:100%;width:'+e.v+'%;background:'+e.c+';border-radius:4px"></div></div><span style="font-size:.65rem;color:var(--td);width:28px">'+e.v+'%</span></div>'});
 h+='</div></div></div>';
 
 // ── 6. COST & RESOURCES (collapsible, default closed) ──
@@ -1052,7 +1124,7 @@ h+='<div class="tdb-metrics" style="display:none">';
 var met=m.inv?(m.actual<=m.target):(m.actual>=m.target);var mc=met?'#22c55e':'#f59e0b';
 var aPct=Math.min(100,m.actual/m.max*100),tPct=Math.min(100,m.target/m.max*100);
 h+='<div class="tdb-metric"><div class="tdb-metric__name">'+m.name+'</div>';
-h+='<div style="display:flex;align-items:baseline;gap:.5rem;margin:.25rem 0"><span style="font-size:1.25rem;font-weight:700;color:'+mc+'">'+(m.prefix||'')+m.actual+m.unit+'</span><span style="font-size:.625rem;color:#64748b">Target: '+(m.prefix||'')+m.target+m.unit+'</span></div>';
+h+='<div style="display:flex;align-items:baseline;gap:.5rem;margin:.25rem 0"><span style="font-size:1.25rem;font-weight:700;color:'+mc+'">'+(m.prefix||'')+m.actual+m.unit+'</span><span style="font-size:.625rem;color:var(--tw)">Target: '+(m.prefix||'')+m.target+m.unit+'</span></div>';
 h+='<div class="tdb-avt__bar-wrap"><div class="tdb-avt__bar" style="width:'+aPct+'%;background:'+mc+'"></div><div class="tdb-avt__marker" style="left:'+tPct+'%"></div></div></div>'});
 h+='</div></div>';
 
@@ -1284,7 +1356,7 @@ function rC(){calcScenario='moderate';rCC()}
 // INIT
 bJM();rOT('service');rCC();bDR();bTel();
 // Refresh telemetry periodically for live feel
-setInterval(function(){if(document.getElementById('vw-telemetry').classList.contains('on')){AGENTS_HEALTH.forEach(a=>{a.containment=Math.min(100,Math.max(50,a.containment+rnd(-2,2)));a.latency=Math.max(0.2,parseFloat((a.latency+rndF(-0.2,0.2)).toFixed(1)));a.errors=Math.max(0,parseFloat((a.errors+rndF(-0.3,0.3)).toFixed(1)));a.status=a.errors>2?'cr':a.errors>1?'wn':'ok'});bTel()}},8000);
+setInterval(function(){if(telView==='dashboard'&&document.getElementById('vw-telemetry').classList.contains('on')){AGENTS_HEALTH.forEach(a=>{a.containment=Math.min(100,Math.max(50,a.containment+rnd(-2,2)));a.latency=Math.max(0.2,parseFloat((a.latency+rndF(-0.2,0.2)).toFixed(1)));a.errors=Math.max(0,parseFloat((a.errors+rndF(-0.3,0.3)).toFixed(1)));a.status=a.errors>2?'cr':a.errors>1?'wn':'ok'});bTel()}},8000);
 </script>
 </body>
 </html>
