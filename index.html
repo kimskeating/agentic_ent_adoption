@@ -32,25 +32,36 @@ body{font-family:var(--f);font-size:.8125rem;color:var(--td);background:var(--pg
 .inp{flex:1;max-width:420px;padding:0 1rem;height:36px;border:1px solid var(--bi);border-radius:var(--rm);font-size:.8125rem;font-family:var(--f);color:var(--td);background:var(--sf);outline:none}
 .inp:focus{border-color:var(--b);box-shadow:0 0 0 1px var(--b)}
 /* Tree */
-.tr{font-size:.8125rem}.tn{margin-left:0}.tn .tc{margin-left:1.5rem;overflow:hidden;transition:max-height .25s ease}
+.tr{font-size:.8125rem}.tn{margin-left:0;position:relative}
+.tn .tc{margin-left:1.75rem;overflow:hidden;transition:max-height .25s ease;position:relative}
 .tn.cl>.tc{max-height:0!important}
-.th{display:flex;align-items:center;gap:.5rem;padding:.5rem 1rem;margin:1px 0;border-radius:var(--rm);cursor:pointer;transition:background .15s;min-height:40px;border-left:3px solid transparent}
-.th:hover{background:var(--hl)}
-.cv{width:16px;height:16px;display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--tw);transition:transform .2s;flex-shrink:0}
-.tn.cl>.th .cv{transform:rotate(-90deg)}.cv.em{visibility:hidden}
-.rl{font-weight:600;flex:1;color:var(--td)}.sl{font-weight:400;font-size:.75rem;color:var(--tw);margin-left:.5rem}
-.cnt{padding:1px 8px;border-radius:10px;font-size:.625rem;font-weight:700;background:var(--blr);color:var(--bd)}
-.nL1>.th{background:var(--bk);color:#fff;border-left-color:transparent}.nL1>.th .rl,.nL1>.th .sl{color:#fff}.nL1>.th .sl{opacity:.7}.nL1>.th .cv{color:rgba(255,255,255,.7)}.nL1>.th .cnt{background:rgba(255,255,255,.2);color:#fff}.nL1>.th:hover{background:#04396e}
-.nL2>.th{background:var(--b);color:#fff;border-left-color:transparent}.nL2>.th .rl,.nL2>.th .sl{color:#fff}.nL2>.th .sl{opacity:.7}.nL2>.th .cv{color:rgba(255,255,255,.7)}.nL2>.th .cnt{background:rgba(255,255,255,.2);color:#fff}.nL2>.th:hover{background:var(--bd)}
-.nL3>.th{background:var(--blr);border-left-color:var(--b)}.nL3>.th .rl{color:var(--bd)}
-.nL4>.th{background:var(--hl);border-left-color:var(--bl)}
-.nL5>.th{background:var(--sa);border-left-color:var(--br)}
+/* Connecting lines */
+.tc::before{content:"";position:absolute;left:-1px;top:0;bottom:12px;width:0;border-left:2px solid var(--br)}
+.tn.cl>.tc::before{display:none}
+/* Node header card style */
+.th{display:flex;align-items:center;gap:.5rem;padding:.625rem 1rem;margin:4px 0;border-radius:var(--rl);cursor:pointer;transition:all .2s;min-height:44px;border-top:3px solid transparent;box-shadow:0 1px 3px rgba(0,0,0,.06);position:relative}
+.th:hover{box-shadow:0 2px 8px rgba(0,0,0,.12);transform:translateY(-1px)}
+/* Horizontal branch line from parent spine */
+.tc>.tn>.th::before{content:"";position:absolute;left:-1.75rem;top:50%;width:1.75rem;height:0;border-top:2px solid var(--br)}
+.cv{width:18px;height:18px;display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--tw);transition:transform .2s;flex-shrink:0;background:var(--sa);border-radius:50%;border:1px solid var(--br)}
+.tn.cl>.th .cv{transform:rotate(-90deg)}.cv.em{visibility:hidden;background:none;border:none}
+.rl{font-weight:600;flex:1;color:var(--td)}.sl{font-weight:400;font-size:.7rem;color:var(--tw);margin-left:.5rem;font-style:italic}
+.cnt{padding:2px 10px;border-radius:10px;font-size:.625rem;font-weight:700;background:var(--afl);color:var(--af);display:flex;align-items:center;gap:3px}
+.cnt::before{content:"\2726";font-size:9px}
+/* Level styling - card-based with top color bar */
+.nL1>.th{background:var(--bk);color:#fff;border-top-color:transparent;box-shadow:0 2px 8px rgba(3,45,96,.3)}.nL1>.th .rl,.nL1>.th .sl{color:#fff}.nL1>.th .sl{opacity:.7}.nL1>.th .cv{color:#fff;background:rgba(255,255,255,.2);border-color:rgba(255,255,255,.3)}.nL1>.th .cnt{background:rgba(255,255,255,.2);color:#fff}.nL1>.th:hover{background:#04396e;transform:translateY(-1px)}
+.nL2>.th{background:var(--sf);border-top-color:var(--b);box-shadow:0 1px 4px rgba(0,0,0,.1)}.nL2>.th .rl{color:var(--bd);font-size:.875rem}
+.nL3>.th{background:var(--sf);border-top-color:var(--bl);box-shadow:0 1px 4px rgba(0,0,0,.08)}.nL3>.th .rl{color:var(--bd)}
+.nL4>.th{background:var(--sf);border-top-color:var(--blr);border-top-width:2px}.nL4>.th .rl{font-size:.8125rem}
+.nL5>.th{background:var(--sf);border-top-color:var(--br);border-top-width:2px}.nL5>.th .rl{font-size:.8125rem}
 /* Agent Card */
-.ac{background:var(--sf);border:1px solid var(--br);border-left:3px solid var(--af);border-radius:var(--rm);padding:.75rem 1rem;margin:2px 0 2px 1.5rem;cursor:pointer;display:flex;align-items:center;gap:.75rem;transition:box-shadow .15s}
-.ac:hover{box-shadow:var(--sc);border-left-color:var(--afd)}
-.ac__i{width:32px;height:32px;border-radius:var(--rm);background:var(--afl);color:var(--af);display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0;font-weight:700}
+.ac{background:linear-gradient(135deg,#faf5ff,#fff);border:1px dashed #d4c2f0;border-radius:var(--rl);padding:.75rem 1rem;margin:4px 0 4px 1.75rem;cursor:pointer;display:flex;align-items:center;gap:.75rem;transition:all .2s;position:relative}
+.ac::before{content:"";position:absolute;left:-1.75rem;top:50%;width:1.75rem;height:0;border-top:2px dashed #d4c2f0}
+.ac:hover{box-shadow:0 4px 12px rgba(117,38,229,.15);border-color:var(--af);transform:translateY(-1px)}
+.ac__i{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--af),#9333ea);color:#fff;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;font-weight:700;position:relative}
+.ac__i::after{content:"\2726";position:absolute;bottom:-2px;right:-2px;background:#fff;color:var(--af);border-radius:50%;width:14px;height:14px;font-size:8px;display:flex;align-items:center;justify-content:center;border:1px solid var(--afl)}
 .ac__b{flex:1;min-width:0}.ac__n{font-size:.8125rem;font-weight:700;color:var(--afd);line-height:1.3}
-.ac__p{font-size:.75rem;color:var(--tw);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ac__p{font-size:.7rem;color:var(--tw);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.3}
 .ac__bd{display:flex;gap:4px;flex-shrink:0;flex-wrap:wrap}
 /* Badges */
 .bd{display:inline-block;padding:2px 8px;border-radius:1rem;font-size:.625rem;font-weight:700;line-height:1.6;white-space:nowrap;text-transform:uppercase;letter-spacing:.03em}
@@ -102,53 +113,244 @@ body{font-family:var(--f);font-size:.8125rem;color:var(--td);background:var(--pg
 .nt strong{color:var(--wn)}
 /* Journey */
 .jm{overflow-x:auto;padding-bottom:1rem}
-.jg{display:grid;grid-template-columns:140px repeat(8,minmax(180px,1fr));gap:0;min-width:1600px}
-.jsh{padding:.75rem .5rem;text-align:center;border:1px solid var(--br);border-left:none;font-weight:700;font-size:.75rem;color:#fff;position:sticky;top:0;z-index:2}
-.jsh:first-child{border-left:1px solid var(--br)}.jsh .sn{font-size:.625rem;opacity:.8;display:block;margin-bottom:2px}
-.jfn{font-size:.625rem;font-weight:400;opacity:.85;display:block;margin-top:2px}
-.smk{background:var(--mk)}.ssl{background:var(--b)}.ssv{background:var(--af)}.sdg{background:#455a64}
-.swl{padding:.6rem .5rem;font-size:.6875rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--tw);background:var(--sa);border:1px solid var(--br);display:flex;align-items:center;position:sticky;left:0;z-index:1}
-.swc{padding:.5rem;border:1px solid var(--br);border-left:none;background:var(--sf);font-size:.75rem;color:var(--ts);line-height:1.5}
-.swc ul{list-style:none;padding:0;margin:0}.swc li{padding:2px 0}.swc li::before{content:"";display:inline-block;width:4px;height:4px;border-radius:50%;margin-right:6px;vertical-align:middle}
-.spa li::before{background:var(--er)}.sch li::before{background:var(--b)}.sca li::before{background:var(--tw)}
-.jp{display:inline-block;padding:3px 8px;border-radius:10px;font-size:.6875rem;font-weight:600;margin:2px;cursor:pointer;transition:all .15s;border:1px solid transparent;line-height:1.4}
-.jp:hover{transform:translateY(-1px);box-shadow:var(--sc)}
-.jp--a{background:var(--afl);color:var(--afd);border-color:#d4c2f0}.jp--a:hover{background:var(--af);color:#fff}
-.jp--r{background:var(--hl);color:var(--bd);border-color:var(--blr)}.jp--r:hover{background:var(--b);color:#fff}
+.jg{display:grid;grid-template-columns:130px repeat(8,minmax(190px,1fr));gap:0;min-width:1700px}
+/* Chevron stage headers */
+.jsh{padding:.75rem .5rem .75rem 1.25rem;text-align:center;font-weight:700;font-size:.75rem;color:#fff;position:sticky;top:0;z-index:2;clip-path:polygon(0 0,calc(100% - 14px) 0,100% 50%,calc(100% - 14px) 100%,0 100%,14px 50%);margin-left:-7px}
+.jsh:first-child{clip-path:polygon(0 0,calc(100% - 14px) 0,100% 50%,calc(100% - 14px) 100%,0 100%);margin-left:0;border-radius:var(--rm) 0 0 0;padding-left:.75rem}
+.jsh:last-child{border-radius:0 var(--rm) 0 0}
+.jsh .sn{font-size:.5625rem;opacity:.7;display:block;margin-bottom:1px;letter-spacing:.1em;text-transform:uppercase}
+.jfn{font-size:.5625rem;font-weight:600;opacity:.9;display:block;margin-top:3px;letter-spacing:.04em;text-transform:uppercase}
+.smk{background:linear-gradient(135deg,var(--mk),#c4054f)}.ssl{background:linear-gradient(135deg,var(--b),var(--bd))}.ssv{background:linear-gradient(135deg,var(--af),var(--afd))}.sdg{background:linear-gradient(135deg,#546e7a,#37474f)}
+/* Swimlane labels */
+.swl{padding:.6rem .5rem;font-size:.65rem;font-weight:700;text-transform:none;color:var(--tw);background:var(--sa);border:1px solid var(--br);display:flex;align-items:center;position:sticky;left:0;z-index:1;line-height:1.3}
+/* Swimlane cells - card style */
+.swc{padding:.5rem;border-bottom:1px solid var(--br);border-right:1px solid var(--br);background:var(--sf);font-size:.75rem;color:var(--ts);line-height:1.5}
+.swc ul{list-style:none;padding:0;margin:0}
+.swc li{padding:3px 6px;margin:3px 0;border-radius:var(--rm);display:flex;align-items:flex-start;gap:6px;font-size:.7rem;line-height:1.4}
+.swc li .li-icon{flex-shrink:0;width:16px;text-align:center;font-size:11px}
+/* Pain points - red card style */
+.spa li{background:linear-gradient(135deg,#fff5f5,#fff);border-left:2px solid var(--er)}
+.spa li .li-icon{color:var(--er)}
+/* Channel - blue subtle */
+.sch li{background:linear-gradient(135deg,#f0f7ff,#fff);border-left:2px solid var(--b)}
+.sch li .li-icon{color:var(--b)}
+/* Actions - neutral */
+.sca li{background:var(--sa);border-left:2px solid var(--bs)}
+.sca li .li-icon{color:var(--tw)}
+/* Emotion curve row */
+.emo-cell{border-bottom:1px solid var(--br);border-right:1px solid var(--br);background:var(--sf);position:relative;height:60px;display:flex;align-items:center;justify-content:center}
+.emo-dot{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;position:relative;z-index:1;border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.15)}
+.emo-label{position:absolute;bottom:4px;font-size:.5625rem;font-weight:600;text-transform:uppercase;letter-spacing:.04em}
+/* Agent/role pills */
+.jp{display:inline-flex;align-items:center;gap:4px;padding:4px 10px;border-radius:var(--rm);font-size:.6875rem;font-weight:600;margin:2px;cursor:pointer;transition:all .15s;border:1px solid transparent;line-height:1.3}
+.jp:hover{transform:translateY(-1px);box-shadow:0 2px 8px rgba(0,0,0,.12)}
+.jp--a{background:var(--afl);color:var(--afd);border-color:#d4c2f0}.jp--a::before{content:"\2726";font-size:10px}.jp--a:hover{background:var(--af);color:#fff}
+.jp--master{background:linear-gradient(135deg,var(--af),#9333ea);color:#fff;border-color:var(--afd);font-weight:700;padding:5px 12px;font-size:.75rem;box-shadow:0 2px 6px rgba(117,38,229,.25)}.jp--master::before{content:"\2B21";font-size:11px}.jp--master:hover{background:linear-gradient(135deg,#5a1ba9,#7c3aed);transform:translateY(-2px);box-shadow:0 4px 12px rgba(117,38,229,.35)}
+.jp-sub-group{display:flex;flex-wrap:wrap;padding-left:12px;border-left:2px solid #d4c2f0;margin:2px 0 4px 8px}
+.jp--r{background:var(--hl);color:var(--bd);border-color:var(--blr)}.jp--r::before{content:"\25CB";font-size:8px}.jp--r:hover{background:var(--b);color:#fff}
 .jp--n{background:var(--sa);color:var(--tw);cursor:default;border-color:var(--br)}.jp--n:hover{transform:none;box-shadow:none}
-/* Data Req */
-.dr-grid{display:grid;grid-template-columns:200px 1fr 1fr 1fr;gap:0;border:1px solid var(--br);border-radius:var(--rm);overflow:hidden;margin-bottom:1.5rem}
-.dr-hdr{background:var(--bk);color:#fff;padding:.5rem .75rem;font-weight:700;font-size:.6875rem;text-transform:uppercase;letter-spacing:.04em;border-right:1px solid rgba(255,255,255,.2)}
-.dr-hdr:last-child{border-right:none}
-.dr-agent{background:var(--sa);padding:.5rem .75rem;font-weight:700;font-size:.8125rem;color:var(--afd);border-bottom:1px solid var(--br);border-right:1px solid var(--br);cursor:pointer;display:flex;align-items:center;gap:.5rem}
-.dr-agent:hover{background:var(--hl)}
-.dr-cell{padding:.4rem .75rem;font-size:.75rem;border-bottom:1px solid var(--br);border-right:1px solid var(--br);color:var(--ts);line-height:1.5}
-.dr-cell:last-child{border-right:none}
-.dr-cell ul{list-style:none;padding:0;margin:0}.dr-cell li{padding:1px 0;display:flex;align-items:flex-start;gap:4px}
-.dr-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;margin-top:5px}
-.dr-rt{background:var(--er)}.dr-nrt{background:var(--wn)}.dr-bt{background:var(--b)}
+/* Data Req - Medallion Architecture */
+.med-flow{display:flex;gap:0;margin-bottom:1.5rem;align-items:stretch;position:relative}
+.med-col{flex:1;min-width:0;position:relative}
+.med-col.silver{flex:1.4}
+.med-col__hdr{padding:.75rem 1rem;font-weight:700;font-size:.8125rem;color:#fff;display:flex;align-items:center;gap:.5rem;border-radius:var(--rl) var(--rl) 0 0}
+.med-col__hdr .med-icon{font-size:16px}
+.med-col__hdr-sub{font-size:.625rem;font-weight:400;opacity:.8;margin-left:auto}
+.med-col__body{padding:.75rem;min-height:200px;border:1px solid var(--br);border-top:none;border-radius:0 0 var(--rl) var(--rl)}
+/* Bronze */
+.med-bronze .med-col__hdr{background:linear-gradient(135deg,#CD7F32,#A0522D)}
+.med-bronze .med-col__body{background:#FDF5ED}
+/* Silver */
+.med-silver .med-col__hdr{background:linear-gradient(135deg,#4682B4,#36648B)}
+.med-silver .med-col__body{background:#EBF0F7;border-width:2px;border-color:#4682B4;box-shadow:0 0 12px rgba(70,130,180,.12)}
+/* Gold */
+.med-gold .med-col__hdr{background:linear-gradient(135deg,#DAA520,#B8860B)}
+.med-gold .med-col__body{background:#FFFBEB}
+/* Arrow connectors between columns */
+.med-arrow{width:32px;display:flex;align-items:center;justify-content:center;flex-shrink:0;position:relative}
+.med-arrow::before{content:"";width:20px;height:2px;background:var(--bs)}
+.med-arrow::after{content:"";position:absolute;right:4px;border:5px solid transparent;border-left:6px solid var(--bs)}
+/* Data object cards */
+.med-card{background:#fff;border:1px solid var(--br);border-radius:var(--rm);padding:.5rem .75rem;margin-bottom:.5rem;transition:all .15s;position:relative}
+.med-card:hover{box-shadow:0 2px 8px rgba(0,0,0,.1)}
+.med-card__name{font-weight:700;font-size:.75rem;color:var(--td);display:flex;align-items:center;gap:6px}
+.med-card__name .sys-icon{font-size:12px}
+.med-card__detail{font-size:.6875rem;color:var(--tw);margin-top:2px;line-height:1.4}
+.med-card__fields{font-size:.6875rem;color:var(--ts);margin-top:4px;line-height:1.5}
+.med-card__fields li{padding:1px 0;display:flex;align-items:center;gap:4px}
+.med-card__badge{position:absolute;top:.5rem;right:.5rem;font-size:.5625rem;font-weight:700;padding:1px 6px;border-radius:8px;text-transform:uppercase;letter-spacing:.04em}
+.med-badge-rt{background:#dcfce7;color:#166534;border:1px solid #bbf7d0}
+.med-badge-nrt{background:#fef3c7;color:#92400e;border:1px solid #fde68a}
+.med-badge-bt{background:#f1f5f9;color:#475569;border:1px solid #e2e8f0}
+/* Silver card - prominent */
+.med-silver .med-card{border-left:3px solid #4682B4;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+.med-silver .med-card:hover{border-left-color:#36648B;box-shadow:0 3px 12px rgba(70,130,180,.15)}
+/* Agent consumers on silver cards */
+.med-consumers{margin-top:6px;padding-top:6px;border-top:1px solid var(--br)}
+.med-consumers__label{font-size:.5625rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--tw);margin-bottom:3px}
+.med-consumer-pill{display:inline-flex;align-items:center;gap:3px;padding:2px 7px;border-radius:8px;font-size:.625rem;font-weight:600;margin:1px;cursor:pointer;background:var(--afl);color:var(--afd);border:1px solid #d4c2f0;transition:all .15s}
+.med-consumer-pill:hover{background:var(--af);color:#fff}
+.med-consumer-pill::before{content:"\2726";font-size:8px}
+/* Agent detail view in data tab */
+.dr-agent-view{background:#fff;border:1px solid var(--br);border-radius:var(--rl);margin-bottom:1rem;overflow:hidden;box-shadow:var(--sc)}
+.dr-agent-hdr{padding:.75rem 1rem;display:flex;align-items:center;gap:.75rem;border-bottom:1px solid var(--br);cursor:pointer;transition:background .15s}
+.dr-agent-hdr:hover{background:var(--hl)}
+.dr-agent-hdr__icon{width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,var(--af),#9333ea);color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0}
+.dr-agent-hdr__name{font-weight:700;font-size:.8125rem;color:var(--afd);flex:1}
+.dr-agent-hdr__nav{font-size:.6875rem;color:var(--b);cursor:pointer;display:flex;align-items:center;gap:4px;padding:4px 8px;border-radius:var(--rm);border:1px solid var(--blr);transition:all .15s}
+.dr-agent-hdr__nav:hover{background:var(--b);color:#fff}
+.dr-agent-body{padding:.75rem 1rem}
+.dr-agent-body .dr-freshness-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.75rem}
+.dr-fresh-col{padding:.5rem;border-radius:var(--rm)}
+.dr-fresh-col.rt{background:linear-gradient(135deg,#f0fdf4,#fff);border:1px solid #bbf7d0}
+.dr-fresh-col.nrt{background:linear-gradient(135deg,#fffbeb,#fff);border:1px solid #fde68a}
+.dr-fresh-col.bt{background:linear-gradient(135deg,#f8fafc,#fff);border:1px solid #e2e8f0}
+.dr-fresh-col__hdr{font-size:.625rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px;display:flex;align-items:center;gap:4px}
+.dr-fresh-col.rt .dr-fresh-col__hdr{color:#166534}.dr-fresh-col.rt .dr-fresh-col__hdr::before{content:"";width:6px;height:6px;border-radius:50%;background:#22c55e}
+.dr-fresh-col.nrt .dr-fresh-col__hdr{color:#92400e}.dr-fresh-col.nrt .dr-fresh-col__hdr::before{content:"";width:6px;height:6px;border-radius:50%;background:#f59e0b}
+.dr-fresh-col.bt .dr-fresh-col__hdr{color:#475569}.dr-fresh-col.bt .dr-fresh-col__hdr::before{content:"";width:6px;height:6px;border-radius:50%;background:#94a3b8}
+.dr-fresh-col ul{list-style:none;padding:0;margin:0;font-size:.7rem;color:var(--ts);line-height:1.5}
+.dr-fresh-col li{padding:2px 0}
 .dr-legend{display:flex;gap:1.5rem;margin-bottom:1rem;font-size:.75rem;color:var(--ts);align-items:center}
 .dr-legend span{display:flex;align-items:center;gap:4px}
-/* Telemetry slides */
-.tel-slide{background:var(--sf);border:1px solid var(--br);border-radius:var(--rm);margin-bottom:1.5rem;box-shadow:var(--sc);overflow:hidden}
-.tel-slide__h{padding:1rem 1.5rem;display:flex;align-items:center;gap:.75rem;cursor:pointer;transition:background .15s}
-.tel-slide__h:hover{background:var(--hl)}
-.tel-slide__icon{width:36px;height:36px;border-radius:var(--rm);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;color:#fff}
-.tel-slide__icon.svc{background:var(--b)}.tel-slide__icon.sal{background:var(--af)}.tel-slide__icon.mkt{background:var(--mk)}.tel-slide__icon.gov{background:var(--bk)}
-.tel-slide__title{font-size:1rem;font-weight:700;flex:1}
-.tel-slide__chev{font-size:12px;color:var(--tw);transition:transform .2s}
-.tel-slide.cl .tel-slide__chev{transform:rotate(-90deg)}
-.tel-slide__body{padding:0 1.5rem 1.5rem;overflow:hidden;transition:max-height .3s}
-.tel-slide.cl .tel-slide__body{max-height:0!important;padding:0 1.5rem}
-.tel-metric{display:grid;grid-template-columns:200px 1fr 180px 200px;gap:0;border:1px solid var(--br);border-radius:var(--rm);overflow:hidden;margin-top:.75rem}
-.tel-metric__hdr{background:var(--sa);padding:.4rem .75rem;font-size:.625rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--tw);border-bottom:1px solid var(--br);border-right:1px solid var(--br)}
-.tel-metric__hdr:last-child{border-right:none}
-.tel-metric__cell{padding:.5rem .75rem;font-size:.75rem;border-bottom:1px solid var(--br);border-right:1px solid var(--br);color:var(--ts);line-height:1.5}
-.tel-metric__cell:last-child{border-right:none}
-.tel-metric__cell:first-child{font-weight:600;color:var(--td)}
-.tel-metric__cell.good{color:var(--ok);font-weight:600}
+.dr-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.dr-rt{background:#22c55e}.dr-nrt{background:#f59e0b}.dr-bt{background:#94a3b8}
+/* Telemetry Dashboard */
+@keyframes pulse-dot{0%{transform:scale(1);opacity:.6}100%{transform:scale(2.5);opacity:0}}
+@keyframes fill-ring{from{--pv:0}}
+@property --pv{syntax:"<integer>";initial-value:0;inherits:false}
 
-@media(max-width:900px){.gh{padding:0 .5rem}.ct{padding:1rem}.sg{grid-template-columns:1fr}.gh__badge{display:none}}
+.tdb{background:#0f172a;border-radius:var(--rl);padding:1.5rem;color:#f8fafc}
+/* KPI Strip */
+.tdb-kpi{display:flex;gap:.75rem;margin-bottom:1.25rem;flex-wrap:wrap}
+.tdb-kpi__card{flex:1;min-width:140px;background:#1e293b;border-radius:var(--rl);padding:1rem;border-top:3px solid var(--bs);position:relative;overflow:hidden}
+.tdb-kpi__card.ok{border-top-color:#22c55e}.tdb-kpi__card.wn{border-top-color:#f59e0b}.tdb-kpi__card.cr{border-top-color:#ef4444}.tdb-kpi__card.info{border-top-color:#3b82f6}
+.tdb-kpi__label{font-size:.625rem;text-transform:uppercase;letter-spacing:.06em;color:#94a3b8;margin-bottom:4px}
+.tdb-kpi__val{font-size:1.5rem;font-weight:700;font-variant-numeric:tabular-nums}
+.tdb-kpi__trend{font-size:.6875rem;display:flex;align-items:center;gap:3px;margin-top:2px}
+.tdb-kpi__trend.up{color:#22c55e}.tdb-kpi__trend.up::before{content:"\25B2";font-size:8px}
+.tdb-kpi__trend.dn{color:#ef4444}.tdb-kpi__trend.dn::before{content:"\25BC";font-size:8px}
+.tdb-kpi__trend.flat{color:#94a3b8}.tdb-kpi__trend.flat::before{content:"\25C6";font-size:8px}
+.tdb-kpi__spark{display:flex;align-items:flex-end;gap:2px;height:24px;position:absolute;bottom:8px;right:8px;opacity:.5}
+.tdb-kpi__spark-bar{width:3px;border-radius:1px;background:#3b82f6;transition:height .4s}
+/* Status dots */
+.tdb-dot{width:8px;height:8px;border-radius:50%;display:inline-block;position:relative;flex-shrink:0}
+.tdb-dot::before{content:'';position:absolute;inset:0;border-radius:50%;background:inherit;animation:pulse-dot 2s infinite linear}
+.tdb-dot.ok{background:#22c55e}.tdb-dot.wn{background:#f59e0b}.tdb-dot.cr{background:#ef4444}
+/* Agent health grid */
+.tdb-health{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:.5rem;margin-bottom:1.25rem}
+.tdb-health__card{background:#1e293b;border-radius:var(--rm);padding:.625rem .75rem;display:flex;align-items:center;gap:.5rem;border-left:3px solid #334155;transition:border-color .3s}
+.tdb-health__card.ok{border-left-color:#22c55e}.tdb-health__card.wn{border-left-color:#f59e0b}.tdb-health__card.cr{border-left-color:#ef4444}
+.tdb-health__name{font-size:.7rem;font-weight:600;flex:1;color:#e2e8f0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tdb-health__stat{font-size:.625rem;color:#94a3b8}
+/* Monthly bar chart (actual vs target) */
+.tdb-monthly{margin-top:.5rem}
+.tdb-monthly__bars{display:flex;align-items:flex-end;gap:3px;height:48px;position:relative}
+.tdb-monthly__bar{flex:1;min-width:0;border-radius:2px 2px 0 0;transition:height .4s;position:relative}
+.tdb-monthly__bar:hover{opacity:.85}
+.tdb-monthly__bar:hover::after{content:attr(data-tip);position:absolute;bottom:calc(100% + 4px);left:50%;transform:translateX(-50%);background:#0f172a;color:#f8fafc;font-size:.5625rem;padding:2px 6px;border-radius:3px;white-space:nowrap;z-index:2;border:1px solid #334155}
+/* Target line overlay */
+.tdb-monthly__target{position:absolute;left:0;right:0;border-top:2px dashed #f8fafc;opacity:.5;pointer-events:none}
+.tdb-monthly__target-label{position:absolute;right:0;top:-12px;font-size:.5625rem;color:#94a3b8}
+.tdb-monthly__labels{display:flex;justify-content:space-between;font-size:.5rem;color:#475569;margin-top:2px;padding:0 1px}
+/* Actual vs target side-by-side mini bar */
+.tdb-avt{display:flex;align-items:center;gap:.5rem;margin-top:.25rem}
+.tdb-avt__bar-wrap{flex:1;height:10px;background:#334155;border-radius:5px;overflow:hidden;position:relative}
+.tdb-avt__bar{height:100%;border-radius:5px;transition:width .6s}
+.tdb-avt__marker{position:absolute;top:-2px;width:2px;height:14px;background:#f8fafc;border-radius:1px;opacity:.7}
+.tdb-avt__val{font-size:.75rem;font-weight:700;min-width:48px;text-align:right;font-variant-numeric:tabular-nums}
+.tdb-avt__target{font-size:.625rem;color:#64748b;min-width:64px}
+/* Metric rows */
+.tdb-section{margin-bottom:1.25rem}
+.tdb-section__hdr{font-size:.6875rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#94a3b8;margin-bottom:.5rem;display:flex;align-items:center;gap:.5rem;padding-bottom:.5rem;border-bottom:1px solid #334155}
+.tdb-section__hdr-icon{font-size:14px}
+.tdb-metrics{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:.75rem}
+.tdb-metric{background:#1e293b;border-radius:var(--rl);padding:1rem;display:flex;flex-direction:column;gap:.5rem}
+.tdb-metric__top{display:flex;align-items:flex-start;justify-content:space-between}
+.tdb-metric__info{flex:1}
+.tdb-metric__name{font-size:.75rem;font-weight:600;color:#e2e8f0}
+.tdb-metric__desc{font-size:.625rem;color:#64748b;margin-top:2px;line-height:1.4}
+.tdb-metric__val-row{display:flex;align-items:baseline;gap:.5rem;margin-top:.25rem}
+.tdb-metric__val{font-size:1.25rem;font-weight:700;font-variant-numeric:tabular-nums}
+.tdb-metric__target{font-size:.625rem;color:#64748b}
+/* Bar chart */
+.tdb-bars{display:flex;align-items:flex-end;gap:3px;height:40px;margin-top:.25rem}
+.tdb-bar{flex:1;min-width:0;border-radius:2px 2px 0 0;transition:height .6s ease-out}
+/* Heatmap */
+.tdb-heatmap{display:grid;grid-template-columns:repeat(12,1fr);gap:2px;margin-top:.5rem}
+.tdb-hm-cell{aspect-ratio:1.5;border-radius:2px;min-height:8px}
+.tdb-hm-label{grid-column:1/-1;font-size:.5625rem;color:#64748b;margin-top:4px}
+/* Threshold bar */
+.tdb-threshold{height:6px;border-radius:3px;background:#334155;overflow:hidden;margin-top:.5rem;position:relative}
+.tdb-threshold__fill{height:100%;border-radius:3px;transition:width .6s ease-out}
+.tdb-threshold__marker{position:absolute;top:-2px;width:2px;height:10px;background:#f8fafc;border-radius:1px}
+/* Expand sections */
+.tdb-expand{background:#1e293b;border-radius:var(--rl);margin-bottom:.75rem;overflow:hidden}
+.tdb-expand__hdr{padding:.75rem 1rem;display:flex;align-items:center;gap:.5rem;cursor:pointer;transition:background .15s}
+.tdb-expand__hdr:hover{background:#334155}
+.tdb-expand__icon{width:28px;height:28px;border-radius:var(--rm);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;color:#fff}
+.tdb-expand__icon.svc{background:#0176d3}.tdb-expand__icon.sal{background:#7526e5}.tdb-expand__icon.mkt{background:#e3066a}.tdb-expand__icon.gov{background:#1e293b;border:1px solid #475569}
+.tdb-expand__title{font-size:.8125rem;font-weight:700;flex:1;color:#e2e8f0}
+.tdb-expand__chev{font-size:10px;color:#64748b;transition:transform .2s}
+.tdb-expand.cl .tdb-expand__chev{transform:rotate(-90deg)}
+.tdb-expand__body{padding:0 1rem 1rem;overflow:hidden;transition:max-height .3s}
+.tdb-expand.cl .tdb-expand__body{max-height:0!important;padding:0 1rem}
+
+/* ROI Calculator */
+.roi-exec{background:#0f172a;border-radius:var(--rl);padding:1.5rem;color:#f8fafc;margin-bottom:1.5rem}
+.roi-exec__title{font-size:1rem;font-weight:700;margin-bottom:1rem;display:flex;align-items:center;gap:.5rem}
+.roi-exec__title span{font-size:.625rem;background:var(--af);padding:2px 8px;border-radius:8px;text-transform:uppercase;letter-spacing:.04em}
+.roi-kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:.75rem;margin-bottom:1.25rem}
+.roi-kpi{background:#1e293b;border-radius:var(--rl);padding:1rem;border-top:3px solid #334155;text-align:center}
+.roi-kpi.highlight{border-top-color:#22c55e;background:linear-gradient(180deg,#0f2918,#1e293b)}
+.roi-kpi.accent{border-top-color:var(--af)}
+.roi-kpi.gold{border-top-color:#eab308}
+.roi-kpi__label{font-size:.5625rem;text-transform:uppercase;letter-spacing:.06em;color:#94a3b8;margin-bottom:6px}
+.roi-kpi__val{font-size:1.5rem;font-weight:700;font-variant-numeric:tabular-nums}
+.roi-kpi__sub{font-size:.6875rem;color:#64748b;margin-top:2px}
+/* Scenario toggle */
+.roi-scenarios{display:flex;gap:2px;background:#1e293b;border-radius:var(--rl);padding:2px;margin-bottom:1rem;width:fit-content}
+.roi-scn-btn{padding:6px 16px;border:none;background:none;color:#94a3b8;font-size:.75rem;font-weight:600;font-family:var(--f);cursor:pointer;border-radius:4px;transition:all .15s}
+.roi-scn-btn.on{background:var(--af);color:#fff}
+.roi-scn-btn:hover:not(.on){color:#e2e8f0}
+/* Value levers */
+.roi-levers{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-bottom:1.5rem}
+.roi-lever{background:#fff;border:1px solid var(--br);border-radius:var(--rl);padding:1rem;box-shadow:var(--sc)}
+.roi-lever__hdr{display:flex;align-items:center;gap:.5rem;margin-bottom:.75rem}
+.roi-lever__icon{width:28px;height:28px;border-radius:var(--rm);display:flex;align-items:center;justify-content:center;font-size:14px;color:#fff;flex-shrink:0}
+.roi-lever__title{font-size:.8125rem;font-weight:700;color:var(--td)}
+.roi-lever__val{font-size:1.125rem;font-weight:700;margin-left:auto;color:var(--ok)}
+.roi-lever__bar-wrap{height:24px;background:var(--sa);border-radius:4px;overflow:hidden;position:relative;margin-bottom:.25rem}
+.roi-lever__bar{height:100%;border-radius:4px;transition:width .5s}
+.roi-lever__bar.current{background:#cbd5e1;position:absolute;top:0;left:0}
+.roi-lever__bar.future{background:var(--ok);position:absolute;top:0;left:0}
+.roi-lever__labels{display:flex;justify-content:space-between;font-size:.625rem;color:var(--tw)}
+.roi-lever__detail{font-size:.6875rem;color:var(--ts);margin-top:.5rem;line-height:1.5}
+/* 36-month timeline */
+.roi-timeline{background:#fff;border:1px solid var(--br);border-radius:var(--rl);padding:1rem;box-shadow:var(--sc);margin-bottom:1.5rem}
+.roi-timeline__hdr{font-size:.875rem;font-weight:700;margin-bottom:.75rem;display:flex;align-items:center;gap:.5rem}
+.roi-timeline__chart{position:relative;height:200px;display:flex;align-items:flex-end;gap:0;padding-bottom:20px;border-bottom:1px solid var(--br)}
+.roi-timeline__bar-grp{flex:1;display:flex;flex-direction:column;align-items:center;gap:0;position:relative}
+.roi-timeline__bar{width:70%;border-radius:3px 3px 0 0;transition:height .4s;min-width:8px}
+.roi-timeline__bar-label{font-size:.5rem;color:var(--tw);position:absolute;bottom:-16px;white-space:nowrap}
+.roi-timeline__bar-stack{display:flex;flex-direction:column-reverse;width:70%;min-width:8px}
+.roi-timeline__bar-seg{transition:height .4s}
+.roi-timeline__bar-seg:first-child{border-radius:3px 3px 0 0}
+.roi-timeline__legend{display:flex;gap:1rem;margin-top:.75rem;font-size:.6875rem;color:var(--ts);flex-wrap:wrap}
+.roi-timeline__legend span{display:flex;align-items:center;gap:4px}
+.roi-timeline__legend span::before{content:'';width:10px;height:10px;border-radius:2px}
+.roi-timeline__be-line{position:absolute;border-left:2px dashed var(--ok);top:0;bottom:20px;z-index:1}
+.roi-timeline__be-label{position:absolute;top:-4px;transform:translateX(-50%);font-size:.5625rem;font-weight:700;color:var(--ok);background:#fff;padding:0 4px;white-space:nowrap}
+/* Investment table */
+.roi-inv{background:#fff;border:1px solid var(--br);border-radius:var(--rl);padding:1rem;box-shadow:var(--sc);margin-bottom:1.5rem}
+.roi-inv__row{display:flex;justify-content:space-between;padding:6px 0;font-size:.8125rem;border-bottom:1px solid var(--br)}
+.roi-inv__row:last-child{border-bottom:none}
+.roi-inv__row.total{font-weight:700;font-size:.875rem;border-top:2px solid var(--td);padding-top:8px;margin-top:4px}
+.roi-inv__row .label{color:var(--ts)}.roi-inv__row .val{font-weight:600;font-variant-numeric:tabular-nums}
+.roi-inv__row.total .val{color:var(--ok)}
+.roi-inv__row.cost .val{color:var(--er)}
+
+@media(max-width:900px){.gh{padding:0 .5rem}.ct{padding:1rem}.sg{grid-template-columns:1fr}.gh__badge{display:none}.roi-levers{grid-template-columns:1fr}}
 @media print{.gh,.tabs,.nt{display:none}.cd{break-inside:avoid}}
 </style>
 </head>
@@ -197,33 +399,30 @@ body{font-family:var(--f);font-size:.8125rem;color:var(--td);background:var(--pg
 <!-- TAB 3: VALUE CALCULATOR -->
 <div id="vw-calculator" class="vw">
   <div class="tabs">
-    <button class="tab on" onclick="sCV('both',this)">Service &amp; Sales</button>
-    <button class="tab" onclick="sCV('service',this)">Service Only</button>
-    <button class="tab" onclick="sCV('sales',this)">Sales Only</button>
-    <div class="sp"></div><div class="bg"><button class="btn" onclick="rC()">Reset Defaults</button></div>
+    <button class="tab on" onclick="sCV('exec',this)">Executive Summary</button>
+    <button class="tab" onclick="sCV('detail',this)">Detailed Inputs</button>
+    <div class="sp"></div>
+    <div class="bg">
+      <button class="btn" onclick="rC()">Reset Defaults</button>
+    </div>
   </div>
-  <div class="ct">
-    <div class="cd cd--intro"><div class="cd__bd"><h3>FTE Cost-Out Calculator</h3><p>Enter FTEs per role, adjust cost and automatable % to model savings from Agentforce deployment.</p></div></div>
-    <div id="cs" class="cd"><div class="cd__h"><div class="cd__hi svc">&#9742;</div><span class="cd__t">Service Roles</span></div><div class="cd__bd"><table class="tb"><thead><tr><th>Role</th><th>Agent(s)</th><th>HITL</th><th>FTEs</th><th>Cost/FTE</th><th>Auto%</th><th>Current</th><th>Projected</th><th>Savings</th></tr></thead><tbody id="csb"></tbody></table></div></div>
-    <div id="cl" class="cd"><div class="cd__h"><div class="cd__hi sal">&#128176;</div><span class="cd__t">Sales Roles</span></div><div class="cd__bd"><table class="tb"><thead><tr><th>Role</th><th>Agent(s)</th><th>HITL</th><th>FTEs</th><th>Cost/FTE</th><th>Auto%</th><th>Current</th><th>Projected</th><th>Savings</th></tr></thead><tbody id="clb"></tbody></table></div></div>
-    <div class="sg" id="csu"></div>
-    <div class="nt"><strong>Note:</strong> Automatable percentages are illustrative estimates. Figures represent capacity displacement, not necessarily headcount elimination.</div>
-  </div>
+  <div class="ct" id="calc-ct"></div>
 </div>
 
 <!-- TAB 4: AGENT DATA REQUIREMENTS -->
 <div id="vw-datareq" class="vw">
   <div class="tabs">
-    <button class="tab on" onclick="sDV('service',this)">Service</button>
-    <button class="tab" onclick="sDV('sales',this)">Sales</button>
-    <button class="tab" onclick="sDV('marketing',this)">Marketing</button>
+    <button class="tab on" onclick="sDV('medallion',this)">Medallion Architecture</button>
+    <button class="tab" onclick="sDV('service',this)">Service Agents</button>
+    <button class="tab" onclick="sDV('sales',this)">Sales Agents</button>
+    <button class="tab" onclick="sDV('marketing',this)">Marketing Agents</button>
     <div class="sp"></div>
   </div>
   <div class="ct">
-    <div class="cd cd--intro" style="border-left-color:var(--af)"><div class="cd__bd"><h3>Agent Data Requirements</h3><p>Each agent's data needs classified by freshness: <strong style="color:var(--er)">Real-time</strong> (sub-second to seconds), <strong style="color:var(--wn)">Near-real-time</strong> (minutes to 1 hour), <strong style="color:var(--b)">Batch</strong> (daily/weekly). Click an agent name to view full details. Data integration powered by Salesforce Data Cloud and MuleSoft.</p></div></div>
+    <div class="cd cd--intro" style="border-left-color:#4682B4"><div class="cd__bd"><h3>Agent Data Requirements — Medallion Architecture</h3><p>All agent data is sourced from the <strong style="color:#4682B4">Silver Layer</strong> (cleaned, validated, conformed) — the authoritative data tier between raw ingestion (Bronze) and business-ready outputs (Gold). Click any agent to navigate to its org chart position. Powered by Salesforce Data Cloud and MuleSoft.</p></div></div>
     <div class="dr-legend">
-      <span><span class="dr-dot dr-rt"></span> Real-time (sub-second)</span>
-      <span><span class="dr-dot dr-nrt"></span> Near-real-time (minutes)</span>
+      <span><span class="dr-dot dr-rt"></span> Real-time (&lt;5s)</span>
+      <span><span class="dr-dot dr-nrt"></span> Near-real-time (min–1hr)</span>
       <span><span class="dr-dot dr-bt"></span> Batch (daily/weekly)</span>
     </div>
     <div id="drg"></div>
@@ -232,19 +431,20 @@ body{font-family:var(--f);font-size:.8125rem;color:var(--td);background:var(--pg
 
 <!-- TAB 5: AGENT TELEMETRY -->
 <div id="vw-telemetry" class="vw">
-  <div class="tabs"><button class="tab on" disabled>Agent Telemetry & Governance</button><div class="sp"></div></div>
-  <div class="ct">
-    <div class="cd cd--intro" style="border-left-color:var(--bk)"><div class="cd__bd"><h3>Agent Telemetry & Governance Dashboard</h3><p>Enterprise metrics to ensure agents work productively and don't drift. Organized by business function with benchmarks and drift detection guidance. Click each section to expand.</p></div></div>
-    <div id="telg"></div>
-  </div>
+  <div class="ct" id="tel-ct" style="max-width:1440px"></div>
 </div>
 
 <!-- MODAL -->
 <div class="mo" id="modal" onclick="if(event.target===this)xM()"><div class="md"><div class="md__h"><div class="md__hi">Af</div><span class="md__t" id="mt"></span><button class="md__x" onclick="xM()">&times;</button></div><div class="md__bd" id="mb"></div></div></div>
 
 <script>
+window.onerror=function(msg,url,line,col,err){
+var d=document.createElement('div');d.style.cssText='position:fixed;top:60px;left:20px;right:20px;background:#fee;border:2px solid red;padding:1rem;z-index:9999;font-family:monospace;font-size:12px';
+d.innerHTML='<b>JS Error:</b> '+msg+'<br>Line: '+line+', Col: '+col;document.body.appendChild(d);console.error('ERROR:',msg,'Line:',line)};
 // ═══ AGENT DATA (compact keys) ═══
 const A={
+careDirectorOrch:{name:"Care Director Orchestrator",purpose:"Master orchestrator for the Director of Care — provides strategic operational visibility and orchestrates sub-agents (Ops Analytics, Volume Driver, VoC, Workforce Planning) to drive reporting, focus groups, and operational improvement.",tasks:"Aggregate strategic insights across all care operations, orchestrate analytics and VoC sub-agents, generate executive briefings, identify cross-functional improvement opportunities, coordinate workforce planning with capacity models, surface root causes for leadership action.",triggers:"Daily performance review, weekly executive briefing, monthly business review, strategic planning cycle.",systems:"BI/analytics, CRM, WFM, telephony/ACD, QA, survey platform, social listening, HR/finance.",keyData:"All sub-agent outputs, contact center KPIs, VoC insights, workforce forecasts, vendor performance, budget data.",kpis:"Insight-to-action time, strategic initiative success rate, executive reporting quality, cross-functional issue resolution.",hitl:"Assistive — orchestrates strategic sub-agents for Director oversight",priority:"Near-term Service",
+dr:{rt:["Live queue depth & service levels","Real-time agent states & adherence"],nrt:["Intraday contact volume vs forecast","Today's QA scores aggregated","Sub-agent output summaries"],bt:["Monthly KPI trends & benchmarks","Vendor SLA reports","Strategic initiative tracking"]}},
 opsAnalytics:{name:"Operations Analytics Agent",purpose:"Real-time and trending view of contact center performance for Director decision-making.",tasks:"Aggregate KPIs (CSAT, NPS, FCR, AHT, cost-per-contact), identify trends/anomalies, generate exec dashboards.",triggers:"Daily review, weekly briefing, monthly business review, KPI breach.",systems:"BI/analytics, CRM, WFM, telephony/ACD, QA.",keyData:"Contact volumes, resolution rates, CSAT/NPS, AHT by queue, cost-per-contact, vendor SLA.",kpis:"Dashboard accuracy, insight-to-action time, anomaly detection rate.",hitl:"Assistive",priority:"Near-term Service",
 dr:{rt:["Live queue depth & service levels","Real-time agent states & adherence","Current abandonment rate"],nrt:["Intraday contact volume vs forecast","Today's AHT/FCR by queue","Today's QA scores aggregated"],bt:["Monthly KPI trends & benchmarks","Vendor SLA performance reports","Historical volume patterns"]}},
 volumeDriver:{name:"Volume Driver Analysis Agent",purpose:"Identify why customers contact the center and surface systemic issues.",tasks:"Classify contact reasons, correlate spikes to events, quantify avoidable contacts.",triggers:"Weekly volume review, post-event analysis.",systems:"Transcript analytics, CRM, billing logs, network incidents.",keyData:"Contact reason taxonomy, volume by reason, repeat-contact patterns.",kpis:"Avoidable contact rate, root-cause accuracy, volume reduction.",hitl:"Assistive",priority:"",
@@ -265,7 +465,7 @@ billingResolution:{name:"Billing Resolution Agent",purpose:"Help supervisors res
 dr:{rt:["Current billing balance & payment due","Active autopay status","Installment plan balances","Promotional credit status"],nrt:["Recent payment attempts & failures","Today's billing adjustments","Recent interaction notes"],bt:["12-24 month invoice history","Historical dispute patterns","Policy threshold rules"]}},
 paymentException:{name:"Payment Exception Agent",purpose:"Help supervisors handle payment exceptions and hardship cases.",tasks:"Present payment history, evaluate hardship, recommend plan, assess restoration.",triggers:"Agent escalation, hardship, service restoration, late-fee waiver.",systems:"Billing, payments, collections, CRM, policy.",keyData:"Balance, payment history, autopay, collections stage, hardship indicators.",kpis:"Exception resolution rate, delinquency save, compliance.",hitl:"Approval-based",priority:"",
 dr:{rt:["Current balance & past-due amount","Collection stage & suspension status","Last payment date/method/amount"],nrt:["Recent payment arrangement history","Hardship indicators (recent contacts, social data)"],bt:["Full payment history (12 months)","Policy exception rules & thresholds","Collections workflow rules"]}},
-supervisorQueue:{name:"Supervisor Queue & Coaching Agent",purpose:"Real-time queue visibility and coaching triggers.",tasks:"Monitor queues, flag spikes, identify coaching needs, recommend staffing adjustments.",triggers:"Queue breach, AHT spike, abandonment, adherence violation.",systems:"WFM, telephony/ACD, QA, CRM.",keyData:"Queue stats, adherence, transcripts, agent performance.",kpis:"Service level, occupancy, coaching-trigger rate.",hitl:"Assistive",priority:"",
+supervisorQueue:{name:"Care Supervisor Orchestrator",purpose:"Master orchestrator for the CC Supervisor — provides real-time floor visibility and orchestrates sub-agents (Billing Resolution, Payment Exception, Interaction QA) to manage escalations, approvals, and coaching.",tasks:"Monitor queue depth and wait times, orchestrate escalation sub-agents, flag AHT/abandonment spikes, identify reps needing coaching, recommend real-time staffing adjustments, coordinate credit approvals and QA reviews.",triggers:"Queue threshold breach, AHT spike, abandonment spike, escalation request, adherence violation.",systems:"WFM, telephony/ACD, QA analytics, CRM, billing, case management.",keyData:"Queue stats, agent adherence, transcripts, agent performance, sentiment, escalation queue, sub-agent outputs.",kpis:"Service level, occupancy, queue health, coaching-trigger rate, escalation resolution time.",hitl:"Assistive — orchestrates day-to-day sub-agents for Supervisor oversight",priority:"",
 dr:{rt:["Live queue depth by skill group","Real-time agent states (available/busy/ACW)","Real-time adherence (RTA)","Current service level & ASA","Live sentiment alerts from active calls"],nrt:["Intraday volume reforecast","Today's agent AHT & FCR","Today's QA evaluation scores"],bt:["Weekly/monthly KPI trends","Agent skill profiles & certifications","Scheduled shifts & planned shrinkage"]}},
 interactionQA:{name:"Interaction QA Agent",purpose:"Auto-score interactions for compliance and quality.",tasks:"Summarize calls, identify policy violations, score quality, recommend coaching.",triggers:"Post-interaction, compliance audit.",systems:"Transcripts, QA platform, CRM, compliance rules.",keyData:"Transcripts, policy library, QA rubric, outcomes.",kpis:"QA score, violation rate, false-positive rate.",hitl:"Approval-based",priority:"",
 dr:{rt:[],nrt:["Completed interaction transcripts (streaming)","Post-interaction disposition codes"],bt:["Policy library & regulatory requirements","QA rubric & scoring criteria","Historical QA score distributions"]}},
@@ -279,24 +479,44 @@ retentionSuperPerf:{name:"Retention Supervisor Performance Agent",purpose:"Manag
 dr:{rt:[],nrt:["Today's save outcomes by rep","Intraday discount values granted"],bt:["30/60/90 post-save churn by rep","Monthly discount leakage analysis","Coaching action completion rates"]}},
 sentimentDefection:{name:"Sentiment & Defection Risk Agent",purpose:"Surface likely defectors for proactive intervention.",tasks:"Monitor negative patterns, score risk, recommend outreach.",triggers:"Repeated contacts, low CSAT, social complaints.",systems:"CRM, NPS, transcript analytics, social.",keyData:"Sentiment, complaint tags, repeat-contact count.",kpis:"Early-risk identification, proactive conversion.",hitl:"Assistive",priority:"",
 dr:{rt:[],nrt:["Real-time sentiment from active interactions","Social media mention alerts","Repeat-contact count (rolling 48-hour)"],bt:["NPS/CSAT survey aggregates","Complaint theme analysis","Churn prediction model outputs"]}},
-careCopilot:{name:"Care Copilot",purpose:"Accelerate assisted-service handling.",tasks:"Retrieve context, suggest next action, draft responses, auto-populate ACW.",triggers:"Authenticated live interaction.",systems:"CRM, billing, knowledge, case notes.",keyData:"Account profile, billing, products, interaction history.",kpis:"AHT reduction, FCR, adoption.",hitl:"Assistive",priority:"Near-term Service",
+careCopilot:{name:"Care Orchestrator",purpose:"Master orchestrator supporting the frontline rep — provides customer context and orchestrates 14 sub-agents (Billing, Payment, Plan, Account, Features, Device, Network, Promo, Security, Autopay, Orders, Number Transfer, Self-Service Guide, Warm Transfer) across the interaction.",tasks:"Authenticate and retrieve full customer context, classify intent, select and orchestrate the right sub-agent(s), maintain conversation continuity across topic switches, manage multi-intent interactions, suggest next best action, draft responses, auto-populate after-call work, determine escalation to supervisor via Warm Transfer Agent.",triggers:"Authenticated live interaction (voice, chat, messaging).",systems:"CRM, billing, payments, OMS, knowledge base, case notes, routing engine.",keyData:"Full account profile, billing summary, product holdings, interaction history, policy/knowledge, escalation thresholds, sub-agent status.",kpis:"AHT reduction, FCR, sub-agent orchestration success rate, escalation accuracy, rep adoption.",hitl:"Assistive — orchestrates autonomous sub-agents while keeping rep in the loop",priority:"Near-term Service",
 dr:{rt:["Customer identity & auth state","Current billing balance & plan details","Active service status per line","Current interaction channel & context","Knowledge base articles (indexed)"],nrt:["Recent interaction history (48h)","Recent case notes & dispositions","Updated product holdings"],bt:["Full account profile & tenure","Historical interaction summary","Policy & procedure library"]}},
-careTriage:{name:"Care Triage Agent",purpose:"Classify and route inbound contacts.",tasks:"Detect intent, assist auth, score priority, generate transfer summary.",triggers:"New inbound call/chat/social.",systems:"IVR/chat, CRM, identity, routing.",keyData:"Identity, account status, prior contacts, sentiment.",kpis:"Routing accuracy, auth success.",hitl:"Fully autonomous",priority:"",
+careTriage:{name:"Warm Transfer Agent",purpose:"Execute warm transfers between agents, channels, and human reps — maintaining full context continuity.",tasks:"Package interaction context (customer identity, issue summary, steps taken, sentiment), route to target agent or human queue, provide receiving party with complete handoff brief, ensure no information loss on transfer.",triggers:"Orchestrator determines transfer needed, customer requests supervisor, issue requires different skill group, cross-channel handoff.",systems:"IVR/chat, CRM, identity verification, case routing engine, telephony/ACD.",keyData:"Full interaction transcript, customer identity, issue classification, prior agent actions, sentiment score, target routing rules.",kpis:"Transfer context completeness, repeat-info rate post-transfer, warm transfer success rate, handoff time.",hitl:"Fully autonomous",priority:"",
 dr:{rt:["Inbound channel & ANI/caller ID","IVR path selections","Customer identity lookup","Active outage in customer's area"],nrt:["Recent contact count (48h)","Last interaction summary & sentiment"],bt:["Contact reason taxonomy","Routing rules & skill group definitions"]}},
 orderStatus:{name:"Order Status Agent",purpose:"Deflect order tracking inquiries.",tasks:"Check order stage, shipment, activation, appointment date.",triggers:"Order inquiry.",systems:"OMS, shipping, activation, CRM.",keyData:"Order ID, shipping status, activation status.",kpis:"Self-service completion, containment.",hitl:"Fully autonomous",priority:"Near-term Service",
 dr:{rt:["Order status (real-time from OMS)","Shipping tracking (carrier API)","Activation status & error codes","Port-in status & FOC date"],nrt:["Recent order modifications"],bt:["Order type definitions","Fulfillment SLA targets"]}},
+planAdvisory:{name:"Plan Advisory Agent",purpose:"Recommend, compare, and execute plan changes based on customer usage patterns and available offers.",tasks:"Analyze current plan vs usage, identify overpaying or underserved scenarios, compare plan options, recommend optimal plan, execute plan change, explain impact on monthly bill, surface multi-line and bundle savings.",triggers:"Customer asks about plan change, usage exceeds plan limits, proactive optimization opportunity, 'am I on the best plan?' inquiry.",systems:"CRM, product catalog, pricing engine, usage analytics, promotion rules.",keyData:"Current plan details, 30/60/90-day usage patterns, available plans and pricing, promo eligibility, household lines.",kpis:"Plan change completion rate, ARPU impact, customer satisfaction post-change, containment rate.",hitl:"Fully autonomous for standard changes; approval-based for downgrades with revenue impact",priority:"",
+dr:{rt:["Current plan & pricing","Available plans with real-time pricing","Active promotions & eligibility"],nrt:["30-day usage patterns (data, voice, text)","Household line configuration"],bt:["Plan comparison rules","Historical plan change patterns","Revenue impact models"]}},
+accountMgmt:{name:"Account Management Agent",purpose:"Handle account profile changes — address, name, authorized users, contact preferences, and billing responsibility transfers.",tasks:"Validate identity, update mailing/service address, process name change, add/remove authorized users, update contact preferences, initiate transfer of billing responsibility, confirm changes and explain downstream impacts.",triggers:"Customer requests account change, address update, authorized user modification, transfer of billing.",systems:"CRM, identity verification, address validation (USPS), billing system, tax jurisdiction lookup.",keyData:"Account profile, identity verification status, address validation, authorized user list, billing configuration.",kpis:"Account change completion rate, identity verification success, error rate on changes, containment rate.",hitl:"Fully autonomous for standard changes; approval-based for billing responsibility transfers",priority:"",
+dr:{rt:["Customer identity & auth state","Current account profile","Address validation API (USPS)"],nrt:["Recent account changes","Authorized user list"],bt:["Account change policies","Tax jurisdiction rules","Transfer of billing requirements"]}},
+featureAddon:{name:"Feature & Add-On Agent",purpose:"Add, remove, or modify account features — international roaming, hotspot, device insurance, call blocking, voicemail, content subscriptions.",tasks:"Show current features, explain available add-ons and pricing, add/remove features, activate international roaming with travel dates, manage device protection plans, set up voicemail, toggle content subscriptions (Netflix, Apple TV+).",triggers:"Feature inquiry, international travel prep, insurance request, voicemail setup, subscription management.",systems:"CRM, product catalog, feature provisioning, partner APIs (streaming services), billing.",keyData:"Current features and add-ons, available features with pricing, device compatibility, partner subscription status.",kpis:"Feature change completion rate, feature attach rate, containment rate, ARPU impact.",hitl:"Fully autonomous",priority:"",
+dr:{rt:["Current active features per line","Available features & pricing","Device compatibility for features"],nrt:["Recent feature changes","Partner subscription status (Netflix, etc.)"],bt:["Feature catalog & rules","International roaming rate tables","Insurance plan terms"]}},
+deviceSupport:{name:"Device Support Agent",purpose:"Answer basic device how-to questions, setup guidance, settings navigation, and trade-in eligibility — not deep troubleshooting.",tasks:"Guide device setup and data transfer, navigate device settings, answer common device FAQ, check trade-in eligibility and value, verify device compatibility, send self-service deep links for app-based resolution.",triggers:"'How do I...?' device questions, new device setup help, trade-in inquiry, device compatibility check.",systems:"CRM, device database, knowledge base, trade-in valuation API, deep link generator.",keyData:"Device model and OS version, device-specific guides, trade-in values, compatibility matrix.",kpis:"Resolution rate, deflection to self-service, escalation rate to Tier 2, containment rate.",hitl:"Fully autonomous",priority:"",
+dr:{rt:["Customer device model, IMEI, OS version","Trade-in valuation (real-time API)"],nrt:["Device-specific FAQ and guides"],bt:["Device setup guides library","Compatibility matrix","Trade-in program terms"]}},
+networkTriage:{name:"Network & Coverage Agent",purpose:"Handle connectivity complaints, check for known outages, run remote diagnostics, and walk through standard reset steps before escalating.",tasks:"Check for active outages at customer's service address, run remote network diagnostics, guide through reset/reprovision steps, check coverage quality at customer locations, set expectations for known issues, escalate to Tier 2 via Warm Transfer if unresolved.",triggers:"'My service is down,' slow data complaint, dropped calls, coverage question, connectivity issue.",systems:"Outage management, network assurance, CRM, remote diagnostics, coverage maps.",keyData:"Customer service address, serving cell site status, active outage tickets, signal quality data, coverage maps.",kpis:"First-contact resolution for network issues, outage containment rate, Tier 2 escalation rate, truck-roll avoidance.",hitl:"Hybrid — autonomous for known outages, assistive for ambiguous issues",priority:"",
+dr:{rt:["Active outage status at customer's area","Cell site alarm status","Customer service address & serving site","Remote diagnostic results"],nrt:["Recent network quality for location","Trouble tickets for area"],bt:["Network coverage maps","Standard troubleshooting procedures","Outage communication templates"]}},
+promoLoyalty:{name:"Promotion & Loyalty Agent",purpose:"Surface available promotions, validate eligibility, explain current discounts, and handle 'am I getting the best deal?' inquiries.",tasks:"Review customer's current discounts and credits, check eligibility for new promotions, compare current deal vs available offers, apply or stack eligible promotions, explain promo terms and duration, surface loyalty rewards and tenure-based benefits.",triggers:"'Am I getting the best deal?', promo inquiry, loyalty benefit question, competitor mention, price sensitivity signal.",systems:"CRM, promotion engine, eligibility rules, loyalty platform, pricing, competitor intelligence.",keyData:"Current discounts and credits, available promotions, eligibility criteria, loyalty tier and points, tenure, competitor offers.",kpis:"Promo application rate, save rate from promo offers, ARPU impact, containment rate.",hitl:"Approval-based for stacking multiple promotions or exceeding discount thresholds",priority:"",
+dr:{rt:["Current discounts & promotional credits","Available promotions & eligibility rules","Loyalty tier & point balance"],nrt:["Recent competitor offers detected","Churn risk score"],bt:["Full promotion terms & conditions","Loyalty program rules","Discount governance thresholds"]}},
+accountSecurity:{name:"Account Security Agent",purpose:"Handle PIN/passcode reset, SIM lock, fraud alerts, and account takeover response with elevated identity verification.",tasks:"Enforce enhanced multi-factor authentication, process PIN/passcode reset, lock/unlock SIM, activate SIM swap protection, respond to fraud alerts, freeze account on suspected takeover, guide through identity recovery, log security events for audit.",triggers:"PIN reset request, SIM lock request, fraud alert, suspicious activity detected, account takeover report, SIM swap attempt.",systems:"CRM, identity verification (MFA), SIM management, fraud detection, security audit log.",keyData:"Account identity markers, authentication history, SIM status, recent security events, fraud risk score.",kpis:"Authentication success rate, fraud prevention rate, false-positive rate, account recovery time, compliance with FCC SIM swap rules.",hitl:"Approval-based — requires enhanced identity verification before any security action",priority:"",
+dr:{rt:["Customer identity & multi-factor auth state","SIM status (active, locked, swapped)","Active fraud alerts"],nrt:["Recent authentication attempts","Recent account changes (security-relevant)"],bt:["Security policies & procedures","FCC SIM swap regulations","Fraud pattern database"]}},
+autopayMgmt:{name:"Autopay & Payment Method Agent",purpose:"Enroll/unenroll autopay, update payment methods, troubleshoot failed autopay charges, and explain autopay discount eligibility.",tasks:"Set up autopay enrollment, update credit card/debit card/bank account on file, troubleshoot declined autopay payments, explain autopay discount ($5-10/line), process payment method changes, confirm next autopay date and amount.",triggers:"Autopay setup request, payment method update, failed autopay notification, autopay discount inquiry.",systems:"Billing, payment gateway, autopay management, CRM.",keyData:"Current payment method on file, autopay status, next payment date/amount, failed payment codes, autopay discount eligibility.",kpis:"Autopay enrollment rate, payment method update success, failed payment recovery rate, containment rate.",hitl:"Fully autonomous",priority:"",
+dr:{rt:["Current autopay status & payment method","Next scheduled payment date/amount","Failed payment error codes"],nrt:["Recent payment method changes"],bt:["Autopay enrollment rules","Payment method validation rules","Autopay discount policies"]}},
+numberTransfer:{name:"Number Transfer Agent",purpose:"Manage port-in requests, port-out processing, and number change requests with carrier interop validation.",tasks:"Guide customer through port-in requirements (account number, PIN from old carrier), validate number portability, initiate port-in request, track port status, handle port-out requests, process number changes, troubleshoot failed ports.",triggers:"Port-in request, port-out inquiry, number change request, failed port troubleshooting.",systems:"Number portability clearinghouse, CRM, activation system, carrier interop APIs.",keyData:"Number to port, donor carrier, account credentials from old carrier, port-in status, FOC date.",kpis:"Port completion rate, port cycle time, failed port rate, containment rate.",hitl:"Fully autonomous for standard ports; approval-based for complex multi-line ports",priority:"",
+dr:{rt:["Port-in request status","Number portability validation","FOC date & scheduled port time"],nrt:["Recent port attempts & failure reasons"],bt:["Carrier-specific port requirements","Port troubleshooting guides","Regulatory porting timelines"]}},
+selfServiceGuide:{name:"Self-Service Guide Agent",purpose:"Walk customers through how to accomplish tasks in the carrier app or website, sending deep links to reduce future call volume.",tasks:"Identify what the customer is trying to do, provide step-by-step app/website navigation guidance, send deep links directly to the relevant app screen, educate on self-service capabilities, reduce callback likelihood.",triggers:"'How do I do this in the app?', customer unaware of self-service option, task that can be done digitally.",systems:"CRM, app/website navigation guides, deep link generator, knowledge base.",keyData:"Customer's device type (iOS/Android), app version, available self-service features, deep link catalog.",kpis:"Self-service deflection rate, deep link click-through rate, callback reduction, containment rate.",hitl:"Fully autonomous",priority:"",
+dr:{rt:["Customer device type & app version"],nrt:["Available self-service features"],bt:["App navigation guides","Deep link catalog","Self-service feature documentation"]}},
 channelResponse:{name:"Channel Response Agent",purpose:"Draft channel-appropriate responses.",tasks:"Compose replies, adapt tone, insert status, recommend escalation.",triggers:"Inbound chat/social case.",systems:"Digital service, CRM, knowledge, moderation.",keyData:"Channel history, account status, response patterns.",kpis:"Response time, containment, CSAT.",hitl:"Assistive",priority:"",
 dr:{rt:["Inbound message content & channel","Customer identity & account status","Active case context"],nrt:["Channel conversation history","Recent account changes"],bt:["Brand voice guidelines","Approved response templates","Moderation rules & compliance policies"]}},
-advTechCopilot:{name:"Advanced Tech Copilot",purpose:"Support complex multistep troubleshooting.",tasks:"Suggest root causes, next diagnostic, customer-safe explanations.",triggers:"Live advanced tech interaction.",systems:"Diagnostics, CRM, knowledge, incidents.",keyData:"Diagnostics, known incidents, device history.",kpis:"Resolution quality, AHT.",hitl:"Assistive",priority:"",
+advTechCopilot:{name:"Tech Support Orchestrator",purpose:"Master orchestrator for advanced tech reps — provides diagnostic context and orchestrates sub-agents (Outage & Health, Device Troubleshooting) across complex technical interactions.",tasks:"Retrieve device/network context, orchestrate diagnostic sub-agents, suggest root-cause hypotheses, recommend next diagnostic step, generate customer-safe explanations, auto-summarize case notes, determine escalation path.",triggers:"Live advanced technical support interaction.",systems:"Diagnostics, CRM, knowledge base, incident platform, network assurance, device management.",keyData:"Full diagnostic context, known incidents, device history, network performance, sub-agent results.",kpis:"Resolution quality, AHT, sub-agent orchestration rate, transfer-back rate, rep adoption.",hitl:"Assistive — orchestrates diagnostic sub-agents with rep oversight",priority:"",
 dr:{rt:["Real-time device diagnostics (signal, firmware)","Active network alarms at serving site","Current provisioning/HLR status","Live speed test results"],nrt:["Recent CDRs (24h) showing failures","Trouble ticket status for area","Recent device diagnostic history"],bt:["Device compatibility & known issues DB","Network coverage baselines","Troubleshooting decision trees"]}},
 outageHealth:{name:"Outage & Service Health Agent",purpose:"Resolve/explain network events during interactions.",tasks:"Identify outage, correlate data, provide ETA, suppress truck-roll.",triggers:"Service down, outage complaint.",systems:"Outage mgmt, network assurance, CRM, incidents.",keyData:"Outage map, service address, alarms, maintenance windows.",kpis:"Containment, ETA accuracy, truck-roll avoidance.",hitl:"Fully autonomous",priority:"Near-term Service",
 dr:{rt:["Active outage tickets with affected area polygons","Cell site alarm status (streaming)","Maintenance window schedule","Customer service address & serving site"],nrt:["Estimated restoration time updates","Affected subscriber count","Historical outage pattern for area"],bt:["Network topology & site database","Outage communication templates"]}},
 deviceTroubleshoot:{name:"Device Troubleshooting Agent",purpose:"Guide through device/connectivity issues.",tasks:"Run troubleshooting tree, identify issue, suggest fixes.",triggers:"Device issue, Wi-Fi complaint, activation failure.",systems:"Device mgmt, network diagnostics, CRM, knowledge.",keyData:"Device model, firmware, diagnostics, signal quality.",kpis:"Resolution rate, truck-roll avoidance.",hitl:"Hybrid",priority:"",
 dr:{rt:["Device model, IMEI, firmware version","Current signal metrics (RSRP/RSRQ/SINR)","SIM/eSIM activation state","Remote diagnostic commands"],nrt:["Recent device error logs","Prior troubleshooting steps attempted","Recent CDRs showing data/call failures"],bt:["Device-specific troubleshooting guides","Known firmware issues database","Device compatibility matrix"]}},
-retentionCopilot:{name:"Retention Copilot",purpose:"Help reps navigate save conversations.",tasks:"Surface churn summary, recommend script, show offers.",triggers:"Cancel/save interaction.",systems:"CRM, retention offers, knowledge, policy.",keyData:"Churn score, prior interactions, eligible offers.",kpis:"Save conversion, time-to-offer.",hitl:"Assistive",priority:"",
+retentionCopilot:{name:"Retention Orchestrator",purpose:"Master orchestrator for retention reps — provides churn context and orchestrates sub-agents (Save Offer, Sentiment & Defection) to guide save conversations.",tasks:"Retrieve customer churn context, orchestrate save offer recommendation, surface churn reason summary, recommend save script path, show eligible offers with margin impact, provide objection handling guidance, flag when to escalate to supervisor.",triggers:"Cancel/save interaction, port-out call.",systems:"CRM, retention offer engine, knowledge base, policy rules, churn model.",keyData:"Full churn context, prior interactions, eligible offers, product economics, escalation thresholds, sub-agent outputs.",kpis:"Save conversion, time-to-offer, discount discipline, orchestration success rate, supervisor escalation accuracy.",hitl:"Assistive — orchestrates retention sub-agents with rep oversight",priority:"",
 dr:{rt:["Current call context & stated cancel reason","Eligible retention offer menu","Contract & device payoff details"],nrt:["Churn propensity score","Recent interaction & complaint summary","Prior save offers extended"],bt:["Save script library","Objection handling playbook","Offer economics & margin data"]}},
 storeTraffic:{name:"Store Traffic & Conversion Agent",purpose:"Improve in-store conversion and staffing.",tasks:"Correlate footfall/conversion; flag underperforming windows.",triggers:"Conversion drop, staffing mismatch.",systems:"POS, appointments, WFM, CRM.",keyData:"Traffic, transactions, inventory, staffing.",kpis:"Conversion, attach rate, wait time.",hitl:"Assistive",priority:"",dr:{rt:["Live footfall counter","Current queue/wait time"],nrt:["Intraday conversion by hour","Today's staffing vs plan"],bt:["Weekly conversion trends","Inventory levels","Campaign calendar"]}},
-retailCopilot:{name:"Retail Associate Copilot",purpose:"Guide associates during sales.",tasks:"Check eligibility, recommend plans, prepare quote/order.",triggers:"In-store interaction.",systems:"CRM, catalog, pricing, eligibility, OMS, POS.",keyData:"Account, eligibility, inventory, promo rules.",kpis:"Conversion, upsell rate, order accuracy.",hitl:"Assistive",priority:"Near-term Sales",
+retailCopilot:{name:"Retail Orchestrator",purpose:"Master orchestrator for retail associates — provides customer context and orchestrates sub-agents (Accessory & Bundle, Promo Eligibility) during in-store sales.",tasks:"Retrieve customer account and eligibility, orchestrate plan recommendation and promo validation, check upgrade eligibility, recommend plans/bundles, explain trade-in, prepare quote/order, summarize disclosures.",triggers:"In-store sales interaction.",systems:"CRM, product catalog, pricing/promotions, eligibility engine, OMS, POS.",keyData:"Account profile, line eligibility, device inventory, promo rules, financing rules, sub-agent outputs.",kpis:"Conversion, upsell rate, order accuracy, basket value, disclosure compliance, orchestration rate.",hitl:"Assistive — orchestrates sales sub-agents with associate oversight",priority:"Near-term Sales",
 dr:{rt:["Customer account & line eligibility","Real-time product catalog & pricing","Device inventory (store & nearby)","Credit check results","Active promotions & qualification rules"],nrt:["Recent usage patterns (30-day)","Trade-in device valuation"],bt:["Financing rules & terms","Disclosure requirements","Commission structures"]}},
 accessoryBundle:{name:"Accessory & Bundle Agent",purpose:"Increase attach rate and ARPU.",tasks:"Suggest add-ons, accessories, bundles.",triggers:"Quote creation, device selection.",systems:"Catalog, promos, POS.",keyData:"Chosen device, household products, promo eligibility.",kpis:"Attach rate, bundle penetration.",hitl:"Assistive",priority:"",dr:{rt:["Selected device & plan","Current household products"],nrt:["Accessory inventory availability"],bt:["Bundle rules & compatibility","Attachment rate benchmarks"]}},
 digitalConversion:{name:"Digital Conversion Optimization Agent",purpose:"Improve online funnel conversion.",tasks:"Identify drop-offs, recommend content/offers, trigger nudges.",triggers:"Cart abandonment, checkout hesitation.",systems:"Web analytics, CDP/CRM, commerce, chat.",keyData:"Clickstream, cart, campaign source, eligibility.",kpis:"Cart recovery, checkout conversion.",hitl:"Assistive",priority:"",dr:{rt:["Live session clickstream","Cart contents & checkout state","Visitor identity (known/anonymous)"],nrt:["Session replay patterns","A/B test variant assignments"],bt:["Funnel conversion benchmarks","Campaign performance history"]}},
@@ -306,7 +526,7 @@ checkoutSupport:{name:"Checkout Support Agent",purpose:"Reduce digital order aba
 digitalFallout:{name:"Digital Order Fallout Agent",purpose:"Catch and remediate failed orders.",tasks:"Diagnose fallout, request missing info, resubmit.",triggers:"Order fallout, validation failure.",systems:"OMS, fraud/ID, activation, CRM.",keyData:"Exception codes, KYC, device eligibility.",kpis:"Fallout rate, recovery rate.",hitl:"Approval-based",priority:"Near-term Sales",dr:{rt:["Order exception codes & error details","KYC/identity verification status","Activation system status"],nrt:["Recent order fallout queue","Fraud screening results"],bt:["Order validation rules","Fallout pattern analysis","Recovery workflow playbooks"]}},
 callCoaching:{name:"Call Coaching & Objection Agent",purpose:"Improve telesales rep effectiveness.",tasks:"Live prompts, objection handling, post-call coaching.",triggers:"Live telesales call.",systems:"Telephony, transcripts, CRM, catalog.",keyData:"Live transcript, customer profile, offer rules.",kpis:"Conversion lift, compliance.",hitl:"Assistive",priority:"",dr:{rt:["Live call transcript (streaming)","Customer account context","Product catalog & current offers"],nrt:["Customer's recent interactions"],bt:["Objection handling playbook","Competitive battle cards","Compliance disclosure scripts"]}},
 telesalesPerf:{name:"Telesales Performance Agent",purpose:"Help supervisors manage conversion and quality.",tasks:"Rank reps, flag leakage, identify coaching needs.",triggers:"Daily review.",systems:"QA, telephony, CRM, sales dashboards.",keyData:"Call outcomes, conversions, QA scores.",kpis:"Conversion, revenue/call.",hitl:"Assistive",priority:"",dr:{rt:[],nrt:["Intraday rep conversion rates","Today's call outcomes & dispositions"],bt:["Weekly/monthly rep performance trends","QA score distributions","Revenue per call benchmarks"]}},
-telesalesCopilot:{name:"Telesales Copilot",purpose:"Speed up acquisition and upgrade sales.",tasks:"Recommend plans/devices, quote price, create order.",triggers:"Inbound acquisition/upgrade call.",systems:"CRM, catalog, CPQ, OMS, payments.",keyData:"Account, eligibility, promos, device stock.",kpis:"Quote-to-order conversion, AHT.",hitl:"Assistive",priority:"Near-term Sales",dr:{rt:["Customer account & eligibility","Real-time pricing & promotions","Device inventory & availability","Credit check results","Financing options & terms"],nrt:["Recent usage patterns","Trade-in valuation"],bt:["Disclosure requirements","Commission structures"]}},
+telesalesCopilot:{name:"Telesales Orchestrator",purpose:"Master orchestrator for telesales reps — provides customer context and orchestrates sub-agents (Upgrade Eligibility, Cross-sell/Upsell) during phone sales.",tasks:"Retrieve customer account and eligibility, orchestrate upgrade and cross-sell recommendations, recommend plans/devices, quote monthly price, handle disclosures, create order.",triggers:"Inbound acquisition or upgrade call.",systems:"CRM, catalog, CPQ/pricing, OMS, payments.",keyData:"Customer/account profile, eligibility, promos, device stock, financing status, sub-agent outputs.",kpis:"Quote-to-order conversion, upsell rate, order accuracy, AHT, orchestration rate.",hitl:"Assistive — orchestrates sales sub-agents with rep oversight",priority:"Near-term Sales",dr:{rt:["Customer account & eligibility","Real-time pricing & promotions","Device inventory & availability","Credit check results","Financing options & terms"],nrt:["Recent usage patterns","Trade-in valuation"],bt:["Disclosure requirements","Commission structures"]}},
 upgradeEligibility:{name:"Upgrade Eligibility Agent",purpose:"Identify the best upgrade path.",tasks:"Check eligibility, trade-in value, financing.",triggers:"Upgrade inquiry.",systems:"Eligibility, device lifecycle, inventory, pricing.",keyData:"Tenure, installment status, trade-in value.",kpis:"Upgrade conversion, attach rate.",hitl:"Assistive",priority:"",dr:{rt:["Device payment plan status & balance","Upgrade eligibility date","Trade-in value (real-time API)","Current device inventory"],nrt:["Recent usage patterns"],bt:["Device lifecycle data","Financing rules","Historical upgrade patterns"]}},
 crossSellUpsell:{name:"Cross-sell / Upsell Agent",purpose:"Monetize interactions with add-on recommendations.",tasks:"Recommend add-a-line, home internet, bundles.",triggers:"Eligible account, quote flow.",systems:"CRM, recommendation engine, catalog, promos.",keyData:"Household, current products, propensity.",kpis:"Attach rate, incremental ARPU.",hitl:"Assistive",priority:"",dr:{rt:["Current household product inventory","Active promotions for cross-sell"],nrt:["Propensity model scores (upgrade, cross-sell)","Recent white-space analysis"],bt:["Campaign rules & targeting criteria","Historical cross-sell acceptance rates"]}},
 quoteGovernance:{name:"Quote & Order Governance Agent",purpose:"Reduce order errors across channels.",tasks:"Validate completeness, check compliance, flag risks.",triggers:"Pre-submit quote/order.",systems:"Catalog, pricing, OMS, compliance.",keyData:"Product rules, pricing, promo terms.",kpis:"Order accuracy, fallout rate.",hitl:"Approval-based",priority:"",dr:{rt:["Quote/order line items","Pricing validation rules","Promo compliance checks"],nrt:["Recent order exception patterns"],bt:["Product dependency rules","Promo terms & conditions","Channel-specific compliance rules"]}},
@@ -329,9 +549,9 @@ nextBestAction:{name:"Next-Best-Action Agent",purpose:"Determine optimal next co
 // ORG TREES (same structure as before — abbreviated for space)
 const O={
 service:{role:"Chief Customer Officer / EVP Customer Operations",level:"L1",agents:[],children:[{role:"VP Customer Care / Service",level:"L2",agents:[],children:[
-{role:"Director, Care",level:"L3",subtitle:"Strategic: reporting, analytics, VoC, workforce planning",agents:[A.opsAnalytics,A.volumeDriver,A.voiceOfCustomer,A.workforcePlanning],children:[
-{role:"CC Supervisor, Care",level:"L4",subtitle:"Day-to-day: escalations, credit approvals, queue mgmt, QA",agents:[A.billingResolution,A.paymentException,A.supervisorQueue,A.interactionQA],children:[
-{role:"Frontline Care Rep",level:"L5",subtitle:"Standard billing, account changes, guided resolution",agents:[A.careCopilot,A.careTriage,A.orderStatus],children:[]},
+{role:"Director, Care",level:"L3",subtitle:"Strategic: reporting, analytics, VoC, workforce planning",agents:[A.careDirectorOrch,A.opsAnalytics,A.volumeDriver,A.voiceOfCustomer,A.workforcePlanning],children:[
+{role:"CC Supervisor, Care",level:"L4",subtitle:"Day-to-day: escalations, queue mgmt, QA, coaching",agents:[A.supervisorQueue,A.interactionQA],children:[
+{role:"Frontline Care Rep",level:"L5",subtitle:"Standard billing, account changes, guided resolution",agents:[A.careCopilot,A.billingResolution,A.paymentException,A.orderStatus,A.planAdvisory,A.accountMgmt,A.featureAddon,A.deviceSupport,A.networkTriage,A.promoLoyalty,A.accountSecurity,A.autopayMgmt,A.numberTransfer,A.selfServiceGuide,A.careTriage],children:[]},
 {role:"Chat / Messaging / Social Rep",level:"L5",subtitle:"Digital channel response",agents:[A.channelResponse],children:[]}]}]},
 {role:"Director, Advanced Technical Support",level:"L3",subtitle:"Strategic: network analysis, escalation optimization",agents:[A.networkPerf,A.techOpsInsights],children:[
 {role:"CC Supervisor, Adv. Technical Support",level:"L4",subtitle:"Day-to-day: escalation triage, queue prioritization",agents:[A.techEscalation,A.techQueuePriority],children:[
@@ -373,12 +593,12 @@ marketing:{role:"CMO / SVP Marketing",level:"L1",agents:[],children:[
 // JOURNEYS
 const J=[
 {name:"Awareness & Consideration",fn:"Marketing",sc:"smk",actions:["See TV/digital/social ads","Research plans & coverage","Compare carriers online","Read reviews, ask friends","Use coverage checker"],channels:["TV / CTV / Streaming","Paid search & social","SEO / organic content","Influencer / social","Retail signage"],pains:["Confusing plan structures","Hidden fees perception","Too many plan tiers","Distrust of promos","Coverage anxiety"],agents:[A.brandPerformance,A.campaignPerformance,A.mediaMix,A.acquisitionCampaign,A.contentPerformance,A.conversionOptimization],roles:["Director, Brand Strategy","Director, Advertising & Creative","Director, Performance Marketing","Director, Web & Conversion Optimization"]},
-{name:"Acquisition & Purchase",fn:"Sales",sc:"ssl",actions:["Select plan","Choose device","Evaluate trade-in","Apply promotions","Credit check","Port number","Checkout"],channels:["Retail store","Website / app","Telesales","Authorized dealers"],pains:["Plan complexity","Credit check friction","Long in-store waits","Trade-in disappointment","Checkout sticker shock","Porting anxiety"],agents:[A.retailCopilot,A.telesalesCopilot,A.planRecommendation,A.promoEligibility,A.checkoutSupport,A.quoteGovernance],roles:["Retail Sales Associate","Inbound Sales Rep","Digital Merchandising / Conversion Mgr"]},
-{name:"Onboarding & Activation",fn:"Sales",sc:"ssl",actions:["Device setup","SIM / eSIM activation","Account creation","Download app","Set up autopay","Activate perks"],channels:["Retail store","Welcome emails","Welcome SMS","Carrier app"],pains:["Activation delays","First-bill shock","Promo credit confusion","Data transfer issues","Feature confusion"],agents:[A.journeyOrchestration,A.retailCopilot,A.orderStatus,A.digitalFallout],roles:["Retail Sales Associate","Director, Lifecycle Marketing","Digital Sales Ops Manager"]},
-{name:"Billing & Payments",fn:"Service",sc:"ssv",actions:["Receive & review bill","Pay bill","Manage autopay","Dispute charges","Request credit","Payment plan"],channels:["Carrier app","Website","Phone / IVR","Chat","Store"],pains:["Bill shock","Proration confusion","Tax/fee opacity","Payment tracking","Autopay failures","Credit timing"],agents:[A.billingResolution,A.paymentException,A.careCopilot,A.orderStatus,A.supervisorQueue],roles:["Frontline Care Rep","CC Supervisor, Care","Director, Care"]},
-{name:"Technical Support",fn:"Service",sc:"ssv",actions:["Troubleshoot device","Report network issue","Check outage status","File insurance claim"],channels:["Self-service / app","AI chatbot","Live chat","Phone","Store","Social"],pains:["Long hold times","Repeating information","IVR frustration","Unresolved first contact","Scripted troubleshooting"],agents:[A.outageHealth,A.deviceTroubleshoot,A.advTechCopilot,A.careTriage,A.techEscalation],roles:["Advanced Technical Support Rep","CC Supervisor, Adv. Technical Support","Director, Advanced Technical Support"]},
-{name:"Retention & Loyalty",fn:"Service",sc:"ssv",actions:["Evaluate competitor offers","Call to cancel","Receive save offer","Redeem loyalty rewards"],channels:["Phone (retention)","Chat","Proactive outreach","Loyalty portal","Email / SMS"],pains:["New vs existing disparity","Hard to reach save team","Inconsistent offers","Weak loyalty rewards","Lock-in resentment"],agents:[A.saveOffer,A.retentionCopilot,A.sentimentDefection,A.churnAnalytics,A.loyaltyEngagement,A.nextBestAction],roles:["Retention / Loyalty Rep","CC Supervisor, Retention","Director, Retention","Director, Loyalty & Rewards"]},
-{name:"Upgrade & Cross-sell",fn:"Sales + Service",sc:"ssl",actions:["Check upgrade eligibility","Select new device","Evaluate trade-in","Add lines / bundles","Accept cross-sell"],channels:["Carrier app","Email / SMS","Retail store","Telesales","Website"],pains:["Confusing eligibility","Trade-in friction","Losing promo on change","Upselling pressure","36-month reset"],agents:[A.upgradeEligibility,A.crossSellUpsell,A.retailCopilot,A.telesalesCopilot,A.accessoryBundle,A.journeyOrchestration],roles:["Upgrade / Retention Sales Specialist","Retail Sales Associate","Director, Lifecycle Marketing"]},
+{name:"Acquisition & Purchase",fn:"Sales",sc:"ssl",actions:["Select plan","Choose device","Evaluate trade-in","Apply promotions","Credit check","Port number","Checkout"],channels:["Retail store","Website / app","Telesales","Authorized dealers"],pains:["Plan complexity","Credit check friction","Long in-store waits","Trade-in disappointment","Checkout sticker shock","Porting anxiety"],agents:[A.retailCopilot,A.telesalesCopilot,A.planRecommendation,A.promoEligibility,A.checkoutSupport,A.quoteGovernance],master:[A.retailCopilot,A.telesalesCopilot],roles:["Digital Merchandising / Conversion Mgr","Inbound Sales Rep","Retail Sales Associate"]},
+{name:"Onboarding & Activation",fn:"Sales",sc:"ssl",actions:["Device setup","SIM / eSIM activation","Account creation","Download app","Set up autopay","Activate perks"],channels:["Retail store","Welcome emails","Welcome SMS","Carrier app"],pains:["Activation delays","First-bill shock","Promo credit confusion","Data transfer issues","Feature confusion"],agents:[A.retailCopilot,A.journeyOrchestration,A.orderStatus,A.digitalFallout],master:[A.retailCopilot],roles:["Director, Lifecycle Marketing","Digital Sales Ops Manager","Retail Sales Associate"]},
+{name:"Billing & Payments",fn:"Service",sc:"ssv",actions:["Receive & review bill","Pay bill","Manage autopay","Dispute charges","Request credit","Payment plan"],channels:["Carrier app","Website","Phone / IVR","Chat","Store"],pains:["Bill shock","Proration confusion","Tax/fee opacity","Payment tracking","Autopay failures","Credit timing"],agents:[A.careDirectorOrch,A.opsAnalytics,A.volumeDriver,A.voiceOfCustomer,A.workforcePlanning,A.supervisorQueue,A.interactionQA,A.careCopilot,A.billingResolution,A.paymentException,A.orderStatus,A.planAdvisory,A.accountMgmt,A.accountSecurity,A.autopayMgmt,A.careTriage],master:[A.careDirectorOrch,A.supervisorQueue,A.careCopilot],roles:["Director, Care","CC Supervisor, Care","Frontline Care Rep"]},
+{name:"Technical Support",fn:"Service",sc:"ssv",actions:["Troubleshoot device","Report network issue","Check outage status","File insurance claim"],channels:["Self-service / app","AI chatbot","Live chat","Phone","Store","Social"],pains:["Long hold times","Repeating information","IVR frustration","Unresolved first contact","Scripted troubleshooting"],agents:[A.advTechCopilot,A.outageHealth,A.deviceTroubleshoot,A.careTriage,A.techEscalation],master:[A.advTechCopilot],roles:["Director, Advanced Technical Support","CC Supervisor, Adv. Technical Support","Advanced Technical Support Rep"]},
+{name:"Retention & Loyalty",fn:"Service",sc:"ssv",actions:["Evaluate competitor offers","Call to cancel","Receive save offer","Redeem loyalty rewards"],channels:["Phone (retention)","Chat","Proactive outreach","Loyalty portal","Email / SMS"],pains:["New vs existing disparity","Hard to reach save team","Inconsistent offers","Weak loyalty rewards","Lock-in resentment"],agents:[A.retentionCopilot,A.saveOffer,A.sentimentDefection,A.churnAnalytics,A.loyaltyEngagement,A.nextBestAction],master:[A.retentionCopilot],roles:["Director, Retention","Director, Loyalty & Rewards","CC Supervisor, Retention","Retention / Loyalty Rep"]},
+{name:"Upgrade & Cross-sell",fn:"Sales + Service",sc:"ssl",actions:["Check upgrade eligibility","Select new device","Evaluate trade-in","Add lines / bundles","Accept cross-sell"],channels:["Carrier app","Email / SMS","Retail store","Telesales","Website"],pains:["Confusing eligibility","Trade-in friction","Losing promo on change","Upselling pressure","36-month reset"],agents:[A.retailCopilot,A.telesalesCopilot,A.upgradeEligibility,A.crossSellUpsell,A.accessoryBundle,A.journeyOrchestration],master:[A.retailCopilot,A.telesalesCopilot],roles:["Director, Lifecycle Marketing","Upgrade / Retention Sales Specialist","Retail Sales Associate"]},
 {name:"Usage & Self-Service",fn:"Digital",sc:"sdg",actions:["Check data usage","Pay bill in app","Manage account","Use troubleshoot tools","Browse upgrades"],channels:["Carrier app","Website","AI chatbot","Push notifications"],pains:["Limited complex self-service","App UX issues","Chatbot limitations","Features buried in menus","Cross-channel inconsistency"],agents:[A.careTriage,A.orderStatus,A.planRecommendation,A.conversionOptimization],roles:["(Digital properties — no org chart)"]}
 ];
 
@@ -390,17 +610,17 @@ const CR={service:[
 {role:"CC Supervisor, Care",agents:"Billing Resolution, Payment, Queue, QA",hitl:"Approval / Assistive",dF:25,dC:78000,dP:35},
 {role:"CC Supervisor, Adv Tech",agents:"Tech Escalation, Queue Priority",hitl:"Assistive",dF:10,dC:82000,dP:25},
 {role:"CC Supervisor, Retention",agents:"Save Offer, Retention Perf, Sentiment",hitl:"Approval / Assistive",dF:8,dC:80000,dP:30},
-{role:"Frontline Care Rep",agents:"Care Copilot, Triage, Order Status",hitl:"Assistive / Autonomous",dF:200,dC:55000,dP:35},
+{role:"Frontline Care Rep",agents:"Care Orchestrator + 14 sub-agents",hitl:"Assistive / Autonomous",dF:200,dC:55000,dP:35},
 {role:"Chat / Social Rep",agents:"Channel Response",hitl:"Assistive",dF:80,dC:52000,dP:30},
-{role:"Adv Tech Support Rep",agents:"Tech Copilot, Outage, Device",hitl:"Assistive / Hybrid",dF:60,dC:65000,dP:30},
-{role:"Retention / Loyalty Rep",agents:"Retention Copilot",hitl:"Assistive",dF:50,dC:58000,dP:25}],
+{role:"Adv Tech Support Rep",agents:"Tech Support Agent, Outage, Device",hitl:"Assistive / Hybrid",dF:60,dC:65000,dP:30},
+{role:"Retention / Loyalty Rep",agents:"Retention Orchestrator",hitl:"Assistive",dF:50,dC:58000,dP:25}],
 sales:[
-{role:"Retail Sales Associate",agents:"Retail Copilot, Accessory",hitl:"Assistive",dF:300,dC:48000,dP:30},
+{role:"Retail Sales Associate",agents:"Retail Orchestrator, Accessory",hitl:"Assistive",dF:300,dC:48000,dP:30},
 {role:"Retail Supervisor",agents:"(Store Traffic)",hitl:"Assistive",dF:40,dC:62000,dP:15},
 {role:"Digital Merch Mgr",agents:"Plan Rec, Promo Eligibility",hitl:"Hybrid / Autonomous",dF:6,dC:95000,dP:45},
 {role:"Ecommerce PM",agents:"Checkout Support",hitl:"Hybrid",dF:4,dC:105000,dP:40},
 {role:"Digital Sales Ops",agents:"Order Fallout",hitl:"Approval-based",dF:5,dC:90000,dP:40},
-{role:"Inbound Sales Rep",agents:"Telesales Copilot",hitl:"Assistive",dF:100,dC:50000,dP:30},
+{role:"Inbound Sales Rep",agents:"Telesales Orchestrator",hitl:"Assistive",dF:100,dC:50000,dP:30},
 {role:"Upgrade Specialist",agents:"Upgrade, Cross-sell",hitl:"Assistive",dF:40,dC:55000,dP:30},
 {role:"Telesales Supervisor",agents:"Coaching, Telesales Perf",hitl:"Assistive",dF:12,dC:75000,dP:25},
 {role:"Sales Ops Mgr",agents:"Quote Governance",hitl:"Approval-based",dF:3,dC:100000,dP:35},
@@ -445,7 +665,7 @@ const TEL=[
 ];
 
 // ═══ APP LOGIC ═══
-let cCV='both',cOV='service',cDV='service';
+let cCV='exec',cOV='service',cDV='medallion';
 
 function sT(t,b){document.querySelectorAll('.gh__ni').forEach(x=>x.classList.remove('on'));b.classList.add('on');document.querySelectorAll('.vw').forEach(v=>v.classList.remove('on'));document.getElementById('vw-'+t).classList.add('on')}
 function sOV(v,b){b.parentElement.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));b.classList.add('on');cOV=v;rOT(v)}
@@ -466,9 +686,11 @@ h+='</span>';if(hA)h+='<span class="cnt">'+n.agents.length+'</span>';h+='</div>'
 if(hX){h+='<div class="tc" style="max-height:9999px">';
 (n.agents||[]).forEach(function(a){if(s&&!a.name.toLowerCase().includes(s)&&!a.purpose.toLowerCase().includes(s)&&!m)return;
 h+='<div class="ac" onclick="oA(\''+a.name.replace(/'/g,"\\'")+'\')">';
-h+='<div class="ac__i">Af</div><div class="ac__b"><div class="ac__n">'+a.name+'</div><div class="ac__p">'+a.purpose+'</div></div>';
+h+='<div class="ac__i">&#10024;</div><div class="ac__b"><div class="ac__n">'+a.name+'</div><div class="ac__p">'+a.purpose+'</div></div>';
 h+='<div class="ac__bd">';if(a.hitl)h+='<span class="bd '+gHC(a.hitl)+'">'+a.hitl.split('.')[0].split(',')[0].trim()+'</span>';
-if(a.priority)h+='<span class="bd '+gPC(a.priority)+'">'+a.priority+'</span>';h+='</div></div>'});
+if(a.priority)h+='<span class="bd '+gPC(a.priority)+'">'+a.priority+'</span>';
+if(a.dr)h+='<span class="bd" style="background:#EBF0F7;color:#4682B4;border:1px solid #b0c4de;cursor:pointer" onclick="event.stopPropagation();nD(\''+a.name.replace(/'/g,"\\'")+'\')">&#9671; Data</span>';
+h+='</div></div>'});
 (n.children||[]).forEach(function(c){h+=rN(c,s)});h+='</div>'}return h+'</div>'}
 function nM(n,t){if(!t)return true;if(n.role.toLowerCase().includes(t))return true;if((n.agents||[]).some(a=>a.name.toLowerCase().includes(t)||a.purpose.toLowerCase().includes(t)))return true;return(n.children||[]).some(c=>nM(c,t))}
 function rOT(v){var c=document.getElementById('ot'),s=document.getElementById('os').value.toLowerCase().trim(),h='';
@@ -501,60 +723,568 @@ function fIT(n,r){if(n.role===r)return true;return(n.children||[]).some(c=>fIT(c
 function fAR(n,a){if((n.agents||[]).some(x=>x.name===a))return n.role;for(var c of(n.children||[])){var r=fAR(c,a);if(r)return r}return null}
 
 // JOURNEY MAP
+var CHAN_ICONS={'TV':'&#128250;','Paid':'&#127919;','SEO':'&#128269;','Influencer':'&#11088;','Retail':'&#127978;','Website':'&#127760;','Telesales':'&#128222;','Authorized':'&#129309;','Welcome':'&#9993;','SMS':'&#128172;','Carrier':'&#128241;','Phone':'&#128222;','Chat':'&#128172;','Store':'&#127978;','Self':'&#128241;','AI':'&#129302;','Live':'&#128172;','Social':'&#128242;','Community':'&#128101;','Loyalty':'&#127942;','Proactive':'&#128227;','Email':'&#9993;','Push':'&#128276;','Mail':'&#9993;'};
+var EMO_DATA=[
+{emoji:'&#129300;',color:'#f59e0b',label:'Curious'},
+{emoji:'&#128556;',color:'#ef4444',label:'Overwhelmed'},
+{emoji:'&#128522;',color:'#22c55e',label:'Excited'},
+{emoji:'&#128544;',color:'#ef4444',label:'Frustrated'},
+{emoji:'&#128529;',color:'#f59e0b',label:'Anxious'},
+{emoji:'&#128542;',color:'#ef4444',label:'Undervalued'},
+{emoji:'&#128528;',color:'#f59e0b',label:'Confused'},
+{emoji:'&#128077;',color:'#22c55e',label:'Empowered'}];
+function getChIcon(ch){for(var k in CHAN_ICONS)if(ch.includes(k))return CHAN_ICONS[k];return'&#128205;'}
 function bJM(){var g=document.getElementById('jg'),h='';
-h+='<div class="swl" style="background:var(--bk);color:#fff;font-weight:700">Stage</div>';
-J.forEach((j,i)=>{h+='<div class="jsh '+j.sc+'"><span class="sn">'+('0'+(i+1)).slice(-2)+'</span>'+j.name+'<span class="jfn">'+j.fn+'</span></div>'});
-h+='<div class="swl">Customer Actions</div>';J.forEach(j=>{h+='<div class="swc sca"><ul>'+j.actions.map(a=>'<li>'+a+'</li>').join('')+'</ul></div>'});
-h+='<div class="swl">Channels</div>';J.forEach(j=>{h+='<div class="swc sch"><ul>'+j.channels.map(c=>'<li>'+c+'</li>').join('')+'</ul></div>'});
-h+='<div class="swl">Pain Points</div>';J.forEach(j=>{h+='<div class="swc spa"><ul>'+j.pains.map(p=>'<li>'+p+'</li>').join('')+'</ul></div>'});
-h+='<div class="swl">Agentforce Agents</div>';J.forEach(j=>{h+='<div class="swc">';j.agents.forEach(a=>{h+='<span class="jp jp--a" onclick="nA(\''+a.name.replace(/'/g,"\\'")+'\')">'+a.name.replace(/ Agent$/,'')+'</span>'});h+='</div>'});
-h+='<div class="swl">Org Roles</div>';J.forEach(j=>{h+='<div class="swc">';j.roles.forEach(r=>{h+=r.startsWith('(')?'<span class="jp jp--n">'+r+'</span>':'<span class="jp jp--r" onclick="nR(\''+r.replace(/'/g,"\\'")+'\')">'+r+'</span>'});h+='</div>'});
-g.innerHTML=h}
+// Stage headers (chevrons)
+h+='<div class="swl" style="background:var(--bk);color:#fff;font-weight:700;font-size:.625rem;border-radius:var(--rm) 0 0 0">STAGE</div>';
+J.forEach((j,i)=>{h+='<div class="jsh '+j.sc+'"><span class="sn">STAGE '+('0'+(i+1)).slice(-2)+'</span>'+j.name+'<span class="jfn">'+j.fn+'</span></div>'});
+// Emotion curve row
+h+='<div class="swl">Sentiment<sup style="font-size:.5rem;color:var(--b)">1</sup></div>';
+EMO_DATA.forEach((e,i)=>{h+='<div class="emo-cell"><div class="emo-dot" style="background:'+e.color+'">'+e.emoji+'</div><span class="emo-label" style="color:'+e.color+'">'+e.label+'</span></div>'});
+// Customer Actions
+h+='<div class="swl">Customer <span style="white-space:nowrap">Actions<sup style="font-size:.5rem;color:var(--b)">2</sup></span></div>';J.forEach(j=>{h+='<div class="swc sca"><ul>'+j.actions.map(a=>'<li><span class="li-icon">&#9654;</span>'+a+'</li>').join('')+'</ul></div>'});
+// Channels
+h+='<div class="swl">Channels<sup style="font-size:.5rem;color:var(--b)">2</sup></div>';J.forEach(j=>{h+='<div class="swc sch"><ul>'+j.channels.map(c=>'<li><span class="li-icon">'+getChIcon(c)+'</span>'+c+'</li>').join('')+'</ul></div>'});
+// Pain Points
+h+='<div class="swl">Pain <span style="white-space:nowrap">Points<sup style="font-size:.5rem;color:var(--b)">2</sup></span></div>';J.forEach(j=>{h+='<div class="swc spa"><ul>'+j.pains.map(p=>'<li><span class="li-icon">&#9888;</span>'+p+'</li>').join('')+'</ul></div>'});
+// Agents
+h+='<div class="swl"><span style="white-space:nowrap">FTEs<sup style="font-size:.5rem;color:var(--b)">3</sup></span></div>';J.forEach(j=>{h+='<div class="swc" style="padding:.5rem">';j.roles.forEach(r=>{h+=r.startsWith('(')?'<span class="jp jp--n">'+r+'</span>':'<span class="jp jp--r" onclick="nR(\''+r.replace(/'/g,"\\'")+'\')">'+r+'</span>'});h+='</div>'});
+// Agents
+h+='<div class="swl"><span style="white-space:nowrap">Agents<sup style="font-size:.5rem;color:var(--b)">3</sup></span></div>';J.forEach(j=>{
+h+='<div class="swc" style="padding:.5rem">';
+var masters=j.master||[];
+var masterNames=masters.map(m=>m.name);
+if(masters.length===0){
+  j.agents.forEach(a=>{h+='<span class="jp jp--a" onclick="nA(\''+a.name.replace(/'/g,"\\'")+'\')">'+a.name.replace(/ Agent$/,'')+'</span>'});
+} else {
+  // Walk through agents in order; when we hit a master, render it as master pill
+  // then collect all following non-master agents as its sub-group until next master
+  var groups=[],cur=null;
+  j.agents.forEach(a=>{
+    if(masterNames.indexOf(a.name)!==-1){
+      if(cur)groups.push(cur);
+      cur={master:a,subs:[]};
+    } else if(cur){
+      cur.subs.push(a);
+    }
+  });
+  if(cur)groups.push(cur);
+  groups.forEach(g=>{
+    h+='<span class="jp jp--master" onclick="nA(\''+g.master.name.replace(/'/g,"\\'")+'\')">'+g.master.name.replace(/ Agent$/,'')+'</span>';
+    if(g.subs.length){
+      h+='<div class="jp-sub-group">';
+      g.subs.forEach(a=>{h+='<span class="jp jp--a" onclick="nA(\''+a.name.replace(/'/g,"\\'")+'\')">'+a.name.replace(/ Agent$/,'')+'</span>'});
+      h+='</div>';
+    }
+  });
+}
+h+='</div>'});
+g.innerHTML=h;
+// Add footnote after the journey grid
+var fn=document.createElement('div');
+fn.style.cssText='margin-top:1.5rem;padding:1rem;background:var(--sa);border:1px solid var(--br);border-radius:.25rem;font-size:.6875rem;color:var(--tw);line-height:1.6';
+fn.innerHTML='<strong style="color:var(--td)">Sources & Methodology</strong><br>'+
+'<sup>1</sup> Customer sentiment indicators are illustrative, synthesized from documented pain points and emotional patterns across B2C telco customer journeys. Key sources include: '+
+'J.D. Power 2025 U.S. Wireless Customer Care Study (satisfaction by contact type and resolution); '+
+'Nielsen Norman Group, <em>Journey Mapping 101</em> (emotional arc methodology for journey maps); '+
+'McKinsey & Company, <em>The Role of Customer Care in a Customer Experience Transformation</em>, 2023 (telco-specific CX pain points including first-bill shock, hold times, and loyalty disparity); '+
+'Qualtrics XM Institute, <em>State of Consumer Experience in Telecommunications</em>, 2025 (channel satisfaction and effort scores by journey stage); '+
+'T-Mobile Un-carrier research (publicly documented customer frustrations that informed their competitive positioning: hidden fees, coverage anxiety, contract resentment). '+
+'<br><sup>2</sup> Pain points, channels, and touchpoints are based on publicly available information from major U.S. carriers (T-Mobile, Verizon, AT&T) and industry analyst reports from COPC, Gartner, and Forrester. '+
+'<br><sup>3</sup> Agentforce agent mappings and org role assignments are illustrative recommendations, not Salesforce product specifications.';
+g.parentElement.appendChild(fn)}
 
-// DATA REQUIREMENTS
+// SILVER LAYER DATA OBJECTS (canonical)
+var SILVER=[
+{name:"Customer Profile",icon:"&#128100;",src:"CRM (Salesforce)",bronze:"Account, Contact, Household records",fields:["Account ID, name, status","Lines, devices, plan details","Tenure, loyalty tier, credit class","Contact preferences, language","Authentication credentials"],freshness:"nrt",agents:["Care Orchestrator","Warm Transfer Agent","Retention Orchestrator","Retail Orchestrator","Telesales Orchestrator","Save Offer Recommendation Agent"]},
+{name:"Billing & Balance",icon:"&#128176;",src:"BSS Billing (Amdocs/CSG)",bronze:"Invoice, Balance, Adjustment records",fields:["Current balance, amount due, due date","Autopay status, payment method","Installment plan balances","Promotional credits & expiry","Tax jurisdiction & surcharges"],freshness:"rt",agents:["Billing Resolution Agent","Payment Exception Agent","Care Orchestrator","Order Status Agent"]},
+{name:"Payment History",icon:"&#128179;",src:"Payment Gateway",bronze:"Transaction logs, ACH/CC records",fields:["Payment date, amount, method","Failed payment attempts & codes","Collections stage & status","Promise-to-pay records","Hardship indicators"],freshness:"rt",agents:["Billing Resolution Agent","Payment Exception Agent","Supervisor Queue & Coaching Agent"]},
+{name:"Order & Activation",icon:"&#128230;",src:"OMS / Provisioning",bronze:"Order, Shipment, Activation records",fields:["Order ID, status, substatus","Shipping tracking & ETA","Activation state & error codes","Port-in status & FOC date","SIM/eSIM assignment"],freshness:"rt",agents:["Order Status Agent","Digital Order Fallout Agent","Retail Orchestrator","Checkout Support Agent"]},
+{name:"Network & Outage Status",icon:"&#128225;",src:"OSS / Network Mgmt",bronze:"SNMP traps, gNMI telemetry, alarms",fields:["Cell site status & alarms","Active outage tickets & polygons","Maintenance windows & ETAs","Signal quality by location","Congestion metrics"],freshness:"rt",agents:["Outage & Service Health Agent","Tech Support Orchestrator","Device Troubleshooting Agent","Network Performance Analytics Agent","Warm Transfer Agent"]},
+{name:"Device & SIM",icon:"&#128241;",src:"Device Mgmt / Inventory",bronze:"IMEI registry, firmware DB, inventory",fields:["Device model, IMEI, firmware","SIM ICCID, eSIM EID, status","Diagnostic results (signal, battery)","Upgrade eligibility & trade-in value","Device compatibility matrix"],freshness:"nrt",agents:["Device Troubleshooting Agent","Tech Support Orchestrator","Upgrade Eligibility Agent","Retail Orchestrator"]},
+{name:"Interaction History",icon:"&#128172;",src:"CRM / Transcript Store",bronze:"Call logs, chat transcripts, case notes",fields:["Recent interactions (48h)","Case dispositions & notes","Sentiment scores per interaction","Escalation history","Channel history (voice/chat/social)"],freshness:"nrt",agents:["Care Orchestrator","Tech Escalation Summary Agent","Sentiment & Defection Risk Agent","Channel Response Agent","Call Coaching & Objection Agent"]},
+{name:"Knowledge & Policy",icon:"&#128218;",src:"Knowledge Base / Policy Engine",bronze:"KB articles, policy docs, scripts",fields:["Troubleshooting decision trees","Policy thresholds (credit limits)","Regulatory disclosure scripts","Save offer playbooks","Brand voice guidelines"],freshness:"bt",agents:["Care Orchestrator","Interaction QA Agent","Retention Orchestrator","Channel Response Agent","Device Troubleshooting Agent"]},
+{name:"Churn & Propensity Scores",icon:"&#127919;",src:"ML Models / Einstein",bronze:"Feature vectors, model outputs",fields:["Churn propensity score","Upgrade propensity","Cross-sell propensity","Customer lifetime value (CLV)","Segment membership"],freshness:"nrt",agents:["Save Offer Recommendation Agent","Sentiment & Defection Risk Agent","Churn Analytics & Forecasting Agent","Next-Best-Action Agent","Tech Queue Prioritization Agent"]},
+{name:"Queue & Workforce",icon:"&#128202;",src:"WFM / Telephony ACD",bronze:"ACD events, adherence logs, schedules",fields:["Live queue depth by skill group","Agent states (available/busy/ACW)","Real-time adherence (RTA)","Service level & ASA","Intraday volume vs forecast"],freshness:"rt",agents:["Supervisor Queue & Coaching Agent","Operations Analytics Agent","Workforce Planning Agent","Tech Queue Prioritization Agent"]},
+{name:"Product Catalog & Pricing",icon:"&#127991;",src:"CPQ / Catalog Platform",bronze:"Plan, device, promo, pricing records",fields:["Available plans & pricing","Active promotions & rules","Device inventory by location","Eligibility criteria","Financing terms & options"],freshness:"rt",agents:["Retail Orchestrator","Telesales Orchestrator","Plan Recommendation Agent","Promo Eligibility Agent","Quote & Order Governance Agent"]},
+{name:"Campaign & Attribution",icon:"&#128200;",src:"Ad Platforms / Marketing Cloud",bronze:"Impression logs, conversion events, spend",fields:["Campaign metrics (impressions, CPA)","Attribution model outputs","Channel performance data","Creative variant results","Spend pacing & budgets"],freshness:"nrt",agents:["Campaign Performance Agent","Acquisition Campaign Agent","Marketing Attribution Agent","Media Mix Optimization Agent","Content & SEO Agent"]},
+{name:"Segments & Audiences",icon:"&#127912;",src:"CDP / Data Cloud",bronze:"Behavioral events, demographic data",fields:["Dynamic segment definitions","Segment membership (real-time)","Engagement history (opens/clicks)","Frequency caps & suppressions","Channel preferences & opt-ins"],freshness:"nrt",agents:["Audience Segmentation Agent","Journey Orchestration Agent","Next-Best-Action Agent","Conversion Optimization Agent"]},
+{name:"Loyalty & Rewards",icon:"&#127942;",src:"Loyalty Platform",bronze:"Points ledger, redemption logs, partner feeds",fields:["Member tier & point balance","Redemption history","Partner offer availability","Program engagement frequency","Disengagement indicators"],freshness:"nrt",agents:["Loyalty Engagement Agent","Retention Orchestrator","Next-Best-Action Agent"]}
+];
+
+var GOLD=[
+{name:"Executive KPI Dashboards",icon:"&#128202;",detail:"CSAT, NPS, FCR, AHT, cost-per-contact, churn rate"},
+{name:"Churn Forecast Models",icon:"&#128201;",detail:"Segment-level churn predictions, scenario modeling"},
+{name:"Workforce Forecasts",icon:"&#128197;",detail:"Volume forecasts, capacity plans, staffing models"},
+{name:"Marketing ROI Reports",icon:"&#128176;",detail:"Campaign ROI, attribution, offer portfolio analysis"},
+{name:"VoC / Sentiment Reports",icon:"&#128172;",detail:"NPS trends, complaint themes, focus group insights"},
+{name:"Channel Performance",icon:"&#128200;",detail:"Conversion by channel, CAC, ARPU, assisted vs self-serve"}
+];
+
+// Navigate to Data tab for a specific agent
+function nD(agentName){
+  document.querySelectorAll('.gh__ni').forEach(b=>b.classList.remove('on'));
+  document.querySelectorAll('.gh__ni')[3].classList.add('on');
+  document.querySelectorAll('.vw').forEach(v=>v.classList.remove('on'));
+  document.getElementById('vw-datareq').classList.add('on');
+  // Switch to the right sub-tab
+  var fn=findAgentFn(agentName);
+  var tabs=document.querySelectorAll('#vw-datareq .tab');
+  tabs.forEach(t=>t.classList.remove('on'));
+  tabs[fn==='service'?1:fn==='sales'?2:fn==='marketing'?3:0].classList.add('on');
+  cDV=fn;bDR();
+  // Scroll to agent
+  setTimeout(()=>{
+    var el=document.querySelector('[data-agent-dr="'+agentName+'"]');
+    if(el){el.scrollIntoView({behavior:'smooth',block:'center'});el.style.boxShadow='0 0 0 3px var(--af)';setTimeout(()=>el.style.boxShadow='',2000)}
+  },150);
+}
+function findAgentFn(name){
+  var svcAgents=[A.careDirectorOrch,A.opsAnalytics,A.volumeDriver,A.voiceOfCustomer,A.workforcePlanning,A.supervisorQueue,A.billingResolution,A.paymentException,A.interactionQA,A.networkPerf,A.techOpsInsights,A.techEscalation,A.techQueuePriority,A.advTechCopilot,A.outageHealth,A.deviceTroubleshoot,A.churnAnalytics,A.retentionProgramPerf,A.saveOffer,A.retentionSuperPerf,A.sentimentDefection,A.careCopilot,A.careTriage,A.orderStatus,A.channelResponse,A.retentionCopilot,A.planAdvisory,A.accountMgmt,A.featureAddon,A.deviceSupport,A.networkTriage,A.promoLoyalty,A.accountSecurity,A.autopayMgmt,A.numberTransfer,A.selfServiceGuide];
+  var salAgents=[A.storeTraffic,A.retailCopilot,A.accessoryBundle,A.digitalConversion,A.planRecommendation,A.promoEligibility,A.checkoutSupport,A.digitalFallout,A.callCoaching,A.telesalesPerf,A.telesalesCopilot,A.upgradeEligibility,A.crossSellUpsell,A.quoteGovernance,A.offerPerformance,A.channelOptimization];
+  if(svcAgents.some(a=>a.name===name))return'service';
+  if(salAgents.some(a=>a.name===name))return'sales';
+  return'marketing';
+}
+
+// DATA REQUIREMENTS RENDERER
 function bDR(){var c=document.getElementById('drg'),h='';
-var agents=cDV==='service'?[A.opsAnalytics,A.volumeDriver,A.voiceOfCustomer,A.workforcePlanning,A.billingResolution,A.paymentException,A.supervisorQueue,A.interactionQA,A.networkPerf,A.techOpsInsights,A.techEscalation,A.techQueuePriority,A.advTechCopilot,A.outageHealth,A.deviceTroubleshoot,A.churnAnalytics,A.retentionProgramPerf,A.saveOffer,A.retentionSuperPerf,A.sentimentDefection,A.careCopilot,A.careTriage,A.orderStatus,A.channelResponse,A.retentionCopilot]:
+
+if(cDV==='medallion'){
+  // Medallion Architecture View
+  h+='<div class="med-flow">';
+  // Bronze column
+  h+='<div class="med-col med-bronze"><div class="med-col__hdr"><span class="med-icon">&#9881;</span> Bronze Layer<span class="med-col__hdr-sub">Raw Ingestion</span></div><div class="med-col__body">';
+  var srcSystems=[{name:"CRM (Salesforce)",icon:"&#9729;",type:"CDC / Real-time"},{name:"BSS Billing",icon:"&#128176;",type:"API + Batch"},{name:"Payment Gateway",icon:"&#128179;",type:"Real-time API"},{name:"OMS / Provisioning",icon:"&#128230;",type:"CDC + API"},{name:"OSS / Network Mgmt",icon:"&#128225;",type:"Streaming Telemetry"},{name:"Device Mgmt",icon:"&#128241;",type:"API + Batch"},{name:"WFM / Telephony",icon:"&#128222;",type:"Real-time Feed"},{name:"Knowledge Base",icon:"&#128218;",type:"Batch Sync"},{name:"ML Models / Einstein",icon:"&#129302;",type:"Near-real-time"},{name:"CPQ / Catalog",icon:"&#127991;",type:"CDC"},{name:"Ad Platforms",icon:"&#128200;",type:"API + Batch"},{name:"CDP / Data Cloud",icon:"&#127912;",type:"Streaming"},{name:"Loyalty Platform",icon:"&#127942;",type:"API"}];
+  srcSystems.forEach(s=>{h+='<div class="med-card"><div class="med-card__name"><span class="sys-icon">'+s.icon+'</span>'+s.name+'</div><div class="med-card__detail">'+s.type+'</div></div>'});
+  h+='</div></div>';
+  // Arrow
+  h+='<div class="med-arrow"></div>';
+  // Silver column
+  h+='<div class="med-col med-silver silver"><div class="med-col__hdr"><span class="med-icon">&#9733;</span> Silver Layer — Authoritative Source<span class="med-col__hdr-sub">Cleaned &amp; Conformed</span></div><div class="med-col__body">';
+  SILVER.forEach(s=>{
+    var fb=s.freshness==='rt'?'med-badge-rt':s.freshness==='nrt'?'med-badge-nrt':'med-badge-bt';
+    var fl=s.freshness==='rt'?'REAL-TIME':s.freshness==='nrt'?'NEAR-RT':'BATCH';
+    h+='<div class="med-card"><div class="med-card__badge '+fb+'">'+fl+'</div><div class="med-card__name"><span class="sys-icon">'+s.icon+'</span>'+s.name+'</div>';
+    h+='<div class="med-card__detail">Source: '+s.src+'</div>';
+    h+='<div class="med-card__fields"><ul>'+s.fields.map(f=>'<li>'+f+'</li>').join('')+'</ul></div>';
+    h+='<div class="med-consumers"><div class="med-consumers__label">Consumed by</div>';
+    s.agents.forEach(a=>{h+='<span class="med-consumer-pill" onclick="nA(\''+a.replace(/'/g,"\\'")+'\')">'+a.replace(/ Agent$/,'')+'</span>'});
+    h+='</div></div>'});
+  h+='</div></div>';
+  // Arrow
+  h+='<div class="med-arrow"></div>';
+  // Gold column
+  h+='<div class="med-col med-gold"><div class="med-col__hdr"><span class="med-icon">&#11088;</span> Gold Layer<span class="med-col__hdr-sub">Business-Ready</span></div><div class="med-col__body">';
+  GOLD.forEach(g=>{h+='<div class="med-card"><div class="med-card__name"><span class="sys-icon">'+g.icon+'</span>'+g.name+'</div><div class="med-card__detail">'+g.detail+'</div></div>'});
+  h+='</div></div>';
+  h+='</div>';
+  c.innerHTML=h;return;
+}
+
+// Agent-specific data views
+var agents=cDV==='service'?[A.careDirectorOrch,A.opsAnalytics,A.volumeDriver,A.voiceOfCustomer,A.workforcePlanning,A.supervisorQueue,A.billingResolution,A.paymentException,A.interactionQA,A.careCopilot,A.planAdvisory,A.accountMgmt,A.featureAddon,A.deviceSupport,A.networkTriage,A.promoLoyalty,A.accountSecurity,A.autopayMgmt,A.numberTransfer,A.selfServiceGuide,A.orderStatus,A.careTriage,A.channelResponse,A.networkPerf,A.techOpsInsights,A.techEscalation,A.techQueuePriority,A.advTechCopilot,A.outageHealth,A.deviceTroubleshoot,A.churnAnalytics,A.retentionProgramPerf,A.saveOffer,A.retentionSuperPerf,A.sentimentDefection,A.retentionCopilot]:
 cDV==='sales'?[A.storeTraffic,A.retailCopilot,A.accessoryBundle,A.digitalConversion,A.planRecommendation,A.promoEligibility,A.checkoutSupport,A.digitalFallout,A.callCoaching,A.telesalesPerf,A.telesalesCopilot,A.upgradeEligibility,A.crossSellUpsell,A.quoteGovernance,A.offerPerformance,A.channelOptimization]:
 [A.brandPerformance,A.campaignPerformance,A.mediaMix,A.acquisitionCampaign,A.contentPerformance,A.conversionOptimization,A.attributionAnalytics,A.journeyOrchestration,A.audienceSegmentation,A.loyaltyEngagement,A.nextBestAction];
 
-h+='<div class="dr-grid"><div class="dr-hdr">Agent</div><div class="dr-hdr">Real-time</div><div class="dr-hdr">Near-real-time</div><div class="dr-hdr">Batch</div>';
 agents.forEach(a=>{if(!a.dr)return;
-h+='<div class="dr-agent" onclick="oA(\''+a.name.replace(/'/g,"\\'")+'\')"><span style="color:var(--af);font-size:11px;font-weight:700">Af</span> '+a.name+'</div>';
-['rt','nrt','bt'].forEach(k=>{h+='<div class="dr-cell"><ul>';(a.dr[k]||[]).forEach(d=>{h+='<li><span class="dr-dot dr-'+(k==='rt'?'rt':k==='nrt'?'nrt':'bt')+'"></span>'+d+'</li>'});
-if(!a.dr[k]||!a.dr[k].length)h+='<li style="color:var(--br)">—</li>';h+='</ul></div>'})});
-h+='</div>';c.innerHTML=h}
-
-// TELEMETRY
-function bTel(){var c=document.getElementById('telg'),h='';
-TEL.forEach(s=>{
-h+='<div class="tel-slide" onclick="this.classList.toggle(\'cl\')">';
-h+='<div class="tel-slide__h"><div class="tel-slide__icon '+s.icon+'">&#9881;</div><span class="tel-slide__title">'+s.title+'</span><span class="tel-slide__chev">&#9660;</span></div>';
-h+='<div class="tel-slide__body" style="max-height:9999px">';
-h+='<div class="tel-metric"><div class="tel-metric__hdr">Metric</div><div class="tel-metric__hdr">What It Measures</div><div class="tel-metric__hdr">Target / Benchmark</div><div class="tel-metric__hdr">Drift Detection</div>';
-s.metrics.forEach(m=>{
-h+='<div class="tel-metric__cell">'+m.name+'</div>';
-h+='<div class="tel-metric__cell">'+m.desc+'</div>';
-h+='<div class="tel-metric__cell good">'+m.good+'</div>';
-h+='<div class="tel-metric__cell">'+m.drift+'</div>'});
+h+='<div class="dr-agent-view" data-agent-dr="'+a.name+'">';
+h+='<div class="dr-agent-hdr" onclick="oA(\''+a.name.replace(/'/g,"\\'")+'\')"><div class="dr-agent-hdr__icon">&#10024;</div><div class="dr-agent-hdr__name">'+a.name+'</div>';
+h+='<span class="dr-agent-hdr__nav" onclick="event.stopPropagation();nA(\''+a.name.replace(/'/g,"\\'")+'\')">&#8592; Org Chart</span>';
+h+='</div>';
+h+='<div class="dr-agent-body"><div class="dr-freshness-row">';
+[{k:'rt',label:'Real-time',cls:'rt'},{k:'nrt',label:'Near-real-time',cls:'nrt'},{k:'bt',label:'Batch',cls:'bt'}].forEach(f=>{
+h+='<div class="dr-fresh-col '+f.cls+'"><div class="dr-fresh-col__hdr">'+f.label+'</div><ul>';
+(a.dr[f.k]||[]).forEach(d=>{h+='<li>'+d+'</li>'});
+if(!a.dr[f.k]||!a.dr[f.k].length)h+='<li style="color:var(--bs)">—</li>';
+h+='</ul></div>'});
 h+='</div></div></div>'});
 c.innerHTML=h}
 
-// CALCULATOR
-function bCT(id,rs,k){var tb=document.getElementById(id),h='';
-rs.forEach((r,i)=>{var d=k+'_'+i;h+='<tr><td style="font-weight:600;min-width:160px">'+r.role+'</td><td style="color:var(--tw);font-size:.75rem;max-width:180px">'+r.agents+'</td><td><span class="bd '+gHC(r.hitl)+'">'+r.hitl+'</span></td>';
-h+='<td><input type="number" id="f'+d+'" value="'+r.dF+'" min="0" oninput="rCC()"></td><td><input type="number" id="c'+d+'" value="'+r.dC+'" min="0" step="1000" oninput="rCC()"></td><td><input type="number" id="p'+d+'" value="'+r.dP+'" min="0" max="100" oninput="rCC()"></td>';
-h+='<td class="money" id="x'+d+'"></td><td class="money" id="y'+d+'"></td><td class="money sav" id="z'+d+'"></td></tr>'});tb.innerHTML=h}
-function rCC(){var t={service:{c:0,p:0},sales:{c:0,p:0}};
-['service','sales'].forEach(k=>{CR[k].forEach((r,i)=>{var d=k+'_'+i,f=+(document.getElementById('f'+d).value)||0,c=+(document.getElementById('c'+d).value)||0,p=+(document.getElementById('p'+d).value)||0;
-var cur=f*c,proj=cur*(1-p/100);document.getElementById('x'+d).textContent=fM(cur);document.getElementById('y'+d).textContent=fM(proj);document.getElementById('z'+d).textContent=fM(cur-proj);t[k].c+=cur;t[k].p+=proj})});
-var h='';if(cCV!=='sales')h+=sCard('Service','svc',t.service.c,t.service.p);if(cCV!=='service')h+=sCard('Sales','sal',t.sales.c,t.sales.p);
-if(cCV==='both')h+=sCard('Combined','cmb',t.service.c+t.sales.c,t.service.p+t.sales.p);document.getElementById('csu').innerHTML=h}
-function sCard(l,cl,c,p){var s=c-p,pc=c>0?s/c*100:0;return'<div class="sc '+cl+'"><div class="sc__l">'+l+'</div><div class="sc__r"><span class="l">Current Annual Cost</span><span class="v">'+fM(c)+'</span></div><div class="sc__r"><span class="l">Projected with Agents</span><span class="v">'+fM(p)+'</span></div><div class="sc__r hi"><span class="l">Annual Savings</span><span class="v">'+fM(s)+' ('+pc.toFixed(1)+'%)</span></div><div class="pb"><div class="pb__f" style="width:'+Math.min(pc,100)+'%"></div></div></div>'}
+// TELEMETRY DASHBOARD
+// Telemetry - single dashboard view
+
+// Simulated live data
+function rnd(min,max){return Math.floor(Math.random()*(max-min+1))+min}
+function rndF(min,max){return parseFloat((Math.random()*(max-min)+min).toFixed(1))}
+function spark(n,min,max){var a=[];for(var i=0;i<n;i++)a.push(rnd(min,max));return a}
+function barH(v,max,h){return Math.round(v/max*h)}
+function statusCls(v,g,w){return v>=g?'ok':v>=w?'wn':'cr'}
+function statusLabel(v,g,w){return v>=g?'Healthy':v>=w?'Degraded':'Critical'}
+function gaugeRot(v){return(v*1.8-90)}
+function ringStyle(v,g,w){return'--pv:'+v+';--ring-color:'+(v>=g?'#22c55e':v>=w?'#f59e0b':'#ef4444')}
+function hmColor(v){var h=v>=90?'#22c55e':v>=70?'#4ade80':v>=50?'#fbbf24':v>=30?'#f97316':'#ef4444';return'background:'+h+';opacity:'+(0.4+v/100*0.6)}
+
+// Agent health data (simulated)
+var AGENTS_HEALTH=[
+{name:"Care Director Orch.",containment:85,latency:1.0,errors:0.3,status:'ok'},
+{name:"Care Supervisor Orch.",containment:74,latency:1.5,errors:1.0,status:'ok'},
+{name:"Billing Resolution",containment:78,latency:1.2,errors:0.8,status:'ok'},
+{name:"Care Orchestrator",containment:82,latency:0.9,errors:0.3,status:'ok'},
+{name:"Order Status",containment:91,latency:0.4,errors:0.1,status:'ok'},
+{name:"Warm Transfer Agent",containment:88,latency:0.6,errors:0.5,status:'ok'},
+{name:"Outage & Health",containment:85,latency:1.1,errors:0.2,status:'ok'},
+{name:"Save Offer",containment:71,latency:1.8,errors:1.2,status:'wn'},
+{name:"Retention Orchestrator",containment:76,latency:1.4,errors:0.6,status:'ok'},
+{name:"Supervisor Queue",containment:69,latency:2.1,errors:1.5,status:'wn'},
+{name:"Device Troubleshoot",containment:73,latency:1.6,errors:0.9,status:'ok'},
+{name:"Retail Orchestrator",containment:80,latency:1.0,errors:0.4,status:'ok'},
+{name:"Telesales Orchestrator",containment:77,latency:1.3,errors:0.7,status:'ok'},
+{name:"Plan Recommendation",containment:83,latency:0.8,errors:0.2,status:'ok'},
+{name:"Promo Eligibility",containment:90,latency:0.5,errors:0.1,status:'ok'},
+{name:"Journey Orchestration",containment:75,latency:1.5,errors:1.8,status:'wn'},
+{name:"Next-Best-Action",containment:72,latency:2.3,errors:2.1,status:'cr'}
+];
+
+// Monthly labels
+var MO=['May','Jun','Jul','Aug','Sep','Oct','Nov','Dec','Jan','Feb','Mar','Apr'];
+// Generate monthly trend data approaching a target
+function moTrend(start,target,variance,max){var d=[],v=parseFloat(start);var cap=max||100;for(var i=0;i<12;i++){v+=(target-v)*0.15+rndF(-variance,variance);v=Math.max(0,Math.min(cap,parseFloat(v.toFixed(1))));d.push(v)}return d}
+// Monthly bar chart HTML: bars colored green if >= target, amber if close, red if far
+function moChart(data,target,max,unit,inv){
+  var h='<div class="tdb-monthly"><div class="tdb-monthly__bars" style="position:relative">';
+  var tgtPx=Math.round(target/max*48);
+  h+='<div class="tdb-monthly__target" style="bottom:'+tgtPx+'px"><span class="tdb-monthly__target-label">Target: '+target+unit+'</span></div>';
+  data.forEach(function(v,i){
+    var pct=Math.round(v/max*48);
+    var met=inv?(v<=target):(v>=target);
+    var close=inv?(v<=target*1.3):(v>=target*0.85);
+    var c=met?'#22c55e':close?'#f59e0b':'#ef4444';
+    h+='<div class="tdb-monthly__bar" style="height:'+pct+'px;background:'+c+'" data-tip="'+MO[i]+': '+v.toFixed(1)+unit+'"></div>'});
+  h+='</div><div class="tdb-monthly__labels">'+MO.map(m=>'<span>'+m.charAt(0)+'</span>').join('')+'</div></div>';
+  return h;
+}
+// Actual vs Target horizontal bar
+function avtBar(actual,target,max,unit,inv){
+  var met=inv?(actual<=target):(actual>=target);
+  var c=met?'#22c55e':actual>=(inv?0:target*0.85)?'#f59e0b':'#ef4444';
+  var aPct=Math.min(100,actual/max*100);
+  var tPct=Math.min(100,target/max*100);
+  return '<div class="tdb-avt"><span class="tdb-avt__val" style="color:'+c+'">'+actual+unit+'</span>'+
+    '<div class="tdb-avt__bar-wrap"><div class="tdb-avt__bar" style="width:'+aPct+'%;background:'+c+'"></div>'+
+    '<div class="tdb-avt__marker" style="left:'+tPct+'%"></div></div>'+
+    '<span class="tdb-avt__target">Target: '+target+unit+'</span></div>';
+}
+
+function bTel(){
+var c=document.getElementById('tel-ct');if(!c)return;
+var h='<div class="tdb">';
+
+// ── 1. KPI STRIP (always visible) ──
+var tA=AGENTS_HEALTH.length,okA=AGENTS_HEALTH.filter(a=>a.status==='ok').length;
+var avgC=Math.round(AGENTS_HEALTH.reduce((s,a)=>s+a.containment,0)/tA);
+var avgL=(AGENTS_HEALTH.reduce((s,a)=>s+a.latency,0)/tA).toFixed(1);
+var avgE=(AGENTS_HEALTH.reduce((s,a)=>s+a.errors,0)/tA).toFixed(1);
+var sp1=spark(8,60,95),sp2=spark(8,5,25),sp3=spark(8,30,80),sp4=spark(8,40,90);
+h+='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.75rem"><div style="font-size:1rem;font-weight:700;color:#f8fafc">Agent Telemetry Dashboard</div><div style="font-size:.625rem;color:#64748b">Last updated: just now</div></div>';
+h+='<div class="tdb-kpi">';
+h+='<div class="tdb-kpi__card '+(okA>=tA-2?'ok':'wn')+'"><div class="tdb-kpi__label">Fleet Health</div><div class="tdb-kpi__val">'+okA+'/'+tA+'</div><div class="tdb-kpi__trend '+(okA>=tA-2?'up':'dn')+'">Target: '+tA+'/'+tA+'</div><div class="tdb-kpi__spark">'+sp1.map(v=>'<div class="tdb-kpi__spark-bar" style="height:'+barH(v,100,24)+'px;background:#22c55e"></div>').join('')+'</div></div>';
+h+='<div class="tdb-kpi__card '+(avgC>=75?'ok':'wn')+'"><div class="tdb-kpi__label">Containment</div><div class="tdb-kpi__val">'+avgC+'%</div><div class="tdb-kpi__trend '+(avgC>=75?'up':'dn')+'">Target: 75%</div><div class="tdb-kpi__spark">'+sp3.map(v=>'<div class="tdb-kpi__spark-bar" style="height:'+barH(v,100,24)+'px;background:#3b82f6"></div>').join('')+'</div></div>';
+h+='<div class="tdb-kpi__card '+(parseFloat(avgL)<=1.5?'ok':'wn')+'"><div class="tdb-kpi__label">P95 Latency</div><div class="tdb-kpi__val">'+avgL+'s</div><div class="tdb-kpi__trend '+(parseFloat(avgL)<=1.5?'up':'dn')+'">Target: ≤1.5s</div><div class="tdb-kpi__spark">'+sp2.map(v=>'<div class="tdb-kpi__spark-bar" style="height:'+barH(v,30,24)+'px;background:#f59e0b"></div>').join('')+'</div></div>';
+h+='<div class="tdb-kpi__card '+(parseFloat(avgE)<=1.0?'ok':'wn')+'"><div class="tdb-kpi__label">Error Rate</div><div class="tdb-kpi__val">'+avgE+'%</div><div class="tdb-kpi__trend '+(parseFloat(avgE)<=1.0?'up':'dn')+'">Target: ≤1.0%</div><div class="tdb-kpi__spark">'+sp4.map(v=>'<div class="tdb-kpi__spark-bar" style="height:'+barH(v,100,24)+'px;background:#ef4444"></div>').join('')+'</div></div>';
+h+='<div class="tdb-kpi__card info"><div class="tdb-kpi__label">Daily Volume</div><div class="tdb-kpi__val">47.2K</div><div class="tdb-kpi__trend up">Target: 45K</div><div class="tdb-kpi__spark">'+sp1.map(v=>'<div class="tdb-kpi__spark-bar" style="height:'+barH(v,100,24)+'px;background:#3b82f6"></div>').join('')+'</div></div>';
+h+='</div>';
+
+// ── 2. AGENT HEALTH GRID (always visible) ──
+h+='<div class="tdb-section"><div class="tdb-section__hdr"><span class="tdb-section__hdr-icon">&#128994;</span> Agent Health Status</div>';
+h+='<div class="tdb-health">';
+AGENTS_HEALTH.sort((a,b)=>a.status==='cr'?-1:b.status==='cr'?1:a.status==='wn'?-1:b.status==='wn'?1:0);
+AGENTS_HEALTH.forEach(a=>{h+='<div class="tdb-health__card '+a.status+'"><span class="tdb-dot '+a.status+'"></span><span class="tdb-health__name">'+a.name+'</span><span class="tdb-health__stat">'+a.containment+'% · '+a.latency+'s</span></div>'});
+h+='</div></div>';
+
+// ── 3. MONTHLY KPI PERFORMANCE (collapsible, default open) ──
+h+='<div class="tdb-section" id="tel-kpi-sec"><div class="tdb-section__hdr" style="cursor:pointer" onclick="var b=this.nextElementSibling;b.style.display=b.style.display===\'none\'?\'grid\':\'none\';this.querySelector(\'.tdb-chv\').style.transform=b.style.display===\'none\'?\'rotate(-90deg)\':\'\'"><span class="tdb-section__hdr-icon">&#128202;</span> Monthly KPI Performance vs Target<span class="tdb-chv" style="margin-left:auto;font-size:10px;color:#64748b;transition:transform .2s">&#9660;</span></div>';
+h+='<div class="tdb-metrics">';
+var kpis=[
+{name:'Containment Rate',target:75,unit:'%',max:100,start:62,variance:3,inv:false,desc:'% resolved without human'},
+{name:'CSAT Score',target:82,unit:'%',max:100,start:71,variance:2.5,inv:false,desc:'AI interaction satisfaction'},
+{name:'First Contact Resolution',target:75,unit:'%',max:100,start:64,variance:3,inv:false,desc:'Resolved on first contact'},
+{name:'P95 Latency',target:1.5,unit:'s',max:4,start:2.8,variance:0.3,inv:true,desc:'95th percentile response'},
+{name:'Error Rate',target:1.0,unit:'%',max:5,start:3.2,variance:0.4,inv:true,desc:'Interactions with errors'},
+{name:'Resolution Accuracy',target:90,unit:'%',max:100,start:78,variance:2,inv:false,desc:'Factual correctness'},
+{name:'Compliance',target:99,unit:'%',max:100,start:94,variance:1,inv:false,desc:'Policy adherence'},
+{name:'Hallucination Rate',target:2.0,unit:'%',max:8,start:5.5,variance:0.5,inv:true,desc:'Fabricated responses'},
+{name:'Credit Governance',target:95,unit:'%',max:100,start:82,variance:2.5,inv:false,desc:'Within policy matrix'},
+{name:'Human Override',target:10,unit:'%',max:30,start:22,variance:2,inv:true,desc:'Actions overridden'},
+{name:'Save Rate',target:45,unit:'%',max:80,start:32,variance:3,inv:false,desc:'At-risk customers saved'},
+{name:'Order Accuracy',target:95,unit:'%',max:100,start:86,variance:2,inv:false,desc:'Orders error-free'}
+];
+kpis.forEach(k=>{
+  var data=moTrend(k.start,k.target,k.variance,k.max);
+  var cur=data[11];
+  var met=k.inv?(cur<=k.target):(cur>=k.target);
+  h+='<div class="tdb-metric"><div class="tdb-metric__top"><div class="tdb-metric__info">';
+  h+='<div class="tdb-metric__name" style="display:flex;align-items:center;gap:6px"><span class="tdb-dot '+(met?'ok':'wn')+'" style="width:6px;height:6px"></span>'+k.name+'</div>';
+  h+='<div class="tdb-metric__desc">'+k.desc+'</div></div>';
+  h+='<div style="text-align:right"><div style="font-size:1.25rem;font-weight:700;color:'+(met?'#22c55e':'#f59e0b')+'">'+cur.toFixed(1)+k.unit+'</div>';
+  h+='<div style="font-size:.5625rem;color:#64748b">Target: '+k.target+k.unit+'</div></div></div>';
+  h+=moChart(data,k.target,k.max,k.unit,k.inv);
+  h+='</div>'});
+h+='</div></div>';
+
+// ── 4. DATA PIPELINE FRESHNESS (collapsible, default open) ──
+h+='<div class="tdb-section"><div class="tdb-section__hdr" style="cursor:pointer" onclick="var b=this.nextElementSibling;b.style.display=b.style.display===\'none\'?\'grid\':\'none\';this.querySelector(\'.tdb-chv\').style.transform=b.style.display===\'none\'?\'rotate(-90deg)\':\'\'"><span class="tdb-section__hdr-icon">&#128200;</span> Data Pipeline Freshness — 12 Hours<span class="tdb-chv" style="margin-left:auto;font-size:10px;color:#64748b;transition:transform .2s">&#9660;</span></div>';
+h+='<div style="display:grid;grid-template-columns:140px 1fr;gap:.5rem;align-items:center">';
+["Customer Profile","Billing & Balance","Payment History","Order & Activation","Network Status","Device & SIM","Interaction History","Queue & Workforce","Product Catalog","Churn Scores","Campaign Data","Segments"].forEach(p=>{
+h+='<div style="font-size:.7rem;color:#94a3b8;text-align:right;padding-right:.5rem">'+p+'</div><div class="tdb-heatmap">';
+for(var i=0;i<12;i++){var v=rnd(60,100);h+='<div class="tdb-hm-cell" style="'+hmColor(v)+'" title="'+v+'%"></div>'}
+h+='</div>'});
+h+='<div style="font-size:.7rem;color:#64748b;text-align:right"></div><div class="tdb-heatmap"><div class="tdb-hm-label" style="display:flex;justify-content:space-between"><span>12h ago</span><span>6h</span><span>Now</span></div></div>';
+h+='</div></div>';
+
+// ── 5. THROUGHPUT & ERRORS (collapsible, default open) ──
+h+='<div class="tdb-section"><div class="tdb-section__hdr" style="cursor:pointer" onclick="var b=this.nextElementSibling;b.style.display=b.style.display===\'none\'?\'grid\':\'none\';this.querySelector(\'.tdb-chv\').style.transform=b.style.display===\'none\'?\'rotate(-90deg)\':\'\'"><span class="tdb-section__hdr-icon">&#128202;</span> Throughput & Errors (24h)<span class="tdb-chv" style="margin-left:auto;font-size:10px;color:#64748b;transition:transform .2s">&#9660;</span></div>';
+h+='<div class="tdb-metrics">';
+h+='<div class="tdb-metric" style="grid-column:span 2"><div class="tdb-metric__top"><div class="tdb-metric__info"><div class="tdb-metric__name">Interactions per Hour</div><div class="tdb-metric__desc">Target: 2,000+</div></div></div>';
+h+='<div class="tdb-monthly"><div class="tdb-monthly__bars" style="position:relative">';
+h+='<div class="tdb-monthly__target" style="bottom:'+Math.round(2000/3500*48)+'px"><span class="tdb-monthly__target-label">Target: 2K/hr</span></div>';
+for(var i=0;i<24;i++){var v=rnd(800,3200);var vc=v>=2000?'#22c55e':v>=1500?'#f59e0b':'#ef4444';h+='<div class="tdb-monthly__bar" style="height:'+barH(v,3500,48)+'px;background:'+vc+'" data-tip="'+v+'"></div>'}
+h+='</div></div></div>';
+h+='<div class="tdb-metric"><div class="tdb-metric__top"><div class="tdb-metric__info"><div class="tdb-metric__name">Error Breakdown</div><div class="tdb-metric__desc">Target: each &lt;0.5%</div></div></div>';
+[{n:'Tool call failure',v:38,c:'#ef4444'},{n:'Timeout',v:22,c:'#f59e0b'},{n:'Hallucination',v:15,c:'#f97316'},{n:'Policy violation',v:12,c:'#a855f7'},{n:'Auth failure',v:8,c:'#6366f1'},{n:'Other',v:5,c:'#64748b'}].forEach(e=>{
+h+='<div style="display:flex;align-items:center;gap:.5rem;margin-top:4px"><span style="font-size:.65rem;color:#94a3b8;width:90px;text-align:right">'+e.n+'</span><div style="flex:1;height:8px;background:#334155;border-radius:4px;overflow:hidden"><div style="height:100%;width:'+e.v+'%;background:'+e.c+';border-radius:4px"></div></div><span style="font-size:.65rem;color:#e2e8f0;width:28px">'+e.v+'%</span></div>'});
+h+='</div></div></div>';
+
+// ── 6. COST & RESOURCES (collapsible, default closed) ──
+h+='<div class="tdb-section"><div class="tdb-section__hdr" style="cursor:pointer" onclick="var b=this.nextElementSibling;b.style.display=b.style.display===\'none\'?\'grid\':\'none\';this.querySelector(\'.tdb-chv\').style.transform=b.style.display===\'none\'?\'rotate(-90deg)\':\'\'"><span class="tdb-section__hdr-icon">&#128176;</span> Cost & Resources vs Targets<span class="tdb-chv" style="margin-left:auto;font-size:10px;color:#64748b;transition:transform .2s;transform:rotate(-90deg)">&#9660;</span></div>';
+h+='<div class="tdb-metrics" style="display:none">';
+[{name:'Token Usage',actual:2.4,target:3.0,max:4,unit:'M/day',inv:true},{name:'Cost/Resolution',actual:0.42,target:0.60,max:1.0,unit:'',inv:true,prefix:'$'},{name:'Escalation Cost',actual:8.50,target:10.0,max:15,unit:'',inv:true,prefix:'$'},{name:'Compute',actual:67,target:85,max:100,unit:'%',inv:true}].forEach(m=>{
+var met=m.inv?(m.actual<=m.target):(m.actual>=m.target);var mc=met?'#22c55e':'#f59e0b';
+var aPct=Math.min(100,m.actual/m.max*100),tPct=Math.min(100,m.target/m.max*100);
+h+='<div class="tdb-metric"><div class="tdb-metric__name">'+m.name+'</div>';
+h+='<div style="display:flex;align-items:baseline;gap:.5rem;margin:.25rem 0"><span style="font-size:1.25rem;font-weight:700;color:'+mc+'">'+(m.prefix||'')+m.actual+m.unit+'</span><span style="font-size:.625rem;color:#64748b">Target: '+(m.prefix||'')+m.target+m.unit+'</span></div>';
+h+='<div class="tdb-avt__bar-wrap"><div class="tdb-avt__bar" style="width:'+aPct+'%;background:'+mc+'"></div><div class="tdb-avt__marker" style="left:'+tPct+'%"></div></div></div>'});
+h+='</div></div>';
+
+h+='</div>';
+c.innerHTML=h}
+
+// ═══ ENTERPRISE ROI CALCULATOR ═══
+var calcScenario='moderate';
 function fM(n){return n>=1e6?'$'+(n/1e6).toFixed(2)+'M':n>=1e3?'$'+(n/1e3).toFixed(0)+'K':'$'+n.toFixed(0)}
-function rC(){['service','sales'].forEach(k=>{CR[k].forEach((r,i)=>{var d=k+'_'+i;document.getElementById('f'+d).value=r.dF;document.getElementById('c'+d).value=r.dC;document.getElementById('p'+d).value=r.dP})});rCC()}
+function fMx(n){return n>=1e6?'$'+(n/1e6).toFixed(1)+'M':n>=1e3?'$'+(n/1e3).toFixed(0)+'K':'$'+n.toFixed(0)}
+
+// Scenario multipliers
+var SCENARIOS={
+conservative:{label:'Conservative',pctMult:0.7,revMult:0.5,rampMonths:18,adoptionPct:60,licenseCost:1.2},
+moderate:{label:'Moderate',pctMult:1.0,revMult:1.0,rampMonths:12,adoptionPct:80,licenseCost:1.0},
+aggressive:{label:'Aggressive',pctMult:1.3,revMult:1.5,rampMonths:8,adoptionPct:95,licenseCost:0.9}
+};
+
+function calcROI(){
+  var sc=SCENARIOS[calcScenario],m=sc.pctMult;
+  // FTE savings
+  var svcCur=0,svcProj=0,salCur=0,salProj=0,totalFTE=0,fteDisplaced=0;
+  CR.service.forEach(r=>{var c=r.dF*r.dC;var p=c*(1-r.dP*m/100);svcCur+=c;svcProj+=p;totalFTE+=r.dF;fteDisplaced+=r.dF*r.dP*m/100});
+  CR.sales.forEach(r=>{var c=r.dF*r.dC;var p=c*(1-r.dP*m/100);salCur+=c;salProj+=p;totalFTE+=r.dF;fteDisplaced+=r.dF*r.dP*m/100});
+  var fteSavings=(svcCur-svcProj)+(salCur-salProj);
+
+  // Revenue impact
+  var conversionLift=salCur*0.08*sc.revMult; // 8% conversion improvement on sales costs as proxy for revenue
+  var saveRateLift=svcCur*0.04*sc.revMult; // 4% churn save improvement
+  var crossSellRev=salCur*0.05*sc.revMult; // 5% cross-sell/upsell
+
+  // CX impact
+  var csatImprovement=Math.round(5*m); // points
+  var npsLift=Math.round(8*m);
+  var churnReduction=parseFloat((1.2*m).toFixed(1)); // percentage points
+  var churnRevSaved=churnReduction*0.01*(svcCur+salCur)*2; // rough: each churn pt = 2x cost base
+
+  // Productivity
+  var ahtReduction=Math.round(25*m); // percent
+  var acwReduction=Math.round(40*m);
+  var trainingReduction=totalFTE*2000*m*0.3; // $2K training/FTE, 30% reduction
+
+  // Quality
+  var errorReduction=Math.round(35*m);
+  var complianceSavings=totalFTE*500*m; // $500/FTE compliance cost reduction
+  var reworkReduction=fteSavings*0.15; // 15% of savings from reduced rework
+
+  // Investment costs (3-year)
+  var licensingAnnual=totalFTE*1200*sc.licenseCost; // $1200/user/yr
+  var integrationY1=350000*sc.licenseCost;
+  var changeManagement=150000*sc.licenseCost;
+  var trainingInvestment=totalFTE*800;
+  var ongoingMaintenance=75000;
+
+  var totalInvestmentY1=licensingAnnual+integrationY1+changeManagement+trainingInvestment;
+  var totalInvestmentY2=licensingAnnual+ongoingMaintenance;
+  var totalInvestmentY3=licensingAnnual+ongoingMaintenance;
+  var totalInvestment3Y=totalInvestmentY1+totalInvestmentY2+totalInvestmentY3;
+
+  // Total value
+  var annualValue=fteSavings+conversionLift+saveRateLift+crossSellRev+churnRevSaved+complianceSavings+reworkReduction+trainingReduction;
+  // Phased ramp: Y1=40%, Y2=80%, Y3=100%
+  var valueY1=annualValue*0.4;
+  var valueY2=annualValue*0.8;
+  var valueY3=annualValue;
+  var totalValue3Y=valueY1+valueY2+valueY3;
+  var netValue3Y=totalValue3Y-totalInvestment3Y;
+  var roiPct=totalInvestment3Y>0?Math.round(netValue3Y/totalInvestment3Y*100):0;
+
+  // Breakeven month
+  var cumInv=0,cumVal=0,beMonth=0;
+  for(var mo=1;mo<=36;mo++){
+    cumInv+=mo<=12?totalInvestmentY1/12:totalInvestmentY2/12;
+    var ramp=mo<=6?mo/12:mo<=12?0.4+(mo-6)/12*0.4:mo<=24?0.8:1.0;
+    cumVal+=annualValue/12*ramp;
+    if(cumVal>=cumInv&&beMonth===0)beMonth=mo;
+  }
+
+  return{fteSavings:fteSavings,conversionLift:conversionLift,saveRateLift:saveRateLift,crossSellRev:crossSellRev,
+    churnRevSaved:churnRevSaved,complianceSavings:complianceSavings,reworkReduction:reworkReduction,trainingReduction:trainingReduction,
+    annualValue:annualValue,totalValue3Y:totalValue3Y,totalInvestment3Y:totalInvestment3Y,netValue3Y:netValue3Y,roiPct:roiPct,beMonth:beMonth,
+    totalFTE:totalFTE,fteDisplaced:Math.round(fteDisplaced),csatImprovement:csatImprovement,npsLift:npsLift,churnReduction:churnReduction,
+    ahtReduction:ahtReduction,acwReduction:acwReduction,errorReduction:errorReduction,
+    svcCur:svcCur,svcProj:svcProj,salCur:salCur,salProj:salProj,
+    valueY1:valueY1,valueY2:valueY2,valueY3:valueY3,
+    totalInvestmentY1:totalInvestmentY1,totalInvestmentY2:totalInvestmentY2,totalInvestmentY3:totalInvestmentY3,
+    licensingAnnual:licensingAnnual,integrationY1:integrationY1,changeManagement:changeManagement,trainingInvestment:trainingInvestment,ongoingMaintenance:ongoingMaintenance,
+    sc:SCENARIOS[calcScenario]};
+}
+
+function rCC(){
+  var c=document.getElementById('calc-ct');if(!c)return;
+  var R=calcROI(),h='';
+
+  if(cCV==='exec'){
+  // ═══ EXECUTIVE SUMMARY ═══
+  // Scenario toggle
+  h+='<div style="display:flex;align-items:center;gap:1rem;margin-bottom:1rem">';
+  h+='<span style="font-size:.75rem;color:var(--tw);font-weight:600">Scenario:</span>';
+  h+='<div class="roi-scenarios">';
+  ['conservative','moderate','aggressive'].forEach(s=>{h+='<button class="roi-scn-btn '+(calcScenario===s?'on':'')+'" onclick="calcScenario=\''+s+'\';rCC()">'+SCENARIOS[s].label+'</button>'});
+  h+='</div></div>';
+
+  // Dark exec summary
+  h+='<div class="roi-exec">';
+  h+='<div class="roi-exec__title">3-Year Business Case — '+R.sc.label+' Scenario <span>Agentforce ROI</span></div>';
+  h+='<div class="roi-kpis">';
+  h+='<div class="roi-kpi highlight"><div class="roi-kpi__label">3-Year Net Value</div><div class="roi-kpi__val" style="color:#22c55e">'+fM(R.netValue3Y)+'</div><div class="roi-kpi__sub">Total value minus investment</div></div>';
+  h+='<div class="roi-kpi highlight"><div class="roi-kpi__label">ROI</div><div class="roi-kpi__val" style="color:#22c55e">'+R.roiPct+'%</div><div class="roi-kpi__sub">Return on investment</div></div>';
+  h+='<div class="roi-kpi gold"><div class="roi-kpi__label">Breakeven</div><div class="roi-kpi__val" style="color:#eab308">Month '+R.beMonth+'</div><div class="roi-kpi__sub">Payback period</div></div>';
+  h+='<div class="roi-kpi accent"><div class="roi-kpi__label">FTEs Redeployed</div><div class="roi-kpi__val" style="color:#a78bfa">'+R.fteDisplaced+'</div><div class="roi-kpi__sub">of '+R.totalFTE+' total</div></div>';
+  h+='<div class="roi-kpi"><div class="roi-kpi__label">CSAT Improvement</div><div class="roi-kpi__val">+'+R.csatImprovement+'pts</div><div class="roi-kpi__sub">Customer satisfaction</div></div>';
+  h+='<div class="roi-kpi"><div class="roi-kpi__label">Churn Reduction</div><div class="roi-kpi__val">-'+R.churnReduction+'%</div><div class="roi-kpi__sub">'+fM(R.churnRevSaved)+' revenue saved</div></div>';
+  h+='</div></div>';
+
+  // Value Levers (bar charts: current vs future)
+  h+='<div style="font-size:.875rem;font-weight:700;margin-bottom:.75rem;display:flex;align-items:center;gap:.5rem">&#128200; Value Levers — Annual Impact</div>';
+  h+='<div class="roi-levers">';
+  var levers=[
+    {name:'FTE Capacity Displacement',val:R.fteSavings,icon:'&#128101;',color:'#0176d3',desc:'Automating '+R.fteDisplaced+' FTE-equivalents across Service & Sales through agent containment and copilot productivity gains.',cur:R.svcCur+R.salCur,fut:R.svcProj+R.salProj},
+    {name:'Revenue — Conversion Lift',val:R.conversionLift,icon:'&#128200;',color:'#22c55e',desc:'Higher conversion rates from real-time guided selling, plan recommendations, and promo eligibility assistance.',pct:8},
+    {name:'Revenue — Retention & Save Rate',val:R.saveRateLift+R.churnRevSaved,icon:'&#128170;',color:'#7526e5',desc:'Improved save rates from AI-powered offer recommendations and proactive defection detection. '+R.churnReduction+'% churn reduction.',pct:4},
+    {name:'Revenue — Cross-sell & Upsell',val:R.crossSellRev,icon:'&#128176;',color:'#e3066a',desc:'Incremental ARPU from intelligent bundle, accessory, and add-a-line recommendations across all channels.',pct:5},
+    {name:'Quality — Error & Rework Reduction',val:R.complianceSavings+R.reworkReduction,icon:'&#9989;',color:'#0891b2',desc:R.errorReduction+'% fewer errors, improved compliance adherence, and reduced manual rework across order and billing flows.'},
+    {name:'Productivity — Training & Onboarding',val:R.trainingReduction,icon:'&#127891;',color:'#ca8a04',desc:R.ahtReduction+'% AHT reduction, '+R.acwReduction+'% ACW reduction. Service Agents accelerate new hire ramp by reducing knowledge dependency.'}
+  ];
+  var maxLever=Math.max.apply(null,levers.map(l=>l.val));
+  levers.forEach(l=>{
+    var pct=Math.round(l.val/maxLever*100);
+    h+='<div class="roi-lever"><div class="roi-lever__hdr"><div class="roi-lever__icon" style="background:'+l.color+'">'+l.icon+'</div>';
+    h+='<div class="roi-lever__title">'+l.name+'</div><div class="roi-lever__val">'+fM(l.val)+'/yr</div></div>';
+    h+='<div class="roi-lever__bar-wrap"><div class="roi-lever__bar future" style="width:'+pct+'%;background:'+l.color+'"></div></div>';
+    h+='<div class="roi-lever__detail">'+l.desc+'</div></div>'});
+  h+='</div>';
+
+  // 36-Month Cumulative Value Timeline
+  h+='<div class="roi-timeline"><div class="roi-timeline__hdr">&#128197; 36-Month Cumulative Investment vs. Value</div>';
+  h+='<div class="roi-timeline__chart" style="position:relative">';
+  var maxMo=0,moData=[];var cumI=0,cumV=0;
+  for(var mo=1;mo<=36;mo++){
+    cumI+=mo<=12?R.totalInvestmentY1/12:R.totalInvestmentY2/12;
+    var ramp=mo<=6?mo/12:mo<=12?0.4+(mo-6)/12*0.4:mo<=24?0.8:1.0;
+    cumV+=R.annualValue/12*ramp;
+    moData.push({mo:mo,inv:cumI,val:cumV});
+    maxMo=Math.max(maxMo,cumI,cumV);
+  }
+  // Breakeven line
+  if(R.beMonth>0&&R.beMonth<=36){
+    var bePct=((R.beMonth-1)/35*100).toFixed(1);
+    h+='<div class="roi-timeline__be-line" style="left:'+bePct+'%"><div class="roi-timeline__be-label">&#9733; Breakeven: Month '+R.beMonth+'</div></div>';
+  }
+  moData.forEach((d,i)=>{
+    if(i%3!==0&&i!==35)return; // show every 3 months
+    var invH=Math.round(d.inv/maxMo*170);
+    var valH=Math.round(d.val/maxMo*170);
+    h+='<div class="roi-timeline__bar-grp" style="flex:1">';
+    h+='<div style="display:flex;align-items:flex-end;gap:2px;height:170px">';
+    h+='<div class="roi-timeline__bar" style="height:'+invH+'px;background:#ef4444;width:45%;opacity:0.7" title="Investment: '+fM(d.inv)+'"></div>';
+    h+='<div class="roi-timeline__bar" style="height:'+valH+'px;background:#22c55e;width:45%" title="Value: '+fM(d.val)+'"></div>';
+    h+='</div><div class="roi-timeline__bar-label">M'+d.mo+'</div></div>'});
+  h+='</div>';
+  h+='<div class="roi-timeline__legend">';
+  h+='<span><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:#ef4444;margin-right:4px"></span>Investment (cumulative)</span>';
+  h+='<span><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:#22c55e;margin-right:4px"></span>Value (cumulative)</span>';
+  h+='</div></div>';
+
+  // Investment breakdown
+  h+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">';
+  // Investment
+  h+='<div class="roi-inv"><div style="font-size:.875rem;font-weight:700;margin-bottom:.75rem">&#128176; 3-Year Investment</div>';
+  h+='<div class="roi-inv__row cost"><span class="label">Agentforce Licensing (Y1)</span><span class="val">'+fM(R.licensingAnnual)+'</span></div>';
+  h+='<div class="roi-inv__row cost"><span class="label">Integration & Data Cloud</span><span class="val">'+fM(R.integrationY1)+'</span></div>';
+  h+='<div class="roi-inv__row cost"><span class="label">Change Management</span><span class="val">'+fM(R.changeManagement)+'</span></div>';
+  h+='<div class="roi-inv__row cost"><span class="label">Training</span><span class="val">'+fM(R.trainingInvestment)+'</span></div>';
+  h+='<div class="roi-inv__row cost"><span class="label">Licensing (Y2+Y3)</span><span class="val">'+fM(R.licensingAnnual*2)+'</span></div>';
+  h+='<div class="roi-inv__row cost"><span class="label">Ongoing Maintenance (Y2+Y3)</span><span class="val">'+fM(R.ongoingMaintenance*2)+'</span></div>';
+  h+='<div class="roi-inv__row total"><span class="label">Total 3-Year Investment</span><span class="val" style="color:var(--er)">'+fM(R.totalInvestment3Y)+'</span></div></div>';
+  // Returns
+  h+='<div class="roi-inv"><div style="font-size:.875rem;font-weight:700;margin-bottom:.75rem">&#128200; 3-Year Value Return</div>';
+  h+='<div class="roi-inv__row"><span class="label">Year 1 (40% ramp)</span><span class="val" style="color:var(--ok)">'+fM(R.valueY1)+'</span></div>';
+  h+='<div class="roi-inv__row"><span class="label">Year 2 (80% ramp)</span><span class="val" style="color:var(--ok)">'+fM(R.valueY2)+'</span></div>';
+  h+='<div class="roi-inv__row"><span class="label">Year 3 (100% scale)</span><span class="val" style="color:var(--ok)">'+fM(R.valueY3)+'</span></div>';
+  h+='<div class="roi-inv__row total"><span class="label">Total 3-Year Value</span><span class="val">'+fM(R.totalValue3Y)+'</span></div>';
+  h+='<div class="roi-inv__row total"><span class="label">Net 3-Year Value</span><span class="val">'+fM(R.netValue3Y)+'</span></div></div>';
+  h+='</div>';
+
+  h+='<div class="nt"><strong>Methodology:</strong> FTE savings based on role-specific automatable percentages. Revenue impacts modeled as percentage lifts on current cost base as a proxy. Ramp follows 40/80/100% over 3 years. All values are annualized and scenario-adjusted. Investment includes Salesforce Agentforce licensing, Data Cloud integration, MuleSoft connectivity, change management, and training.</div>';
+
+  } else {
+  // ═══ DETAILED INPUTS ═══
+  h+='<div style="display:flex;align-items:center;gap:1rem;margin-bottom:1rem">';
+  h+='<span style="font-size:.75rem;color:var(--tw);font-weight:600">Scenario:</span>';
+  h+='<div class="roi-scenarios">';
+  ['conservative','moderate','aggressive'].forEach(s=>{h+='<button class="roi-scn-btn '+(calcScenario===s?'on':'')+'" onclick="calcScenario=\''+s+'\';rCC()">'+SCENARIOS[s].label+'</button>'});
+  h+='</div></div>';
+
+  var sc=SCENARIOS[calcScenario],m=sc.pctMult;
+  // Service table
+  h+='<div class="cd"><div class="cd__h"><div class="cd__hi svc">&#9742;</div><span class="cd__t">Service Roles — '+sc.label+' Scenario</span></div><div class="cd__bd"><table class="tb"><thead><tr><th>Role</th><th>Agent(s)</th><th>FTEs</th><th>Cost/FTE</th><th>Auto %</th><th>Current Cost</th><th>Projected</th><th>Annual Savings</th></tr></thead><tbody>';
+  var svcT={c:0,p:0};
+  CR.service.forEach(r=>{var cur=r.dF*r.dC;var adj=Math.min(100,Math.round(r.dP*m));var proj=cur*(1-adj/100);svcT.c+=cur;svcT.p+=proj;
+  h+='<tr><td style="font-weight:600">'+r.role+'</td><td style="color:var(--tw);font-size:.75rem">'+r.agents+'</td><td style="text-align:center">'+r.dF+'</td><td class="money">'+fM(r.dC)+'</td><td style="text-align:center">'+adj+'%</td><td class="money">'+fM(cur)+'</td><td class="money">'+fM(proj)+'</td><td class="money sav">'+fM(cur-proj)+'</td></tr>'});
+  h+='<tr style="font-weight:700;border-top:2px solid var(--td)"><td colspan="5" style="text-align:right;padding-right:1rem">Service Total</td><td class="money">'+fM(svcT.c)+'</td><td class="money">'+fM(svcT.p)+'</td><td class="money sav">'+fM(svcT.c-svcT.p)+'</td></tr>';
+  h+='</tbody></table></div></div>';
+
+  // Sales table
+  h+='<div class="cd"><div class="cd__h"><div class="cd__hi sal">&#128176;</div><span class="cd__t">Sales Roles — '+sc.label+' Scenario</span></div><div class="cd__bd"><table class="tb"><thead><tr><th>Role</th><th>Agent(s)</th><th>FTEs</th><th>Cost/FTE</th><th>Auto %</th><th>Current Cost</th><th>Projected</th><th>Annual Savings</th></tr></thead><tbody>';
+  var salT={c:0,p:0};
+  CR.sales.forEach(r=>{var cur=r.dF*r.dC;var adj=Math.min(100,Math.round(r.dP*m));var proj=cur*(1-adj/100);salT.c+=cur;salT.p+=proj;
+  h+='<tr><td style="font-weight:600">'+r.role+'</td><td style="color:var(--tw);font-size:.75rem">'+r.agents+'</td><td style="text-align:center">'+r.dF+'</td><td class="money">'+fM(r.dC)+'</td><td style="text-align:center">'+adj+'%</td><td class="money">'+fM(cur)+'</td><td class="money">'+fM(proj)+'</td><td class="money sav">'+fM(cur-proj)+'</td></tr>'});
+  h+='<tr style="font-weight:700;border-top:2px solid var(--td)"><td colspan="5" style="text-align:right;padding-right:1rem">Sales Total</td><td class="money">'+fM(salT.c)+'</td><td class="money">'+fM(salT.p)+'</td><td class="money sav">'+fM(salT.c-salT.p)+'</td></tr>';
+  h+='</tbody></table></div></div>';
+
+  // Combined summary
+  var R2=calcROI();
+  h+='<div class="sg">';
+  h+='<div class="sc svc"><div class="sc__l">Service</div><div class="sc__r"><span class="l">Current</span><span class="v">'+fM(svcT.c)+'</span></div><div class="sc__r"><span class="l">Projected</span><span class="v">'+fM(svcT.p)+'</span></div><div class="sc__r hi"><span class="l">Savings</span><span class="v">'+fM(svcT.c-svcT.p)+'</span></div><div class="pb"><div class="pb__f" style="width:'+Math.min(100,(svcT.c-svcT.p)/svcT.c*100)+'%"></div></div></div>';
+  h+='<div class="sc sal"><div class="sc__l">Sales</div><div class="sc__r"><span class="l">Current</span><span class="v">'+fM(salT.c)+'</span></div><div class="sc__r"><span class="l">Projected</span><span class="v">'+fM(salT.p)+'</span></div><div class="sc__r hi"><span class="l">Savings</span><span class="v">'+fM(salT.c-salT.p)+'</span></div><div class="pb"><div class="pb__f" style="width:'+Math.min(100,(salT.c-salT.p)/salT.c*100)+'%"></div></div></div>';
+  h+='<div class="sc cmb"><div class="sc__l">Combined</div><div class="sc__r"><span class="l">Current</span><span class="v">'+fM(svcT.c+salT.c)+'</span></div><div class="sc__r"><span class="l">Projected</span><span class="v">'+fM(svcT.p+salT.p)+'</span></div><div class="sc__r hi"><span class="l">Savings</span><span class="v">'+fM(svcT.c-svcT.p+salT.c-salT.p)+'</span></div><div class="pb"><div class="pb__f" style="width:'+Math.min(100,(svcT.c-svcT.p+salT.c-salT.p)/(svcT.c+salT.c)*100)+'%"></div></div></div>';
+  h+='</div>';
+  }
+
+  c.innerHTML=h;
+}
+
+function sCV(v,b){b.parentElement.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));b.classList.add('on');cCV=v;rCC()}
+function rC(){calcScenario='moderate';rCC()}
 
 // INIT
-bJM();rOT('service');bCT('csb',CR.service,'service');bCT('clb',CR.sales,'sales');rCC();bDR();bTel();
+bJM();rOT('service');rCC();bDR();bTel();
+// Refresh telemetry periodically for live feel
+setInterval(function(){if(document.getElementById('vw-telemetry').classList.contains('on')){AGENTS_HEALTH.forEach(a=>{a.containment=Math.min(100,Math.max(50,a.containment+rnd(-2,2)));a.latency=Math.max(0.2,parseFloat((a.latency+rndF(-0.2,0.2)).toFixed(1)));a.errors=Math.max(0,parseFloat((a.errors+rndF(-0.3,0.3)).toFixed(1)));a.status=a.errors>2?'cr':a.errors>1?'wn':'ok'});bTel()}},8000);
 </script>
 </body>
 </html>
