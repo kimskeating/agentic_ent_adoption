@@ -31,38 +31,68 @@ body{font-family:var(--f);font-size:.8125rem;color:var(--td);background:var(--pg
 .vw{display:none}.vw.on{display:block}
 .inp{flex:1;max-width:420px;padding:0 1rem;height:36px;border:1px solid var(--bi);border-radius:var(--rm);font-size:.8125rem;font-family:var(--f);color:var(--td);background:var(--sf);outline:none}
 .inp:focus{border-color:var(--b);box-shadow:0 0 0 1px var(--b)}
-/* Tree */
-.tr{font-size:.8125rem}.tn{margin-left:0;position:relative}
-.tn .tc{margin-left:1.75rem;overflow:hidden;transition:max-height .25s ease;position:relative}
-.tn.cl>.tc{max-height:0!important}
+/* ═══ TOP-DOWN ORG CHART (Hybrid: tree for roles, panel for agents) ═══ */
+.oc{overflow-x:auto;-webkit-overflow-scrolling:touch;padding:1rem 0;text-align:center}
+.oc ul{margin:0;padding:0;list-style:none}
+.oc>ul{display:inline-flex;flex-direction:column;align-items:center}
+.oc li{position:relative;display:flex;flex-direction:column;align-items:center;padding-top:20px}
+.oc ul ul{display:flex;flex-direction:row;justify-content:center;padding-top:20px;position:relative;flex-wrap:nowrap}
 /* Connecting lines */
-.tc::before{content:"";position:absolute;left:-1px;top:0;bottom:12px;width:0;border-left:2px solid var(--br)}
-.tn.cl>.tc::before{display:none}
-/* Node header card style */
-.th{display:flex;align-items:center;gap:.5rem;padding:.625rem 1rem;margin:4px 0;border-radius:var(--rl);cursor:pointer;transition:all .2s;min-height:44px;border-top:3px solid transparent;box-shadow:0 1px 3px rgba(0,0,0,.06);position:relative}
-.th:hover{box-shadow:0 2px 8px rgba(0,0,0,.12);transform:translateY(-1px)}
-/* Horizontal branch line from parent spine */
-.tc>.tn>.th::before{content:"";position:absolute;left:-1.75rem;top:50%;width:1.75rem;height:0;border-top:2px solid var(--br)}
-.cv{width:18px;height:18px;display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--tw);transition:transform .2s;flex-shrink:0;background:var(--sa);border-radius:50%;border:1px solid var(--br)}
-.tn.cl>.th .cv{transform:rotate(-90deg)}.cv.em{visibility:hidden;background:none;border:none}
-.rl{font-weight:600;flex:1;color:var(--td)}.sl{font-weight:400;font-size:.7rem;color:var(--tw);margin-left:.5rem;font-style:italic}
-.cnt{padding:2px 10px;border-radius:10px;font-size:.625rem;font-weight:700;background:var(--afl);color:var(--af);display:flex;align-items:center;gap:3px}
-.cnt::before{content:"\2726";font-size:9px}
-/* Level styling - card-based with top color bar */
-.nL1>.th{background:var(--bk);color:#fff;border-top-color:transparent;box-shadow:0 2px 8px rgba(3,45,96,.3)}.nL1>.th .rl,.nL1>.th .sl{color:#fff}.nL1>.th .sl{opacity:.7}.nL1>.th .cv{color:#fff;background:rgba(255,255,255,.2);border-color:rgba(255,255,255,.3)}.nL1>.th .cnt{background:rgba(255,255,255,.2);color:#fff}.nL1>.th:hover{background:#04396e;transform:translateY(-1px)}
-.nL2>.th{background:var(--sf);border-top-color:var(--b);box-shadow:0 1px 4px rgba(0,0,0,.1)}.nL2>.th .rl{color:var(--bd);font-size:.875rem}
-.nL3>.th{background:var(--sf);border-top-color:var(--bl);box-shadow:0 1px 4px rgba(0,0,0,.08)}.nL3>.th .rl{color:var(--bd)}
-.nL4>.th{background:var(--sf);border-top-color:var(--blr);border-top-width:2px}.nL4>.th .rl{font-size:.8125rem}
-.nL5>.th{background:var(--sf);border-top-color:var(--br);border-top-width:2px}.nL5>.th .rl{font-size:.8125rem}
-/* Agent Card */
-.ac{background:linear-gradient(135deg,#faf5ff,#fff);border:1px dashed #d4c2f0;border-radius:var(--rl);padding:.75rem 1rem;margin:4px 0 4px 1.75rem;cursor:pointer;display:flex;align-items:center;gap:.75rem;transition:all .2s;position:relative}
-.ac::before{content:"";position:absolute;left:-1.75rem;top:50%;width:1.75rem;height:0;border-top:2px dashed #d4c2f0}
-.ac:hover{box-shadow:0 4px 12px rgba(117,38,229,.15);border-color:var(--af);transform:translateY(-1px)}
-.ac__i{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--af),#9333ea);color:#fff;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;font-weight:700;position:relative}
-.ac__i::after{content:"\2726";position:absolute;bottom:-2px;right:-2px;background:#fff;color:var(--af);border-radius:50%;width:14px;height:14px;font-size:8px;display:flex;align-items:center;justify-content:center;border:1px solid var(--afl)}
-.ac__b{flex:1;min-width:0}.ac__n{font-size:.8125rem;font-weight:700;color:var(--afd);line-height:1.3}
-.ac__p{font-size:.7rem;color:var(--tw);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.3}
-.ac__bd{display:flex;gap:4px;flex-shrink:0;flex-wrap:wrap}
+.oc ul ul::before{content:"";position:absolute;top:0;left:50%;width:0;height:20px;border-left:2px solid #c9c9c9}
+.oc ul ul>li::before{content:"";position:absolute;top:0;left:0;width:50%;height:20px;border-top:2px solid #c9c9c9;border-right:2px solid #c9c9c9}
+.oc ul ul>li::after{content:"";position:absolute;top:0;left:50%;width:50%;height:0;border-top:2px solid #c9c9c9}
+.oc ul ul>li:first-child::before{border-top:none}
+.oc ul ul>li:last-child::after{border-top:none}
+.oc ul ul>li:only-child::before{border-top:none;height:20px;border-right:2px solid #c9c9c9}
+.oc ul ul>li:only-child::after{display:none}
+.oc>ul>li{padding-top:0}.oc>ul>li::before,.oc>ul>li::after{display:none}
+
+/* ═══ ROLE NODE CARD ═══ */
+.oc-node{display:inline-block;width:150px;padding:8px 10px;margin:0 4px;background:var(--sf);border:1px solid var(--br);border-radius:var(--rl);text-align:center;position:relative;z-index:1;box-shadow:0 2px 6px rgba(0,0,0,.08);cursor:pointer;transition:all .2s}
+.oc-node:hover{box-shadow:0 4px 16px rgba(0,0,0,.14);transform:translateY(-2px)}
+.oc-node.selected{box-shadow:0 0 0 3px var(--af),0 4px 16px rgba(117,38,229,.2)}
+.oc-node__title{font-size:.6rem;font-weight:700;color:var(--td);line-height:1.2}
+.oc-node__sub{font-size:.5rem;color:var(--tw);margin-top:2px;line-height:1.2;font-style:italic}
+.oc-node__orch{font-size:.5rem;font-weight:700;color:var(--af);margin-top:3px;padding:2px 6px;background:var(--afl);border-radius:6px;display:inline-flex;align-items:center;gap:2px}
+.oc-node__orch::before{content:"\2726";font-size:8px}
+.oc-node__count{display:inline-flex;align-items:center;gap:2px;margin-top:3px;padding:1px 6px;border-radius:8px;font-size:.5rem;font-weight:700;background:var(--afl);color:var(--af);margin-left:2px}
+/* Level colors */
+.oc-node.L1{background:var(--bk);border-color:var(--bk);width:180px}
+.oc-node.L1 .oc-node__title{color:#fff;font-size:.7rem}
+.oc-node.L1 .oc-node__sub{color:rgba(255,255,255,.7)}
+.oc-node.L1 .oc-node__orch{background:rgba(255,255,255,.15);color:rgba(255,255,255,.9)}
+.oc-node.L1 .oc-node__count{background:rgba(255,255,255,.15);color:rgba(255,255,255,.9)}
+.oc-node.L2{border-top:3px solid var(--b);width:160px}
+.oc-node.L2 .oc-node__title{color:var(--bd);font-size:.65rem}
+.oc-node.L3{border-top:3px solid var(--bl)}
+.oc-node.L3 .oc-node__title{color:var(--bd)}
+.oc-node.L4{border-top:2px solid var(--blr)}
+.oc-node.L5{border-top:2px solid var(--bs)}
+
+/* ═══ AGENT ROSTER PANEL (appears below selected node) ═══ */
+.oc-roster{background:var(--sf);border:1px solid var(--br);border-radius:var(--rl);box-shadow:0 4px 20px rgba(0,0,0,.12);padding:1rem;margin-top:1.5rem;text-align:left;max-width:800px;margin-left:auto;margin-right:auto;position:relative}
+.oc-roster::before{content:"";position:absolute;top:-8px;left:50%;transform:translateX(-50%);width:16px;height:16px;background:var(--sf);border-left:1px solid var(--br);border-top:1px solid var(--br);transform:translateX(-50%) rotate(45deg)}
+.oc-roster__hdr{display:flex;align-items:center;gap:.5rem;margin-bottom:.75rem;padding-bottom:.75rem;border-bottom:1px solid var(--br)}
+.oc-roster__hdr-title{font-size:.875rem;font-weight:700;color:var(--td);flex:1}
+.oc-roster__hdr-close{width:24px;height:24px;border:none;background:var(--sa);border-radius:var(--rm);cursor:pointer;font-size:14px;color:var(--tw);display:flex;align-items:center;justify-content:center}
+.oc-roster__hdr-close:hover{background:var(--br)}
+.oc-roster__grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:.5rem}
+/* Agent chip in roster */
+.oc-chip{background:var(--sf);border:1px solid var(--br);border-radius:var(--rm);padding:8px 10px;cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:8px}
+.oc-chip:hover{box-shadow:0 2px 8px rgba(0,0,0,.1);border-color:var(--af)}
+.oc-chip__icon{width:28px;height:28px;border-radius:50%;background:var(--afl);color:var(--af);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0}
+.oc-chip__info{flex:1;min-width:0}
+.oc-chip__name{font-size:.7rem;font-weight:700;color:var(--afd);line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.oc-chip__hitl{font-size:.5625rem;color:var(--tw)}
+/* Orchestrator chip */
+.oc-chip.master{border-color:var(--af);background:linear-gradient(135deg,#faf5ff,#fff);border-width:2px}
+.oc-chip.master .oc-chip__icon{background:linear-gradient(135deg,var(--af),#9333ea);color:#fff}
+/* Shared agent indicator */
+.oc-chip.shared{position:relative}
+.oc-chip.shared::after{content:"Shared";position:absolute;top:-4px;right:6px;font-size:.5rem;font-weight:700;background:#f59e0b;color:#fff;padding:0 5px;border-radius:4px;line-height:1.4}
+/* Data link on chip */
+.oc-chip__data{font-size:.5625rem;color:#4682B4;cursor:pointer;display:flex;align-items:center;gap:2px;margin-top:2px}
+.oc-chip__data:hover{text-decoration:underline}
 /* Badges */
 .bd{display:inline-block;padding:2px 8px;border-radius:1rem;font-size:.625rem;font-weight:700;line-height:1.6;white-space:nowrap;text-transform:uppercase;letter-spacing:.03em}
 .bd-au{background:var(--okb);color:var(--ok);border:1px solid var(--okl)}
@@ -248,10 +278,10 @@ body{font-family:var(--f);font-size:.8125rem;color:var(--td);background:var(--pg
 .tdb-monthly__bars{display:flex;align-items:flex-end;gap:3px;height:48px;position:relative}
 .tdb-monthly__bar{flex:1;min-width:0;border-radius:2px 2px 0 0;transition:height .4s;position:relative}
 .tdb-monthly__bar:hover{opacity:.85}
-.tdb-monthly__bar:hover::after{content:attr(data-tip);position:absolute;bottom:calc(100% + 4px);left:50%;transform:translateX(-50%);background:#0f172a;color:#f8fafc;font-size:.5625rem;padding:2px 6px;border-radius:3px;white-space:nowrap;z-index:2;border:1px solid #334155}
+.tdb-monthly__bar:hover::after{content:attr(data-tip);position:absolute;bottom:calc(100% + 4px);left:50%;transform:translateX(-50%);background:var(--bk);color:#fff;font-size:.5625rem;padding:2px 6px;border-radius:3px;white-space:nowrap;z-index:2;border:1px solid var(--bs)}
 /* Target line overlay */
-.tdb-monthly__target{position:absolute;left:0;right:0;border-top:2px dashed #f8fafc;opacity:.5;pointer-events:none}
-.tdb-monthly__target-label{position:absolute;right:0;top:-12px;font-size:.5625rem;color:#94a3b8}
+.tdb-monthly__target{position:absolute;left:0;right:0;border-top:2px dashed var(--td);opacity:.3;pointer-events:none}
+.tdb-monthly__target-label{position:absolute;right:0;top:-12px;font-size:.5625rem;color:var(--tw)}
 .tdb-monthly__labels{display:flex;justify-content:space-between;font-size:.5rem;color:#475569;margin-top:2px;padding:0 1px}
 /* Actual vs target side-by-side mini bar */
 .tdb-avt{display:flex;align-items:center;gap:.5rem;margin-top:.25rem}
@@ -401,8 +431,101 @@ body{font-family:var(--f);font-size:.8125rem;color:var(--td);background:var(--pg
 .roi-inv__row.total .val{color:var(--ok)}
 .roi-inv__row.cost .val{color:var(--er)}
 
-@media(max-width:900px){.gh{padding:0 .5rem}.ct{padding:1rem}.sg{grid-template-columns:1fr}.gh__badge{display:none}.roi-levers{grid-template-columns:1fr}}
-@media print{.gh,.tabs,.nt{display:none}.cd{break-inside:avoid}}
+/* ═══ TABLET (768-1023px) ═══ */
+@media(max-width:1023px){
+  .gh__logo-sub{display:none}
+  .gh__ni{padding:0 .5rem;font-size:.6875rem}
+  .ct{padding:1rem}
+  .tdb-kpi{flex-wrap:wrap}
+  .tdb-kpi__card{min-width:120px}
+  .tdb-w .tdb-kpi__card{min-width:120px}
+  .roi-kpis{grid-template-columns:repeat(3,1fr)}
+  .roi-levers{grid-template-columns:1fr 1fr}
+  .roi-timeline__chart{height:160px}
+  .med-flow{flex-wrap:wrap}
+  .med-col{flex:1 1 100%}
+  .med-col.silver{flex:1 1 100%}
+  .med-arrow{width:100%;height:24px;transform:rotate(90deg)}
+  .tdb-metrics{grid-template-columns:repeat(auto-fill,minmax(240px,1fr))}
+  .tdb-w .tdb-metrics{grid-template-columns:repeat(auto-fill,minmax(240px,1fr))}
+  .tdb-health{grid-template-columns:repeat(auto-fill,minmax(160px,1fr))}
+  .tdb-w .tdb-health{grid-template-columns:repeat(auto-fill,minmax(160px,1fr))}
+}
+
+/* ═══ MOBILE (<768px) ═══ */
+@media(max-width:767px){
+  .gh{height:auto;flex-wrap:wrap;padding:.5rem}
+  .gh__logo{margin-right:.5rem}
+  .gh__logo-text{font-size:.75rem}
+  .gh__logo-sub{display:none}
+  .gh__nav{flex-wrap:wrap;gap:0}
+  .gh__ni{padding:0 .5rem;font-size:.625rem;height:36px}
+  .gh__badge{display:none}
+  .tabs{padding:0 .75rem;flex-wrap:wrap;gap:0}
+  .tab{padding:.5rem .75rem;font-size:.75rem}
+  .ct{padding:.75rem}
+  /* Journey map: enforce horizontal scroll */
+  .jm{-webkit-overflow-scrolling:touch}
+  /* Org chart: compress indentation */
+  .tn .tc{margin-left:1rem}
+  .ac{margin-left:1rem}
+  .ac::before{width:1rem;left:-1rem}
+  .tc>.tn>.th::before{width:1rem;left:-1rem}
+  /* Tables: horizontal scroll */
+  .cd__bd{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .tb{min-width:600px}
+  .tb input[type="number"]{width:64px}
+  /* Modal: near-full-width */
+  .mo{padding:1rem}
+  .md{max-width:95vw}
+  .md__bd{padding:1rem}
+  /* Grids: single column */
+  .sg{grid-template-columns:1fr}
+  .roi-kpis{grid-template-columns:repeat(2,1fr)}
+  .roi-levers{grid-template-columns:1fr}
+  .roi-timeline__chart{height:140px}
+  .roi-inv{margin-bottom:1rem}
+  div[style*="grid-template-columns: 1fr 1fr"]{display:block!important}
+  /* Telemetry */
+  .tdb-kpi{flex-direction:column}
+  .tdb-kpi__card{min-width:unset}
+  .tdb-w .tdb-kpi{flex-direction:column}
+  .tdb-w .tdb-kpi__card{min-width:unset}
+  .tdb-metrics{grid-template-columns:1fr}
+  .tdb-w .tdb-metrics{grid-template-columns:1fr}
+  .tdb-metric[style*="grid-column:span 2"]{grid-column:span 1!important}
+  .tdb-health{grid-template-columns:1fr 1fr}
+  .tdb-w .tdb-health{grid-template-columns:1fr 1fr}
+  /* Data requirements: stack medallion vertically */
+  .med-flow{flex-direction:column}
+  .med-arrow{width:100%;height:20px;transform:rotate(90deg)}
+  .dr-agent-body .dr-freshness-row{grid-template-columns:1fr}
+  /* KPI definitions tables */
+  .tel-def__body{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .tel-def .tb{min-width:600px}
+  /* Touch targets: minimum 44px */
+  .th{min-height:44px}
+  .ac{min-height:44px}
+  .jp{min-height:32px;padding:6px 10px}
+  .btn{min-height:36px}
+  .tab{min-height:40px}
+  .gh__ni{min-height:36px}
+  /* Font floor */
+  body{font-size:.8125rem}
+  .swc li{font-size:.75rem}
+}
+
+/* ═══ LARGE SCREENS (1920px+) ═══ */
+@media(min-width:1920px){
+  .ct{max-width:1600px}
+  .tdb-metrics{grid-template-columns:repeat(4,1fr)}
+  .tdb-w .tdb-metrics{grid-template-columns:repeat(4,1fr)}
+  .roi-levers{grid-template-columns:repeat(3,1fr)}
+  .roi-kpis{grid-template-columns:repeat(6,1fr)}
+}
+
+/* ═══ PRINT ═══ */
+@media print{.gh,.tabs,.nt,.slds-input-container{display:none}.cd{break-inside:avoid}.tdb,.tdb-w{background:#fff!important;color:#000!important}}
 </style>
 </head>
 <body>
@@ -415,9 +538,9 @@ body{font-family:var(--f);font-size:.8125rem;color:var(--td);background:var(--pg
   <nav class="gh__nav">
     <button class="gh__ni on" onclick="sT('journey',this)">Customer Journeys</button>
     <button class="gh__ni" onclick="sT('orgchart',this)">Enterprise Agentic Functions</button>
-    <button class="gh__ni" onclick="sT('calculator',this)">Value Calculator</button>
     <button class="gh__ni" onclick="sT('datareq',this)">Agent Data Requirements</button>
     <button class="gh__ni" onclick="sT('telemetry',this)">Agent Telemetry</button>
+    <button class="gh__ni" onclick="sT('calculator',this)">Value Calculator</button>
   </nav>
   <div class="gh__trail"><span class="gh__badge">B2C Telco</span></div>
 </header>
@@ -439,11 +562,9 @@ body{font-family:var(--f);font-size:.8125rem;color:var(--td);background:var(--pg
     <button class="tab" onclick="sOV('marketing',this)">Marketing</button>
     <button class="tab" onclick="sOV('all',this)">Combined</button>
     <div class="sp"></div>
-    <div class="bg"><button class="btn" onclick="eA()">Expand All</button><button class="btn" onclick="cA()">Collapse All</button></div>
   </div>
   <div class="ct">
-    <div style="display:flex;gap:.75rem;margin-bottom:1.5rem;align-items:center"><input type="text" class="inp" id="os" placeholder="Search roles or agents..." oninput="fT()"></div>
-    <div id="ot" class="tr"></div>
+    <div id="ot" class="oc"></div>
   </div>
 </div>
 
@@ -588,6 +709,35 @@ crossSellUpsell:{name:"Cross-sell / Upsell Agent",purpose:"Monetize interactions
 quoteGovernance:{name:"Quote & Order Governance Agent",purpose:"Reduce order errors across channels.",tasks:"Validate completeness, check compliance, flag risks.",triggers:"Pre-submit quote/order.",systems:"Catalog, pricing, OMS, compliance.",keyData:"Product rules, pricing, promo terms.",kpis:"Order accuracy, fallout rate.",hitl:"Approval-based",priority:"",dr:{rt:["Quote/order line items","Pricing validation rules","Promo compliance checks"],nrt:["Recent order exception patterns"],bt:["Product dependency rules","Promo terms & conditions","Channel-specific compliance rules"]}},
 offerPerformance:{name:"Offer Performance Agent",purpose:"Evaluate offer effectiveness by channel.",tasks:"Compare uptake, margin impact, abuse patterns.",triggers:"Campaign launch, weekly review.",systems:"Pricing, sales analytics, finance.",keyData:"Promo usage, conversion, discount depth.",kpis:"Offer ROI, abuse rate.",hitl:"Assistive",priority:"",dr:{rt:[],nrt:["Intraday offer uptake rates"],bt:["Weekly offer performance by channel","Margin impact analysis","Abuse/fraud pattern detection","Historical offer ROI"]}},
 channelOptimization:{name:"Channel Optimization Agent",purpose:"Compare channel performance and reallocate focus.",tasks:"Identify underperformance, diagnose funnels.",triggers:"Weekly business review.",systems:"Enterprise analytics, commerce, POS, telephony.",keyData:"Conversion by channel, CAC, ARPU.",kpis:"Channel conversion, CAC efficiency.",hitl:"Assistive",priority:"",dr:{rt:[],nrt:["Intraday channel conversion rates"],bt:["Weekly channel performance comparison","CAC by channel","ARPU & attach rate trends","Assisted vs self-service mix"]}},
+// NEW SALES AGENTS
+salesDirectorOrch:{name:"Sales Director Orchestrator",purpose:"Master orchestrator for the CRO/VP level — provides strategic sales visibility and orchestrates sub-agents (Sales Forecast, Competitive Intel, RevOps) to drive revenue strategy.",tasks:"Aggregate pipeline and revenue data across all channels, orchestrate forecasting and competitive sub-agents, generate executive sales briefings, identify cross-channel optimization opportunities.",triggers:"Weekly pipeline review, monthly business review, quarterly planning, revenue variance alert.",systems:"CRM, BI/analytics, pipeline management, competitive intel, finance.",keyData:"Pipeline by channel, conversion rates, revenue forecasts, competitive landscape, market share.",kpis:"Forecast accuracy, pipeline health, revenue attainment, cross-channel alignment.",hitl:"Assistive",priority:"",
+dr:{rt:[],nrt:["Pipeline summary by channel","Today's conversion rates"],bt:["Monthly revenue analysis","Quarterly forecasts","Market share trends"]}},
+salesSupervisorOrch:{name:"Sales Supervisor Orchestrator",purpose:"Master orchestrator for retail/telesales supervisors — provides floor visibility and orchestrates sub-agents (Coaching, Compliance, Knowledge) to manage rep performance.",tasks:"Monitor rep activity and conversion, orchestrate coaching and enablement sub-agents, flag compliance issues, surface real-time competitive battle cards, manage deal escalations.",triggers:"Rep performance anomaly, compliance flag, deal escalation, shift review.",systems:"CRM, QA, telephony, POS, coaching platform, compliance rules.",keyData:"Rep performance metrics, active deals, compliance status, coaching history.",kpis:"Rep conversion lift, coaching completion, compliance adherence, deal escalation quality.",hitl:"Assistive",priority:"",
+dr:{rt:["Live rep activity & conversion"],nrt:["Today's coaching triggers","Compliance flags"],bt:["Weekly rep performance trends","Coaching effectiveness analysis"]}},
+leadScoring:{name:"Lead Scoring & Qualification Agent",purpose:"Score inbound leads based on engagement signals, fit criteria, and behavioral data; auto-route qualified leads to the right channel/rep.",tasks:"Analyze web/app engagement signals, score leads against ICP criteria, classify by channel fit (retail/digital/telesales), auto-route to appropriate rep queue, flag high-value prospects for priority handling.",triggers:"New web inquiry, form submission, chat initiation, app engagement threshold, campaign response.",systems:"CRM, CDP, web analytics, marketing automation, lead routing engine.",keyData:"Engagement score, demographic fit, behavioral signals, campaign source, channel preference.",kpis:"Lead-to-opportunity conversion, routing accuracy, time-to-first-contact, lead quality score.",hitl:"Fully autonomous",priority:"Near-term Sales",
+dr:{rt:["Inbound lead data","Web/app engagement signals"],nrt:["Lead scoring model output","Campaign attribution"],bt:["ICP criteria","Historical conversion rates by source","Routing rules"]}},
+salesForecast:{name:"Sales Forecasting & Pipeline Agent",purpose:"Analyze deal characteristics, historical close rates, and seasonality to produce rolling forecasts and flag at-risk pipeline.",tasks:"Model pipeline by stage/channel/product, forecast weekly/monthly/quarterly revenue, flag deals at risk of slipping, identify seasonality patterns, recommend pipeline actions.",triggers:"Weekly forecast cycle, deal stage change, pipeline variance alert, quarter-end planning.",systems:"CRM, pipeline analytics, finance, historical sales data.",keyData:"Pipeline by stage, deal velocity, historical close rates, seasonal patterns, channel mix.",kpis:"Forecast accuracy, pipeline coverage ratio, deal velocity, at-risk identification rate.",hitl:"Assistive",priority:"",
+dr:{rt:["Current pipeline by stage"],nrt:["Deal stage changes today"],bt:["Historical close rates","Seasonal patterns","Revenue targets"]}},
+competitiveIntel:{name:"Competitive Intelligence Agent",purpose:"Monitor competitor pricing, promotions, plan changes, and sentiment; generate real-time battle cards for frontline reps.",tasks:"Track competitor plan/pricing changes, monitor promotional offers, analyze competitive sentiment, generate battle cards, alert on significant competitive moves, benchmark market positioning.",triggers:"Competitor pricing change, new competitor promotion, weekly competitive review, rep request.",systems:"Competitive intel platform, web scraping, social listening, CRM, knowledge base.",keyData:"Competitor plans and pricing, promotional calendars, market share data, customer win/loss reasons.",kpis:"Battle card usage by reps, competitive win rate, time-to-detect competitor changes.",hitl:"Assistive",priority:"Near-term Sales",
+dr:{rt:["Active competitor promotions"],nrt:["Competitor pricing changes (hourly scan)","Social sentiment on competitors"],bt:["Market share analysis","Win/loss reason trends","Competitive positioning maps"]}},
+customerOnboarding:{name:"Customer Onboarding Agent",purpose:"Automate post-sale activation journey: device setup, plan walkthrough, first-bill explanation, feature adoption nudges.",tasks:"Guide device setup and data transfer, explain plan features and included perks, preview first bill to prevent bill shock, prompt app download and autopay enrollment, trigger welcome journey communications, monitor activation success.",triggers:"New activation, device purchase, plan change, first-bill generation.",systems:"CRM, billing, activation, marketing automation, carrier app.",keyData:"Activation status, device type, plan details, first-bill preview, feature adoption status.",kpis:"Activation success rate, first-bill call-in rate, app adoption rate, 30-day churn rate, feature activation rate.",hitl:"Fully autonomous",priority:"Near-term Sales",
+dr:{rt:["Activation status","Device setup progress"],nrt:["First-bill preview data","Feature adoption status"],bt:["Onboarding journey templates","Welcome communication sequences"]}},
+renewalRetention:{name:"Renewal & Lifecycle Agent",purpose:"Proactively identify contracts nearing expiration, model churn risk at renewal, and generate personalized retention/upgrade offers.",tasks:"Track device payment completion dates, identify renewal windows, score churn risk at renewal, generate personalized upgrade/retention offers, trigger proactive outreach, measure renewal conversion.",triggers:"Device payment 80% complete, contract anniversary, churn risk spike at renewal window.",systems:"CRM, billing, device lifecycle, churn model, offer engine, marketing automation.",keyData:"Device payment status, contract dates, renewal eligibility, churn propensity at renewal, offer history.",kpis:"Renewal conversion rate, proactive outreach success, churn at renewal, ARPU post-renewal.",hitl:"Hybrid — autonomous for standard renewals, approval-based for high-value retention offers",priority:"",
+dr:{rt:["Device payment balance & completion date"],nrt:["Churn score at renewal window","Eligible renewal offers"],bt:["Renewal conversion history","Offer effectiveness at renewal","Lifecycle stage analysis"]}},
+partnerDealer:{name:"Partner & Dealer Management Agent",purpose:"Manage authorized dealer/retailer performance, distribute leads, track compliance, and optimize co-op marketing spend.",tasks:"Distribute leads to dealers by territory and performance, monitor dealer sales compliance, track co-op/MDF spend and ROI, flag dealer quality issues, benchmark dealer vs corporate store performance.",triggers:"New lead for dealer territory, dealer compliance review, co-op claim submission, quarterly performance review.",systems:"Partner portal, CRM, lead routing, compliance tracking, finance/co-op system.",keyData:"Dealer performance metrics, lead distribution, compliance scores, co-op spend and ROI, territory coverage.",kpis:"Dealer conversion rate, lead response time, compliance score, co-op ROI, dealer satisfaction.",hitl:"Assistive",priority:"",
+dr:{rt:["Incoming leads for dealer routing"],nrt:["Dealer daily performance"],bt:["Monthly dealer scorecards","Co-op spend analysis","Compliance audit results"]}},
+inventoryAllocation:{name:"Inventory & Allocation Agent",purpose:"Match device inventory to demand forecasts, flag out-of-stock risks, and optimize allocation across stores and warehouses.",tasks:"Forecast device demand by SKU/location, identify stockout risks, recommend reallocation between stores, flag overstock situations, align inventory with promotional campaigns.",triggers:"Stockout alert, new device launch, promotional campaign, weekly allocation cycle.",systems:"Inventory management, POS, demand forecasting, supply chain, CRM.",keyData:"Device inventory by location/SKU, demand forecasts, sales velocity, promotional calendar, supply pipeline.",kpis:"Stockout rate, inventory turns, lost sales from OOS, allocation accuracy.",hitl:"Assistive",priority:"",
+dr:{rt:["Current inventory by location/SKU"],nrt:["Sales velocity by device"],bt:["Demand forecasts","Supply pipeline status","Promotional calendar"]}},
+revOps:{name:"RevOps Orchestrator",purpose:"Unify pipeline, forecasting, and revenue data across retail/digital/telesales/dealer channels; ensure funnel alignment and data hygiene.",tasks:"Reconcile pipeline data across channels, enforce consistent stage definitions, identify funnel leakage points, generate unified revenue reports, coordinate cross-channel handoffs, maintain data hygiene.",triggers:"Pipeline discrepancy detected, cross-channel handoff, weekly revenue review, data quality alert.",systems:"CRM, BI, pipeline analytics, finance, all channel systems.",keyData:"Unified pipeline, channel conversion rates, funnel stage alignment, data quality scores, revenue attribution.",kpis:"Pipeline accuracy, cross-channel conversion, data hygiene score, revenue forecast variance.",hitl:"Assistive",priority:"Near-term Sales",
+dr:{rt:["Unified pipeline across channels"],nrt:["Channel conversion discrepancies"],bt:["Monthly revenue reconciliation","Data quality audit","Funnel alignment analysis"]}},
+complianceReg:{name:"Compliance & Regulatory Agent",purpose:"Monitor agent and rep actions for TCPA, FCC, and state regulatory compliance; flag violations and ensure disclosures.",tasks:"Audit outbound communications for TCPA compliance, verify mandatory disclosures in sales transactions, monitor consent management, flag potential regulatory violations, generate compliance reports.",triggers:"Outbound campaign launch, sales transaction, consent status change, regulatory audit, violation detection.",systems:"Compliance platform, CRM, marketing automation, consent management, telephony.",keyData:"Consent records, disclosure completion, TCPA opt-in status, regulatory requirements by state, violation history.",kpis:"Compliance rate, violation count, disclosure completion rate, audit pass rate.",hitl:"Approval-based — flags violations for human review",priority:"",
+dr:{rt:["Consent/opt-in status","Active disclosure requirements"],nrt:["Today's compliance flags"],bt:["Regulatory requirements database","Violation history","Audit schedules"]}},
+knowledgeMgmt:{name:"Knowledge Management Agent",purpose:"Surface relevant knowledge articles, product specs, competitive battle cards, and policy docs to reps in real-time during interactions.",tasks:"Index and rank knowledge content, surface contextually relevant articles during live interactions, identify knowledge gaps from failed searches, recommend content updates, track article effectiveness.",triggers:"Live rep interaction, knowledge search, content gap detected, new product/policy launch.",systems:"Knowledge base, CRM, search engine, content management, training platform.",keyData:"Knowledge articles, product specs, policy documents, battle cards, search logs, content effectiveness.",kpis:"Article surfacing accuracy, search success rate, knowledge gap identification, content freshness.",hitl:"Fully autonomous",priority:"",
+dr:{rt:["Contextual search based on live interaction"],nrt:["Recently updated articles"],bt:["Full knowledge base index","Content effectiveness metrics","Gap analysis"]}},
+salesCoach:{name:"Sales Enablement & Coaching Agent",purpose:"AI role-play for reps: simulate customer objections, practice pitches, provide deal-specific coaching per opportunity stage.",tasks:"Run objection handling simulations, score rep pitch quality, provide deal-specific coaching recommendations, identify skill gaps, generate personalized learning paths, track coaching completion.",triggers:"New rep onboarding, deal stage progression, coaching session request, skill gap identified.",systems:"Coaching platform, CRM, training/LMS, call recording, QA analytics.",keyData:"Rep skill assessments, deal context, objection library, best-practice scripts, coaching history.",kpis:"Rep skill improvement, coaching completion rate, time-to-productivity for new hires, conversion lift post-coaching.",hitl:"Assistive",priority:"",
+dr:{rt:["Current deal context for coaching"],nrt:["Rep recent performance"],bt:["Objection handling library","Best practice scripts","Training curriculum"]}},
+abandonedCart:{name:"Cart Recovery Agent",purpose:"Trigger personalized multi-touch recovery sequences when customers abandon digital carts or drop out of checkout.",tasks:"Detect cart abandonment, determine abandonment reason, send personalized recovery messages (email/SMS/push), offer incentives if appropriate, track recovery conversion, hand off to live agent if needed.",triggers:"Cart abandoned >30 minutes, checkout step failure, payment decline, session exit from checkout.",systems:"Commerce platform, marketing automation, CRM, payments, SMS/email.",keyData:"Cart contents, abandonment step, customer profile, prior purchase history, recovery offer eligibility.",kpis:"Cart recovery rate, recovery revenue, time-to-recovery, channel effectiveness.",hitl:"Fully autonomous for standard recovery; approval-based for discount incentives",priority:"",
+dr:{rt:["Abandoned cart contents & checkout step","Customer identity"],nrt:["Prior abandonment history","Recovery offer eligibility"],bt:["Recovery sequence templates","Incentive rules","Historical recovery rates"]}},
 // MARKETING
 brandPerformance:{name:"Brand Performance Agent",purpose:"Track brand health and campaign impact.",tasks:"Monitor awareness/favorability, track social sentiment, analyze competitive SOV.",triggers:"Post-campaign, quarterly brand review.",systems:"Brand tracking, social listening, surveys, competitive intel.",keyData:"Awareness, favorability, NPS, social sentiment, SOV.",kpis:"Brand lift, sentiment trend.",hitl:"Assistive",priority:"",dr:{rt:[],nrt:["Social media sentiment (hourly)","Real-time social mention volume"],bt:["Quarterly brand tracking surveys","Competitive share of voice analysis","Campaign brand lift studies"]}},
 campaignPerformance:{name:"Campaign Performance Agent",purpose:"Measure and optimize advertising campaigns.",tasks:"Aggregate metrics, A/B test creative, recommend budget shifts.",triggers:"Campaign launch, weekly review.",systems:"Ad platforms, media agency, attribution.",keyData:"Impressions, reach, CTR, CPM, CPA, creative variants.",kpis:"Campaign ROI, CPA efficiency.",hitl:"Assistive",priority:"",dr:{rt:["Live campaign delivery metrics (impressions, spend)"],nrt:["Intraday CTR/CPA by channel","Creative performance comparisons"],bt:["Weekly campaign ROI analysis","Historical CPA benchmarks","Media mix model outputs"]}},
@@ -599,7 +749,29 @@ attributionAnalytics:{name:"Marketing Attribution Agent",purpose:"Cross-channel 
 journeyOrchestration:{name:"Journey Orchestration Agent",purpose:"Automate lifecycle communications.",tasks:"Trigger right message at right time, select channel, personalize, manage frequency.",triggers:"Customer events (activation, first bill, churn signal).",systems:"Marketing Cloud, CRM, CDP, email/SMS.",keyData:"Lifecycle stage, engagement history, preferences, event triggers.",kpis:"Open/click rates, journey completion, opt-out rate.",hitl:"Hybrid",priority:"Near-term Marketing",dr:{rt:["Customer event triggers (activation, payment, etc.)","Channel preference & opt-in status","Frequency cap status"],nrt:["Recent engagement signals (opens, clicks)","Updated segment membership"],bt:["Journey flow definitions","Content template library","Historical engagement benchmarks"]}},
 audienceSegmentation:{name:"Audience Segmentation Agent",purpose:"Build and maintain dynamic customer segments.",tasks:"Create segments, identify micro-segments, recommend lookalikes.",triggers:"Campaign planning, quarterly refresh.",systems:"CDP, CRM, data warehouse, marketing automation.",keyData:"Demographics, behaviors, transactions, propensity scores.",kpis:"Segment performance lift, data freshness.",hitl:"Assistive",priority:"",dr:{rt:[],nrt:["Real-time behavioral event stream","Updated propensity scores"],bt:["Customer demographic & transaction data","Segment definition rules","Lookalike model outputs","Historical segment performance"]}},
 loyaltyEngagement:{name:"Loyalty Engagement Agent",purpose:"Optimize loyalty program engagement.",tasks:"Analyze redemption, recommend personalized offers, identify disengaged.",triggers:"Weekly engagement review, program refresh.",systems:"Loyalty platform, CRM, partner APIs.",keyData:"Redemption data, engagement frequency, partner offers.",kpis:"Engagement rate, redemption rate, program ROI.",hitl:"Assistive",priority:"",dr:{rt:["Member point balance & tier status"],nrt:["Recent redemption activity","Partner offer availability"],bt:["Monthly engagement trend analysis","Program ROI calculations","Disengaged member identification"]}},
-nextBestAction:{name:"Next-Best-Action Agent",purpose:"Determine optimal next communication or offer.",tasks:"Score propensity, select offer, determine channel/time, enforce rules.",triggers:"Real-time interaction, scheduled outreach.",systems:"Decision engine, CRM, CDP, marketing automation.",keyData:"Propensity scores, offer eligibility, interaction history, preferences.",kpis:"Offer acceptance, incremental revenue.",hitl:"Hybrid",priority:"",dr:{rt:["Customer context (current interaction or trigger event)","Offer eligibility rules","Frequency cap & suppression status","Channel availability"],nrt:["Updated propensity scores (upgrade, churn, cross-sell)","Recent interaction history"],bt:["Business rules & prioritization logic","Historical offer acceptance rates","Margin & economics per offer"]}}
+nextBestAction:{name:"Next-Best-Action Agent",purpose:"Determine optimal next communication or offer.",tasks:"Score propensity, select offer, determine channel/time, enforce rules.",triggers:"Real-time interaction, scheduled outreach.",systems:"Decision engine, CRM, CDP, marketing automation.",keyData:"Propensity scores, offer eligibility, interaction history, preferences.",kpis:"Offer acceptance, incremental revenue.",hitl:"Hybrid",priority:"",dr:{rt:["Customer context (current interaction or trigger event)","Offer eligibility rules","Frequency cap & suppression status","Channel availability"],nrt:["Updated propensity scores (upgrade, churn, cross-sell)","Recent interaction history"],bt:["Business rules & prioritization logic","Historical offer acceptance rates","Margin & economics per offer"]}},
+// NEW MARKETING AGENTS
+brandOrch:{name:"Brand Orchestrator",purpose:"Master orchestrator for the VP Brand & Communications — orchestrates sub-agents (Brand Performance, Campaign, Media Mix, Content, Social, Reputation) for integrated brand management.",tasks:"Coordinate brand campaigns, orchestrate creative and media sub-agents, maintain brand consistency across channels, surface brand health insights for leadership.",triggers:"Campaign launch, brand health review, crisis alert, quarterly planning.",systems:"Brand tracking, ad platforms, social listening, creative tools, PR.",keyData:"Brand health metrics, campaign performance, social sentiment, competitive SOV, creative assets.",kpis:"Brand lift, campaign ROI, cross-channel brand consistency, crisis response time.",hitl:"Assistive",priority:"",dr:{rt:[],nrt:["Campaign performance summary","Social sentiment"],bt:["Brand health trends","Competitive SOV"]}},
+contentCreative:{name:"Content Generation Agent",purpose:"Generate ad copy, email variants, social posts, and landing pages at scale while maintaining brand voice.",tasks:"Produce multi-variant ad copy, generate email subject lines and body content, create social media posts by platform, draft landing page copy, adapt content for segments, enforce brand voice guidelines.",triggers:"Campaign brief, content calendar deadline, A/B test variant needed, new product/promo launch.",systems:"CMS, creative tools, brand guidelines, marketing automation, DAM.",keyData:"Brand voice guidelines, campaign brief, audience segments, prior high-performing content, product details.",kpis:"Content production velocity, engagement rates, brand voice compliance, variant win rate.",hitl:"Approval-based — human reviews before publish",priority:"Near-term Marketing",
+dr:{rt:[],nrt:["Campaign brief details","Active A/B test needs"],bt:["Brand voice guidelines","High-performing content library","Segment profiles"]}},
+socialMedia:{name:"Social Media Management Agent",purpose:"Schedule posts, monitor engagement, respond to comments, identify trending conversations, and manage community across platforms.",tasks:"Schedule and publish social content, monitor brand mentions and engagement, draft community responses, identify trending topics, flag crisis signals, track influencer activity, report on social KPIs.",triggers:"Scheduled post, brand mention spike, negative sentiment alert, trending topic, community question.",systems:"Social management platform, CRM, content library, social listening, moderation tools.",keyData:"Social calendar, engagement metrics, brand mentions, community sentiment, trending topics, influencer data.",kpis:"Engagement rate, response time, sentiment trend, community growth, crisis detection speed.",hitl:"Approval-based for public responses; autonomous for monitoring and scheduling",priority:"Near-term Marketing",
+dr:{rt:["Real-time brand mentions","Engagement spikes"],nrt:["Social sentiment trends","Community questions queue"],bt:["Social content calendar","Platform best practices","Crisis response playbook"]}},
+reputationReview:{name:"Reputation & Review Agent",purpose:"Monitor reviews across Google, Yelp, app stores; generate response drafts; alert on sentiment spikes; track NPS trends.",tasks:"Aggregate reviews from all platforms, classify sentiment and topics, generate response drafts, alert on negative review spikes, track app store rating trends, identify store-level reputation issues.",triggers:"New review, rating drop, sentiment spike, weekly reputation review.",systems:"Review monitoring platform, CRM, store data, app store APIs, social listening.",keyData:"Reviews by platform, star ratings, sentiment classification, store-level ratings, app store metrics.",kpis:"Average rating, response rate, response time, sentiment trend, rating improvement.",hitl:"Approval-based for public review responses",priority:"",
+dr:{rt:["New review alerts"],nrt:["Daily rating summary by platform"],bt:["Weekly reputation trends","Store-level rating analysis","App store rating history"]}},
+digitalMktOrch:{name:"Digital Marketing Orchestrator",purpose:"Master orchestrator for VP Digital Marketing — orchestrates sub-agents (Acquisition, SEO, Conversion, Attribution, Competitive Monitoring, A/B Testing) for integrated digital growth.",tasks:"Coordinate digital acquisition strategy, orchestrate channel-specific sub-agents, optimize budget allocation across digital channels, surface performance insights.",triggers:"Daily performance review, budget reallocation, channel anomaly, quarterly planning.",systems:"Ad platforms, SEO tools, web analytics, attribution, A/B testing.",keyData:"Digital CPA by channel, conversion funnels, SEO rankings, attribution paths, test results.",kpis:"Digital CPA, ROAS, organic traffic growth, conversion rate, test velocity.",hitl:"Assistive",priority:"",
+dr:{rt:["Live campaign performance"],nrt:["Channel CPA trends"],bt:["Monthly digital performance","Budget allocation analysis"]}},
+competitiveMonitor:{name:"Competitive Monitoring Agent",purpose:"Track competitor ad creative, messaging changes, pricing promotions, and share-of-voice shifts for marketing counter-response.",tasks:"Monitor competitor advertising activity, detect messaging/positioning changes, track promotional cadence, analyze share of voice shifts, alert on significant competitive moves, recommend counter-campaign actions.",triggers:"Competitor campaign launch, SOV shift, pricing change, weekly competitive review.",systems:"Competitive monitoring platform, ad intelligence, social listening, web scraping.",keyData:"Competitor ad spend estimates, creative samples, messaging themes, promotional calendar, SOV data.",kpis:"Time-to-detect competitor moves, counter-campaign response time, SOV trend.",hitl:"Assistive",priority:"",
+dr:{rt:[],nrt:["Competitor ad activity (hourly scan)"],bt:["Weekly competitive landscape report","SOV analysis","Competitor promotional calendar"]}},
+abTestAutomation:{name:"A/B Test Automation Agent",purpose:"Design experiments, monitor statistical significance, auto-promote winners, and manage test velocity across channels.",tasks:"Recommend test hypotheses, design experiment variants, monitor statistical significance in real-time, auto-promote winning variants, manage test calendar, archive learnings, prevent test conflicts.",triggers:"New test launch, significance threshold reached, test calendar slot available, performance anomaly suggesting test opportunity.",systems:"A/B testing platform, web analytics, CMS, marketing automation.",keyData:"Active tests, variant performance, statistical significance, test history, conversion baselines.",kpis:"Test velocity, win rate, incremental conversion from testing, time-to-significance.",hitl:"Hybrid — auto-promotes clear winners, flags close calls for human decision",priority:"",
+dr:{rt:["Active test variant performance","Real-time significance calculations"],nrt:["Test queue status"],bt:["Test history & learnings archive","Conversion baselines","Best practice test patterns"]}},
+crmLifecycleOrch:{name:"CRM & Lifecycle Orchestrator",purpose:"Master orchestrator for VP CRM & Lifecycle Marketing — orchestrates sub-agents (Journey, Segmentation, Loyalty, NBA, Data Enrichment, Product Launch) for integrated lifecycle management.",tasks:"Coordinate lifecycle communication strategy, orchestrate journey and personalization sub-agents, manage cross-channel frequency governance, surface lifecycle KPIs for leadership.",triggers:"Lifecycle stage transition, campaign planning, frequency cap conflict, quarterly review.",systems:"Marketing Cloud, CRM, CDP, loyalty platform, decision engine.",keyData:"Lifecycle stage distribution, engagement metrics, journey performance, segment health, frequency status.",kpis:"Lifecycle revenue, engagement rates, opt-out rate, journey completion, NBO acceptance.",hitl:"Assistive",priority:"",
+dr:{rt:["Customer lifecycle events"],nrt:["Journey performance summary","Segment health"],bt:["Lifecycle strategy review","Cross-channel frequency analysis"]}},
+productLaunch:{name:"Product Launch Agent",purpose:"Orchestrate multi-channel launch sequences for new devices, plans, and promotions — from teaser through post-launch nurture.",tasks:"Coordinate launch timeline across channels (email, SMS, social, in-store, digital), manage teaser campaigns, trigger launch-day activations, monitor launch performance in real-time, adjust messaging based on early signals, manage post-launch nurture sequences.",triggers:"Product launch calendar milestone, launch day, post-launch performance review.",systems:"Marketing automation, CMS, social management, CRM, commerce, inventory.",keyData:"Launch calendar, target segments, channel readiness, inventory availability, early performance signals.",kpis:"Launch awareness, day-1 conversion, channel coordination score, post-launch adoption curve.",hitl:"Hybrid — autonomous for execution, approval-based for mid-launch pivots",priority:"",
+dr:{rt:["Launch-day channel performance"],nrt:["Inventory availability","Early conversion signals"],bt:["Launch timeline & milestones","Target segment definitions","Post-launch nurture sequences"]}},
+dataEnrichment:{name:"Customer Data Enrichment Agent",purpose:"Continuously enrich customer profiles with behavioral signals, third-party data, intent signals, and interaction history.",tasks:"Ingest behavioral events from app/web/store, append third-party demographic and firmographic data, detect intent signals (competitor site visits, upgrade research), maintain data freshness and accuracy, flag data quality issues.",triggers:"New behavioral event, data quality threshold breach, third-party data refresh, enrichment schedule.",systems:"CDP, CRM, data warehouse, third-party data providers, web analytics.",keyData:"Customer behavioral events, third-party data feeds, intent signals, data quality scores, profile completeness.",kpis:"Profile completeness rate, data freshness, enrichment coverage, downstream model accuracy improvement.",hitl:"Fully autonomous",priority:"",
+dr:{rt:["Real-time behavioral events"],nrt:["Intent signal detection","Third-party data ingestion"],bt:["Data quality audit","Profile completeness analysis","Third-party data refresh schedule"]}},
+customer360:{name:"Customer 360 Agent",purpose:"Compile and maintain a single unified customer view from CRM, billing, support, commerce, and usage data; surface it to all agents.",tasks:"Reconcile customer identity across systems, merge duplicate profiles, maintain golden record, surface unified view to requesting agents, track data lineage, ensure consistency across touchpoints.",triggers:"New customer event from any system, identity merge detected, data conflict, agent context request.",systems:"Salesforce Data Cloud, CRM, billing, OMS, support, commerce, CDP.",keyData:"All customer data points unified: profile, billing, products, interactions, usage, preferences, churn risk, LTV.",kpis:"Identity resolution accuracy, golden record completeness, cross-system consistency, agent context delivery speed.",hitl:"Fully autonomous",priority:"Near-term Marketing",
+dr:{rt:["Cross-system identity resolution","Real-time profile updates"],nrt:["Merged profile consistency checks"],bt:["Identity resolution rules","Data lineage mapping","Profile completeness audit"]}}
 };
 
 // ORG TREES (same structure as before — abbreviated for space)
@@ -616,32 +788,35 @@ service:{role:"Chief Customer Officer / EVP Customer Operations",level:"L1",agen
 {role:"CC Supervisor, Retention",level:"L4",subtitle:"Day-to-day: save approvals, discount governance",agents:[A.saveOffer,A.retentionSuperPerf,A.sentimentDefection],children:[
 {role:"Retention / Loyalty Rep",level:"L5",subtitle:"Save conversations, scripted retention",agents:[A.retentionCopilot],children:[]}]}]}
 ]}]},
-sales:{role:"Chief Revenue Officer / EVP Consumer Sales",level:"L1",agents:[],children:[
-{role:"VP Retail Sales",level:"L2",agents:[],children:[{role:"Regional Retail Director",level:"L3",agents:[],children:[{role:"Retail Store Manager",level:"L4",agents:[A.storeTraffic],children:[{role:"Retail Sales Supervisor / ASM",level:"L4",agents:[],children:[{role:"Retail Sales Associate",level:"L5",agents:[A.retailCopilot,A.accessoryBundle],children:[]}]}]}]}]},
-{role:"VP Digital Sales",level:"L2",agents:[],children:[{role:"Director of Digital Sales",level:"L3",agents:[A.digitalConversion],children:[
+sales:{role:"Chief Revenue Officer / EVP Consumer Sales",level:"L1",agents:[A.salesDirectorOrch,A.salesForecast,A.competitiveIntel],children:[
+{role:"VP Retail Sales",level:"L2",agents:[],children:[{role:"Regional Retail Director",level:"L3",agents:[A.inventoryAllocation],children:[{role:"Retail Store Manager",level:"L4",subtitle:"Floor management, conversion, staffing",agents:[A.salesSupervisorOrch,A.storeTraffic,A.salesCoach],children:[{role:"Retail Sales Associate",level:"L5",subtitle:"Device and plan sales, trade-in, checkout",agents:[A.retailCopilot,A.accessoryBundle,A.customerOnboarding],children:[]}]}]}]},
+{role:"VP Digital Sales",level:"L2",agents:[],children:[{role:"Director of Digital Sales",level:"L3",agents:[A.digitalConversion,A.leadScoring],children:[
 {role:"Digital Merchandising / Conversion Mgr",level:"L4",agents:[A.planRecommendation,A.promoEligibility],children:[]},
-{role:"Ecommerce Product Manager",level:"L4",agents:[A.checkoutSupport],children:[]},
-{role:"Digital Sales Ops Manager",level:"L4",agents:[A.digitalFallout],children:[]}]}]},
-{role:"VP Telesales / Inside Sales",level:"L2",agents:[],children:[{role:"Telesales Director",level:"L3",agents:[],children:[{role:"Telesales Supervisor",level:"L4",agents:[A.callCoaching,A.telesalesPerf],children:[
-{role:"Inbound Sales Rep",level:"L5",agents:[A.telesalesCopilot],children:[]},
-{role:"Upgrade / Retention Sales Specialist",level:"L5",agents:[A.upgradeEligibility,A.crossSellUpsell],children:[]}]}]}]},
-{role:"Cross-channel Sales",level:"L2",agents:[],children:[
-{role:"Sales Ops / Commercial Ops Manager",level:"L4",agents:[A.quoteGovernance],children:[]},
+{role:"Ecommerce Product Manager",level:"L4",agents:[A.checkoutSupport,A.abandonedCart],children:[]},
+{role:"Digital Sales Ops Manager",level:"L4",agents:[A.digitalFallout,A.customerOnboarding],children:[]}]}]},
+{role:"VP Telesales / Inside Sales",level:"L2",agents:[],children:[{role:"Telesales Director",level:"L3",agents:[],children:[{role:"Telesales Supervisor",level:"L4",subtitle:"Call floor mgmt, coaching, compliance",agents:[A.salesSupervisorOrch,A.callCoaching,A.telesalesPerf,A.salesCoach],children:[
+{role:"Inbound Sales Rep",level:"L5",agents:[A.telesalesCopilot,A.customerOnboarding],children:[]},
+{role:"Upgrade / Retention Sales Specialist",level:"L5",agents:[A.upgradeEligibility,A.crossSellUpsell,A.renewalRetention],children:[]}]}]}]},
+{role:"RevOps & Commercial Operations",level:"L2",subtitle:"Cross-channel revenue operations, compliance, knowledge",agents:[A.revOps],children:[
+{role:"Sales Ops / Commercial Ops Manager",level:"L4",agents:[A.quoteGovernance,A.complianceReg],children:[]},
 {role:"Promotions / Offer Strategy Manager",level:"L4",agents:[A.offerPerformance],children:[]},
-{role:"Channel Performance Manager",level:"L4",agents:[A.channelOptimization],children:[]}]}]},
-marketing:{role:"CMO / SVP Marketing",level:"L1",agents:[],children:[
-{role:"VP Brand & Communications",level:"L2",agents:[],children:[
-{role:"Director, Brand Strategy",level:"L3",agents:[A.brandPerformance],children:[]},
-{role:"Director, Advertising & Creative",level:"L3",agents:[A.campaignPerformance],children:[]},
-{role:"Director, Media Planning & Buying",level:"L3",agents:[A.mediaMix],children:[]}]},
-{role:"VP Digital Marketing / Growth",level:"L2",agents:[],children:[
+{role:"Channel Performance Manager",level:"L4",agents:[A.channelOptimization],children:[]},
+{role:"Partner / Dealer Manager",level:"L4",subtitle:"Authorized dealer and retailer management",agents:[A.partnerDealer],children:[]},
+{role:"Knowledge & Enablement Manager",level:"L4",agents:[A.knowledgeMgmt],children:[]}]}]},
+marketing:{role:"CMO / SVP Marketing",level:"L1",agents:[A.customer360],children:[
+{role:"VP Brand & Communications",level:"L2",agents:[A.brandOrch],children:[
+{role:"Director, Brand Strategy",level:"L3",agents:[A.brandPerformance,A.reputationReview],children:[]},
+{role:"Director, Advertising & Creative",level:"L3",agents:[A.campaignPerformance,A.contentCreative],children:[]},
+{role:"Director, Media Planning & Buying",level:"L3",agents:[A.mediaMix],children:[]},
+{role:"Director, Social Media",level:"L3",subtitle:"Social strategy, community, influencer",agents:[A.socialMedia],children:[]}]},
+{role:"VP Digital Marketing / Growth",level:"L2",agents:[A.digitalMktOrch],children:[
 {role:"Director, Performance Marketing",level:"L3",agents:[A.acquisitionCampaign],children:[]},
 {role:"Director, SEO & Content",level:"L3",agents:[A.contentPerformance],children:[]},
-{role:"Director, Web & Conversion Optimization",level:"L3",agents:[A.conversionOptimization],children:[]},
-{role:"Director, Marketing Analytics",level:"L3",agents:[A.attributionAnalytics],children:[]}]},
-{role:"VP CRM & Lifecycle Marketing",level:"L2",agents:[],children:[
-{role:"Director, Lifecycle Marketing",level:"L3",agents:[A.journeyOrchestration],children:[]},
-{role:"Director, CRM & Marketing Automation",level:"L3",agents:[A.audienceSegmentation],children:[]},
+{role:"Director, Web & Conversion Optimization",level:"L3",agents:[A.conversionOptimization,A.abTestAutomation],children:[]},
+{role:"Director, Marketing Analytics",level:"L3",agents:[A.attributionAnalytics,A.competitiveMonitor],children:[]}]},
+{role:"VP CRM & Lifecycle Marketing",level:"L2",agents:[A.crmLifecycleOrch],children:[
+{role:"Director, Lifecycle Marketing",level:"L3",agents:[A.journeyOrchestration,A.productLaunch],children:[]},
+{role:"Director, CRM & Marketing Automation",level:"L3",agents:[A.audienceSegmentation,A.dataEnrichment],children:[]},
 {role:"Director, Loyalty & Rewards",level:"L3",agents:[A.loyaltyEngagement],children:[]},
 {role:"Director, Personalization",level:"L3",agents:[A.nextBestAction],children:[]}]}]}
 };
@@ -731,30 +906,100 @@ function sDV(v,b){b.parentElement.querySelectorAll('.tab').forEach(x=>x.classLis
 function gHC(h){if(!h)return'';var l=h.toLowerCase();return l.includes('autonomous')?'bd-au':l.includes('approval')?'bd-ap':l.includes('hybrid')?'bd-hy':l.includes('assistive')?'bd-as':''}
 function gPC(p){return!p?'':p.includes('Service')?'bd-ps':p.includes('Sales')?'bd-pl':p.includes('Marketing')?'bd-hy':''}
 
-// TREE
-function rN(n,s){var hC=n.children&&n.children.length,hA=n.agents&&n.agents.length,hX=hC||hA;
-var m=!s||n.role.toLowerCase().includes(s)||(n.agents||[]).some(a=>a.name.toLowerCase().includes(s)||a.purpose.toLowerCase().includes(s));
-var cm=(n.children||[]).some(c=>nM(c,s));if(s&&!m&&!cm)return'';
-var h='<div class="tn nL'+n.level[1]+'" data-role="'+n.role+'">';
-h+='<div class="th" onclick="tN(this)"><span class="cv '+(hX?'':'em')+'">'+(hX?'&#9660;':'')+'</span><span class="rl">'+n.role;
-if(n.subtitle)h+='<span class="sl">'+n.subtitle+'</span>';
-h+='</span>';if(hA)h+='<span class="cnt">'+n.agents.length+'</span>';h+='</div>';
-if(hX){h+='<div class="tc" style="max-height:9999px">';
-(n.agents||[]).forEach(function(a){if(s&&!a.name.toLowerCase().includes(s)&&!a.purpose.toLowerCase().includes(s)&&!m)return;
-h+='<div class="ac" onclick="oA(\''+a.name.replace(/'/g,"\\'")+'\')">';
-h+='<div class="ac__i">&#10024;</div><div class="ac__b"><div class="ac__n">'+a.name+'</div><div class="ac__p">'+a.purpose+'</div></div>';
-h+='<div class="ac__bd">';if(a.hitl)h+='<span class="bd '+gHC(a.hitl)+'">'+a.hitl.split('.')[0].split(',')[0].trim()+'</span>';
-if(a.priority)h+='<span class="bd '+gPC(a.priority)+'">'+a.priority+'</span>';
-if(a.dr)h+='<span class="bd" style="background:#EBF0F7;color:#4682B4;border:1px solid #b0c4de;cursor:pointer" onclick="event.stopPropagation();nD(\''+a.name.replace(/'/g,"\\'")+'\')">&#9671; Data</span>';
-h+='</div></div>'});
-(n.children||[]).forEach(function(c){h+=rN(c,s)});h+='</div>'}return h+'</div>'}
-function nM(n,t){if(!t)return true;if(n.role.toLowerCase().includes(t))return true;if((n.agents||[]).some(a=>a.name.toLowerCase().includes(t)||a.purpose.toLowerCase().includes(t)))return true;return(n.children||[]).some(c=>nM(c,t))}
-function rOT(v){var c=document.getElementById('ot'),s=document.getElementById('os').value.toLowerCase().trim(),h='';
-if(v==='service'||v==='all')h+=rN(O.service,s);if(v==='sales'||v==='all')h+=rN(O.sales,s);if(v==='marketing'||v==='all')h+=rN(O.marketing,s);c.innerHTML=h}
-function tN(h){h.parentElement.classList.toggle('cl')}
-function eA(){document.querySelectorAll('.tn').forEach(n=>n.classList.remove('cl'))}
-function cA(){document.querySelectorAll('.tn').forEach(n=>{if(n.querySelector('.tc'))n.classList.add('cl')})}
-function fT(){rOT(cOV)}
+// ═══ TOP-DOWN ORG CHART (Hybrid: tree for roles, roster panel for agents) ═══
+
+// Shared agent map
+function buildSharedMap(){
+  var map={};
+  function walk(n,fn){(n.agents||[]).forEach(function(a){if(!map[a.name])map[a.name]=[];if(map[a.name].indexOf(fn)===-1)map[a.name].push(fn)});(n.children||[]).forEach(function(c){walk(c,fn)})}
+  walk(O.service,'Service');walk(O.sales,'Sales');walk(O.marketing,'Marketing');return map;
+}
+function findOrch(n){return(n.agents||[]).find(function(a){return a.name.indexOf('Orchestrator')!==-1})}
+function findNode(n,role){if(n.role===role)return n;for(var i=0;i<(n.children||[]).length;i++){var r=findNode(n.children[i],role);if(r)return r}return null}
+
+var _sharedMap=null;
+var _selectedRole=null;
+
+// Render role node card (no agents in the tree)
+function rNCard(node){
+  var orch=findOrch(node);
+  var ac=(node.agents||[]).length;
+  var sel=_selectedRole===node.role?' selected':'';
+  var h='<div class="oc-node '+node.level+sel+'" data-role="'+node.role+'" onclick="ocSelect(\''+node.role.replace(/'/g,"\\'")+'\')">';
+  h+='<div class="oc-node__title">'+node.role+'</div>';
+  if(node.subtitle)h+='<div class="oc-node__sub">'+node.subtitle+'</div>';
+  if(orch)h+='<div class="oc-node__orch">'+orch.name+'</div>';
+  if(ac>0)h+='<span class="oc-node__count">'+ac+'</span>';
+  h+='</div>';
+  return h;
+}
+
+// Recursive: render ONLY role nodes (L1-L5), no agents in tree
+function rOC(node){
+  var hasChildren=(node.children||[]).length>0;
+  var h='<li>'+rNCard(node);
+  if(hasChildren){h+='<ul>';(node.children||[]).forEach(function(c){h+=rOC(c)});h+='</ul>'}
+  h+='</li>';
+  return h;
+}
+
+// Render agent roster panel for a selected role
+function renderRoster(node){
+  if(!node||!(node.agents||[]).length)return'';
+  var shared=_sharedMap;
+  var orch=findOrch(node);
+  var subs=(node.agents||[]).filter(function(a){return a!==orch});
+  var h='<div class="oc-roster"><div class="oc-roster__hdr"><div class="oc-roster__hdr-title">'+node.role+' — '+node.agents.length+' Agent'+(node.agents.length>1?'s':'')+'</div><button class="oc-roster__hdr-close" onclick="_selectedRole=null;rOT(cOV)">&times;</button></div>';
+  h+='<div class="oc-roster__grid">';
+  // Orchestrator first
+  if(orch){
+    var isShared=shared[orch.name]&&shared[orch.name].length>1;
+    h+='<div class="oc-chip master'+(isShared?' shared':'')+'" onclick="oA(\''+orch.name.replace(/'/g,"\\'")+'\')"'+(isShared?' title="Shared: '+shared[orch.name].join(', ')+'"':'')+'>';
+    h+='<div class="oc-chip__icon">&#11088;</div><div class="oc-chip__info"><div class="oc-chip__name">'+orch.name+'</div><div class="oc-chip__hitl">'+orch.hitl.split('.')[0].split(',')[0].trim()+'</div>';
+    if(orch.dr)h+='<div class="oc-chip__data" onclick="event.stopPropagation();nD(\''+orch.name.replace(/'/g,"\\'")+'\')">&#9671; Data Requirements</div>';
+    h+='</div></div>';
+  }
+  // Sub-agents
+  subs.forEach(function(a){
+    var isShared=shared[a.name]&&shared[a.name].length>1;
+    h+='<div class="oc-chip'+(isShared?' shared':'')+'" onclick="oA(\''+a.name.replace(/'/g,"\\'")+'\')"'+(isShared?' title="Shared: '+shared[a.name].join(', ')+'"':'')+'>';
+    h+='<div class="oc-chip__icon">&#10024;</div><div class="oc-chip__info"><div class="oc-chip__name">'+a.name+'</div><div class="oc-chip__hitl">'+a.hitl.split('.')[0].split(',')[0].trim()+'</div>';
+    if(a.dr)h+='<div class="oc-chip__data" onclick="event.stopPropagation();nD(\''+a.name.replace(/'/g,"\\'")+'\')">&#9671; Data Requirements</div>';
+    h+='</div></div>';
+  });
+  h+='</div></div>';
+  return h;
+}
+
+// Click a role node to show its agent roster
+function ocSelect(role){
+  if(_selectedRole===role){_selectedRole=null}else{_selectedRole=role}
+  rOT(cOV);
+  if(_selectedRole){
+    setTimeout(function(){var p=document.querySelector('.oc-roster');if(p)p.scrollIntoView({behavior:'smooth',block:'nearest'})},50);
+  }
+}
+
+function rOT(v){
+  var c=document.getElementById('ot');
+  _sharedMap=buildSharedMap();
+  var tree=v==='service'?O.service:v==='sales'?O.sales:v==='marketing'?O.marketing:null;
+  var h='';
+  if(v==='all'){
+    h+='<div style="display:flex;gap:2rem;justify-content:center;align-items:flex-start;flex-wrap:wrap">';
+    h+='<div class="oc"><ul>'+rOC(O.service)+'</ul></div>';
+    h+='<div class="oc"><ul>'+rOC(O.sales)+'</ul></div>';
+    h+='<div class="oc"><ul>'+rOC(O.marketing)+'</ul></div></div>';
+  } else {
+    h+='<ul>'+rOC(tree)+'</ul>';
+  }
+  // If a role is selected, show roster panel below
+  if(_selectedRole){
+    var node=findNode(O.service,_selectedRole)||findNode(O.sales,_selectedRole)||findNode(O.marketing,_selectedRole);
+    if(node&&(node.agents||[]).length)h+=renderRoster(node);
+  }
+  c.innerHTML=h;
+}
 
 // MODAL
 function oA(name){var a=Object.values(A).find(x=>x.name===name);if(!a)return;
@@ -772,8 +1017,8 @@ function nR(r){document.querySelectorAll('.gh__ni').forEach(b=>b.classList.remov
 document.querySelectorAll('.vw').forEach(v=>v.classList.remove('on'));document.getElementById('vw-orgchart').classList.add('on');
 var f=fIT(O.service,r)?'service':fIT(O.sales,r)?'sales':fIT(O.marketing,r)?'marketing':'all';
 var ts=document.querySelectorAll('#vw-orgchart .tab');ts.forEach(t=>t.classList.remove('on'));
-ts[f==='service'?0:f==='sales'?1:f==='marketing'?2:3].classList.add('on');cOV=f;rOT(f);eA();
-setTimeout(()=>{var n=document.querySelector('[data-role="'+r+'"]');if(n){n.scrollIntoView({behavior:'smooth',block:'center'});var h=n.querySelector('.th');h.style.boxShadow='0 0 0 3px var(--af)';setTimeout(()=>h.style.boxShadow='',2000)}},100)}
+ts[f==='service'?0:f==='sales'?1:f==='marketing'?2:3].classList.add('on');cOV=f;rOT(f);
+setTimeout(()=>{var n=document.querySelector('[data-role="'+r+'"]');if(n){n.scrollIntoView({behavior:'smooth',block:'center'});n.style.boxShadow='0 0 0 3px var(--af)';setTimeout(()=>n.style.boxShadow='',2000)}},100)}
 function nA(name){var r=fAR(O.service,name)||fAR(O.sales,name)||fAR(O.marketing,name);if(r)nR(r);setTimeout(()=>oA(name),400)}
 function fIT(n,r){if(n.role===r)return true;return(n.children||[]).some(c=>fIT(c,r))}
 function fAR(n,a){if((n.agents||[]).some(x=>x.name===a))return n.role;for(var c of(n.children||[])){var r=fAR(c,a);if(r)return r}return null}
@@ -880,7 +1125,7 @@ var GOLD=[
 // Navigate to Data tab for a specific agent
 function nD(agentName){
   document.querySelectorAll('.gh__ni').forEach(b=>b.classList.remove('on'));
-  document.querySelectorAll('.gh__ni')[3].classList.add('on');
+  document.querySelectorAll('.gh__ni')[2].classList.add('on');
   document.querySelectorAll('.vw').forEach(v=>v.classList.remove('on'));
   document.getElementById('vw-datareq').classList.add('on');
   // Switch to the right sub-tab
@@ -897,7 +1142,7 @@ function nD(agentName){
 }
 function findAgentFn(name){
   var svcAgents=[A.careDirectorOrch,A.opsAnalytics,A.volumeDriver,A.voiceOfCustomer,A.workforcePlanning,A.supervisorQueue,A.billingResolution,A.paymentException,A.interactionQA,A.networkPerf,A.techOpsInsights,A.techEscalation,A.techQueuePriority,A.advTechCopilot,A.outageHealth,A.deviceTroubleshoot,A.churnAnalytics,A.retentionProgramPerf,A.saveOffer,A.retentionSuperPerf,A.sentimentDefection,A.careCopilot,A.careTriage,A.orderStatus,A.channelResponse,A.retentionCopilot,A.planAdvisory,A.accountMgmt,A.featureAddon,A.deviceSupport,A.networkTriage,A.promoLoyalty,A.accountSecurity,A.autopayMgmt,A.numberTransfer,A.selfServiceGuide];
-  var salAgents=[A.storeTraffic,A.retailCopilot,A.accessoryBundle,A.digitalConversion,A.planRecommendation,A.promoEligibility,A.checkoutSupport,A.digitalFallout,A.callCoaching,A.telesalesPerf,A.telesalesCopilot,A.upgradeEligibility,A.crossSellUpsell,A.quoteGovernance,A.offerPerformance,A.channelOptimization];
+  var salAgents=[A.salesDirectorOrch,A.salesForecast,A.competitiveIntel,A.salesSupervisorOrch,A.salesCoach,A.leadScoring,A.customerOnboarding,A.renewalRetention,A.revOps,A.complianceReg,A.knowledgeMgmt,A.partnerDealer,A.inventoryAllocation,A.abandonedCart,A.storeTraffic,A.retailCopilot,A.accessoryBundle,A.digitalConversion,A.planRecommendation,A.promoEligibility,A.checkoutSupport,A.digitalFallout,A.callCoaching,A.telesalesPerf,A.telesalesCopilot,A.upgradeEligibility,A.crossSellUpsell,A.quoteGovernance,A.offerPerformance,A.channelOptimization];
   if(svcAgents.some(a=>a.name===name))return'service';
   if(salAgents.some(a=>a.name===name))return'sales';
   return'marketing';
@@ -940,8 +1185,8 @@ if(cDV==='medallion'){
 
 // Agent-specific data views
 var agents=cDV==='service'?[A.careDirectorOrch,A.opsAnalytics,A.volumeDriver,A.voiceOfCustomer,A.workforcePlanning,A.supervisorQueue,A.billingResolution,A.paymentException,A.interactionQA,A.careCopilot,A.planAdvisory,A.accountMgmt,A.featureAddon,A.deviceSupport,A.networkTriage,A.promoLoyalty,A.accountSecurity,A.autopayMgmt,A.numberTransfer,A.selfServiceGuide,A.orderStatus,A.careTriage,A.channelResponse,A.networkPerf,A.techOpsInsights,A.techEscalation,A.techQueuePriority,A.advTechCopilot,A.outageHealth,A.deviceTroubleshoot,A.churnAnalytics,A.retentionProgramPerf,A.saveOffer,A.retentionSuperPerf,A.sentimentDefection,A.retentionCopilot]:
-cDV==='sales'?[A.storeTraffic,A.retailCopilot,A.accessoryBundle,A.digitalConversion,A.planRecommendation,A.promoEligibility,A.checkoutSupport,A.digitalFallout,A.callCoaching,A.telesalesPerf,A.telesalesCopilot,A.upgradeEligibility,A.crossSellUpsell,A.quoteGovernance,A.offerPerformance,A.channelOptimization]:
-[A.brandPerformance,A.campaignPerformance,A.mediaMix,A.acquisitionCampaign,A.contentPerformance,A.conversionOptimization,A.attributionAnalytics,A.journeyOrchestration,A.audienceSegmentation,A.loyaltyEngagement,A.nextBestAction];
+cDV==='sales'?[A.salesDirectorOrch,A.salesForecast,A.competitiveIntel,A.salesSupervisorOrch,A.salesCoach,A.leadScoring,A.customerOnboarding,A.renewalRetention,A.revOps,A.complianceReg,A.knowledgeMgmt,A.partnerDealer,A.inventoryAllocation,A.abandonedCart,A.storeTraffic,A.retailCopilot,A.accessoryBundle,A.digitalConversion,A.planRecommendation,A.promoEligibility,A.checkoutSupport,A.digitalFallout,A.callCoaching,A.telesalesPerf,A.telesalesCopilot,A.upgradeEligibility,A.crossSellUpsell,A.quoteGovernance,A.offerPerformance,A.channelOptimization]:
+[A.brandOrch,A.brandPerformance,A.campaignPerformance,A.mediaMix,A.contentCreative,A.socialMedia,A.reputationReview,A.digitalMktOrch,A.acquisitionCampaign,A.contentPerformance,A.conversionOptimization,A.abTestAutomation,A.attributionAnalytics,A.competitiveMonitor,A.crmLifecycleOrch,A.journeyOrchestration,A.productLaunch,A.audienceSegmentation,A.dataEnrichment,A.loyaltyEngagement,A.nextBestAction,A.customer360];
 
 agents.forEach(a=>{if(!a.dr)return;
 h+='<div class="dr-agent-view" data-agent-dr="'+a.name+'">';
