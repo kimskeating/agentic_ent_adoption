@@ -1,0 +1,2233 @@
+{
+  "careDirectorOrch": {
+    "name": "Care Director Orchestrator",
+    "purpose": "Master orchestrator for the Director of Care — provides strategic operational visibility and orchestrates sub-agents (Ops Analytics, Volume Driver, VoC, Workforce Planning) to drive reporting, focus groups, and operational improvement.",
+    "tasks": "Aggregate strategic insights across all care operations, orchestrate analytics and VoC sub-agents, generate executive briefings, identify cross-functional improvement opportunities, coordinate workforce planning with capacity models, surface root causes for leadership action.",
+    "triggers": "Daily performance review, weekly executive briefing, monthly business review, strategic planning cycle.",
+    "systems": "BI/analytics, CRM, WFM, telephony/ACD, QA, survey platform, social listening, HR/finance.",
+    "keyData": "All sub-agent outputs, contact center KPIs, VoC insights, workforce forecasts, vendor performance, budget data.",
+    "kpis": "Insight-to-action time, strategic initiative success rate, executive reporting quality, cross-functional issue resolution.",
+    "hitl": "Assistive — orchestrates strategic sub-agents for Director oversight",
+    "priority": "Near-term Service",
+    "dataRequirements": {
+      "realtime": [
+        "Live queue depth & service levels",
+        "Real-time agent states & adherence"
+      ],
+      "nearRealtime": [
+        "Intraday contact volume vs forecast",
+        "Today's QA scores aggregated",
+        "Sub-agent output summaries"
+      ],
+      "batch": [
+        "Monthly KPI trends & benchmarks",
+        "Vendor SLA reports",
+        "Strategic initiative tracking"
+      ]
+    }
+  },
+  "opsAnalytics": {
+    "name": "Operations Analytics Agent",
+    "purpose": "Real-time and trending view of contact center performance for Director decision-making.",
+    "tasks": "Aggregate KPIs (CSAT, NPS, FCR, AHT, cost-per-contact), identify trends/anomalies, generate exec dashboards.",
+    "triggers": "Daily review, weekly briefing, monthly business review, KPI breach.",
+    "systems": "BI/analytics, CRM, WFM, telephony/ACD, QA.",
+    "keyData": "Contact volumes, resolution rates, CSAT/NPS, AHT by queue, cost-per-contact, vendor SLA.",
+    "kpis": "Dashboard accuracy, insight-to-action time, anomaly detection rate.",
+    "hitl": "Assistive",
+    "priority": "Near-term Service",
+    "dataRequirements": {
+      "realtime": [
+        "Live queue depth & service levels",
+        "Real-time agent states & adherence",
+        "Current abandonment rate"
+      ],
+      "nearRealtime": [
+        "Intraday contact volume vs forecast",
+        "Today's AHT/FCR by queue",
+        "Today's QA scores aggregated"
+      ],
+      "batch": [
+        "Monthly KPI trends & benchmarks",
+        "Vendor SLA performance reports",
+        "Historical volume patterns"
+      ]
+    }
+  },
+  "volumeDriver": {
+    "name": "Volume Driver Analysis Agent",
+    "purpose": "Identify why customers contact the center and surface systemic issues.",
+    "tasks": "Classify contact reasons, correlate spikes to events, quantify avoidable contacts.",
+    "triggers": "Weekly volume review, post-event analysis.",
+    "systems": "Transcript analytics, CRM, billing logs, network incidents.",
+    "keyData": "Contact reason taxonomy, volume by reason, repeat-contact patterns.",
+    "kpis": "Avoidable contact rate, root-cause accuracy, volume reduction.",
+    "hitl": "Assistive",
+    "priority": "",
+    "dataRequirements": {
+      "realtime": [],
+      "nearRealtime": [
+        "Today's contact reason distribution",
+        "Recent billing system event correlation",
+        "Active outage-to-contact mapping"
+      ],
+      "batch": [
+        "Monthly contact reason trends",
+        "Product launch impact analysis",
+        "Avoidable contact rate history"
+      ]
+    }
+  },
+  "voiceOfCustomer": {
+    "name": "Voice of Customer Agent",
+    "purpose": "Synthesize feedback from surveys, social, complaints, and focus groups.",
+    "tasks": "Aggregate verbatims, cluster themes, identify emerging pain points, track sentiment.",
+    "triggers": "Post-survey, focus group, quarterly VoC, sentiment shift.",
+    "systems": "Survey platform, NPS, social listening, transcript analytics.",
+    "keyData": "Survey responses, NPS verbatims, social mentions, focus group transcripts.",
+    "kpis": "Theme identification accuracy, emerging issue lead time.",
+    "hitl": "Assistive",
+    "priority": "",
+    "dataRequirements": {
+      "realtime": [],
+      "nearRealtime": [
+        "Social media sentiment (hourly refresh)",
+        "Today's NPS/CSAT survey responses"
+      ],
+      "batch": [
+        "Monthly NPS/CSAT aggregates",
+        "Focus group transcript analysis",
+        "Complaint theme trends (quarterly)"
+      ]
+    }
+  },
+  "workforcePlanning": {
+    "name": "Workforce Planning Agent",
+    "purpose": "Support strategic capacity planning and headcount decisions.",
+    "tasks": "Forecast volumes, model staffing scenarios, identify gaps, project automation impact.",
+    "triggers": "Monthly capacity review, annual budget, seasonal planning.",
+    "systems": "WFM, forecasting, HR/headcount, finance.",
+    "keyData": "Historical volumes, seasonality, attrition, shrinkage, deflection rates.",
+    "kpis": "Forecast accuracy, staffing variance.",
+    "hitl": "Assistive",
+    "priority": "",
+    "dataRequirements": {
+      "realtime": [],
+      "nearRealtime": [
+        "Intraday volume actuals vs forecast"
+      ],
+      "batch": [
+        "Historical volume patterns (12-24 months)",
+        "Attrition rates & ramp times",
+        "Automation deflection rates",
+        "Budget constraints & headcount caps"
+      ]
+    }
+  },
+  "networkPerf": {
+    "name": "Network Performance Analytics Agent",
+    "purpose": "Visibility into how network quality drives tech support demand.",
+    "tasks": "Correlate network events with contact volume, identify chronic areas, quantify truck-roll drivers.",
+    "triggers": "Weekly ops review, post-outage analysis.",
+    "systems": "Network mgmt, outage mgmt, CRM, BI, field dispatch.",
+    "keyData": "Network alarms, outage history, contact-to-outage correlation, truck-roll rates.",
+    "kpis": "Correlation accuracy, proactive identification, truck-roll reduction.",
+    "hitl": "Assistive",
+    "priority": "",
+    "dataRequirements": {
+      "realtime": [
+        "Active network alarms (SNMP/gNMI)",
+        "Current outage status by site"
+      ],
+      "nearRealtime": [
+        "Outage-to-contact correlation (15-min refresh)",
+        "Recent truck-roll dispatch status"
+      ],
+      "batch": [
+        "Network quality trends by region",
+        "Equipment failure rate analysis",
+        "Coverage maps & RF propagation models"
+      ]
+    }
+  },
+  "techOpsInsights": {
+    "name": "Technical Operations Insights Agent",
+    "purpose": "Understand escalation patterns and optimize tiered support.",
+    "tasks": "Analyze Tier 1/2 flows, identify training gaps, surface repeat failures.",
+    "triggers": "Monthly escalation review, KB audit.",
+    "systems": "CRM, case mgmt, knowledge, QA, LMS.",
+    "keyData": "Escalation rates, repeat-step rates, KB usage.",
+    "kpis": "Escalation reduction, Tier 1 improvement.",
+    "hitl": "Assistive",
+    "priority": "",
+    "dataRequirements": {
+      "realtime": [],
+      "nearRealtime": [
+        "Today's escalation rates by issue type"
+      ],
+      "batch": [
+        "Monthly escalation flow analysis",
+        "KB article usage & gap analysis",
+        "Training completion vs performance correlation"
+      ]
+    }
+  },
+  "churnAnalytics": {
+    "name": "Churn Analytics & Forecasting Agent",
+    "purpose": "Strategic visibility into churn drivers and retention ROI.",
+    "tasks": "Model churn propensity, identify leading indicators, forecast scenarios.",
+    "triggers": "Monthly churn review, quarterly evaluation.",
+    "systems": "CRM, churn model, retention analytics, finance.",
+    "keyData": "Churn by segment, save acceptance, post-save churn, LTV.",
+    "kpis": "Forecast accuracy, program ROI, early-warning lead time.",
+    "hitl": "Assistive",
+    "priority": "",
+    "dataRequirements": {
+      "realtime": [],
+      "nearRealtime": [
+        "Updated churn propensity scores (hourly refresh)"
+      ],
+      "batch": [
+        "Monthly churn rates by segment/reason",
+        "Save program ROI analysis",
+        "Competitive pricing & market share data",
+        "NPS by customer segment"
+      ]
+    }
+  },
+  "retentionProgramPerf": {
+    "name": "Retention Program Performance Agent",
+    "purpose": "Evaluate whether retention offers work and where they leak margin.",
+    "tasks": "Compare save rate by offer, measure post-save churn, flag leakage.",
+    "triggers": "Weekly save review, monthly margin analysis.",
+    "systems": "CRM, retention offers, finance/margin, QA.",
+    "keyData": "Save outcomes, discount depth, post-save churn, margin per save.",
+    "kpis": "Save rate by offer, margin retention, leakage rate.",
+    "hitl": "Assistive",
+    "priority": "",
+    "dataRequirements": {
+      "realtime": [],
+      "nearRealtime": [
+        "Today's save outcomes & discount values"
+      ],
+      "batch": [
+        "30/60/90-day post-save churn rates",
+        "Offer portfolio ROI analysis",
+        "Rep-level save economics"
+      ]
+    }
+  },
+  "billingResolution": {
+    "name": "Billing Resolution Agent",
+    "purpose": "Help supervisors resolve escalated billing disputes.",
+    "tasks": "Pull billing history, identify dispute root cause, validate credit eligibility, recommend amount.",
+    "triggers": "Escalated dispute, credit above threshold, multi-cycle dispute.",
+    "systems": "CRM, billing, payments, case mgmt, policy rules.",
+    "keyData": "Full billing history, charges, credits, adjustments, plan history, prior disputes.",
+    "kpis": "Resolution rate, credit accuracy, policy compliance.",
+    "hitl": "Approval-based",
+    "priority": "Near-term Service",
+    "dataRequirements": {
+      "realtime": [
+        "Current billing balance & payment due",
+        "Active autopay status",
+        "Installment plan balances",
+        "Promotional credit status"
+      ],
+      "nearRealtime": [
+        "Recent payment attempts & failures",
+        "Today's billing adjustments",
+        "Recent interaction notes"
+      ],
+      "batch": [
+        "12-24 month invoice history",
+        "Historical dispute patterns",
+        "Policy threshold rules"
+      ]
+    }
+  },
+  "paymentException": {
+    "name": "Payment Exception Agent",
+    "purpose": "Help supervisors handle payment exceptions and hardship cases.",
+    "tasks": "Present payment history, evaluate hardship, recommend plan, assess restoration.",
+    "triggers": "Agent escalation, hardship, service restoration, late-fee waiver.",
+    "systems": "Billing, payments, collections, CRM, policy.",
+    "keyData": "Balance, payment history, autopay, collections stage, hardship indicators.",
+    "kpis": "Exception resolution rate, delinquency save, compliance.",
+    "hitl": "Approval-based",
+    "priority": "",
+    "dataRequirements": {
+      "realtime": [
+        "Current balance & past-due amount",
+        "Collection stage & suspension status",
+        "Last payment date/method/amount"
+      ],
+      "nearRealtime": [
+        "Recent payment arrangement history",
+        "Hardship indicators (recent contacts, social data)"
+      ],
+      "batch": [
+        "Full payment history (12 months)",
+        "Policy exception rules & thresholds",
+        "Collections workflow rules"
+      ]
+    }
+  },
+  "supervisorQueue": {
+    "name": "Care Supervisor Orchestrator",
+    "purpose": "Master orchestrator for the CC Supervisor — provides real-time floor visibility and orchestrates sub-agents (Billing Resolution, Payment Exception, Interaction QA) to manage escalations, approvals, and coaching.",
+    "tasks": "Monitor queue depth and wait times, orchestrate escalation sub-agents, flag AHT/abandonment spikes, identify reps needing coaching, recommend real-time staffing adjustments, coordinate credit approvals and QA reviews.",
+    "triggers": "Queue threshold breach, AHT spike, abandonment spike, escalation request, adherence violation.",
+    "systems": "WFM, telephony/ACD, QA analytics, CRM, billing, case management.",
+    "keyData": "Queue stats, agent adherence, transcripts, agent performance, sentiment, escalation queue, sub-agent outputs.",
+    "kpis": "Service level, occupancy, queue health, coaching-trigger rate, escalation resolution time.",
+    "hitl": "Assistive — orchestrates day-to-day sub-agents for Supervisor oversight",
+    "priority": "",
+    "dataRequirements": {
+      "realtime": [
+        "Live queue depth by skill group",
+        "Real-time agent states (available/busy/ACW)",
+        "Real-time adherence (RTA)",
+        "Current service level & ASA",
+        "Live sentiment alerts from active calls"
+      ],
+      "nearRealtime": [
+        "Intraday volume reforecast",
+        "Today's agent AHT & FCR",
+        "Today's QA evaluation scores"
+      ],
+      "batch": [
+        "Weekly/monthly KPI trends",
+        "Agent skill profiles & certifications",
+        "Scheduled shifts & planned shrinkage"
+      ]
+    }
+  },
+  "interactionQA": {
+    "name": "Interaction QA Agent",
+    "purpose": "Auto-score interactions for compliance and quality.",
+    "tasks": "Summarize calls, identify policy violations, score quality, recommend coaching.",
+    "triggers": "Post-interaction, compliance audit.",
+    "systems": "Transcripts, QA platform, CRM, compliance rules.",
+    "keyData": "Transcripts, policy library, QA rubric, outcomes.",
+    "kpis": "QA score, violation rate, false-positive rate.",
+    "hitl": "Approval-based",
+    "priority": "",
+    "dataRequirements": {
+      "realtime": [],
+      "nearRealtime": [
+        "Completed interaction transcripts (streaming)",
+        "Post-interaction disposition codes"
+      ],
+      "batch": [
+        "Policy library & regulatory requirements",
+        "QA rubric & scoring criteria",
+        "Historical QA score distributions"
+      ]
+    }
+  },
+  "techEscalation": {
+    "name": "Tech Escalation Summary Agent",
+    "purpose": "Reduce handoff loss on escalations.",
+    "tasks": "Summarize diagnostics, capture symptoms, tag root cause.",
+    "triggers": "Transfer from care to advanced tech.",
+    "systems": "CRM, diagnostics, case system, transcripts.",
+    "keyData": "Prior troubleshooting, telemetry, transcript summary.",
+    "kpis": "Repeat-step rate, escalation quality.",
+    "hitl": "Assistive",
+    "priority": "",
+    "dataRequirements": {
+      "realtime": [
+        "Current interaction transcript",
+        "Active diagnostic results",
+        "Customer authentication state"
+      ],
+      "nearRealtime": [
+        "Prior troubleshooting steps (from case notes)",
+        "Recent device/network telemetry"
+      ],
+      "batch": [
+        "Known issue database",
+        "Device troubleshooting decision trees"
+      ]
+    }
+  },
+  "techQueuePriority": {
+    "name": "Tech Queue Prioritization Agent",
+    "purpose": "Prioritize tech cases by impact and risk.",
+    "tasks": "Rank by severity, VIP status, churn risk, repeat-failure.",
+    "triggers": "Queue backlog, event surge.",
+    "systems": "Case platform, network events, customer-value model.",
+    "keyData": "Severity, failed contacts, customer value, SLA status.",
+    "kpis": "Backlog aging, high-risk response time.",
+    "hitl": "Assistive",
+    "priority": "",
+    "dataRequirements": {
+      "realtime": [
+        "Live tech support queue with case metadata",
+        "Active outage severity by site",
+        "SLA clock status per case"
+      ],
+      "nearRealtime": [
+        "Updated churn risk scores",
+        "Repeat-contact count per customer"
+      ],
+      "batch": [
+        "Customer value tier assignments",
+        "SLA policy definitions"
+      ]
+    }
+  },
+  "saveOffer": {
+    "name": "Save Offer Recommendation Agent",
+    "purpose": "Select the right retention offer.",
+    "tasks": "Score churn, identify root cause, rank offers, enforce governance.",
+    "triggers": "Cancel inquiry, port-out, rejected initial offer.",
+    "systems": "CRM, retention offers, pricing, usage, margin.",
+    "keyData": "Churn propensity, tenure, complaints, prior offers, discount rules.",
+    "kpis": "Save rate, margin impact, leakage.",
+    "hitl": "Approval-based",
+    "priority": "Near-term Service",
+    "dataRequirements": {
+      "realtime": [
+        "Current call context & cancel reason",
+        "Authorized offer menu with eligibility",
+        "Contract terms & device payoff amount"
+      ],
+      "nearRealtime": [
+        "Updated churn propensity score",
+        "Recent interaction & complaint history",
+        "Recent competitive offers detected"
+      ],
+      "batch": [
+        "Historical save outcomes by offer type",
+        "Discount governance rules",
+        "Customer LTV & margin contribution"
+      ]
+    }
+  },
+  "retentionSuperPerf": {
+    "name": "Retention Supervisor Performance Agent",
+    "purpose": "Manage save quality across the team.",
+    "tasks": "Compare reps on save rate, discount depth, post-save churn.",
+    "triggers": "Daily review, leakage alert.",
+    "systems": "Workforce analytics, CRM, offers, finance.",
+    "keyData": "Save outcomes by rep, discounts, downstream churn.",
+    "kpis": "Save rate, leakage, compliance.",
+    "hitl": "Assistive",
+    "priority": "",
+    "dataRequirements": {
+      "realtime": [],
+      "nearRealtime": [
+        "Today's save outcomes by rep",
+        "Intraday discount values granted"
+      ],
+      "batch": [
+        "30/60/90 post-save churn by rep",
+        "Monthly discount leakage analysis",
+        "Coaching action completion rates"
+      ]
+    }
+  },
+  "sentimentDefection": {
+    "name": "Sentiment & Defection Risk Agent",
+    "purpose": "Surface likely defectors for proactive intervention.",
+    "tasks": "Monitor negative patterns, score risk, recommend outreach.",
+    "triggers": "Repeated contacts, low CSAT, social complaints.",
+    "systems": "CRM, NPS, transcript analytics, social.",
+    "keyData": "Sentiment, complaint tags, repeat-contact count.",
+    "kpis": "Early-risk identification, proactive conversion.",
+    "hitl": "Assistive",
+    "priority": "",
+    "dataRequirements": {
+      "realtime": [],
+      "nearRealtime": [
+        "Real-time sentiment from active interactions",
+        "Social media mention alerts",
+        "Repeat-contact count (rolling 48-hour)"
+      ],
+      "batch": [
+        "NPS/CSAT survey aggregates",
+        "Complaint theme analysis",
+        "Churn prediction model outputs"
+      ]
+    }
+  },
+  "careCopilot": {
+    "name": "Care Orchestrator",
+    "purpose": "Master orchestrator supporting the frontline rep — provides customer context and orchestrates 14 sub-agents (Billing, Payment, Plan, Account, Features, Device, Network, Promo, Security, Autopay, Orders, Number Transfer, Self-Service Guide, Warm Transfer) across the interaction.",
+    "tasks": "Authenticate and retrieve full customer context, classify intent, select and orchestrate the right sub-agent(s), maintain conversation continuity across topic switches, manage multi-intent interactions, suggest next best action, draft responses, auto-populate after-call work, determine escalation to supervisor via Warm Transfer Agent.",
+    "triggers": "Authenticated live interaction (voice, chat, messaging).",
+    "systems": "CRM, billing, payments, OMS, knowledge base, case notes, routing engine.",
+    "keyData": "Full account profile, billing summary, product holdings, interaction history, policy/knowledge, escalation thresholds, sub-agent status.",
+    "kpis": "AHT reduction, FCR, sub-agent orchestration success rate, escalation accuracy, rep adoption.",
+    "hitl": "Assistive — orchestrates autonomous sub-agents while keeping rep in the loop",
+    "priority": "Near-term Service",
+    "dataRequirements": {
+      "realtime": [
+        "Customer identity & auth state",
+        "Current billing balance & plan details",
+        "Active service status per line",
+        "Current interaction channel & context",
+        "Knowledge base articles (indexed)"
+      ],
+      "nearRealtime": [
+        "Recent interaction history (48h)",
+        "Recent case notes & dispositions",
+        "Updated product holdings"
+      ],
+      "batch": [
+        "Full account profile & tenure",
+        "Historical interaction summary",
+        "Policy & procedure library"
+      ]
+    }
+  },
+  "careTriage": {
+    "name": "Warm Transfer Agent",
+    "purpose": "Execute warm transfers between agents, channels, and human reps — maintaining full context continuity.",
+    "tasks": "Package interaction context (customer identity, issue summary, steps taken, sentiment), route to target agent or human queue, provide receiving party with complete handoff brief, ensure no information loss on transfer.",
+    "triggers": "Orchestrator determines transfer needed, customer requests supervisor, issue requires different skill group, cross-channel handoff.",
+    "systems": "IVR/chat, CRM, identity verification, case routing engine, telephony/ACD.",
+    "keyData": "Full interaction transcript, customer identity, issue classification, prior agent actions, sentiment score, target routing rules.",
+    "kpis": "Transfer context completeness, repeat-info rate post-transfer, warm transfer success rate, handoff time.",
+    "hitl": "Fully autonomous",
+    "priority": "",
+    "dataRequirements": {
+      "realtime": [
+        "Inbound channel & ANI/caller ID",
+        "IVR path selections",
+        "Customer identity lookup",
+        "Active outage in customer's area"
+      ],
+      "nearRealtime": [
+        "Recent contact count (48h)",
+        "Last interaction summary & sentiment"
+      ],
+      "batch": [
+        "Contact reason taxonomy",
+        "Routing rules & skill group definitions"
+      ]
+    }
+  },
+  "orderStatus": {
+    "name": "Order Status Agent",
+    "purpose": "Deflect order tracking inquiries.",
+    "tasks": "Check order stage, shipment, activation, appointment date.",
+    "triggers": "Order inquiry.",
+    "systems": "OMS, shipping, activation, CRM.",
+    "keyData": "Order ID, shipping status, activation status.",
+    "kpis": "Self-service completion, containment.",
+    "hitl": "Fully autonomous",
+    "priority": "Near-term Service",
+    "dataRequirements": {
+      "realtime": [
+        "Order status (real-time from OMS)",
+        "Shipping tracking (carrier API)",
+        "Activation status & error codes",
+        "Port-in status & FOC date"
+      ],
+      "nearRealtime": [
+        "Recent order modifications"
+      ],
+      "batch": [
+        "Order type definitions",
+        "Fulfillment SLA targets"
+      ]
+    }
+  },
+  "planAdvisory": {
+    "name": "Plan Advisory Agent",
+    "purpose": "Recommend, compare, and execute plan changes based on customer usage patterns and available offers.",
+    "tasks": "Analyze current plan vs usage, identify overpaying or underserved scenarios, compare plan options, recommend optimal plan, execute plan change, explain impact on monthly bill, surface multi-line and bundle savings.",
+    "triggers": "Customer asks about plan change, usage exceeds plan limits, proactive optimization opportunity, 'am I on the best plan?' inquiry.",
+    "systems": "CRM, product catalog, pricing engine, usage analytics, promotion rules.",
+    "keyData": "Current plan details, 30/60/90-day usage patterns, available plans and pricing, promo eligibility, household lines.",
+    "kpis": "Plan change completion rate, ARPU impact, customer satisfaction post-change, containment rate.",
+    "hitl": "Fully autonomous for standard changes; approval-based for downgrades with revenue impact",
+    "priority": "",
+    "dataRequirements": {
+      "realtime": [
+        "Current plan & pricing",
+        "Available plans with real-time pricing",
+        "Active promotions & eligibility"
+      ],
+      "nearRealtime": [
+        "30-day usage patterns (data, voice, text)",
+        "Household line configuration"
+      ],
+      "batch": [
+        "Plan comparison rules",
+        "Historical plan change patterns",
+        "Revenue impact models"
+      ]
+    }
+  },
+  "accountMgmt": {
+    "name": "Account Management Agent",
+    "purpose": "Handle account profile changes — address, name, authorized users, contact preferences, and billing responsibility transfers.",
+    "tasks": "Validate identity, update mailing/service address, process name change, add/remove authorized users, update contact preferences, initiate transfer of billing responsibility, confirm changes and explain downstream impacts.",
+    "triggers": "Customer requests account change, address update, authorized user modification, transfer of billing.",
+    "systems": "CRM, identity verification, address validation (USPS), billing system, tax jurisdiction lookup.",
+    "keyData": "Account profile, identity verification status, address validation, authorized user list, billing configuration.",
+    "kpis": "Account change completion rate, identity verification success, error rate on changes, containment rate.",
+    "hitl": "Fully autonomous for standard changes; approval-based for billing responsibility transfers",
+    "priority": "",
+    "dataRequirements": {
+      "realtime": [
+        "Customer identity & auth state",
+        "Current account profile",
+        "Address validation API (USPS)"
+      ],
+      "nearRealtime": [
+        "Recent account changes",
+        "Authorized user list"
+      ],
+      "batch": [
+        "Account change policies",
+        "Tax jurisdiction rules",
+        "Transfer of billing requirements"
+      ]
+    }
+  },
+  "featureAddon": {
+    "name": "Feature & Add-On Agent",
+    "purpose": "Add, remove, or modify account features — international roaming, hotspot, device insurance, call blocking, voicemail, content subscriptions.",
+    "tasks": "Show current features, explain available add-ons and pricing, add/remove features, activate international roaming with travel dates, manage device protection plans, set up voicemail, toggle content subscriptions (Netflix, Apple TV+).",
+    "triggers": "Feature inquiry, international travel prep, insurance request, voicemail setup, subscription management.",
+    "systems": "CRM, product catalog, feature provisioning, partner APIs (streaming services), billing.",
+    "keyData": "Current features and add-ons, available features with pricing, device compatibility, partner subscription status.",
+    "kpis": "Feature change completion rate, feature attach rate, containment rate, ARPU impact.",
+    "hitl": "Fully autonomous",
+    "priority": "",
+    "dataRequirements": {
+      "realtime": [
+        "Current active features per line",
+        "Available features & pricing",
+        "Device compatibility for features"
+      ],
+      "nearRealtime": [
+        "Recent feature changes",
+        "Partner subscription status (Netflix, etc.)"
+      ],
+      "batch": [
+        "Feature catalog & rules",
+        "International roaming rate tables",
+        "Insurance plan terms"
+      ]
+    }
+  },
+  "deviceSupport": {
+    "name": "Device Support Agent",
+    "purpose": "Answer basic device how-to questions, setup guidance, settings navigation, and trade-in eligibility — not deep troubleshooting.",
+    "tasks": "Guide device setup and data transfer, navigate device settings, answer common device FAQ, check trade-in eligibility and value, verify device compatibility, send self-service deep links for app-based resolution.",
+    "triggers": "'How do I...?' device questions, new device setup help, trade-in inquiry, device compatibility check.",
+    "systems": "CRM, device database, knowledge base, trade-in valuation API, deep link generator.",
+    "keyData": "Device model and OS version, device-specific guides, trade-in values, compatibility matrix.",
+    "kpis": "Resolution rate, deflection to self-service, escalation rate to Tier 2, containment rate.",
+    "hitl": "Fully autonomous",
+    "priority": "",
+    "dataRequirements": {
+      "realtime": [
+        "Customer device model, IMEI, OS version",
+        "Trade-in valuation (real-time API)"
+      ],
+      "nearRealtime": [
+        "Device-specific FAQ and guides"
+      ],
+      "batch": [
+        "Device setup guides library",
+        "Compatibility matrix",
+        "Trade-in program terms"
+      ]
+    }
+  },
+  "networkTriage": {
+    "name": "Network & Coverage Agent",
+    "purpose": "Handle connectivity complaints, check for known outages, run remote diagnostics, and walk through standard reset steps before escalating.",
+    "tasks": "Check for active outages at customer's service address, run remote network diagnostics, guide through reset/reprovision steps, check coverage quality at customer locations, set expectations for known issues, escalate to Tier 2 via Warm Transfer if unresolved.",
+    "triggers": "'My service is down,' slow data complaint, dropped calls, coverage question, connectivity issue.",
+    "systems": "Outage management, network assurance, CRM, remote diagnostics, coverage maps.",
+    "keyData": "Customer service address, serving cell site status, active outage tickets, signal quality data, coverage maps.",
+    "kpis": "First-contact resolution for network issues, outage containment rate, Tier 2 escalation rate, truck-roll avoidance.",
+    "hitl": "Hybrid — autonomous for known outages, assistive for ambiguous issues",
+    "priority": "",
+    "dataRequirements": {
+      "realtime": [
+        "Active outage status at customer's area",
+        "Cell site alarm status",
+        "Customer service address & serving site",
+        "Remote diagnostic results"
+      ],
+      "nearRealtime": [
+        "Recent network quality for location",
+        "Trouble tickets for area"
+      ],
+      "batch": [
+        "Network coverage maps",
+        "Standard troubleshooting procedures",
+        "Outage communication templates"
+      ]
+    }
+  },
+  "promoLoyalty": {
+    "name": "Promotion & Loyalty Agent",
+    "purpose": "Surface available promotions, validate eligibility, explain current discounts, and handle 'am I getting the best deal?' inquiries.",
+    "tasks": "Review customer's current discounts and credits, check eligibility for new promotions, compare current deal vs available offers, apply or stack eligible promotions, explain promo terms and duration, surface loyalty rewards and tenure-based benefits.",
+    "triggers": "'Am I getting the best deal?', promo inquiry, loyalty benefit question, competitor mention, price sensitivity signal.",
+    "systems": "CRM, promotion engine, eligibility rules, loyalty platform, pricing, competitor intelligence.",
+    "keyData": "Current discounts and credits, available promotions, eligibility criteria, loyalty tier and points, tenure, competitor offers.",
+    "kpis": "Promo application rate, save rate from promo offers, ARPU impact, containment rate.",
+    "hitl": "Approval-based for stacking multiple promotions or exceeding discount thresholds",
+    "priority": "",
+    "dataRequirements": {
+      "realtime": [
+        "Current discounts & promotional credits",
+        "Available promotions & eligibility rules",
+        "Loyalty tier & point balance"
+      ],
+      "nearRealtime": [
+        "Recent competitor offers detected",
+        "Churn risk score"
+      ],
+      "batch": [
+        "Full promotion terms & conditions",
+        "Loyalty program rules",
+        "Discount governance thresholds"
+      ]
+    }
+  },
+  "accountSecurity": {
+    "name": "Account Security Agent",
+    "purpose": "Handle PIN/passcode reset, SIM lock, fraud alerts, and account takeover response with elevated identity verification.",
+    "tasks": "Enforce enhanced multi-factor authentication, process PIN/passcode reset, lock/unlock SIM, activate SIM swap protection, respond to fraud alerts, freeze account on suspected takeover, guide through identity recovery, log security events for audit.",
+    "triggers": "PIN reset request, SIM lock request, fraud alert, suspicious activity detected, account takeover report, SIM swap attempt.",
+    "systems": "CRM, identity verification (MFA), SIM management, fraud detection, security audit log.",
+    "keyData": "Account identity markers, authentication history, SIM status, recent security events, fraud risk score.",
+    "kpis": "Authentication success rate, fraud prevention rate, false-positive rate, account recovery time, compliance with FCC SIM swap rules.",
+    "hitl": "Approval-based — requires enhanced identity verification before any security action",
+    "priority": "",
+    "dataRequirements": {
+      "realtime": [
+        "Customer identity & multi-factor auth state",
+        "SIM status (active, locked, swapped)",
+        "Active fraud alerts"
+      ],
+      "nearRealtime": [
+        "Recent authentication attempts",
+        "Recent account changes (security-relevant)"
+      ],
+      "batch": [
+        "Security policies & procedures",
+        "FCC SIM swap regulations",
+        "Fraud pattern database"
+      ]
+    }
+  },
+  "autopayMgmt": {
+    "name": "Autopay & Payment Method Agent",
+    "purpose": "Enroll/unenroll autopay, update payment methods, troubleshoot failed autopay charges, and explain autopay discount eligibility.",
+    "tasks": "Set up autopay enrollment, update credit card/debit card/bank account on file, troubleshoot declined autopay payments, explain autopay discount ($5-10/line), process payment method changes, confirm next autopay date and amount.",
+    "triggers": "Autopay setup request, payment method update, failed autopay notification, autopay discount inquiry.",
+    "systems": "Billing, payment gateway, autopay management, CRM.",
+    "keyData": "Current payment method on file, autopay status, next payment date/amount, failed payment codes, autopay discount eligibility.",
+    "kpis": "Autopay enrollment rate, payment method update success, failed payment recovery rate, containment rate.",
+    "hitl": "Fully autonomous",
+    "priority": "",
+    "dataRequirements": {
+      "realtime": [
+        "Current autopay status & payment method",
+        "Next scheduled payment date/amount",
+        "Failed payment error codes"
+      ],
+      "nearRealtime": [
+        "Recent payment method changes"
+      ],
+      "batch": [
+        "Autopay enrollment rules",
+        "Payment method validation rules",
+        "Autopay discount policies"
+      ]
+    }
+  },
+  "numberTransfer": {
+    "name": "Number Transfer Agent",
+    "purpose": "Manage port-in requests, port-out processing, and number change requests with carrier interop validation.",
+    "tasks": "Guide customer through port-in requirements (account number, PIN from old carrier), validate number portability, initiate port-in request, track port status, handle port-out requests, process number changes, troubleshoot failed ports.",
+    "triggers": "Port-in request, port-out inquiry, number change request, failed port troubleshooting.",
+    "systems": "Number portability clearinghouse, CRM, activation system, carrier interop APIs.",
+    "keyData": "Number to port, donor carrier, account credentials from old carrier, port-in status, FOC date.",
+    "kpis": "Port completion rate, port cycle time, failed port rate, containment rate.",
+    "hitl": "Fully autonomous for standard ports; approval-based for complex multi-line ports",
+    "priority": "",
+    "dataRequirements": {
+      "realtime": [
+        "Port-in request status",
+        "Number portability validation",
+        "FOC date & scheduled port time"
+      ],
+      "nearRealtime": [
+        "Recent port attempts & failure reasons"
+      ],
+      "batch": [
+        "Carrier-specific port requirements",
+        "Port troubleshooting guides",
+        "Regulatory porting timelines"
+      ]
+    }
+  },
+  "selfServiceGuide": {
+    "name": "Self-Service Guide Agent",
+    "purpose": "Walk customers through how to accomplish tasks in the carrier app or website, sending deep links to reduce future call volume.",
+    "tasks": "Identify what the customer is trying to do, provide step-by-step app/website navigation guidance, send deep links directly to the relevant app screen, educate on self-service capabilities, reduce callback likelihood.",
+    "triggers": "'How do I do this in the app?', customer unaware of self-service option, task that can be done digitally.",
+    "systems": "CRM, app/website navigation guides, deep link generator, knowledge base.",
+    "keyData": "Customer's device type (iOS/Android), app version, available self-service features, deep link catalog.",
+    "kpis": "Self-service deflection rate, deep link click-through rate, callback reduction, containment rate.",
+    "hitl": "Fully autonomous",
+    "priority": "",
+    "dataRequirements": {
+      "realtime": [
+        "Customer device type & app version"
+      ],
+      "nearRealtime": [
+        "Available self-service features"
+      ],
+      "batch": [
+        "App navigation guides",
+        "Deep link catalog",
+        "Self-service feature documentation"
+      ]
+    }
+  },
+  "channelResponse": {
+    "name": "Channel Response Agent",
+    "purpose": "Draft channel-appropriate responses.",
+    "tasks": "Compose replies, adapt tone, insert status, recommend escalation.",
+    "triggers": "Inbound chat/social case.",
+    "systems": "Digital service, CRM, knowledge, moderation.",
+    "keyData": "Channel history, account status, response patterns.",
+    "kpis": "Response time, containment, CSAT.",
+    "hitl": "Assistive",
+    "priority": "",
+    "dataRequirements": {
+      "realtime": [
+        "Inbound message content & channel",
+        "Customer identity & account status",
+        "Active case context"
+      ],
+      "nearRealtime": [
+        "Channel conversation history",
+        "Recent account changes"
+      ],
+      "batch": [
+        "Brand voice guidelines",
+        "Approved response templates",
+        "Moderation rules & compliance policies"
+      ]
+    }
+  },
+  "advTechCopilot": {
+    "name": "Tech Support Orchestrator",
+    "purpose": "Master orchestrator for advanced tech reps — provides diagnostic context and orchestrates sub-agents (Outage & Health, Device Troubleshooting) across complex technical interactions.",
+    "tasks": "Retrieve device/network context, orchestrate diagnostic sub-agents, suggest root-cause hypotheses, recommend next diagnostic step, generate customer-safe explanations, auto-summarize case notes, determine escalation path.",
+    "triggers": "Live advanced technical support interaction.",
+    "systems": "Diagnostics, CRM, knowledge base, incident platform, network assurance, device management.",
+    "keyData": "Full diagnostic context, known incidents, device history, network performance, sub-agent results.",
+    "kpis": "Resolution quality, AHT, sub-agent orchestration rate, transfer-back rate, rep adoption.",
+    "hitl": "Assistive — orchestrates diagnostic sub-agents with rep oversight",
+    "priority": "",
+    "dataRequirements": {
+      "realtime": [
+        "Real-time device diagnostics (signal, firmware)",
+        "Active network alarms at serving site",
+        "Current provisioning/HLR status",
+        "Live speed test results"
+      ],
+      "nearRealtime": [
+        "Recent CDRs (24h) showing failures",
+        "Trouble ticket status for area",
+        "Recent device diagnostic history"
+      ],
+      "batch": [
+        "Device compatibility & known issues DB",
+        "Network coverage baselines",
+        "Troubleshooting decision trees"
+      ]
+    }
+  },
+  "outageHealth": {
+    "name": "Outage & Service Health Agent",
+    "purpose": "Resolve/explain network events during interactions.",
+    "tasks": "Identify outage, correlate data, provide ETA, suppress truck-roll.",
+    "triggers": "Service down, outage complaint.",
+    "systems": "Outage mgmt, network assurance, CRM, incidents.",
+    "keyData": "Outage map, service address, alarms, maintenance windows.",
+    "kpis": "Containment, ETA accuracy, truck-roll avoidance.",
+    "hitl": "Fully autonomous",
+    "priority": "Near-term Service",
+    "dataRequirements": {
+      "realtime": [
+        "Active outage tickets with affected area polygons",
+        "Cell site alarm status (streaming)",
+        "Maintenance window schedule",
+        "Customer service address & serving site"
+      ],
+      "nearRealtime": [
+        "Estimated restoration time updates",
+        "Affected subscriber count",
+        "Historical outage pattern for area"
+      ],
+      "batch": [
+        "Network topology & site database",
+        "Outage communication templates"
+      ]
+    }
+  },
+  "deviceTroubleshoot": {
+    "name": "Device Troubleshooting Agent",
+    "purpose": "Guide through device/connectivity issues.",
+    "tasks": "Run troubleshooting tree, identify issue, suggest fixes.",
+    "triggers": "Device issue, Wi-Fi complaint, activation failure.",
+    "systems": "Device mgmt, network diagnostics, CRM, knowledge.",
+    "keyData": "Device model, firmware, diagnostics, signal quality.",
+    "kpis": "Resolution rate, truck-roll avoidance.",
+    "hitl": "Hybrid",
+    "priority": "",
+    "dataRequirements": {
+      "realtime": [
+        "Device model, IMEI, firmware version",
+        "Current signal metrics (RSRP/RSRQ/SINR)",
+        "SIM/eSIM activation state",
+        "Remote diagnostic commands"
+      ],
+      "nearRealtime": [
+        "Recent device error logs",
+        "Prior troubleshooting steps attempted",
+        "Recent CDRs showing data/call failures"
+      ],
+      "batch": [
+        "Device-specific troubleshooting guides",
+        "Known firmware issues database",
+        "Device compatibility matrix"
+      ]
+    }
+  },
+  "retentionCopilot": {
+    "name": "Retention Orchestrator",
+    "purpose": "Master orchestrator for retention reps — provides churn context and orchestrates sub-agents (Save Offer, Sentiment & Defection) to guide save conversations.",
+    "tasks": "Retrieve customer churn context, orchestrate save offer recommendation, surface churn reason summary, recommend save script path, show eligible offers with margin impact, provide objection handling guidance, flag when to escalate to supervisor.",
+    "triggers": "Cancel/save interaction, port-out call.",
+    "systems": "CRM, retention offer engine, knowledge base, policy rules, churn model.",
+    "keyData": "Full churn context, prior interactions, eligible offers, product economics, escalation thresholds, sub-agent outputs.",
+    "kpis": "Save conversion, time-to-offer, discount discipline, orchestration success rate, supervisor escalation accuracy.",
+    "hitl": "Assistive — orchestrates retention sub-agents with rep oversight",
+    "priority": "",
+    "dataRequirements": {
+      "realtime": [
+        "Current call context & stated cancel reason",
+        "Eligible retention offer menu",
+        "Contract & device payoff details"
+      ],
+      "nearRealtime": [
+        "Churn propensity score",
+        "Recent interaction & complaint summary",
+        "Prior save offers extended"
+      ],
+      "batch": [
+        "Save script library",
+        "Objection handling playbook",
+        "Offer economics & margin data"
+      ]
+    }
+  },
+  "storeTraffic": {
+    "name": "Store Traffic & Conversion Agent",
+    "purpose": "Improve in-store conversion and staffing.",
+    "tasks": "Correlate footfall/conversion; flag underperforming windows.",
+    "triggers": "Conversion drop, staffing mismatch.",
+    "systems": "POS, appointments, WFM, CRM.",
+    "keyData": "Traffic, transactions, inventory, staffing.",
+    "kpis": "Conversion, attach rate, wait time.",
+    "hitl": "Assistive",
+    "priority": "",
+    "dataRequirements": {
+      "realtime": [
+        "Live footfall counter",
+        "Current queue/wait time"
+      ],
+      "nearRealtime": [
+        "Intraday conversion by hour",
+        "Today's staffing vs plan"
+      ],
+      "batch": [
+        "Weekly conversion trends",
+        "Inventory levels",
+        "Campaign calendar"
+      ]
+    }
+  },
+  "retailCopilot": {
+    "name": "Retail Orchestrator",
+    "purpose": "Master orchestrator for retail associates — provides customer context and orchestrates sub-agents (Accessory & Bundle, Promo Eligibility) during in-store sales.",
+    "tasks": "Retrieve customer account and eligibility, orchestrate plan recommendation and promo validation, check upgrade eligibility, recommend plans/bundles, explain trade-in, prepare quote/order, summarize disclosures.",
+    "triggers": "In-store sales interaction.",
+    "systems": "CRM, product catalog, pricing/promotions, eligibility engine, OMS, POS.",
+    "keyData": "Account profile, line eligibility, device inventory, promo rules, financing rules, sub-agent outputs.",
+    "kpis": "Conversion, upsell rate, order accuracy, basket value, disclosure compliance, orchestration rate.",
+    "hitl": "Assistive — orchestrates sales sub-agents with associate oversight",
+    "priority": "Near-term Sales",
+    "dataRequirements": {
+      "realtime": [
+        "Customer account & line eligibility",
+        "Real-time product catalog & pricing",
+        "Device inventory (store & nearby)",
+        "Credit check results",
+        "Active promotions & qualification rules"
+      ],
+      "nearRealtime": [
+        "Recent usage patterns (30-day)",
+        "Trade-in device valuation"
+      ],
+      "batch": [
+        "Financing rules & terms",
+        "Disclosure requirements",
+        "Commission structures"
+      ]
+    }
+  },
+  "accessoryBundle": {
+    "name": "Accessory & Bundle Agent",
+    "purpose": "Increase attach rate and ARPU.",
+    "tasks": "Suggest add-ons, accessories, bundles.",
+    "triggers": "Quote creation, device selection.",
+    "systems": "Catalog, promos, POS.",
+    "keyData": "Chosen device, household products, promo eligibility.",
+    "kpis": "Attach rate, bundle penetration.",
+    "hitl": "Assistive",
+    "priority": "",
+    "dataRequirements": {
+      "realtime": [
+        "Selected device & plan",
+        "Current household products"
+      ],
+      "nearRealtime": [
+        "Accessory inventory availability"
+      ],
+      "batch": [
+        "Bundle rules & compatibility",
+        "Attachment rate benchmarks"
+      ]
+    }
+  },
+  "digitalConversion": {
+    "name": "Digital Conversion Optimization Agent",
+    "purpose": "Improve online funnel conversion.",
+    "tasks": "Identify drop-offs, recommend content/offers, trigger nudges.",
+    "triggers": "Cart abandonment, checkout hesitation.",
+    "systems": "Web analytics, CDP/CRM, commerce, chat.",
+    "keyData": "Clickstream, cart, campaign source, eligibility.",
+    "kpis": "Cart recovery, checkout conversion.",
+    "hitl": "Assistive",
+    "priority": "",
+    "dataRequirements": {
+      "realtime": [
+        "Live session clickstream",
+        "Cart contents & checkout state",
+        "Visitor identity (known/anonymous)"
+      ],
+      "nearRealtime": [
+        "Session replay patterns",
+        "A/B test variant assignments"
+      ],
+      "batch": [
+        "Funnel conversion benchmarks",
+        "Campaign performance history"
+      ]
+    }
+  },
+  "planRecommendation": {
+    "name": "Plan Recommendation Agent",
+    "purpose": "Match users to the right plan online.",
+    "tasks": "Infer needs, compare plans, surface bundles.",
+    "triggers": "Plan browse, comparison page.",
+    "systems": "Catalog, pricing, recommendation engine.",
+    "keyData": "Plan catalog, promos, usage profile.",
+    "kpis": "Recommendation acceptance, conversion uplift.",
+    "hitl": "Hybrid",
+    "priority": "Near-term Sales",
+    "dataRequirements": {
+      "realtime": [
+        "Available plans & current pricing",
+        "Visitor browsing behavior",
+        "Current plan (if existing customer)"
+      ],
+      "nearRealtime": [
+        "Usage patterns (if known customer)",
+        "Household product holdings"
+      ],
+      "batch": [
+        "Plan comparison rules",
+        "Recommendation model weights",
+        "Regional availability"
+      ]
+    }
+  },
+  "promoEligibility": {
+    "name": "Promo Eligibility Agent",
+    "purpose": "Reduce offer confusion and fallout.",
+    "tasks": "Validate promo rules, explain requirements.",
+    "triggers": "Promo selection, checkout validation failure.",
+    "systems": "Pricing, promo engine, identity, order validation.",
+    "keyData": "Promo terms, line status, trade-in rules.",
+    "kpis": "Fallout rate, order completion.",
+    "hitl": "Fully autonomous",
+    "priority": "Near-term Sales",
+    "dataRequirements": {
+      "realtime": [
+        "Promotion rules & eligibility criteria",
+        "Customer line & account status",
+        "Credit class & financing eligibility",
+        "Trade-in device valuation (real-time API)"
+      ],
+      "nearRealtime": [
+        "Port-in validation status"
+      ],
+      "batch": [
+        "Full promotion terms & conditions",
+        "Historical promo fallout patterns"
+      ]
+    }
+  },
+  "checkoutSupport": {
+    "name": "Checkout Support Agent",
+    "purpose": "Reduce digital order abandonment.",
+    "tasks": "Answer checkout questions, recover failed steps.",
+    "triggers": "Stalled checkout, payment decline.",
+    "systems": "Commerce, payments, shipping, OMS.",
+    "keyData": "Cart, financing, shipping options, error codes.",
+    "kpis": "Checkout completion, abandonment rate.",
+    "hitl": "Hybrid",
+    "priority": "",
+    "dataRequirements": {
+      "realtime": [
+        "Cart contents & checkout step",
+        "Payment processing status & error codes",
+        "Shipping options & delivery estimates"
+      ],
+      "nearRealtime": [
+        "Session error history",
+        "Recent cart modifications"
+      ],
+      "batch": [
+        "FAQ & checkout help content",
+        "Payment method rules"
+      ]
+    }
+  },
+  "digitalFallout": {
+    "name": "Digital Order Fallout Agent",
+    "purpose": "Catch and remediate failed orders.",
+    "tasks": "Diagnose fallout, request missing info, resubmit.",
+    "triggers": "Order fallout, validation failure.",
+    "systems": "OMS, fraud/ID, activation, CRM.",
+    "keyData": "Exception codes, KYC, device eligibility.",
+    "kpis": "Fallout rate, recovery rate.",
+    "hitl": "Approval-based",
+    "priority": "Near-term Sales",
+    "dataRequirements": {
+      "realtime": [
+        "Order exception codes & error details",
+        "KYC/identity verification status",
+        "Activation system status"
+      ],
+      "nearRealtime": [
+        "Recent order fallout queue",
+        "Fraud screening results"
+      ],
+      "batch": [
+        "Order validation rules",
+        "Fallout pattern analysis",
+        "Recovery workflow playbooks"
+      ]
+    }
+  },
+  "callCoaching": {
+    "name": "Call Coaching & Objection Agent",
+    "purpose": "Improve telesales rep effectiveness.",
+    "tasks": "Live prompts, objection handling, post-call coaching.",
+    "triggers": "Live telesales call.",
+    "systems": "Telephony, transcripts, CRM, catalog.",
+    "keyData": "Live transcript, customer profile, offer rules.",
+    "kpis": "Conversion lift, compliance.",
+    "hitl": "Assistive",
+    "priority": "",
+    "dataRequirements": {
+      "realtime": [
+        "Live call transcript (streaming)",
+        "Customer account context",
+        "Product catalog & current offers"
+      ],
+      "nearRealtime": [
+        "Customer's recent interactions"
+      ],
+      "batch": [
+        "Objection handling playbook",
+        "Competitive battle cards",
+        "Compliance disclosure scripts"
+      ]
+    }
+  },
+  "telesalesPerf": {
+    "name": "Telesales Performance Agent",
+    "purpose": "Help supervisors manage conversion and quality.",
+    "tasks": "Rank reps, flag leakage, identify coaching needs.",
+    "triggers": "Daily review.",
+    "systems": "QA, telephony, CRM, sales dashboards.",
+    "keyData": "Call outcomes, conversions, QA scores.",
+    "kpis": "Conversion, revenue/call.",
+    "hitl": "Assistive",
+    "priority": "",
+    "dataRequirements": {
+      "realtime": [],
+      "nearRealtime": [
+        "Intraday rep conversion rates",
+        "Today's call outcomes & dispositions"
+      ],
+      "batch": [
+        "Weekly/monthly rep performance trends",
+        "QA score distributions",
+        "Revenue per call benchmarks"
+      ]
+    }
+  },
+  "telesalesCopilot": {
+    "name": "Telesales Orchestrator",
+    "purpose": "Master orchestrator for telesales reps — provides customer context and orchestrates sub-agents (Upgrade Eligibility, Cross-sell/Upsell) during phone sales.",
+    "tasks": "Retrieve customer account and eligibility, orchestrate upgrade and cross-sell recommendations, recommend plans/devices, quote monthly price, handle disclosures, create order.",
+    "triggers": "Inbound acquisition or upgrade call.",
+    "systems": "CRM, catalog, CPQ/pricing, OMS, payments.",
+    "keyData": "Customer/account profile, eligibility, promos, device stock, financing status, sub-agent outputs.",
+    "kpis": "Quote-to-order conversion, upsell rate, order accuracy, AHT, orchestration rate.",
+    "hitl": "Assistive — orchestrates sales sub-agents with rep oversight",
+    "priority": "Near-term Sales",
+    "dataRequirements": {
+      "realtime": [
+        "Customer account & eligibility",
+        "Real-time pricing & promotions",
+        "Device inventory & availability",
+        "Credit check results",
+        "Financing options & terms"
+      ],
+      "nearRealtime": [
+        "Recent usage patterns",
+        "Trade-in valuation"
+      ],
+      "batch": [
+        "Disclosure requirements",
+        "Commission structures"
+      ]
+    }
+  },
+  "upgradeEligibility": {
+    "name": "Upgrade Eligibility Agent",
+    "purpose": "Identify the best upgrade path.",
+    "tasks": "Check eligibility, trade-in value, financing.",
+    "triggers": "Upgrade inquiry.",
+    "systems": "Eligibility, device lifecycle, inventory, pricing.",
+    "keyData": "Tenure, installment status, trade-in value.",
+    "kpis": "Upgrade conversion, attach rate.",
+    "hitl": "Assistive",
+    "priority": "",
+    "dataRequirements": {
+      "realtime": [
+        "Device payment plan status & balance",
+        "Upgrade eligibility date",
+        "Trade-in value (real-time API)",
+        "Current device inventory"
+      ],
+      "nearRealtime": [
+        "Recent usage patterns"
+      ],
+      "batch": [
+        "Device lifecycle data",
+        "Financing rules",
+        "Historical upgrade patterns"
+      ]
+    }
+  },
+  "crossSellUpsell": {
+    "name": "Cross-sell / Upsell Agent",
+    "purpose": "Monetize interactions with add-on recommendations.",
+    "tasks": "Recommend add-a-line, home internet, bundles.",
+    "triggers": "Eligible account, quote flow.",
+    "systems": "CRM, recommendation engine, catalog, promos.",
+    "keyData": "Household, current products, propensity.",
+    "kpis": "Attach rate, incremental ARPU.",
+    "hitl": "Assistive",
+    "priority": "",
+    "dataRequirements": {
+      "realtime": [
+        "Current household product inventory",
+        "Active promotions for cross-sell"
+      ],
+      "nearRealtime": [
+        "Propensity model scores (upgrade, cross-sell)",
+        "Recent white-space analysis"
+      ],
+      "batch": [
+        "Campaign rules & targeting criteria",
+        "Historical cross-sell acceptance rates"
+      ]
+    }
+  },
+  "quoteGovernance": {
+    "name": "Quote & Order Governance Agent",
+    "purpose": "Reduce order errors across channels.",
+    "tasks": "Validate completeness, check compliance, flag risks.",
+    "triggers": "Pre-submit quote/order.",
+    "systems": "Catalog, pricing, OMS, compliance.",
+    "keyData": "Product rules, pricing, promo terms.",
+    "kpis": "Order accuracy, fallout rate.",
+    "hitl": "Approval-based",
+    "priority": "",
+    "dataRequirements": {
+      "realtime": [
+        "Quote/order line items",
+        "Pricing validation rules",
+        "Promo compliance checks"
+      ],
+      "nearRealtime": [
+        "Recent order exception patterns"
+      ],
+      "batch": [
+        "Product dependency rules",
+        "Promo terms & conditions",
+        "Channel-specific compliance rules"
+      ]
+    }
+  },
+  "offerPerformance": {
+    "name": "Offer Performance Agent",
+    "purpose": "Evaluate offer effectiveness by channel.",
+    "tasks": "Compare uptake, margin impact, abuse patterns.",
+    "triggers": "Campaign launch, weekly review.",
+    "systems": "Pricing, sales analytics, finance.",
+    "keyData": "Promo usage, conversion, discount depth.",
+    "kpis": "Offer ROI, abuse rate.",
+    "hitl": "Assistive",
+    "priority": "",
+    "dataRequirements": {
+      "realtime": [],
+      "nearRealtime": [
+        "Intraday offer uptake rates"
+      ],
+      "batch": [
+        "Weekly offer performance by channel",
+        "Margin impact analysis",
+        "Abuse/fraud pattern detection",
+        "Historical offer ROI"
+      ]
+    }
+  },
+  "channelOptimization": {
+    "name": "Channel Optimization Agent",
+    "purpose": "Compare channel performance and reallocate focus.",
+    "tasks": "Identify underperformance, diagnose funnels.",
+    "triggers": "Weekly business review.",
+    "systems": "Enterprise analytics, commerce, POS, telephony.",
+    "keyData": "Conversion by channel, CAC, ARPU.",
+    "kpis": "Channel conversion, CAC efficiency.",
+    "hitl": "Assistive",
+    "priority": "",
+    "dataRequirements": {
+      "realtime": [],
+      "nearRealtime": [
+        "Intraday channel conversion rates"
+      ],
+      "batch": [
+        "Weekly channel performance comparison",
+        "CAC by channel",
+        "ARPU & attach rate trends",
+        "Assisted vs self-service mix"
+      ]
+    }
+  },
+  "salesDirectorOrch": {
+    "name": "Sales Director Orchestrator",
+    "purpose": "Master orchestrator for the CRO/VP level — provides strategic sales visibility and orchestrates sub-agents (Sales Forecast, Competitive Intel, RevOps) to drive revenue strategy.",
+    "tasks": "Aggregate pipeline and revenue data across all channels, orchestrate forecasting and competitive sub-agents, generate executive sales briefings, identify cross-channel optimization opportunities.",
+    "triggers": "Weekly pipeline review, monthly business review, quarterly planning, revenue variance alert.",
+    "systems": "CRM, BI/analytics, pipeline management, competitive intel, finance.",
+    "keyData": "Pipeline by channel, conversion rates, revenue forecasts, competitive landscape, market share.",
+    "kpis": "Forecast accuracy, pipeline health, revenue attainment, cross-channel alignment.",
+    "hitl": "Assistive",
+    "priority": "",
+    "dataRequirements": {
+      "realtime": [],
+      "nearRealtime": [
+        "Pipeline summary by channel",
+        "Today's conversion rates"
+      ],
+      "batch": [
+        "Monthly revenue analysis",
+        "Quarterly forecasts",
+        "Market share trends"
+      ]
+    }
+  },
+  "salesSupervisorOrch": {
+    "name": "Sales Supervisor Orchestrator",
+    "purpose": "Master orchestrator for retail/telesales supervisors — provides floor visibility and orchestrates sub-agents (Coaching, Compliance, Knowledge) to manage rep performance.",
+    "tasks": "Monitor rep activity and conversion, orchestrate coaching and enablement sub-agents, flag compliance issues, surface real-time competitive battle cards, manage deal escalations.",
+    "triggers": "Rep performance anomaly, compliance flag, deal escalation, shift review.",
+    "systems": "CRM, QA, telephony, POS, coaching platform, compliance rules.",
+    "keyData": "Rep performance metrics, active deals, compliance status, coaching history.",
+    "kpis": "Rep conversion lift, coaching completion, compliance adherence, deal escalation quality.",
+    "hitl": "Assistive",
+    "priority": "",
+    "dataRequirements": {
+      "realtime": [
+        "Live rep activity & conversion"
+      ],
+      "nearRealtime": [
+        "Today's coaching triggers",
+        "Compliance flags"
+      ],
+      "batch": [
+        "Weekly rep performance trends",
+        "Coaching effectiveness analysis"
+      ]
+    }
+  },
+  "leadScoring": {
+    "name": "Lead Scoring & Qualification Agent",
+    "purpose": "Score inbound leads based on engagement signals, fit criteria, and behavioral data; auto-route qualified leads to the right channel/rep.",
+    "tasks": "Analyze web/app engagement signals, score leads against ICP criteria, classify by channel fit (retail/digital/telesales), auto-route to appropriate rep queue, flag high-value prospects for priority handling.",
+    "triggers": "New web inquiry, form submission, chat initiation, app engagement threshold, campaign response.",
+    "systems": "CRM, CDP, web analytics, marketing automation, lead routing engine.",
+    "keyData": "Engagement score, demographic fit, behavioral signals, campaign source, channel preference.",
+    "kpis": "Lead-to-opportunity conversion, routing accuracy, time-to-first-contact, lead quality score.",
+    "hitl": "Fully autonomous",
+    "priority": "Near-term Sales",
+    "dataRequirements": {
+      "realtime": [
+        "Inbound lead data",
+        "Web/app engagement signals"
+      ],
+      "nearRealtime": [
+        "Lead scoring model output",
+        "Campaign attribution"
+      ],
+      "batch": [
+        "ICP criteria",
+        "Historical conversion rates by source",
+        "Routing rules"
+      ]
+    }
+  },
+  "salesForecast": {
+    "name": "Sales Forecasting & Pipeline Agent",
+    "purpose": "Analyze deal characteristics, historical close rates, and seasonality to produce rolling forecasts and flag at-risk pipeline.",
+    "tasks": "Model pipeline by stage/channel/product, forecast weekly/monthly/quarterly revenue, flag deals at risk of slipping, identify seasonality patterns, recommend pipeline actions.",
+    "triggers": "Weekly forecast cycle, deal stage change, pipeline variance alert, quarter-end planning.",
+    "systems": "CRM, pipeline analytics, finance, historical sales data.",
+    "keyData": "Pipeline by stage, deal velocity, historical close rates, seasonal patterns, channel mix.",
+    "kpis": "Forecast accuracy, pipeline coverage ratio, deal velocity, at-risk identification rate.",
+    "hitl": "Assistive",
+    "priority": "",
+    "dataRequirements": {
+      "realtime": [
+        "Current pipeline by stage"
+      ],
+      "nearRealtime": [
+        "Deal stage changes today"
+      ],
+      "batch": [
+        "Historical close rates",
+        "Seasonal patterns",
+        "Revenue targets"
+      ]
+    }
+  },
+  "competitiveIntel": {
+    "name": "Competitive Intelligence Agent",
+    "purpose": "Monitor competitor pricing, promotions, plan changes, and sentiment; generate real-time battle cards for frontline reps.",
+    "tasks": "Track competitor plan/pricing changes, monitor promotional offers, analyze competitive sentiment, generate battle cards, alert on significant competitive moves, benchmark market positioning.",
+    "triggers": "Competitor pricing change, new competitor promotion, weekly competitive review, rep request.",
+    "systems": "Competitive intel platform, web scraping, social listening, CRM, knowledge base.",
+    "keyData": "Competitor plans and pricing, promotional calendars, market share data, customer win/loss reasons.",
+    "kpis": "Battle card usage by reps, competitive win rate, time-to-detect competitor changes.",
+    "hitl": "Assistive",
+    "priority": "Near-term Sales",
+    "dataRequirements": {
+      "realtime": [
+        "Active competitor promotions"
+      ],
+      "nearRealtime": [
+        "Competitor pricing changes (hourly scan)",
+        "Social sentiment on competitors"
+      ],
+      "batch": [
+        "Market share analysis",
+        "Win/loss reason trends",
+        "Competitive positioning maps"
+      ]
+    }
+  },
+  "customerOnboarding": {
+    "name": "Customer Onboarding Agent",
+    "purpose": "Automate post-sale activation journey: device setup, plan walkthrough, first-bill explanation, feature adoption nudges.",
+    "tasks": "Guide device setup and data transfer, explain plan features and included perks, preview first bill to prevent bill shock, prompt app download and autopay enrollment, trigger welcome journey communications, monitor activation success.",
+    "triggers": "New activation, device purchase, plan change, first-bill generation.",
+    "systems": "CRM, billing, activation, marketing automation, carrier app.",
+    "keyData": "Activation status, device type, plan details, first-bill preview, feature adoption status.",
+    "kpis": "Activation success rate, first-bill call-in rate, app adoption rate, 30-day churn rate, feature activation rate.",
+    "hitl": "Fully autonomous",
+    "priority": "Near-term Sales",
+    "dataRequirements": {
+      "realtime": [
+        "Activation status",
+        "Device setup progress"
+      ],
+      "nearRealtime": [
+        "First-bill preview data",
+        "Feature adoption status"
+      ],
+      "batch": [
+        "Onboarding journey templates",
+        "Welcome communication sequences"
+      ]
+    }
+  },
+  "renewalRetention": {
+    "name": "Renewal & Lifecycle Agent",
+    "purpose": "Proactively identify contracts nearing expiration, model churn risk at renewal, and generate personalized retention/upgrade offers.",
+    "tasks": "Track device payment completion dates, identify renewal windows, score churn risk at renewal, generate personalized upgrade/retention offers, trigger proactive outreach, measure renewal conversion.",
+    "triggers": "Device payment 80% complete, contract anniversary, churn risk spike at renewal window.",
+    "systems": "CRM, billing, device lifecycle, churn model, offer engine, marketing automation.",
+    "keyData": "Device payment status, contract dates, renewal eligibility, churn propensity at renewal, offer history.",
+    "kpis": "Renewal conversion rate, proactive outreach success, churn at renewal, ARPU post-renewal.",
+    "hitl": "Hybrid — autonomous for standard renewals, approval-based for high-value retention offers",
+    "priority": "",
+    "dataRequirements": {
+      "realtime": [
+        "Device payment balance & completion date"
+      ],
+      "nearRealtime": [
+        "Churn score at renewal window",
+        "Eligible renewal offers"
+      ],
+      "batch": [
+        "Renewal conversion history",
+        "Offer effectiveness at renewal",
+        "Lifecycle stage analysis"
+      ]
+    }
+  },
+  "partnerDealer": {
+    "name": "Partner & Dealer Management Agent",
+    "purpose": "Manage authorized dealer/retailer performance, distribute leads, track compliance, and optimize co-op marketing spend.",
+    "tasks": "Distribute leads to dealers by territory and performance, monitor dealer sales compliance, track co-op/MDF spend and ROI, flag dealer quality issues, benchmark dealer vs corporate store performance.",
+    "triggers": "New lead for dealer territory, dealer compliance review, co-op claim submission, quarterly performance review.",
+    "systems": "Partner portal, CRM, lead routing, compliance tracking, finance/co-op system.",
+    "keyData": "Dealer performance metrics, lead distribution, compliance scores, co-op spend and ROI, territory coverage.",
+    "kpis": "Dealer conversion rate, lead response time, compliance score, co-op ROI, dealer satisfaction.",
+    "hitl": "Assistive",
+    "priority": "",
+    "dataRequirements": {
+      "realtime": [
+        "Incoming leads for dealer routing"
+      ],
+      "nearRealtime": [
+        "Dealer daily performance"
+      ],
+      "batch": [
+        "Monthly dealer scorecards",
+        "Co-op spend analysis",
+        "Compliance audit results"
+      ]
+    }
+  },
+  "inventoryAllocation": {
+    "name": "Inventory & Allocation Agent",
+    "purpose": "Match device inventory to demand forecasts, flag out-of-stock risks, and optimize allocation across stores and warehouses.",
+    "tasks": "Forecast device demand by SKU/location, identify stockout risks, recommend reallocation between stores, flag overstock situations, align inventory with promotional campaigns.",
+    "triggers": "Stockout alert, new device launch, promotional campaign, weekly allocation cycle.",
+    "systems": "Inventory management, POS, demand forecasting, supply chain, CRM.",
+    "keyData": "Device inventory by location/SKU, demand forecasts, sales velocity, promotional calendar, supply pipeline.",
+    "kpis": "Stockout rate, inventory turns, lost sales from OOS, allocation accuracy.",
+    "hitl": "Assistive",
+    "priority": "",
+    "dataRequirements": {
+      "realtime": [
+        "Current inventory by location/SKU"
+      ],
+      "nearRealtime": [
+        "Sales velocity by device"
+      ],
+      "batch": [
+        "Demand forecasts",
+        "Supply pipeline status",
+        "Promotional calendar"
+      ]
+    }
+  },
+  "revOps": {
+    "name": "RevOps Orchestrator",
+    "purpose": "Unify pipeline, forecasting, and revenue data across retail/digital/telesales/dealer channels; ensure funnel alignment and data hygiene.",
+    "tasks": "Reconcile pipeline data across channels, enforce consistent stage definitions, identify funnel leakage points, generate unified revenue reports, coordinate cross-channel handoffs, maintain data hygiene.",
+    "triggers": "Pipeline discrepancy detected, cross-channel handoff, weekly revenue review, data quality alert.",
+    "systems": "CRM, BI, pipeline analytics, finance, all channel systems.",
+    "keyData": "Unified pipeline, channel conversion rates, funnel stage alignment, data quality scores, revenue attribution.",
+    "kpis": "Pipeline accuracy, cross-channel conversion, data hygiene score, revenue forecast variance.",
+    "hitl": "Assistive",
+    "priority": "Near-term Sales",
+    "dataRequirements": {
+      "realtime": [
+        "Unified pipeline across channels"
+      ],
+      "nearRealtime": [
+        "Channel conversion discrepancies"
+      ],
+      "batch": [
+        "Monthly revenue reconciliation",
+        "Data quality audit",
+        "Funnel alignment analysis"
+      ]
+    }
+  },
+  "complianceReg": {
+    "name": "Compliance & Regulatory Agent",
+    "purpose": "Monitor agent and rep actions for TCPA, FCC, and state regulatory compliance; flag violations and ensure disclosures.",
+    "tasks": "Audit outbound communications for TCPA compliance, verify mandatory disclosures in sales transactions, monitor consent management, flag potential regulatory violations, generate compliance reports.",
+    "triggers": "Outbound campaign launch, sales transaction, consent status change, regulatory audit, violation detection.",
+    "systems": "Compliance platform, CRM, marketing automation, consent management, telephony.",
+    "keyData": "Consent records, disclosure completion, TCPA opt-in status, regulatory requirements by state, violation history.",
+    "kpis": "Compliance rate, violation count, disclosure completion rate, audit pass rate.",
+    "hitl": "Approval-based — flags violations for human review",
+    "priority": "",
+    "dataRequirements": {
+      "realtime": [
+        "Consent/opt-in status",
+        "Active disclosure requirements"
+      ],
+      "nearRealtime": [
+        "Today's compliance flags"
+      ],
+      "batch": [
+        "Regulatory requirements database",
+        "Violation history",
+        "Audit schedules"
+      ]
+    }
+  },
+  "knowledgeMgmt": {
+    "name": "Knowledge Management Agent",
+    "purpose": "Surface relevant knowledge articles, product specs, competitive battle cards, and policy docs to reps in real-time during interactions.",
+    "tasks": "Index and rank knowledge content, surface contextually relevant articles during live interactions, identify knowledge gaps from failed searches, recommend content updates, track article effectiveness.",
+    "triggers": "Live rep interaction, knowledge search, content gap detected, new product/policy launch.",
+    "systems": "Knowledge base, CRM, search engine, content management, training platform.",
+    "keyData": "Knowledge articles, product specs, policy documents, battle cards, search logs, content effectiveness.",
+    "kpis": "Article surfacing accuracy, search success rate, knowledge gap identification, content freshness.",
+    "hitl": "Fully autonomous",
+    "priority": "",
+    "dataRequirements": {
+      "realtime": [
+        "Contextual search based on live interaction"
+      ],
+      "nearRealtime": [
+        "Recently updated articles"
+      ],
+      "batch": [
+        "Full knowledge base index",
+        "Content effectiveness metrics",
+        "Gap analysis"
+      ]
+    }
+  },
+  "salesCoach": {
+    "name": "Sales Enablement & Coaching Agent",
+    "purpose": "AI role-play for reps: simulate customer objections, practice pitches, provide deal-specific coaching per opportunity stage.",
+    "tasks": "Run objection handling simulations, score rep pitch quality, provide deal-specific coaching recommendations, identify skill gaps, generate personalized learning paths, track coaching completion.",
+    "triggers": "New rep onboarding, deal stage progression, coaching session request, skill gap identified.",
+    "systems": "Coaching platform, CRM, training/LMS, call recording, QA analytics.",
+    "keyData": "Rep skill assessments, deal context, objection library, best-practice scripts, coaching history.",
+    "kpis": "Rep skill improvement, coaching completion rate, time-to-productivity for new hires, conversion lift post-coaching.",
+    "hitl": "Assistive",
+    "priority": "",
+    "dataRequirements": {
+      "realtime": [
+        "Current deal context for coaching"
+      ],
+      "nearRealtime": [
+        "Rep recent performance"
+      ],
+      "batch": [
+        "Objection handling library",
+        "Best practice scripts",
+        "Training curriculum"
+      ]
+    }
+  },
+  "abandonedCart": {
+    "name": "Cart Recovery Agent",
+    "purpose": "Trigger personalized multi-touch recovery sequences when customers abandon digital carts or drop out of checkout.",
+    "tasks": "Detect cart abandonment, determine abandonment reason, send personalized recovery messages (email/SMS/push), offer incentives if appropriate, track recovery conversion, hand off to live agent if needed.",
+    "triggers": "Cart abandoned >30 minutes, checkout step failure, payment decline, session exit from checkout.",
+    "systems": "Commerce platform, marketing automation, CRM, payments, SMS/email.",
+    "keyData": "Cart contents, abandonment step, customer profile, prior purchase history, recovery offer eligibility.",
+    "kpis": "Cart recovery rate, recovery revenue, time-to-recovery, channel effectiveness.",
+    "hitl": "Fully autonomous for standard recovery; approval-based for discount incentives",
+    "priority": "",
+    "dataRequirements": {
+      "realtime": [
+        "Abandoned cart contents & checkout step",
+        "Customer identity"
+      ],
+      "nearRealtime": [
+        "Prior abandonment history",
+        "Recovery offer eligibility"
+      ],
+      "batch": [
+        "Recovery sequence templates",
+        "Incentive rules",
+        "Historical recovery rates"
+      ]
+    }
+  },
+  "brandPerformance": {
+    "name": "Brand Performance Agent",
+    "purpose": "Track brand health and campaign impact.",
+    "tasks": "Monitor awareness/favorability, track social sentiment, analyze competitive SOV.",
+    "triggers": "Post-campaign, quarterly brand review.",
+    "systems": "Brand tracking, social listening, surveys, competitive intel.",
+    "keyData": "Awareness, favorability, NPS, social sentiment, SOV.",
+    "kpis": "Brand lift, sentiment trend.",
+    "hitl": "Assistive",
+    "priority": "",
+    "dataRequirements": {
+      "realtime": [],
+      "nearRealtime": [
+        "Social media sentiment (hourly)",
+        "Real-time social mention volume"
+      ],
+      "batch": [
+        "Quarterly brand tracking surveys",
+        "Competitive share of voice analysis",
+        "Campaign brand lift studies"
+      ]
+    }
+  },
+  "campaignPerformance": {
+    "name": "Campaign Performance Agent",
+    "purpose": "Measure and optimize advertising campaigns.",
+    "tasks": "Aggregate metrics, A/B test creative, recommend budget shifts.",
+    "triggers": "Campaign launch, weekly review.",
+    "systems": "Ad platforms, media agency, attribution.",
+    "keyData": "Impressions, reach, CTR, CPM, CPA, creative variants.",
+    "kpis": "Campaign ROI, CPA efficiency.",
+    "hitl": "Assistive",
+    "priority": "",
+    "dataRequirements": {
+      "realtime": [
+        "Live campaign delivery metrics (impressions, spend)"
+      ],
+      "nearRealtime": [
+        "Intraday CTR/CPA by channel",
+        "Creative performance comparisons"
+      ],
+      "batch": [
+        "Weekly campaign ROI analysis",
+        "Historical CPA benchmarks",
+        "Media mix model outputs"
+      ]
+    }
+  },
+  "mediaMix": {
+    "name": "Media Mix Optimization Agent",
+    "purpose": "Optimize media spend allocation.",
+    "tasks": "Run MMM, recommend budget shifts, forecast volume.",
+    "triggers": "Quarterly planning, budget reallocation.",
+    "systems": "MMM platform, ad platforms, finance.",
+    "keyData": "Spend by channel, attribution, conversions, CPAs.",
+    "kpis": "Marketing efficiency ratio, channel ROAS.",
+    "hitl": "Assistive",
+    "priority": "",
+    "dataRequirements": {
+      "realtime": [],
+      "nearRealtime": [],
+      "batch": [
+        "Marketing mix model outputs (monthly rebuild)",
+        "Spend & conversion data by channel",
+        "Incrementality test results",
+        "Budget constraints & targets"
+      ]
+    }
+  },
+  "acquisitionCampaign": {
+    "name": "Acquisition Campaign Agent",
+    "purpose": "Optimize digital acquisition in real-time.",
+    "tasks": "Adjust bids, pause underperformers, scale winners.",
+    "triggers": "Daily review, CPA breach.",
+    "systems": "Google Ads, Meta Ads, DSP, analytics.",
+    "keyData": "Keyword/audience performance, CPA, quality scores.",
+    "kpis": "Digital CPA, conversion volume, ROAS.",
+    "hitl": "Hybrid",
+    "priority": "",
+    "dataRequirements": {
+      "realtime": [
+        "Live bid landscape & auction data",
+        "Real-time spend pacing",
+        "Conversion event stream"
+      ],
+      "nearRealtime": [
+        "Intraday CPA by campaign/ad group",
+        "Audience performance shifts"
+      ],
+      "batch": [
+        "Historical keyword performance",
+        "Audience overlap analysis",
+        "Quality score trends"
+      ]
+    }
+  },
+  "contentPerformance": {
+    "name": "Content & SEO Agent",
+    "purpose": "Optimize organic content strategy.",
+    "tasks": "Track rankings, identify gaps, analyze competitor SEO.",
+    "triggers": "Weekly ranking review, content planning.",
+    "systems": "SEO platform, CMS, web analytics.",
+    "keyData": "Rankings, organic traffic, competitor rankings.",
+    "kpis": "Organic traffic growth, ranking improvements.",
+    "hitl": "Assistive",
+    "priority": "",
+    "dataRequirements": {
+      "realtime": [],
+      "nearRealtime": [],
+      "batch": [
+        "Weekly keyword ranking snapshots",
+        "Monthly organic traffic analysis",
+        "Content gap analysis",
+        "Competitor SEO strategy changes"
+      ]
+    }
+  },
+  "conversionOptimization": {
+    "name": "Conversion Optimization Agent",
+    "purpose": "Improve website conversion rates.",
+    "tasks": "Identify drop-offs, recommend A/B tests, personalize pages.",
+    "triggers": "Conversion drop, new campaign, quarterly CRO.",
+    "systems": "A/B testing, web analytics, CMS, CDP.",
+    "keyData": "Funnel metrics, test results, segment performance.",
+    "kpis": "Conversion rate, test velocity, revenue/visitor.",
+    "hitl": "Hybrid",
+    "priority": "",
+    "dataRequirements": {
+      "realtime": [
+        "Live funnel conversion rates",
+        "Active A/B test variant performance"
+      ],
+      "nearRealtime": [
+        "Session-level conversion paths",
+        "Page load performance metrics"
+      ],
+      "batch": [
+        "Historical conversion benchmarks",
+        "Completed test results & learnings",
+        "Segment performance analysis"
+      ]
+    }
+  },
+  "attributionAnalytics": {
+    "name": "Marketing Attribution Agent",
+    "purpose": "Cross-channel attribution for budget decisions.",
+    "tasks": "Run MTA models, compare MTA vs MMM, identify high-value paths.",
+    "triggers": "Monthly review, budget planning.",
+    "systems": "Attribution platform, ad platforms, CRM, data warehouse.",
+    "keyData": "Touchpoint data, conversion paths, channel interactions.",
+    "kpis": "Attribution accuracy, path insights.",
+    "hitl": "Assistive",
+    "priority": "",
+    "dataRequirements": {
+      "realtime": [],
+      "nearRealtime": [
+        "Recent conversion path data"
+      ],
+      "batch": [
+        "Monthly multi-touch attribution model outputs",
+        "Channel interaction analysis",
+        "Incrementality study results",
+        "Time-to-convert analysis"
+      ]
+    }
+  },
+  "journeyOrchestration": {
+    "name": "Journey Orchestration Agent",
+    "purpose": "Automate lifecycle communications.",
+    "tasks": "Trigger right message at right time, select channel, personalize, manage frequency.",
+    "triggers": "Customer events (activation, first bill, churn signal).",
+    "systems": "Marketing Cloud, CRM, CDP, email/SMS.",
+    "keyData": "Lifecycle stage, engagement history, preferences, event triggers.",
+    "kpis": "Open/click rates, journey completion, opt-out rate.",
+    "hitl": "Hybrid",
+    "priority": "Near-term Marketing",
+    "dataRequirements": {
+      "realtime": [
+        "Customer event triggers (activation, payment, etc.)",
+        "Channel preference & opt-in status",
+        "Frequency cap status"
+      ],
+      "nearRealtime": [
+        "Recent engagement signals (opens, clicks)",
+        "Updated segment membership"
+      ],
+      "batch": [
+        "Journey flow definitions",
+        "Content template library",
+        "Historical engagement benchmarks"
+      ]
+    }
+  },
+  "audienceSegmentation": {
+    "name": "Audience Segmentation Agent",
+    "purpose": "Build and maintain dynamic customer segments.",
+    "tasks": "Create segments, identify micro-segments, recommend lookalikes.",
+    "triggers": "Campaign planning, quarterly refresh.",
+    "systems": "CDP, CRM, data warehouse, marketing automation.",
+    "keyData": "Demographics, behaviors, transactions, propensity scores.",
+    "kpis": "Segment performance lift, data freshness.",
+    "hitl": "Assistive",
+    "priority": "",
+    "dataRequirements": {
+      "realtime": [],
+      "nearRealtime": [
+        "Real-time behavioral event stream",
+        "Updated propensity scores"
+      ],
+      "batch": [
+        "Customer demographic & transaction data",
+        "Segment definition rules",
+        "Lookalike model outputs",
+        "Historical segment performance"
+      ]
+    }
+  },
+  "loyaltyEngagement": {
+    "name": "Loyalty Engagement Agent",
+    "purpose": "Optimize loyalty program engagement.",
+    "tasks": "Analyze redemption, recommend personalized offers, identify disengaged.",
+    "triggers": "Weekly engagement review, program refresh.",
+    "systems": "Loyalty platform, CRM, partner APIs.",
+    "keyData": "Redemption data, engagement frequency, partner offers.",
+    "kpis": "Engagement rate, redemption rate, program ROI.",
+    "hitl": "Assistive",
+    "priority": "",
+    "dataRequirements": {
+      "realtime": [
+        "Member point balance & tier status"
+      ],
+      "nearRealtime": [
+        "Recent redemption activity",
+        "Partner offer availability"
+      ],
+      "batch": [
+        "Monthly engagement trend analysis",
+        "Program ROI calculations",
+        "Disengaged member identification"
+      ]
+    }
+  },
+  "nextBestAction": {
+    "name": "Next-Best-Action Agent",
+    "purpose": "Determine optimal next communication or offer.",
+    "tasks": "Score propensity, select offer, determine channel/time, enforce rules.",
+    "triggers": "Real-time interaction, scheduled outreach.",
+    "systems": "Decision engine, CRM, CDP, marketing automation.",
+    "keyData": "Propensity scores, offer eligibility, interaction history, preferences.",
+    "kpis": "Offer acceptance, incremental revenue.",
+    "hitl": "Hybrid",
+    "priority": "",
+    "dataRequirements": {
+      "realtime": [
+        "Customer context (current interaction or trigger event)",
+        "Offer eligibility rules",
+        "Frequency cap & suppression status",
+        "Channel availability"
+      ],
+      "nearRealtime": [
+        "Updated propensity scores (upgrade, churn, cross-sell)",
+        "Recent interaction history"
+      ],
+      "batch": [
+        "Business rules & prioritization logic",
+        "Historical offer acceptance rates",
+        "Margin & economics per offer"
+      ]
+    }
+  },
+  "brandOrch": {
+    "name": "Brand Orchestrator",
+    "purpose": "Master orchestrator for the VP Brand & Communications — orchestrates sub-agents (Brand Performance, Campaign, Media Mix, Content, Social, Reputation) for integrated brand management.",
+    "tasks": "Coordinate brand campaigns, orchestrate creative and media sub-agents, maintain brand consistency across channels, surface brand health insights for leadership.",
+    "triggers": "Campaign launch, brand health review, crisis alert, quarterly planning.",
+    "systems": "Brand tracking, ad platforms, social listening, creative tools, PR.",
+    "keyData": "Brand health metrics, campaign performance, social sentiment, competitive SOV, creative assets.",
+    "kpis": "Brand lift, campaign ROI, cross-channel brand consistency, crisis response time.",
+    "hitl": "Assistive",
+    "priority": "",
+    "dataRequirements": {
+      "realtime": [],
+      "nearRealtime": [
+        "Campaign performance summary",
+        "Social sentiment"
+      ],
+      "batch": [
+        "Brand health trends",
+        "Competitive SOV"
+      ]
+    }
+  },
+  "contentCreative": {
+    "name": "Content Generation Agent",
+    "purpose": "Generate ad copy, email variants, social posts, and landing pages at scale while maintaining brand voice.",
+    "tasks": "Produce multi-variant ad copy, generate email subject lines and body content, create social media posts by platform, draft landing page copy, adapt content for segments, enforce brand voice guidelines.",
+    "triggers": "Campaign brief, content calendar deadline, A/B test variant needed, new product/promo launch.",
+    "systems": "CMS, creative tools, brand guidelines, marketing automation, DAM.",
+    "keyData": "Brand voice guidelines, campaign brief, audience segments, prior high-performing content, product details.",
+    "kpis": "Content production velocity, engagement rates, brand voice compliance, variant win rate.",
+    "hitl": "Approval-based — human reviews before publish",
+    "priority": "Near-term Marketing",
+    "dataRequirements": {
+      "realtime": [],
+      "nearRealtime": [
+        "Campaign brief details",
+        "Active A/B test needs"
+      ],
+      "batch": [
+        "Brand voice guidelines",
+        "High-performing content library",
+        "Segment profiles"
+      ]
+    }
+  },
+  "socialMedia": {
+    "name": "Social Media Management Agent",
+    "purpose": "Schedule posts, monitor engagement, respond to comments, identify trending conversations, and manage community across platforms.",
+    "tasks": "Schedule and publish social content, monitor brand mentions and engagement, draft community responses, identify trending topics, flag crisis signals, track influencer activity, report on social KPIs.",
+    "triggers": "Scheduled post, brand mention spike, negative sentiment alert, trending topic, community question.",
+    "systems": "Social management platform, CRM, content library, social listening, moderation tools.",
+    "keyData": "Social calendar, engagement metrics, brand mentions, community sentiment, trending topics, influencer data.",
+    "kpis": "Engagement rate, response time, sentiment trend, community growth, crisis detection speed.",
+    "hitl": "Approval-based for public responses; autonomous for monitoring and scheduling",
+    "priority": "Near-term Marketing",
+    "dataRequirements": {
+      "realtime": [
+        "Real-time brand mentions",
+        "Engagement spikes"
+      ],
+      "nearRealtime": [
+        "Social sentiment trends",
+        "Community questions queue"
+      ],
+      "batch": [
+        "Social content calendar",
+        "Platform best practices",
+        "Crisis response playbook"
+      ]
+    }
+  },
+  "reputationReview": {
+    "name": "Reputation & Review Agent",
+    "purpose": "Monitor reviews across Google, Yelp, app stores; generate response drafts; alert on sentiment spikes; track NPS trends.",
+    "tasks": "Aggregate reviews from all platforms, classify sentiment and topics, generate response drafts, alert on negative review spikes, track app store rating trends, identify store-level reputation issues.",
+    "triggers": "New review, rating drop, sentiment spike, weekly reputation review.",
+    "systems": "Review monitoring platform, CRM, store data, app store APIs, social listening.",
+    "keyData": "Reviews by platform, star ratings, sentiment classification, store-level ratings, app store metrics.",
+    "kpis": "Average rating, response rate, response time, sentiment trend, rating improvement.",
+    "hitl": "Approval-based for public review responses",
+    "priority": "",
+    "dataRequirements": {
+      "realtime": [
+        "New review alerts"
+      ],
+      "nearRealtime": [
+        "Daily rating summary by platform"
+      ],
+      "batch": [
+        "Weekly reputation trends",
+        "Store-level rating analysis",
+        "App store rating history"
+      ]
+    }
+  },
+  "digitalMktOrch": {
+    "name": "Digital Marketing Orchestrator",
+    "purpose": "Master orchestrator for VP Digital Marketing — orchestrates sub-agents (Acquisition, SEO, Conversion, Attribution, Competitive Monitoring, A/B Testing) for integrated digital growth.",
+    "tasks": "Coordinate digital acquisition strategy, orchestrate channel-specific sub-agents, optimize budget allocation across digital channels, surface performance insights.",
+    "triggers": "Daily performance review, budget reallocation, channel anomaly, quarterly planning.",
+    "systems": "Ad platforms, SEO tools, web analytics, attribution, A/B testing.",
+    "keyData": "Digital CPA by channel, conversion funnels, SEO rankings, attribution paths, test results.",
+    "kpis": "Digital CPA, ROAS, organic traffic growth, conversion rate, test velocity.",
+    "hitl": "Assistive",
+    "priority": "",
+    "dataRequirements": {
+      "realtime": [
+        "Live campaign performance"
+      ],
+      "nearRealtime": [
+        "Channel CPA trends"
+      ],
+      "batch": [
+        "Monthly digital performance",
+        "Budget allocation analysis"
+      ]
+    }
+  },
+  "competitiveMonitor": {
+    "name": "Competitive Monitoring Agent",
+    "purpose": "Track competitor ad creative, messaging changes, pricing promotions, and share-of-voice shifts for marketing counter-response.",
+    "tasks": "Monitor competitor advertising activity, detect messaging/positioning changes, track promotional cadence, analyze share of voice shifts, alert on significant competitive moves, recommend counter-campaign actions.",
+    "triggers": "Competitor campaign launch, SOV shift, pricing change, weekly competitive review.",
+    "systems": "Competitive monitoring platform, ad intelligence, social listening, web scraping.",
+    "keyData": "Competitor ad spend estimates, creative samples, messaging themes, promotional calendar, SOV data.",
+    "kpis": "Time-to-detect competitor moves, counter-campaign response time, SOV trend.",
+    "hitl": "Assistive",
+    "priority": "",
+    "dataRequirements": {
+      "realtime": [],
+      "nearRealtime": [
+        "Competitor ad activity (hourly scan)"
+      ],
+      "batch": [
+        "Weekly competitive landscape report",
+        "SOV analysis",
+        "Competitor promotional calendar"
+      ]
+    }
+  },
+  "abTestAutomation": {
+    "name": "A/B Test Automation Agent",
+    "purpose": "Design experiments, monitor statistical significance, auto-promote winners, and manage test velocity across channels.",
+    "tasks": "Recommend test hypotheses, design experiment variants, monitor statistical significance in real-time, auto-promote winning variants, manage test calendar, archive learnings, prevent test conflicts.",
+    "triggers": "New test launch, significance threshold reached, test calendar slot available, performance anomaly suggesting test opportunity.",
+    "systems": "A/B testing platform, web analytics, CMS, marketing automation.",
+    "keyData": "Active tests, variant performance, statistical significance, test history, conversion baselines.",
+    "kpis": "Test velocity, win rate, incremental conversion from testing, time-to-significance.",
+    "hitl": "Hybrid — auto-promotes clear winners, flags close calls for human decision",
+    "priority": "",
+    "dataRequirements": {
+      "realtime": [
+        "Active test variant performance",
+        "Real-time significance calculations"
+      ],
+      "nearRealtime": [
+        "Test queue status"
+      ],
+      "batch": [
+        "Test history & learnings archive",
+        "Conversion baselines",
+        "Best practice test patterns"
+      ]
+    }
+  },
+  "crmLifecycleOrch": {
+    "name": "CRM & Lifecycle Orchestrator",
+    "purpose": "Master orchestrator for VP CRM & Lifecycle Marketing — orchestrates sub-agents (Journey, Segmentation, Loyalty, NBA, Data Enrichment, Product Launch) for integrated lifecycle management.",
+    "tasks": "Coordinate lifecycle communication strategy, orchestrate journey and personalization sub-agents, manage cross-channel frequency governance, surface lifecycle KPIs for leadership.",
+    "triggers": "Lifecycle stage transition, campaign planning, frequency cap conflict, quarterly review.",
+    "systems": "Marketing Cloud, CRM, CDP, loyalty platform, decision engine.",
+    "keyData": "Lifecycle stage distribution, engagement metrics, journey performance, segment health, frequency status.",
+    "kpis": "Lifecycle revenue, engagement rates, opt-out rate, journey completion, NBO acceptance.",
+    "hitl": "Assistive",
+    "priority": "",
+    "dataRequirements": {
+      "realtime": [
+        "Customer lifecycle events"
+      ],
+      "nearRealtime": [
+        "Journey performance summary",
+        "Segment health"
+      ],
+      "batch": [
+        "Lifecycle strategy review",
+        "Cross-channel frequency analysis"
+      ]
+    }
+  },
+  "productLaunch": {
+    "name": "Product Launch Agent",
+    "purpose": "Orchestrate multi-channel launch sequences for new devices, plans, and promotions — from teaser through post-launch nurture.",
+    "tasks": "Coordinate launch timeline across channels (email, SMS, social, in-store, digital), manage teaser campaigns, trigger launch-day activations, monitor launch performance in real-time, adjust messaging based on early signals, manage post-launch nurture sequences.",
+    "triggers": "Product launch calendar milestone, launch day, post-launch performance review.",
+    "systems": "Marketing automation, CMS, social management, CRM, commerce, inventory.",
+    "keyData": "Launch calendar, target segments, channel readiness, inventory availability, early performance signals.",
+    "kpis": "Launch awareness, day-1 conversion, channel coordination score, post-launch adoption curve.",
+    "hitl": "Hybrid — autonomous for execution, approval-based for mid-launch pivots",
+    "priority": "",
+    "dataRequirements": {
+      "realtime": [
+        "Launch-day channel performance"
+      ],
+      "nearRealtime": [
+        "Inventory availability",
+        "Early conversion signals"
+      ],
+      "batch": [
+        "Launch timeline & milestones",
+        "Target segment definitions",
+        "Post-launch nurture sequences"
+      ]
+    }
+  },
+  "dataEnrichment": {
+    "name": "Customer Data Enrichment Agent",
+    "purpose": "Continuously enrich customer profiles with behavioral signals, third-party data, intent signals, and interaction history.",
+    "tasks": "Ingest behavioral events from app/web/store, append third-party demographic and firmographic data, detect intent signals (competitor site visits, upgrade research), maintain data freshness and accuracy, flag data quality issues.",
+    "triggers": "New behavioral event, data quality threshold breach, third-party data refresh, enrichment schedule.",
+    "systems": "CDP, CRM, data warehouse, third-party data providers, web analytics.",
+    "keyData": "Customer behavioral events, third-party data feeds, intent signals, data quality scores, profile completeness.",
+    "kpis": "Profile completeness rate, data freshness, enrichment coverage, downstream model accuracy improvement.",
+    "hitl": "Fully autonomous",
+    "priority": "",
+    "dataRequirements": {
+      "realtime": [
+        "Real-time behavioral events"
+      ],
+      "nearRealtime": [
+        "Intent signal detection",
+        "Third-party data ingestion"
+      ],
+      "batch": [
+        "Data quality audit",
+        "Profile completeness analysis",
+        "Third-party data refresh schedule"
+      ]
+    }
+  },
+  "customer360": {
+    "name": "Customer 360 Agent",
+    "purpose": "Compile and maintain a single unified customer view from CRM, billing, support, commerce, and usage data; surface it to all agents.",
+    "tasks": "Reconcile customer identity across systems, merge duplicate profiles, maintain golden record, surface unified view to requesting agents, track data lineage, ensure consistency across touchpoints.",
+    "triggers": "New customer event from any system, identity merge detected, data conflict, agent context request.",
+    "systems": "Salesforce Data Cloud, CRM, billing, OMS, support, commerce, CDP.",
+    "keyData": "All customer data points unified: profile, billing, products, interactions, usage, preferences, churn risk, LTV.",
+    "kpis": "Identity resolution accuracy, golden record completeness, cross-system consistency, agent context delivery speed.",
+    "hitl": "Fully autonomous",
+    "priority": "Near-term Marketing",
+    "dataRequirements": {
+      "realtime": [
+        "Cross-system identity resolution",
+        "Real-time profile updates"
+      ],
+      "nearRealtime": [
+        "Merged profile consistency checks"
+      ],
+      "batch": [
+        "Identity resolution rules",
+        "Data lineage mapping",
+        "Profile completeness audit"
+      ]
+    }
+  }
+}

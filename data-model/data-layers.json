@@ -1,0 +1,322 @@
+{
+  "silver": [
+    {
+      "name": "Customer Profile",
+      "icon": "&#128100;",
+      "source": "CRM (Salesforce)",
+      "bronzeDescription": "Account, Contact, Household records",
+      "fields": [
+        "Account ID, name, status",
+        "Lines, devices, plan details",
+        "Tenure, loyalty tier, credit class",
+        "Contact preferences, language",
+        "Authentication credentials"
+      ],
+      "freshness": "nrt",
+      "consumedByAgents": [
+        "Care Orchestrator",
+        "Warm Transfer Agent",
+        "Retention Orchestrator",
+        "Retail Orchestrator",
+        "Telesales Orchestrator",
+        "Save Offer Recommendation Agent"
+      ]
+    },
+    {
+      "name": "Billing & Balance",
+      "icon": "&#128176;",
+      "source": "BSS Billing (Amdocs/CSG)",
+      "bronzeDescription": "Invoice, Balance, Adjustment records",
+      "fields": [
+        "Current balance, amount due, due date",
+        "Autopay status, payment method",
+        "Installment plan balances",
+        "Promotional credits & expiry",
+        "Tax jurisdiction & surcharges"
+      ],
+      "freshness": "rt",
+      "consumedByAgents": [
+        "Billing Resolution Agent",
+        "Payment Exception Agent",
+        "Care Orchestrator",
+        "Order Status Agent"
+      ]
+    },
+    {
+      "name": "Payment History",
+      "icon": "&#128179;",
+      "source": "Payment Gateway",
+      "bronzeDescription": "Transaction logs, ACH/CC records",
+      "fields": [
+        "Payment date, amount, method",
+        "Failed payment attempts & codes",
+        "Collections stage & status",
+        "Promise-to-pay records",
+        "Hardship indicators"
+      ],
+      "freshness": "rt",
+      "consumedByAgents": [
+        "Billing Resolution Agent",
+        "Payment Exception Agent",
+        "Supervisor Queue & Coaching Agent"
+      ]
+    },
+    {
+      "name": "Order & Activation",
+      "icon": "&#128230;",
+      "source": "OMS / Provisioning",
+      "bronzeDescription": "Order, Shipment, Activation records",
+      "fields": [
+        "Order ID, status, substatus",
+        "Shipping tracking & ETA",
+        "Activation state & error codes",
+        "Port-in status & FOC date",
+        "SIM/eSIM assignment"
+      ],
+      "freshness": "rt",
+      "consumedByAgents": [
+        "Order Status Agent",
+        "Digital Order Fallout Agent",
+        "Retail Orchestrator",
+        "Checkout Support Agent"
+      ]
+    },
+    {
+      "name": "Network & Outage Status",
+      "icon": "&#128225;",
+      "source": "OSS / Network Mgmt",
+      "bronzeDescription": "SNMP traps, gNMI telemetry, alarms",
+      "fields": [
+        "Cell site status & alarms",
+        "Active outage tickets & polygons",
+        "Maintenance windows & ETAs",
+        "Signal quality by location",
+        "Congestion metrics"
+      ],
+      "freshness": "rt",
+      "consumedByAgents": [
+        "Outage & Service Health Agent",
+        "Tech Support Orchestrator",
+        "Device Troubleshooting Agent",
+        "Network Performance Analytics Agent",
+        "Warm Transfer Agent"
+      ]
+    },
+    {
+      "name": "Device & SIM",
+      "icon": "&#128241;",
+      "source": "Device Mgmt / Inventory",
+      "bronzeDescription": "IMEI registry, firmware DB, inventory",
+      "fields": [
+        "Device model, IMEI, firmware",
+        "SIM ICCID, eSIM EID, status",
+        "Diagnostic results (signal, battery)",
+        "Upgrade eligibility & trade-in value",
+        "Device compatibility matrix"
+      ],
+      "freshness": "nrt",
+      "consumedByAgents": [
+        "Device Troubleshooting Agent",
+        "Tech Support Orchestrator",
+        "Upgrade Eligibility Agent",
+        "Retail Orchestrator"
+      ]
+    },
+    {
+      "name": "Interaction History",
+      "icon": "&#128172;",
+      "source": "CRM / Transcript Store",
+      "bronzeDescription": "Call logs, chat transcripts, case notes",
+      "fields": [
+        "Recent interactions (48h)",
+        "Case dispositions & notes",
+        "Sentiment scores per interaction",
+        "Escalation history",
+        "Channel history (voice/chat/social)"
+      ],
+      "freshness": "nrt",
+      "consumedByAgents": [
+        "Care Orchestrator",
+        "Tech Escalation Summary Agent",
+        "Sentiment & Defection Risk Agent",
+        "Channel Response Agent",
+        "Call Coaching & Objection Agent"
+      ]
+    },
+    {
+      "name": "Knowledge & Policy",
+      "icon": "&#128218;",
+      "source": "Knowledge Base / Policy Engine",
+      "bronzeDescription": "KB articles, policy docs, scripts",
+      "fields": [
+        "Troubleshooting decision trees",
+        "Policy thresholds (credit limits)",
+        "Regulatory disclosure scripts",
+        "Save offer playbooks",
+        "Brand voice guidelines"
+      ],
+      "freshness": "bt",
+      "consumedByAgents": [
+        "Care Orchestrator",
+        "Interaction QA Agent",
+        "Retention Orchestrator",
+        "Channel Response Agent",
+        "Device Troubleshooting Agent"
+      ]
+    },
+    {
+      "name": "Churn & Propensity Scores",
+      "icon": "&#127919;",
+      "source": "ML Models / Einstein",
+      "bronzeDescription": "Feature vectors, model outputs",
+      "fields": [
+        "Churn propensity score",
+        "Upgrade propensity",
+        "Cross-sell propensity",
+        "Customer lifetime value (CLV)",
+        "Segment membership"
+      ],
+      "freshness": "nrt",
+      "consumedByAgents": [
+        "Save Offer Recommendation Agent",
+        "Sentiment & Defection Risk Agent",
+        "Churn Analytics & Forecasting Agent",
+        "Next-Best-Action Agent",
+        "Tech Queue Prioritization Agent"
+      ]
+    },
+    {
+      "name": "Queue & Workforce",
+      "icon": "&#128202;",
+      "source": "WFM / Telephony ACD",
+      "bronzeDescription": "ACD events, adherence logs, schedules",
+      "fields": [
+        "Live queue depth by skill group",
+        "Agent states (available/busy/ACW)",
+        "Real-time adherence (RTA)",
+        "Service level & ASA",
+        "Intraday volume vs forecast"
+      ],
+      "freshness": "rt",
+      "consumedByAgents": [
+        "Supervisor Queue & Coaching Agent",
+        "Operations Analytics Agent",
+        "Workforce Planning Agent",
+        "Tech Queue Prioritization Agent"
+      ]
+    },
+    {
+      "name": "Product Catalog & Pricing",
+      "icon": "&#127991;",
+      "source": "CPQ / Catalog Platform",
+      "bronzeDescription": "Plan, device, promo, pricing records",
+      "fields": [
+        "Available plans & pricing",
+        "Active promotions & rules",
+        "Device inventory by location",
+        "Eligibility criteria",
+        "Financing terms & options"
+      ],
+      "freshness": "rt",
+      "consumedByAgents": [
+        "Retail Orchestrator",
+        "Telesales Orchestrator",
+        "Plan Recommendation Agent",
+        "Promo Eligibility Agent",
+        "Quote & Order Governance Agent"
+      ]
+    },
+    {
+      "name": "Campaign & Attribution",
+      "icon": "&#128200;",
+      "source": "Ad Platforms / Marketing Cloud",
+      "bronzeDescription": "Impression logs, conversion events, spend",
+      "fields": [
+        "Campaign metrics (impressions, CPA)",
+        "Attribution model outputs",
+        "Channel performance data",
+        "Creative variant results",
+        "Spend pacing & budgets"
+      ],
+      "freshness": "nrt",
+      "consumedByAgents": [
+        "Campaign Performance Agent",
+        "Acquisition Campaign Agent",
+        "Marketing Attribution Agent",
+        "Media Mix Optimization Agent",
+        "Content & SEO Agent"
+      ]
+    },
+    {
+      "name": "Segments & Audiences",
+      "icon": "&#127912;",
+      "source": "CDP / Data Cloud",
+      "bronzeDescription": "Behavioral events, demographic data",
+      "fields": [
+        "Dynamic segment definitions",
+        "Segment membership (real-time)",
+        "Engagement history (opens/clicks)",
+        "Frequency caps & suppressions",
+        "Channel preferences & opt-ins"
+      ],
+      "freshness": "nrt",
+      "consumedByAgents": [
+        "Audience Segmentation Agent",
+        "Journey Orchestration Agent",
+        "Next-Best-Action Agent",
+        "Conversion Optimization Agent"
+      ]
+    },
+    {
+      "name": "Loyalty & Rewards",
+      "icon": "&#127942;",
+      "source": "Loyalty Platform",
+      "bronzeDescription": "Points ledger, redemption logs, partner feeds",
+      "fields": [
+        "Member tier & point balance",
+        "Redemption history",
+        "Partner offer availability",
+        "Program engagement frequency",
+        "Disengagement indicators"
+      ],
+      "freshness": "nrt",
+      "consumedByAgents": [
+        "Loyalty Engagement Agent",
+        "Retention Orchestrator",
+        "Next-Best-Action Agent"
+      ]
+    }
+  ],
+  "gold": [
+    {
+      "name": "Executive KPI Dashboards",
+      "icon": "&#128202;",
+      "detail": "CSAT, NPS, FCR, AHT, cost-per-contact, churn rate"
+    },
+    {
+      "name": "Churn Forecast Models",
+      "icon": "&#128201;",
+      "detail": "Segment-level churn predictions, scenario modeling"
+    },
+    {
+      "name": "Workforce Forecasts",
+      "icon": "&#128197;",
+      "detail": "Volume forecasts, capacity plans, staffing models"
+    },
+    {
+      "name": "Marketing ROI Reports",
+      "icon": "&#128176;",
+      "detail": "Campaign ROI, attribution, offer portfolio analysis"
+    },
+    {
+      "name": "VoC / Sentiment Reports",
+      "icon": "&#128172;",
+      "detail": "NPS trends, complaint themes, focus group insights"
+    },
+    {
+      "name": "Channel Performance",
+      "icon": "&#128200;",
+      "detail": "Conversion by channel, CAC, ARPU, assisted vs self-serve"
+    }
+  ]
+}

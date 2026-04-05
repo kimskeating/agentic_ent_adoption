@@ -1,0 +1,174 @@
+{
+  "service": [
+    {
+      "role": "Director, Care",
+      "agents": "Ops Analytics, Volume Driver, VoC, WFP",
+      "hitl": "Assistive",
+      "dF": 3,
+      "dC": 140000,
+      "dP": 30
+    },
+    {
+      "role": "Director, Adv. Tech",
+      "agents": "Network Perf, Tech Ops",
+      "hitl": "Assistive",
+      "dF": 2,
+      "dC": 145000,
+      "dP": 25
+    },
+    {
+      "role": "Director, Retention",
+      "agents": "Churn Analytics, Retention Perf",
+      "hitl": "Assistive",
+      "dF": 2,
+      "dC": 140000,
+      "dP": 25
+    },
+    {
+      "role": "CC Supervisor, Care",
+      "agents": "Billing Resolution, Payment, Queue, QA",
+      "hitl": "Approval / Assistive",
+      "dF": 25,
+      "dC": 78000,
+      "dP": 35
+    },
+    {
+      "role": "CC Supervisor, Adv Tech",
+      "agents": "Tech Escalation, Queue Priority",
+      "hitl": "Assistive",
+      "dF": 10,
+      "dC": 82000,
+      "dP": 25
+    },
+    {
+      "role": "CC Supervisor, Retention",
+      "agents": "Save Offer, Retention Perf, Sentiment",
+      "hitl": "Approval / Assistive",
+      "dF": 8,
+      "dC": 80000,
+      "dP": 30
+    },
+    {
+      "role": "Frontline Care Rep",
+      "agents": "Care Orchestrator + 14 sub-agents",
+      "hitl": "Assistive / Autonomous",
+      "dF": 200,
+      "dC": 55000,
+      "dP": 35
+    },
+    {
+      "role": "Chat / Social Rep",
+      "agents": "Channel Response",
+      "hitl": "Assistive",
+      "dF": 80,
+      "dC": 52000,
+      "dP": 30
+    },
+    {
+      "role": "Adv Tech Support Rep",
+      "agents": "Tech Support Agent, Outage, Device",
+      "hitl": "Assistive / Hybrid",
+      "dF": 60,
+      "dC": 65000,
+      "dP": 30
+    },
+    {
+      "role": "Retention / Loyalty Rep",
+      "agents": "Retention Orchestrator",
+      "hitl": "Assistive",
+      "dF": 50,
+      "dC": 58000,
+      "dP": 25
+    }
+  ],
+  "sales": [
+    {
+      "role": "Retail Sales Associate",
+      "agents": "Retail Orchestrator, Accessory",
+      "hitl": "Assistive",
+      "dF": 300,
+      "dC": 48000,
+      "dP": 30
+    },
+    {
+      "role": "Retail Supervisor",
+      "agents": "(Store Traffic)",
+      "hitl": "Assistive",
+      "dF": 40,
+      "dC": 62000,
+      "dP": 15
+    },
+    {
+      "role": "Digital Merch Mgr",
+      "agents": "Plan Rec, Promo Eligibility",
+      "hitl": "Hybrid / Autonomous",
+      "dF": 6,
+      "dC": 95000,
+      "dP": 45
+    },
+    {
+      "role": "Ecommerce PM",
+      "agents": "Checkout Support",
+      "hitl": "Hybrid",
+      "dF": 4,
+      "dC": 105000,
+      "dP": 40
+    },
+    {
+      "role": "Digital Sales Ops",
+      "agents": "Order Fallout",
+      "hitl": "Approval-based",
+      "dF": 5,
+      "dC": 90000,
+      "dP": 40
+    },
+    {
+      "role": "Inbound Sales Rep",
+      "agents": "Telesales Orchestrator",
+      "hitl": "Assistive",
+      "dF": 100,
+      "dC": 50000,
+      "dP": 30
+    },
+    {
+      "role": "Upgrade Specialist",
+      "agents": "Upgrade, Cross-sell",
+      "hitl": "Assistive",
+      "dF": 40,
+      "dC": 55000,
+      "dP": 30
+    },
+    {
+      "role": "Telesales Supervisor",
+      "agents": "Coaching, Telesales Perf",
+      "hitl": "Assistive",
+      "dF": 12,
+      "dC": 75000,
+      "dP": 25
+    },
+    {
+      "role": "Sales Ops Mgr",
+      "agents": "Quote Governance",
+      "hitl": "Approval-based",
+      "dF": 3,
+      "dC": 100000,
+      "dP": 35
+    },
+    {
+      "role": "Promos Mgr",
+      "agents": "Offer Performance",
+      "hitl": "Assistive",
+      "dF": 2,
+      "dC": 105000,
+      "dP": 25
+    },
+    {
+      "role": "Channel Perf Mgr",
+      "agents": "Channel Optimization",
+      "hitl": "Assistive",
+      "dF": 2,
+      "dC": 100000,
+      "dP": 25
+    }
+  ]
+}

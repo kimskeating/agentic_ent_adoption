@@ -1,0 +1,469 @@
+{
+  "service": {
+    "role": "Chief Customer Officer / EVP Customer Operations",
+    "level": "L1",
+    "agents": [],
+    "children": [
+      {
+        "role": "VP Customer Care / Service",
+        "level": "L2",
+        "agents": [],
+        "children": [
+          {
+            "role": "Director, Care",
+            "level": "L3",
+            "subtitle": "Strategic: reporting, analytics, VoC, workforce planning",
+            "agents": [
+              "Care Director Orchestrator",
+              "Operations Analytics Agent",
+              "Volume Driver Analysis Agent",
+              "Voice of Customer Agent",
+              "Workforce Planning Agent"
+            ],
+            "children": [
+              {
+                "role": "CC Supervisor, Care",
+                "level": "L4",
+                "subtitle": "Day-to-day: escalations, queue mgmt, QA, coaching",
+                "agents": [
+                  "Care Supervisor Orchestrator",
+                  "Interaction QA Agent"
+                ],
+                "children": [
+                  {
+                    "role": "Frontline Care Rep",
+                    "level": "L5",
+                    "subtitle": "Standard billing, account changes, guided resolution",
+                    "agents": [
+                      "Care Orchestrator",
+                      "Billing Resolution Agent",
+                      "Payment Exception Agent",
+                      "Order Status Agent",
+                      "Plan Advisory Agent",
+                      "Account Management Agent",
+                      "Feature & Add-On Agent",
+                      "Device Support Agent",
+                      "Network & Coverage Agent",
+                      "Promotion & Loyalty Agent",
+                      "Account Security Agent",
+                      "Autopay & Payment Method Agent",
+                      "Number Transfer Agent",
+                      "Self-Service Guide Agent",
+                      "Warm Transfer Agent"
+                    ],
+                    "children": []
+                  },
+                  {
+                    "role": "Chat / Messaging / Social Rep",
+                    "level": "L5",
+                    "subtitle": "Digital channel response",
+                    "agents": [
+                      "Channel Response Agent"
+                    ],
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "role": "Director, Advanced Technical Support",
+            "level": "L3",
+            "subtitle": "Strategic: network analysis, escalation optimization",
+            "agents": [
+              "Network Performance Analytics Agent",
+              "Technical Operations Insights Agent"
+            ],
+            "children": [
+              {
+                "role": "CC Supervisor, Adv. Technical Support",
+                "level": "L4",
+                "subtitle": "Day-to-day: escalation triage, queue prioritization",
+                "agents": [
+                  "Tech Escalation Summary Agent",
+                  "Tech Queue Prioritization Agent"
+                ],
+                "children": [
+                  {
+                    "role": "Advanced Technical Support Rep",
+                    "level": "L5",
+                    "subtitle": "Complex troubleshooting, outage resolution",
+                    "agents": [
+                      "Tech Support Orchestrator",
+                      "Outage & Service Health Agent",
+                      "Device Troubleshooting Agent"
+                    ],
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "role": "Director, Retention",
+            "level": "L3",
+            "subtitle": "Strategic: churn forecasting, program ROI",
+            "agents": [
+              "Churn Analytics & Forecasting Agent",
+              "Retention Program Performance Agent"
+            ],
+            "children": [
+              {
+                "role": "CC Supervisor, Retention",
+                "level": "L4",
+                "subtitle": "Day-to-day: save approvals, discount governance",
+                "agents": [
+                  "Save Offer Recommendation Agent",
+                  "Retention Supervisor Performance Agent",
+                  "Sentiment & Defection Risk Agent"
+                ],
+                "children": [
+                  {
+                    "role": "Retention / Loyalty Rep",
+                    "level": "L5",
+                    "subtitle": "Save conversations, scripted retention",
+                    "agents": [
+                      "Retention Orchestrator"
+                    ],
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "sales": {
+    "role": "Chief Revenue Officer / EVP Consumer Sales",
+    "level": "L1",
+    "agents": [
+      "Sales Director Orchestrator",
+      "Sales Forecasting & Pipeline Agent",
+      "Competitive Intelligence Agent"
+    ],
+    "children": [
+      {
+        "role": "VP Retail Sales",
+        "level": "L2",
+        "agents": [],
+        "children": [
+          {
+            "role": "Regional Retail Director",
+            "level": "L3",
+            "agents": [
+              "Inventory & Allocation Agent"
+            ],
+            "children": [
+              {
+                "role": "Retail Store Manager",
+                "level": "L4",
+                "subtitle": "Floor management, conversion, staffing",
+                "agents": [
+                  "Sales Supervisor Orchestrator",
+                  "Store Traffic & Conversion Agent",
+                  "Sales Enablement & Coaching Agent"
+                ],
+                "children": [
+                  {
+                    "role": "Retail Sales Associate",
+                    "level": "L5",
+                    "subtitle": "Device and plan sales, trade-in, checkout",
+                    "agents": [
+                      "Retail Orchestrator",
+                      "Accessory & Bundle Agent",
+                      "Customer Onboarding Agent"
+                    ],
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "role": "VP Digital Sales",
+        "level": "L2",
+        "agents": [],
+        "children": [
+          {
+            "role": "Director of Digital Sales",
+            "level": "L3",
+            "agents": [
+              "Digital Conversion Optimization Agent",
+              "Lead Scoring & Qualification Agent"
+            ],
+            "children": [
+              {
+                "role": "Digital Merchandising / Conversion Mgr",
+                "level": "L4",
+                "agents": [
+                  "Plan Recommendation Agent",
+                  "Promo Eligibility Agent"
+                ],
+                "children": []
+              },
+              {
+                "role": "Ecommerce Product Manager",
+                "level": "L4",
+                "agents": [
+                  "Checkout Support Agent",
+                  "Cart Recovery Agent"
+                ],
+                "children": []
+              },
+              {
+                "role": "Digital Sales Ops Manager",
+                "level": "L4",
+                "agents": [
+                  "Digital Order Fallout Agent",
+                  "Customer Onboarding Agent"
+                ],
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "role": "VP Telesales / Inside Sales",
+        "level": "L2",
+        "agents": [],
+        "children": [
+          {
+            "role": "Telesales Director",
+            "level": "L3",
+            "agents": [],
+            "children": [
+              {
+                "role": "Telesales Supervisor",
+                "level": "L4",
+                "subtitle": "Call floor mgmt, coaching, compliance",
+                "agents": [
+                  "Sales Supervisor Orchestrator",
+                  "Call Coaching & Objection Agent",
+                  "Telesales Performance Agent",
+                  "Sales Enablement & Coaching Agent"
+                ],
+                "children": [
+                  {
+                    "role": "Inbound Sales Rep",
+                    "level": "L5",
+                    "agents": [
+                      "Telesales Orchestrator",
+                      "Customer Onboarding Agent"
+                    ],
+                    "children": []
+                  },
+                  {
+                    "role": "Upgrade / Retention Sales Specialist",
+                    "level": "L5",
+                    "agents": [
+                      "Upgrade Eligibility Agent",
+                      "Cross-sell / Upsell Agent",
+                      "Renewal & Lifecycle Agent"
+                    ],
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "role": "RevOps & Commercial Operations",
+        "level": "L2",
+        "subtitle": "Cross-channel revenue operations, compliance, knowledge",
+        "agents": [
+          "RevOps Orchestrator"
+        ],
+        "children": [
+          {
+            "role": "Sales Ops / Commercial Ops Manager",
+            "level": "L4",
+            "agents": [
+              "Quote & Order Governance Agent",
+              "Compliance & Regulatory Agent"
+            ],
+            "children": []
+          },
+          {
+            "role": "Promotions / Offer Strategy Manager",
+            "level": "L4",
+            "agents": [
+              "Offer Performance Agent"
+            ],
+            "children": []
+          },
+          {
+            "role": "Channel Performance Manager",
+            "level": "L4",
+            "agents": [
+              "Channel Optimization Agent"
+            ],
+            "children": []
+          },
+          {
+            "role": "Partner / Dealer Manager",
+            "level": "L4",
+            "subtitle": "Authorized dealer and retailer management",
+            "agents": [
+              "Partner & Dealer Management Agent"
+            ],
+            "children": []
+          },
+          {
+            "role": "Knowledge & Enablement Manager",
+            "level": "L4",
+            "agents": [
+              "Knowledge Management Agent"
+            ],
+            "children": []
+          }
+        ]
+      }
+    ]
+  },
+  "marketing": {
+    "role": "CMO / SVP Marketing",
+    "level": "L1",
+    "agents": [
+      "Customer 360 Agent"
+    ],
+    "children": [
+      {
+        "role": "VP Brand & Communications",
+        "level": "L2",
+        "agents": [
+          "Brand Orchestrator"
+        ],
+        "children": [
+          {
+            "role": "Director, Brand Strategy",
+            "level": "L3",
+            "agents": [
+              "Brand Performance Agent",
+              "Reputation & Review Agent"
+            ],
+            "children": []
+          },
+          {
+            "role": "Director, Advertising & Creative",
+            "level": "L3",
+            "agents": [
+              "Campaign Performance Agent",
+              "Content Generation Agent"
+            ],
+            "children": []
+          },
+          {
+            "role": "Director, Media Planning & Buying",
+            "level": "L3",
+            "agents": [
+              "Media Mix Optimization Agent"
+            ],
+            "children": []
+          },
+          {
+            "role": "Director, Social Media",
+            "level": "L3",
+            "subtitle": "Social strategy, community, influencer",
+            "agents": [
+              "Social Media Management Agent"
+            ],
+            "children": []
+          }
+        ]
+      },
+      {
+        "role": "VP Digital Marketing / Growth",
+        "level": "L2",
+        "agents": [
+          "Digital Marketing Orchestrator"
+        ],
+        "children": [
+          {
+            "role": "Director, Performance Marketing",
+            "level": "L3",
+            "agents": [
+              "Acquisition Campaign Agent"
+            ],
+            "children": []
+          },
+          {
+            "role": "Director, SEO & Content",
+            "level": "L3",
+            "agents": [
+              "Content & SEO Agent"
+            ],
+            "children": []
+          },
+          {
+            "role": "Director, Web & Conversion Optimization",
+            "level": "L3",
+            "agents": [
+              "Conversion Optimization Agent",
+              "A/B Test Automation Agent"
+            ],
+            "children": []
+          },
+          {
+            "role": "Director, Marketing Analytics",
+            "level": "L3",
+            "agents": [
+              "Marketing Attribution Agent",
+              "Competitive Monitoring Agent"
+            ],
+            "children": []
+          }
+        ]
+      },
+      {
+        "role": "VP CRM & Lifecycle Marketing",
+        "level": "L2",
+        "agents": [
+          "CRM & Lifecycle Orchestrator"
+        ],
+        "children": [
+          {
+            "role": "Director, Lifecycle Marketing",
+            "level": "L3",
+            "agents": [
+              "Journey Orchestration Agent",
+              "Product Launch Agent"
+            ],
+            "children": []
+          },
+          {
+            "role": "Director, CRM & Marketing Automation",
+            "level": "L3",
+            "agents": [
+              "Audience Segmentation Agent",
+              "Customer Data Enrichment Agent"
+            ],
+            "children": []
+          },
+          {
+            "role": "Director, Loyalty & Rewards",
+            "level": "L3",
+            "agents": [
+              "Loyalty Engagement Agent"
+            ],
+            "children": []
+          },
+          {
+            "role": "Director, Personalization",
+            "level": "L3",
+            "agents": [
+              "Next-Best-Action Agent"
+            ],
+            "children": []
+          }
+        ]
+      }
+    ]
+  }
+}

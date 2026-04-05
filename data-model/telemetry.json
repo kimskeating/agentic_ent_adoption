@@ -1,0 +1,258 @@
+{
+  "performance": [
+    {
+      "title": "Service Performance",
+      "icon": "svc",
+      "metrics": [
+        {
+          "name": "Containment Rate",
+          "desc": "% of interactions fully resolved by agent without human intervention",
+          "good": "65-85% (telco benchmark); track by intent category",
+          "drift": "Alert when any intent drops >5pts below 4-week rolling baseline"
+        },
+        {
+          "name": "Verified Resolution Rate",
+          "desc": "Confirmed resolution via surveys, no-callback within 48h, or QA review",
+          "good": "Within 10pts of raw containment; re-contact rate <15%",
+          "drift": "Gap widening between raw containment and verified resolution"
+        },
+        {
+          "name": "Resolution Accuracy",
+          "desc": "Factual correctness of agent's proposed resolution or action",
+          "good": "85%+ goal accuracy; 99%+ for billing/credit actions",
+          "drift": "Run daily golden-dataset evals; track by intent category"
+        },
+        {
+          "name": "CSAT / NPS Delta",
+          "desc": "Satisfaction gap between AI-handled and human-handled interactions",
+          "good": "AI CSAT within 5-10% of human CSAT; gap trending closed",
+          "drift": "AI CSAT drops >5% below baseline or gap widens >3pts"
+        },
+        {
+          "name": "First Contact Resolution",
+          "desc": "Issues resolved on first AI contact without repeat contact within 48h",
+          "good": "70-75% industry standard; 80%+ for top performers",
+          "drift": "FCR trending down or re-contact rate rising above 15%"
+        },
+        {
+          "name": "Save Rate / Retention",
+          "desc": "% of at-risk customers successfully saved by retention agents",
+          "good": "45%+ save rate; positive margin per save",
+          "drift": "Save rate declining or post-save churn increasing"
+        },
+        {
+          "name": "Compliance Adherence",
+          "desc": "Aggregate regulatory and policy compliance posture",
+          "good": "100% on mandatory disclosures; 99%+ internal policy",
+          "drift": "Any compliance failure trend; regulatory audit findings"
+        },
+        {
+          "name": "Credit / Discount Governance",
+          "desc": "Total AI-issued credits and discounts vs approved policy matrix",
+          "good": "Within 10% of approved matrix; daily total within budget",
+          "drift": "Daily total exceeds 115% budget; avg credit deviates >$2"
+        }
+      ]
+    },
+    {
+      "title": "Sales Performance",
+      "icon": "sal",
+      "metrics": [
+        {
+          "name": "Quote / Order Accuracy",
+          "desc": "% of agent-generated quotes and orders passing validation error-free",
+          "good": "95%+ first-pass accuracy; <3% fallout rate",
+          "drift": "Track by channel and order type; alert on fallout increase"
+        },
+        {
+          "name": "Conversion Impact",
+          "desc": "Conversion rate lift attributable to agent assistance vs unassisted baseline",
+          "good": "10-20% conversion lift; controlled A/B measurement",
+          "drift": "Declining lift over time; compare agent vs control weekly"
+        },
+        {
+          "name": "Cross-sell / Upsell Acceptance",
+          "desc": "Rate at which cross-sell recommendations are accepted by customers",
+          "good": "15-25% acceptance; positive ARPU impact without churn increase",
+          "drift": "Acceptance declining or post-sale churn increasing"
+        },
+        {
+          "name": "Lead Qualification Rate",
+          "desc": "% of agent-scored leads that convert to qualified opportunities",
+          "good": "30-40% MQL-to-SQL conversion; declining false positive rate",
+          "drift": "Conversion rate dropping or sales team rejecting more leads"
+        },
+        {
+          "name": "Onboarding Completion",
+          "desc": "% of new customers completing full onboarding journey within 14 days",
+          "good": "80%+ completion; first-bill call-in rate <15%",
+          "drift": "Completion dropping or first-bill complaint rate rising"
+        },
+        {
+          "name": "Renewal Conversion",
+          "desc": "% of renewal-eligible customers who renew or upgrade",
+          "good": "70%+ renewal rate; proactive outreach success >20%",
+          "drift": "Renewal rate declining at device payment completion window"
+        }
+      ]
+    },
+    {
+      "title": "Marketing Performance",
+      "icon": "mkt",
+      "metrics": [
+        {
+          "name": "Journey Completion Rate",
+          "desc": "% of customers completing lifecycle communication journeys as designed",
+          "good": "60-70% welcome journey completion; <2% opt-out rate",
+          "drift": "Completion rate dropping or opt-out rate rising"
+        },
+        {
+          "name": "NBO Acceptance Rate",
+          "desc": "% of Next-Best-Offer recommendations accepted by customers",
+          "good": "20-30% acceptance; positive incremental revenue",
+          "drift": "Acceptance declining while volume constant; offers repetitive"
+        },
+        {
+          "name": "Campaign ROI",
+          "desc": "Return on investment for agent-optimized campaigns vs manually managed",
+          "good": "15-25% ROI improvement; declining CPA trend",
+          "drift": "ROI improvement narrowing; CPA creeping upward"
+        },
+        {
+          "name": "Customer 360 Completeness",
+          "desc": "% of customer profiles with unified, enriched data across all systems",
+          "good": "85%+ profile completeness; identity resolution >95%",
+          "drift": "Completeness declining; duplicate rate increasing"
+        }
+      ]
+    }
+  ],
+  "agent_telemetry": [
+    {
+      "title": "Agent Behavior & Quality",
+      "icon": "svc",
+      "metrics": [
+        {
+          "name": "Hallucination Rate",
+          "desc": "% of responses with fabricated information (policies, prices, procedures)",
+          "good": "Below 2% for customer-facing agents",
+          "drift": "Daily automated eval against golden dataset; alert on any increase"
+        },
+        {
+          "name": "Human Override Rate",
+          "desc": "Frequency and reasons humans override or correct agent actions",
+          "good": "Declining trend; <10% override rate for mature agents",
+          "drift": "Rising override rate or new override reason categories emerging"
+        },
+        {
+          "name": "Escalation Quality Score",
+          "desc": "Rubric score for handoff completeness: context, issue ID, sentiment, history",
+          "good": "4+/5 rubric; post-escalation AHT ≤ direct-to-human AHT",
+          "drift": "Median drops below 3.5/5 or poor escalations exceed 15%"
+        },
+        {
+          "name": "Recommendation Relevance",
+          "desc": "% of agent recommendations accepted (plans, devices, offers, content)",
+          "good": "25-40% acceptance rate; declining skip/dismiss rate",
+          "drift": "Acceptance dropping while recommendation volume stays constant"
+        },
+        {
+          "name": "Disclosure Compliance",
+          "desc": "Completion of required regulatory disclosures in transactions",
+          "good": "100% mandatory disclosure completion",
+          "drift": "Automated audit of 100% of transactions; flag any omission"
+        },
+        {
+          "name": "Personalization Relevance",
+          "desc": "Engagement lift from personalized vs generic content",
+          "good": "2-3x engagement lift; declining unsubscribe rate",
+          "drift": "Engagement lift narrowing; unsubscribe rate increasing"
+        }
+      ]
+    },
+    {
+      "title": "Infrastructure & Reliability",
+      "icon": "gov",
+      "metrics": [
+        {
+          "name": "P95 Latency",
+          "desc": "95th percentile agent response time",
+          "good": "P95 <3s; P99 <5s",
+          "drift": "Response time degradation; increasing timeout rates"
+        },
+        {
+          "name": "Error Rate & Failure Modes",
+          "desc": "% of interactions with agent errors, tool call failures, or crashes",
+          "good": "<1% error rate; classified failure taxonomy maintained",
+          "drift": "New failure modes emerging; error rate trending up"
+        },
+        {
+          "name": "Data Freshness",
+          "desc": "Whether each data feed meets its SLA (RT <5s, NRT <15min, batch <24h)",
+          "good": "99%+ data freshness SLA compliance across all feeds",
+          "drift": "Any feed missing SLA >3 consecutive intervals"
+        },
+        {
+          "name": "Token Usage & Cost",
+          "desc": "LLM token consumption and associated cost per interaction",
+          "good": "Declining cost per resolution; within budget allocation",
+          "drift": "Cost per interaction rising without quality improvement"
+        },
+        {
+          "name": "Availability",
+          "desc": "Agent uptime and service availability",
+          "good": "99.9% availability; <4 minutes unplanned downtime per month",
+          "drift": "Availability SLA breach; increasing error responses"
+        }
+      ]
+    },
+    {
+      "title": "Model Health & Governance",
+      "icon": "gov",
+      "metrics": [
+        {
+          "name": "Model Drift Detection",
+          "desc": "Statistical divergence of model inputs/outputs from training distribution",
+          "good": "KL divergence and PSI within acceptable bounds",
+          "drift": "Automated monitoring of feature distributions; alert on shift"
+        },
+        {
+          "name": "Bias Monitoring",
+          "desc": "Outcome fairness across customer segments (demographics, tenure, value tier)",
+          "good": "No statistically significant outcome disparities across protected groups",
+          "drift": "Quarterly bias audits; continuous monitoring of outcomes by segment"
+        },
+        {
+          "name": "PII / Data Handling Compliance",
+          "desc": "Agent adherence to data minimization, masking, and access controls",
+          "good": "Zero PII exposure in logs/transcripts; 100% masking compliance",
+          "drift": "Automated PII scanning of all agent outputs and logs"
+        },
+        {
+          "name": "Feedback Loop Health",
+          "desc": "Whether human corrections are being incorporated into agent improvement",
+          "good": "90%+ of corrections reviewed within 7 days; retraining cycle <30 days",
+          "drift": "Growing backlog; same errors recurring"
+        },
+        {
+          "name": "Campaign Optimization Accuracy",
+          "desc": "% of agent bid/budget recommendations that improve CPA or ROAS",
+          "good": "70%+ of recommendations improve performance",
+          "drift": "Recommendation-to-outcome correlation declining"
+        },
+        {
+          "name": "Segmentation Quality",
+          "desc": "Performance lift of agent-created segments vs manual segments",
+          "good": "10-15% performance lift; <5% segment overlap",
+          "drift": "Segment performance lift declining; definitions stale"
+        },
+        {
+          "name": "Attribution Accuracy",
+          "desc": "Alignment between attribution model predictions and actual outcomes",
+          "good": "Model predictions within 15% of actual channel contribution",
+          "drift": "Growing divergence between predicted and actual"
+        }
+      ]
+    }
+  ]
+}

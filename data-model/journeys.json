@@ -1,0 +1,337 @@
+[
+  {
+    "name": "Awareness & Consideration",
+    "function": "Marketing",
+    "actions": [
+      "See TV/digital/social ads",
+      "Research plans & coverage",
+      "Compare carriers online",
+      "Read reviews, ask friends",
+      "Use coverage checker"
+    ],
+    "channels": [
+      "TV / CTV / Streaming",
+      "Paid search & social",
+      "SEO / organic content",
+      "Influencer / social",
+      "Retail signage"
+    ],
+    "painPoints": [
+      "Confusing plan structures",
+      "Hidden fees perception",
+      "Too many plan tiers",
+      "Distrust of promos",
+      "Coverage anxiety"
+    ],
+    "agentNames": [
+      "Brand Performance Agent",
+      "Campaign Performance Agent",
+      "Media Mix Optimization Agent",
+      "Acquisition Campaign Agent",
+      "Content & SEO Agent",
+      "Conversion Optimization Agent"
+    ],
+    "roleNames": [
+      "Director, Brand Strategy",
+      "Director, Advertising & Creative",
+      "Director, Performance Marketing",
+      "Director, Web & Conversion Optimization"
+    ],
+    "masterAgentNames": []
+  },
+  {
+    "name": "Acquisition & Purchase",
+    "function": "Sales",
+    "actions": [
+      "Select plan",
+      "Choose device",
+      "Evaluate trade-in",
+      "Apply promotions",
+      "Credit check",
+      "Port number",
+      "Checkout"
+    ],
+    "channels": [
+      "Retail store",
+      "Website / app",
+      "Telesales",
+      "Authorized dealers"
+    ],
+    "painPoints": [
+      "Plan complexity",
+      "Credit check friction",
+      "Long in-store waits",
+      "Trade-in disappointment",
+      "Checkout sticker shock",
+      "Porting anxiety"
+    ],
+    "agentNames": [
+      "Retail Orchestrator",
+      "Telesales Orchestrator",
+      "Plan Recommendation Agent",
+      "Promo Eligibility Agent",
+      "Checkout Support Agent",
+      "Quote & Order Governance Agent"
+    ],
+    "roleNames": [
+      "Digital Merchandising / Conversion Mgr",
+      "Inbound Sales Rep",
+      "Retail Sales Associate"
+    ],
+    "masterAgentNames": [
+      "Retail Orchestrator",
+      "Telesales Orchestrator"
+    ]
+  },
+  {
+    "name": "Onboarding & Activation",
+    "function": "Sales",
+    "actions": [
+      "Device setup",
+      "SIM / eSIM activation",
+      "Account creation",
+      "Download app",
+      "Set up autopay",
+      "Activate perks"
+    ],
+    "channels": [
+      "Retail store",
+      "Welcome emails",
+      "Welcome SMS",
+      "Carrier app"
+    ],
+    "painPoints": [
+      "Activation delays",
+      "First-bill shock",
+      "Promo credit confusion",
+      "Data transfer issues",
+      "Feature confusion"
+    ],
+    "agentNames": [
+      "Retail Orchestrator",
+      "Journey Orchestration Agent",
+      "Order Status Agent",
+      "Digital Order Fallout Agent"
+    ],
+    "roleNames": [
+      "Director, Lifecycle Marketing",
+      "Digital Sales Ops Manager",
+      "Retail Sales Associate"
+    ],
+    "masterAgentNames": [
+      "Retail Orchestrator"
+    ]
+  },
+  {
+    "name": "Billing & Payments",
+    "function": "Service",
+    "actions": [
+      "Receive & review bill",
+      "Pay bill",
+      "Manage autopay",
+      "Dispute charges",
+      "Request credit",
+      "Payment plan"
+    ],
+    "channels": [
+      "Carrier app",
+      "Website",
+      "Phone / IVR",
+      "Chat",
+      "Store"
+    ],
+    "painPoints": [
+      "Bill shock",
+      "Proration confusion",
+      "Tax/fee opacity",
+      "Payment tracking",
+      "Autopay failures",
+      "Credit timing"
+    ],
+    "agentNames": [
+      "Care Director Orchestrator",
+      "Operations Analytics Agent",
+      "Volume Driver Analysis Agent",
+      "Voice of Customer Agent",
+      "Workforce Planning Agent",
+      "Care Supervisor Orchestrator",
+      "Interaction QA Agent",
+      "Care Orchestrator",
+      "Billing Resolution Agent",
+      "Payment Exception Agent",
+      "Order Status Agent",
+      "Plan Advisory Agent",
+      "Account Management Agent",
+      "Account Security Agent",
+      "Autopay & Payment Method Agent",
+      "Warm Transfer Agent"
+    ],
+    "roleNames": [
+      "Director, Care",
+      "CC Supervisor, Care",
+      "Frontline Care Rep"
+    ],
+    "masterAgentNames": [
+      "Care Director Orchestrator",
+      "Care Supervisor Orchestrator",
+      "Care Orchestrator"
+    ]
+  },
+  {
+    "name": "Technical Support",
+    "function": "Service",
+    "actions": [
+      "Troubleshoot device",
+      "Report network issue",
+      "Check outage status",
+      "File insurance claim"
+    ],
+    "channels": [
+      "Self-service / app",
+      "AI chatbot",
+      "Live chat",
+      "Phone",
+      "Store",
+      "Social"
+    ],
+    "painPoints": [
+      "Long hold times",
+      "Repeating information",
+      "IVR frustration",
+      "Unresolved first contact",
+      "Scripted troubleshooting"
+    ],
+    "agentNames": [
+      "Tech Support Orchestrator",
+      "Outage & Service Health Agent",
+      "Device Troubleshooting Agent",
+      "Warm Transfer Agent",
+      "Tech Escalation Summary Agent"
+    ],
+    "roleNames": [
+      "Director, Advanced Technical Support",
+      "CC Supervisor, Adv. Technical Support",
+      "Advanced Technical Support Rep"
+    ],
+    "masterAgentNames": [
+      "Tech Support Orchestrator"
+    ]
+  },
+  {
+    "name": "Retention & Loyalty",
+    "function": "Service",
+    "actions": [
+      "Evaluate competitor offers",
+      "Call to cancel",
+      "Receive save offer",
+      "Redeem loyalty rewards"
+    ],
+    "channels": [
+      "Phone (retention)",
+      "Chat",
+      "Proactive outreach",
+      "Loyalty portal",
+      "Email / SMS"
+    ],
+    "painPoints": [
+      "New vs existing disparity",
+      "Hard to reach save team",
+      "Inconsistent offers",
+      "Weak loyalty rewards",
+      "Lock-in resentment"
+    ],
+    "agentNames": [
+      "Retention Orchestrator",
+      "Save Offer Recommendation Agent",
+      "Sentiment & Defection Risk Agent",
+      "Churn Analytics & Forecasting Agent",
+      "Loyalty Engagement Agent",
+      "Next-Best-Action Agent"
+    ],
+    "roleNames": [
+      "Director, Retention",
+      "Director, Loyalty & Rewards",
+      "CC Supervisor, Retention",
+      "Retention / Loyalty Rep"
+    ],
+    "masterAgentNames": [
+      "Retention Orchestrator"
+    ]
+  },
+  {
+    "name": "Upgrade & Cross-sell",
+    "function": "Sales + Service",
+    "actions": [
+      "Check upgrade eligibility",
+      "Select new device",
+      "Evaluate trade-in",
+      "Add lines / bundles",
+      "Accept cross-sell"
+    ],
+    "channels": [
+      "Carrier app",
+      "Email / SMS",
+      "Retail store",
+      "Telesales",
+      "Website"
+    ],
+    "painPoints": [
+      "Confusing eligibility",
+      "Trade-in friction",
+      "Losing promo on change",
+      "Upselling pressure",
+      "36-month reset"
+    ],
+    "agentNames": [
+      "Retail Orchestrator",
+      "Telesales Orchestrator",
+      "Upgrade Eligibility Agent",
+      "Cross-sell / Upsell Agent",
+      "Accessory & Bundle Agent",
+      "Journey Orchestration Agent"
+    ],
+    "roleNames": [
+      "Director, Lifecycle Marketing",
+      "Upgrade / Retention Sales Specialist",
+      "Retail Sales Associate"
+    ],
+    "masterAgentNames": [
+      "Retail Orchestrator",
+      "Telesales Orchestrator"
+    ]
+  },
+  {
+    "name": "Usage & Self-Service",
+    "function": "Digital",
+    "actions": [
+      "Check data usage",
+      "Pay bill in app",
+      "Manage account",
+      "Use troubleshoot tools",
+      "Browse upgrades"
+    ],
+    "channels": [
+      "Carrier app",
+      "Website",
+      "AI chatbot",
+      "Push notifications"
+    ],
+    "painPoints": [
+      "Limited complex self-service",
+      "App UX issues",
+      "Chatbot limitations",
+      "Features buried in menus",
+      "Cross-channel inconsistency"
+    ],
+    "agentNames": [
+      "Warm Transfer Agent",
+      "Order Status Agent",
+      "Plan Recommendation Agent",
+      "Conversion Optimization Agent"
+    ],
+    "roleNames": [
+      "(Digital properties — no org chart)"
+    ],
+    "masterAgentNames": []
+  }
+]
