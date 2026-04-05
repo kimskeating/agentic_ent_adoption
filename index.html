@@ -3,32 +3,130 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Agentic Enterprise Adoption with Agentforce</title>
+<title>Agentic Enterprise Adoption</title>
 <style>
-:root{--b:#0176d3;--bd:#014486;--bk:#032d60;--bl:#1b96ff;--blr:#d8edff;--td:#181818;--ts:#444;--tw:#706e6b;--pg:#f3f3f3;--sf:#fff;--sa:#fafaf9;--hl:#eef4ff;--br:#e5e5e5;--bs:#c9c9c9;--bi:#747474;--ok:#2e844a;--okl:#cdefc2;--okb:#f3faf0;--wn:#dd7a01;--wnl:#fef0cd;--wnb:#fffbf0;--er:#ea001e;--af:#7526e5;--afl:#ede3fb;--afd:#5a1ba9;--mk:#e3066a;--mkl:#fde8ef;--f:'Salesforce Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;--rm:.25rem;--rl:.5rem;--sc:0 2px 2px 0 rgba(0,0,0,.1);--so:0 2px 8px 0 rgba(0,0,0,.16)}
+:root{--b:#0176d3;--bd:#014486;--bk:#032d60;--bl:#1b96ff;--blr:#d8edff;--td:#181818;--ts:#444444;--tw:#706e6b;--pg:#f3f3f3;--sf:#fff;--sa:#fafaf9;--hl:#eef4ff;--br:#e5e5e5;--bs:#c9c9c9;--bi:#747474;--ok:#2e844a;--okl:#cdefc2;--okb:#f0fdf4;--wn:#dd7a01;--wnl:#fef0cd;--wnb:#fffbeb;--er:#ea001e;--af:#7526e5;--afl:#ede3fb;--afd:#5a1ba9;--mk:#e3066a;--mkl:#fde8ef;--accent:#032d60;--f:'Salesforce Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;--rm:.25rem;--rl:.5rem;--sc:0 1px 3px rgba(0,0,0,.06);--so:0 4px 16px rgba(0,0,0,.1)}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-body{font-family:var(--f);font-size:.8125rem;color:var(--td);background:var(--pg);line-height:1.5;-webkit-font-smoothing:antialiased}
-.gh{background:var(--bk);height:48px;display:flex;align-items:center;padding:0 1rem;position:sticky;top:0;z-index:100}
-.gh__logo{display:flex;align-items:center;gap:.5rem;margin-right:1rem}
-.gh__logo svg{width:28px;height:20px}
-.gh__logo-text{color:#fff;font-size:.875rem;font-weight:700;letter-spacing:.02em}
-.gh__logo-sub{color:rgba(255,255,255,.7);font-size:.6875rem;font-weight:400;margin-left:.25rem}
-.gh__nav{display:flex;gap:2px;flex:1;overflow-x:auto}
-.gh__ni{color:rgba(255,255,255,.85);font-size:.75rem;font-weight:400;padding:0 .75rem;height:48px;display:flex;align-items:center;border:none;background:none;cursor:pointer;font-family:var(--f);position:relative;transition:color .15s,background .15s;white-space:nowrap}
-.gh__ni:hover{color:#fff;background:rgba(255,255,255,.1)}
-.gh__ni.on{color:#fff;font-weight:700}
-.gh__ni.on::after{content:"";position:absolute;bottom:0;left:.75rem;right:.75rem;height:3px;background:var(--bl);border-radius:3px 3px 0 0}
-.gh__trail{display:flex;align-items:center;gap:.75rem;margin-left:auto}
-.gh__badge{background:var(--af);color:#fff;font-size:.5625rem;font-weight:700;padding:2px 8px;border-radius:10px;letter-spacing:.05em;text-transform:uppercase}
-.tabs{background:var(--sf);border-bottom:1px solid var(--br);padding:0 1.5rem;display:flex;align-items:flex-end}
-.tab{padding:.75rem 1rem;border:none;background:none;cursor:pointer;font-size:.8125rem;font-weight:400;color:var(--ts);font-family:var(--f);border-bottom:3px solid transparent;margin-bottom:-1px;transition:all .15s}
-.tab:hover{color:var(--b)}.tab.on{color:var(--b);font-weight:700;border-bottom-color:var(--b)}
-.tabs .sp{flex:1}
+html{scroll-behavior:smooth;scroll-padding-top:50px}
+body{font-family:var(--f);font-size:.875rem;color:var(--td);background:var(--pg);line-height:1.5;-webkit-font-smoothing:antialiased}
+
+/* ═══ EXECUTIVE NAV ═══ */
+.ex-nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--br)}
+.ex-nav__inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;height:50px;padding:0 2rem;gap:0}
+.ex-nav__logo{font-size:.875rem;font-weight:700;color:var(--accent);letter-spacing:-.01em;margin-right:2rem;flex-shrink:0}
+.ex-nav__link{font-size:.8125rem;font-weight:500;color:var(--ts);text-decoration:none;padding:0 1rem;height:50px;display:flex;align-items:center;border-bottom:2px solid transparent;transition:all .15s}
+.ex-nav__link:hover{color:var(--td)}
+.ex-nav__link.on{color:var(--td);font-weight:700;border-bottom-color:var(--b)}
+
+/* ═══ HERO ═══ */
+.ex-hero{background:var(--accent);color:#fff;padding:5rem 2rem 4rem}
+.ex-hero__inner{max-width:800px;margin:0 auto;text-align:center}
+.ex-hero__eyebrow{font-size:.6875rem;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.5);display:block;margin-bottom:1rem}
+.ex-hero__h1{font-size:1.5rem;font-weight:700;line-height:1.25;letter-spacing:normal;margin-bottom:1rem}
+.ex-hero__sub{font-size:.875rem;line-height:1.5;color:rgba(255,255,255,.7);max-width:640px;margin:0 auto 2rem}
+.ex-hero__ctas{display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap;margin-bottom:2.5rem}
+.ex-btn{display:inline-flex;align-items:center;padding:0 1rem;height:2rem;font-size:.8125rem;font-weight:700;font-family:var(--f);border-radius:var(--rm);text-decoration:none;transition:all .15s;cursor:pointer;border:none}
+.ex-btn--primary{background:#fff;color:var(--b)}
+.ex-btn--primary:hover{background:#f1f5f9}
+.ex-btn--secondary{background:transparent;color:rgba(255,255,255,.8);border:1px solid rgba(255,255,255,.25)}
+.ex-btn--secondary:hover{background:rgba(255,255,255,.1);color:#fff}
+.ex-hero__proof{display:flex;gap:2rem;justify-content:center;flex-wrap:wrap}
+.ex-proof{font-size:.8125rem;color:rgba(255,255,255,.5);display:flex;align-items:center;gap:.5rem}
+.ex-proof__icon{font-size:.5rem;color:rgba(255,255,255,.6)}
+
+/* ═══ SECTIONS ═══ */
+.ex-section{padding:3rem 2rem}
+.ex-section--alt{background:var(--sa)}
+.ex-section__inner{max-width:1000px;margin:0 auto}
+.ex-section__num{display:none}
+.ex-section__h2{font-size:1.5rem;font-weight:700;color:var(--td);line-height:1.25;letter-spacing:normal;margin-bottom:1rem}
+.ex-section__label{font-size:.8125rem;font-weight:600;color:var(--tw);text-transform:uppercase;letter-spacing:.04em;margin-bottom:.75rem}
+.ex-section__body{font-size:.875rem;color:var(--ts);line-height:1.5;margin-bottom:1.5rem}
+.ex-section__support{font-size:.875rem;color:var(--tw);line-height:1.5;font-style:italic;margin-bottom:1.5rem;padding-left:1rem;border-left:2px solid var(--br)}
+.ex-section__prompt{font-size:.875rem;font-weight:700;color:var(--td);margin-bottom:.5rem}
+.ex-section__note{font-size:.8125rem;color:var(--tw);margin-bottom:1.5rem;font-style:italic}
+
+/* Connected Framework Steps */
+.ex-steps{display:flex;gap:0;margin:2rem 0;position:relative}
+.ex-steps::before{content:'';position:absolute;top:28px;left:calc(16.66% + 14px);right:calc(16.66% + 14px);height:2px;background:linear-gradient(90deg,var(--accent),var(--tw))}
+.ex-step{flex:1;display:flex;flex-direction:column;align-items:center;text-align:center;position:relative;padding:0 1rem}
+.ex-step__num{width:56px;height:56px;border-radius:50%;background:var(--accent);color:#fff;font-size:1.125rem;font-weight:700;display:flex;align-items:center;justify-content:center;position:relative;z-index:1;box-shadow:0 2px 8px rgba(30,41,59,.2);margin-bottom:1rem}
+.ex-step__arrow{display:none}
+.ex-step__card{background:#fff;border:1px solid var(--br);border-radius:8px;padding:1.25rem;width:100%;transition:box-shadow .2s;flex:1}
+.ex-step__card:hover{box-shadow:0 4px 12px rgba(0,0,0,.06)}
+.ex-step__h3{font-size:.875rem;font-weight:700;color:var(--td);margin-bottom:.5rem}
+.ex-step__p{font-size:.75rem;color:var(--ts);line-height:1.5}
+@media(max-width:767px){
+  .ex-steps{flex-direction:column;gap:0}
+  .ex-steps::before{top:0;bottom:0;left:28px;right:auto;width:2px;height:auto}
+  .ex-step{flex-direction:row;text-align:left;padding:.75rem 0}
+  .ex-step__num{margin-bottom:0;margin-right:1rem;flex-shrink:0;width:48px;height:48px;font-size:1rem}
+  .ex-step__arrow{display:none!important}
+}
+
+/* Callout */
+.ex-callout{background:#fff;border:1px solid var(--br);border-left:4px solid var(--b);border-radius:var(--rm);padding:1rem 1.25rem;font-size:.875rem;color:var(--ts);line-height:1.5;margin:1.5rem 0}
+.ex-section--alt .ex-callout{background:var(--pg)}
+
+/* Bullets */
+.ex-bullets{list-style:none;padding:0;margin:0 0 1.5rem;display:grid;grid-template-columns:1fr 1fr;gap:.5rem}
+.ex-bullets li{font-size:.875rem;color:var(--ts);padding:.5rem .75rem;background:#fff;border:1px solid var(--br);border-radius:6px;display:flex;align-items:center;gap:.5rem}
+.ex-bullets li::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--accent);flex-shrink:0}
+.ex-section--alt .ex-bullets li{background:var(--pg)}
+
+/* Pillars */
+.ex-pillars{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.25rem;margin:1.5rem 0}
+.ex-pillar{padding:1.25rem;border:1px solid var(--br);border-radius:8px;background:#fff}
+.ex-pillar__h4{font-size:.875rem;font-weight:700;color:var(--td);margin-bottom:.5rem}
+.ex-pillar__p{font-size:.8125rem;color:var(--ts);line-height:1.6}
+.ex-section--alt .ex-pillar{background:var(--pg)}
+
+/* Checklist */
+.ex-checklist{background:#fff;border:1px solid var(--br);border-radius:8px;padding:1.25rem 1.5rem;margin:1.5rem 0}
+.ex-checklist__h4{font-size:.875rem;font-weight:700;color:var(--td);margin-bottom:.75rem}
+.ex-checklist__list{list-style:none;padding:0;margin:0}
+.ex-checklist__list li{font-size:.8125rem;color:var(--ts);padding:.375rem 0;display:flex;align-items:center;gap:.5rem;border-bottom:1px solid #f3f4f6}
+.ex-checklist__list li:last-child{border-bottom:none}
+.ex-checklist__list li::before{content:'';width:14px;height:14px;border:2px solid var(--br);border-radius:3px;flex-shrink:0}
+.ex-section--alt .ex-checklist{background:var(--pg)}
+
+/* Dashboard nav cards */
+.ex-dash-label{font-size:.75rem;font-weight:600;color:var(--tw);text-transform:uppercase;letter-spacing:.04em;margin-bottom:.5rem;display:flex;align-items:center;gap:.5rem}
+.ex-dash-label::after{content:'';flex:1;height:1px;background:var(--br)}
+.ex-dash-nav{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:1.5rem}
+.ex-dash-card{display:flex;align-items:flex-start;gap:.75rem;padding:1rem 1.25rem;border:2px solid var(--br);border-radius:8px;cursor:pointer;transition:all .2s;background:#fff;position:relative}
+.ex-dash-card:hover{box-shadow:0 4px 12px rgba(0,0,0,.08);border-color:#b0b7bf;transform:translateY(-1px)}
+.ex-dash-card.on{border-color:var(--accent);background:linear-gradient(180deg,#f8f9fb,#fff);box-shadow:0 4px 12px rgba(30,41,59,.1)}
+.ex-dash-card.on::after{content:'';position:absolute;bottom:-10px;left:50%;transform:translateX(-50%);width:0;height:0;border-left:8px solid transparent;border-right:8px solid transparent;border-top:8px solid var(--accent)}
+.ex-dash-card__icon{font-size:1.25rem;flex-shrink:0;width:36px;height:36px;display:flex;align-items:center;justify-content:center;background:var(--sa);border-radius:8px;border:1px solid var(--br);transition:all .2s}
+.ex-dash-card:hover .ex-dash-card__icon{background:#eef0f4;border-color:#b0b7bf}
+.ex-dash-card.on .ex-dash-card__icon{background:var(--accent);color:#fff;border-color:var(--accent)}
+.ex-dash-card__body{flex:1;min-width:0}
+.ex-dash-card__title{font-size:.875rem;font-weight:700;color:var(--td);margin-bottom:2px;display:flex;align-items:center;gap:.375rem}
+.ex-dash-card__title::after{content:'\2192';font-size:.75rem;color:var(--tw);transition:transform .15s}
+.ex-dash-card:hover .ex-dash-card__title::after{transform:translateX(2px);color:var(--td)}
+.ex-dash-card.on .ex-dash-card__title::after{display:none}
+.ex-dash-card__desc{font-size:.75rem;color:var(--tw);line-height:1.4}
+
+/* Closing CTA */
+.ex-cta{background:var(--accent);color:#fff;padding:4rem 2rem;text-align:center}
+.ex-cta__inner{max-width:640px;margin:0 auto}
+.ex-cta__h2{font-size:1.25rem;font-weight:700;line-height:1.25;margin-bottom:1rem}
+.ex-cta__p{font-size:.875rem;color:rgba(255,255,255,.7);line-height:1.5;margin-bottom:2rem}
+/* Tab navigation — consistent across site */
+.tabs{display:inline-flex;align-items:center;gap:6px;margin-bottom:1.25rem;position:relative}
+.tabs::before{content:'Select a view';display:block;position:absolute;top:-1.25rem;left:0;font-size:.6875rem;font-weight:600;color:var(--tw);text-transform:uppercase;letter-spacing:.04em}
+.tab{padding:.5rem 1.25rem;border:2px solid var(--br);background:#fff;cursor:pointer;font-size:.8125rem;font-weight:500;color:var(--tw);font-family:var(--f);border-radius:6px;transition:all .2s;position:relative;display:inline-flex;align-items:center;gap:.375rem}
+.tab::after{content:'\2192';font-size:.7rem;color:var(--br);transition:transform .15s,color .15s}
+.tab:hover{color:var(--td);border-color:#b0b7bf;box-shadow:0 2px 6px rgba(0,0,0,.06);transform:translateY(-1px)}
+.tab:hover::after{transform:translateX(2px);color:var(--tw)}
+.tab.on{color:#fff;font-weight:600;background:var(--accent);border-color:var(--accent);box-shadow:0 2px 8px rgba(30,41,59,.12)}
+.tab.on::after{display:none}
+.tabs .sp{display:none}
 .bg{display:flex;gap:4px;padding-bottom:6px}
 .btn{display:inline-flex;align-items:center;gap:6px;padding:0 1rem;height:32px;border:1px solid var(--bs);border-radius:var(--rm);background:var(--sf);color:var(--td);font-size:.75rem;font-weight:400;font-family:var(--f);cursor:pointer;transition:background .15s;white-space:nowrap}
 .btn:hover{background:var(--sa)}
-.ct{max-width:1440px;margin:0 auto;padding:1.5rem}
-.vw{display:none}.vw.on{display:block}
+.ct{max-width:1200px;margin:0 auto;padding:1.5rem}
 .inp{flex:1;max-width:420px;padding:0 1rem;height:36px;border:1px solid var(--bi);border-radius:var(--rm);font-size:.8125rem;font-family:var(--f);color:var(--td);background:var(--sf);outline:none}
 .inp:focus{border-color:var(--b);box-shadow:0 0 0 1px var(--b)}
 /* ═══ TOP-DOWN ORG CHART (Hybrid: tree for roles, panel for agents) ═══ */
@@ -38,12 +136,12 @@ body{font-family:var(--f);font-size:.8125rem;color:var(--td);background:var(--pg
 .oc li{position:relative;display:flex;flex-direction:column;align-items:center;padding-top:20px}
 .oc ul ul{display:flex;flex-direction:row;justify-content:center;padding-top:20px;position:relative;flex-wrap:nowrap}
 /* Connecting lines */
-.oc ul ul::before{content:"";position:absolute;top:0;left:50%;width:0;height:20px;border-left:2px solid #c9c9c9}
-.oc ul ul>li::before{content:"";position:absolute;top:0;left:0;width:50%;height:20px;border-top:2px solid #c9c9c9;border-right:2px solid #c9c9c9}
-.oc ul ul>li::after{content:"";position:absolute;top:0;left:50%;width:50%;height:0;border-top:2px solid #c9c9c9}
+.oc ul ul::before{content:"";position:absolute;top:0;left:50%;width:0;height:20px;border-left:2px solid var(--br)}
+.oc ul ul>li::before{content:"";position:absolute;top:0;left:0;width:50%;height:20px;border-top:2px solid var(--br);border-right:2px solid var(--br)}
+.oc ul ul>li::after{content:"";position:absolute;top:0;left:50%;width:50%;height:0;border-top:2px solid var(--br)}
 .oc ul ul>li:first-child::before{border-top:none}
 .oc ul ul>li:last-child::after{border-top:none}
-.oc ul ul>li:only-child::before{border-top:none;height:20px;border-right:2px solid #c9c9c9}
+.oc ul ul>li:only-child::before{border-top:none;height:20px;border-right:2px solid var(--br)}
 .oc ul ul>li:only-child::after{display:none}
 .oc>ul>li{padding-top:0}.oc>ul>li::before,.oc>ul>li::after{display:none}
 
@@ -142,7 +240,23 @@ body{font-family:var(--f);font-size:.8125rem;color:var(--td);background:var(--pg
 .nt{margin-top:1.5rem;padding:1rem;background:var(--wnb);border:1px solid var(--wnl);border-left:3px solid var(--wn);border-radius:var(--rm);font-size:.75rem;color:var(--ts);line-height:1.6}
 .nt strong{color:var(--wn)}
 /* Journey */
-.jm{overflow-x:auto;padding-bottom:1rem}
+.jm{overflow:hidden;position:relative;margin-bottom:.5rem}
+.jm__scroll{overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;padding-bottom:.75rem}
+.jm__scroll::-webkit-scrollbar{height:8px}
+.jm__scroll::-webkit-scrollbar-track{background:var(--br);border-radius:4px}
+.jm__scroll::-webkit-scrollbar-thumb{background:var(--bs);border-radius:4px}
+.jm__scroll::-webkit-scrollbar-thumb:hover{background:var(--tw)}
+/* Fixed horizontal scrollbar mirrored at top */
+.jm__nav{overflow-x:auto;overflow-y:hidden;height:12px;margin-bottom:4px}
+.jm__nav::-webkit-scrollbar{height:8px}
+.jm__nav::-webkit-scrollbar-track{background:var(--br);border-radius:4px}
+.jm__nav::-webkit-scrollbar-thumb{background:var(--bs);border-radius:4px}
+.jm__nav::-webkit-scrollbar-thumb:hover{background:var(--tw)}
+.jm::before{content:'Scroll to see all 8 stages \2192';display:block;text-align:right;font-size:.6875rem;font-weight:500;color:var(--tw);padding:0 4px 4px;letter-spacing:.01em}
+.jm::-webkit-scrollbar{height:8px}
+.jm::-webkit-scrollbar-track{background:var(--br);border-radius:4px}
+.jm::-webkit-scrollbar-thumb{background:var(--bs);border-radius:4px}
+.jm::-webkit-scrollbar-thumb:hover{background:var(--tw)}
 .jg{display:grid;grid-template-columns:130px repeat(8,minmax(190px,1fr));gap:0;min-width:1700px}
 /* Chevron stage headers */
 .jsh{padding:.75rem .5rem .75rem 1.25rem;text-align:center;font-weight:700;font-size:.75rem;color:#fff;position:sticky;top:0;z-index:2;clip-path:polygon(0 0,calc(100% - 14px) 0,100% 50%,calc(100% - 14px) 100%,0 100%,14px 50%);margin-left:-7px}
@@ -150,7 +264,7 @@ body{font-family:var(--f);font-size:.8125rem;color:var(--td);background:var(--pg
 .jsh:last-child{border-radius:0 var(--rm) 0 0}
 .jsh .sn{font-size:.5625rem;opacity:.7;display:block;margin-bottom:1px;letter-spacing:.1em;text-transform:uppercase}
 .jfn{font-size:.5625rem;font-weight:600;opacity:.9;display:block;margin-top:3px;letter-spacing:.04em;text-transform:uppercase}
-.smk{background:linear-gradient(135deg,var(--mk),#c4054f)}.ssl{background:linear-gradient(135deg,var(--b),var(--bd))}.ssv{background:linear-gradient(135deg,var(--af),var(--afd))}.sdg{background:linear-gradient(135deg,#546e7a,#37474f)}
+.smk{background:var(--mk)}.ssl{background:var(--b)}.ssv{background:var(--af)}.sdg{background:var(--tw)}
 /* Swimlane labels */
 .swl{padding:.6rem .5rem;font-size:.65rem;font-weight:700;text-transform:none;color:var(--tw);background:var(--sa);border:1px solid var(--br);display:flex;align-items:center;position:sticky;left:0;z-index:1;line-height:1.3}
 /* Swimlane cells - card style */
@@ -528,6 +642,20 @@ body{font-family:var(--f);font-size:.8125rem;color:var(--td);background:var(--pg
 
 /* ═══ MOBILE (<768px) ═══ */
 @media(max-width:767px){
+  .ex-nav__inner{flex-wrap:wrap;height:auto;padding:.5rem 1rem;gap:0}
+  .ex-nav__link{font-size:.75rem;padding:0 .5rem;height:40px}
+  .ex-nav__logo{width:100%;margin-bottom:.25rem;margin-right:0}
+  .ex-hero{padding:3rem 1.5rem 2.5rem}
+  .ex-hero__h1{font-size:1.25rem}
+  .ex-section{padding:2rem 1.25rem}
+  .ex-steps{flex-direction:column;gap:0}
+  .ex-steps::before{top:0;bottom:0;left:28px;right:auto;width:2px;height:auto}
+  .ex-step{flex-direction:row;text-align:left;padding:.75rem 0}
+  .ex-step__num{margin-bottom:0;margin-right:1rem;flex-shrink:0;width:48px;height:48px;font-size:1rem}
+  .ex-bullets{grid-template-columns:1fr}
+  .ex-pillars{grid-template-columns:1fr}
+  .ex-dash-nav{grid-template-columns:1fr}
+  .ex-cta{padding:2.5rem 1.25rem}
   .gh{height:auto;flex-wrap:wrap;padding:.5rem}
   .gh__logo{margin-right:.5rem}
   .gh__logo-text{font-size:.75rem}
@@ -604,78 +732,252 @@ body{font-family:var(--f);font-size:.8125rem;color:var(--td);background:var(--pg
 </head>
 <body>
 
-<header class="gh">
-  <div class="gh__logo">
-    <svg viewBox="0 0 24 17" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10.13 2.06c.95-1 2.27-1.62 3.73-1.62 1.77 0 3.33.9 4.26 2.27a5.14 5.14 0 0 1 2.3-.55c2.86 0 5.18 2.36 5.18 5.27s-2.32 5.27-5.18 5.27c-.36 0-.72-.04-1.06-.11a4.46 4.46 0 0 1-3.88 2.3 4.4 4.4 0 0 1-2.1-.53 4.96 4.96 0 0 1-4.36 2.62 5 5 0 0 1-4.64-3.2 3.87 3.87 0 0 1-.68.06C1.83 13.84 0 11.97 0 9.67c0-1.6.89-2.99 2.2-3.67a4.33 4.33 0 0 1-.15-1.13c0-2.7 2.15-4.87 4.8-4.87 1.37 0 2.6.58 3.48 1.51" fill="#ffffff"/></svg>
-    <span class="gh__logo-text">Agentic Enterprise Adoption<span class="gh__logo-sub">with Agentforce</span></span>
+<!-- ═══ STICKY NAV ═══ -->
+<nav class="ex-nav" id="ex-nav">
+  <div class="ex-nav__inner">
+    <span class="ex-nav__logo">Agentic Enterprise</span>
+    <a href="#s-why" class="ex-nav__link on">Why This Matters</a>
+    <a href="#s-journeys" class="ex-nav__link">Priority Journeys</a>
+    <a href="#s-model" class="ex-nav__link">Operating Model</a>
+    <a href="#s-data" class="ex-nav__link">Data Foundation</a>
+    <a href="#s-measure" class="ex-nav__link">Measurement</a>
   </div>
-  <nav class="gh__nav">
-    <button class="gh__ni on" onclick="sT('journey',this)">Customer Journeys</button>
-    <button class="gh__ni" onclick="sT('orgchart',this)">Enterprise Agentic Functions</button>
-    <button class="gh__ni" onclick="sT('datareq',this)">Agent Data Requirements</button>
-    <button class="gh__ni" onclick="sT('analytics',this)">Analytics</button>
-  </nav>
-  <div class="gh__trail"><span class="gh__badge">B2C Telco</span></div>
-</header>
+</nav>
 
-<!-- TAB 1: CUSTOMER JOURNEYS -->
-<div id="vw-journey" class="vw on">
-  <div class="tabs"><button class="tab on" disabled>Customer Journey Map</button><div class="sp"></div></div>
-  <div class="ct">
-    <div class="cd cd--intro" style="border-left-color:var(--af)"><div class="cd__bd"><h3>B2C Telco Customer Journey Map</h3><p>Horizontal view of the customer lifecycle across Marketing, Sales, and Service. Click any <strong style="color:var(--af)">agent</strong> or <strong style="color:var(--b)">role</strong> pill to navigate to its position in the Org Chart.</p></div></div>
-    <div class="jm"><div class="jg" id="jg"></div></div>
-  </div>
-</div>
-
-<!-- TAB 2: ENTERPRISE AGENTIC FUNCTIONS -->
-<div id="vw-orgchart" class="vw">
-  <div class="tabs">
-    <button class="tab on" onclick="sOV('service',this)">Service</button>
-    <button class="tab" onclick="sOV('sales',this)">Sales</button>
-    <button class="tab" onclick="sOV('marketing',this)">Marketing</button>
-    <button class="tab" onclick="sOV('all',this)">Combined</button>
-    <div class="sp"></div>
-  </div>
-  <div class="ct">
-    <div id="ot" class="oc"></div>
-  </div>
-</div>
-
-<!-- TAB 3: VALUE CALCULATOR -->
-<!-- Calculator is now inside Analytics tab -->
-
-<!-- TAB 4: AGENT DATA REQUIREMENTS -->
-<div id="vw-datareq" class="vw">
-  <div class="tabs">
-    <button class="tab on" onclick="sDV('medallion',this)">Medallion Architecture</button>
-    <button class="tab" onclick="sDV('service',this)">Service Agents</button>
-    <button class="tab" onclick="sDV('sales',this)">Sales Agents</button>
-    <button class="tab" onclick="sDV('marketing',this)">Marketing Agents</button>
-    <div class="sp"></div>
-  </div>
-  <div class="ct">
-    <div class="cd cd--intro" style="border-left-color:#4682B4"><div class="cd__bd"><h3>Agent Data Requirements — Medallion Architecture</h3><p>All agent data is sourced from the <strong style="color:#4682B4">Silver Layer</strong> (cleaned, validated, conformed) — the authoritative data tier between raw ingestion (Bronze) and business-ready outputs (Gold). Click any agent to navigate to its org chart position. Powered by Salesforce Data Cloud and MuleSoft.</p></div></div>
-    <div class="dr-legend">
-      <span><span class="dr-dot dr-rt"></span> Real-time (&lt;5s)</span>
-      <span><span class="dr-dot dr-nrt"></span> Near-real-time (min–1hr)</span>
-      <span><span class="dr-dot dr-bt"></span> Batch (daily/weekly)</span>
+<!-- ═══ HERO ═══ -->
+<section class="ex-hero" id="s-hero">
+  <div class="ex-hero__inner">
+    <span class="ex-hero__eyebrow">Executive Framework</span>
+    <h1 class="ex-hero__h1">How enterprises scale agents across journeys, teams, and data</h1>
+    <p class="ex-hero__sub">A practical operating model for deploying agentic workflows across sales, service, and marketing — with the governance, telemetry, and trusted data required for production.</p>
+    <div class="ex-hero__ctas">
+      <a href="#s-why" class="ex-btn ex-btn--primary">Explore the framework</a>
+      <a href="#s-journeys" class="ex-btn ex-btn--secondary">See priority journeys</a>
     </div>
-    <div id="drg"></div>
+    <div class="ex-hero__proof">
+      <div class="ex-proof"><span class="ex-proof__icon">&#9670;</span> High-value journeys come first</div>
+      <div class="ex-proof"><span class="ex-proof__icon">&#9670;</span> Humans and agents need clear role design</div>
+      <div class="ex-proof"><span class="ex-proof__icon">&#9670;</span> Data, controls, and telemetry determine scale</div>
+    </div>
   </div>
-</div>
+</section>
 
-<!-- TAB 5: ANALYTICS -->
-<div id="vw-analytics" class="vw">
-  <div class="tabs">
-    <button class="tab on" onclick="sAnaV('performance',this)">Performance</button>
-    <button class="tab" onclick="sAnaV('telemetry',this)">Agent Telemetry</button>
-    <button class="tab" onclick="sAnaV('calculator',this)">Value Calculator</button>
-    <div class="sp"></div>
+<!-- ═══ SECTION 1: WHY THIS MATTERS ═══ -->
+<section class="ex-section" id="s-why">
+  <div class="ex-section__inner">
+    <span class="ex-section__num">1</span>
+    <h2 class="ex-section__h2">Why This Matters</h2>
+    <p class="ex-section__body">Most enterprise AI efforts stall because the use cases are fragmented, the ownership model is unclear, and the supporting data is not production-ready. Agentic enterprise adoption only scales when teams align around priority journeys, define where agents should act, and instrument the model for performance, trust, and value.</p>
+    <div class="ex-steps">
+      <div class="ex-step">
+        <div class="ex-step__num">1</div>
+        <span class="ex-step__arrow"></span>
+        <div class="ex-step__card">
+          <h3 class="ex-step__h3">Start with the journey</h3>
+          <p class="ex-step__p">Prioritize a small number of customer journeys where agentic workflows can reduce friction, improve responsiveness, and deliver measurable business value.</p>
+        </div>
+      </div>
+      <div class="ex-step">
+        <div class="ex-step__num">2</div>
+        <span class="ex-step__arrow"></span>
+        <div class="ex-step__card">
+          <h3 class="ex-step__h3">Design the operating model</h3>
+          <p class="ex-step__p">Define how human roles and AI agents work together across service, sales, and marketing — instead of layering agents onto an unclear org model.</p>
+        </div>
+      </div>
+      <div class="ex-step">
+        <div class="ex-step__num">3</div>
+        <div class="ex-step__card">
+          <h3 class="ex-step__h3">Operationalize for scale</h3>
+          <p class="ex-step__p">Scale requires trusted data, explicit governance, telemetry, and value measurement from day one.</p>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="ct" id="ana-ct" style="max-width:1440px"></div>
-</div>
+</section>
 
-<!-- MODAL -->
+<!-- ═══ SECTION 2: PRIORITY JOURNEYS ═══ -->
+<section class="ex-section ex-section--alt" id="s-journeys">
+  <div class="ex-section__inner">
+    <span class="ex-section__num">2</span>
+    <h2 class="ex-section__h2">Priority Journeys</h2>
+    <p class="ex-section__body">Start with the journeys that create the most customer friction and the clearest economic value. In a B2C telco environment, the best starting points typically sit across acquisition, onboarding, support, retention, renewal, upsell, and cross-sell. The goal is not to automate everything. The goal is to focus the organization on a few journeys where agentic workflows can materially improve speed, experience, and cost-to-serve.</p>
+    <div class="ex-callout">
+      <strong>Industry applicability.</strong> The journey map below is specific to B2C telco, but the framework applies to any industry with high-volume, repeatable frontline processes and complex customer lifecycles. The journey stages, agent patterns, and orchestration model translate directly — though the specific pain points, sentiment drivers, and regulatory context will differ by sector.
+      <div style="margin-top:.75rem;display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:.5rem;font-size:.8125rem">
+        <div style="padding:.5rem .75rem;background:var(--pg);border-radius:6px;border:1px solid var(--br)"><strong>B2C Insurance</strong> — claims, underwriting, renewals, policyholder service</div>
+        <div style="padding:.5rem .75rem;background:var(--pg);border-radius:6px;border:1px solid var(--br)"><strong>Retail Banking</strong> — account opening, lending, disputes, advisory</div>
+        <div style="padding:.5rem .75rem;background:var(--pg);border-radius:6px;border:1px solid var(--br)"><strong>Healthcare</strong> — scheduling, prior auth, billing, patient support</div>
+        <div style="padding:.5rem .75rem;background:var(--pg);border-radius:6px;border:1px solid var(--br)"><strong>Utilities</strong> — billing, outages, service requests, move/transfer</div>
+        <div style="padding:.5rem .75rem;background:var(--pg);border-radius:6px;border:1px solid var(--br)"><strong>Retail / E-commerce</strong> — orders, returns, recommendations, loyalty</div>
+        <div style="padding:.5rem .75rem;background:var(--pg);border-radius:6px;border:1px solid var(--br)"><strong>Travel & Hospitality</strong> — bookings, disruptions, loyalty, concierge</div>
+      </div>
+    </div>
+    <div class="ex-callout" style="border-left-color:var(--af)">Use this section to identify where agents should create value first — not where it could theoretically be applied.</div>
+    <p class="ex-section__prompt">Each journey should be evaluated against four questions:</p>
+    <ul class="ex-bullets">
+      <li>Where is customer friction highest?</li>
+      <li>Where is manual effort repeatable?</li>
+      <li>Where is decision support valuable?</li>
+      <li>Where can value be measured within one operating cycle?</li>
+    </ul>
+    <!-- Interactive journey map preserved -->
+    <div id="vw-journey" style="margin-top:2rem">
+      <h3 style="font-size:1rem;font-weight:700;color:var(--td);margin-bottom:.75rem">B2C Telco Example</h3>
+      <div class="jm">
+        <div class="jm__nav" id="jm-nav"><div id="jm-nav-inner" style="height:1px"></div></div>
+        <div class="jm__scroll" id="jm-scroll"><div class="jg" id="jg"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SECTION 3: OPERATING MODEL ═══ -->
+<section class="ex-section" id="s-model">
+  <div class="ex-section__inner">
+    <span class="ex-section__num">3</span>
+    <h2 class="ex-section__h2">Operating Model</h2>
+    <p class="ex-section__body">An agentic enterprise does not scale through isolated bots. It scales through a clear operating model that defines where agents assist, where they act autonomously, and where human oversight remains essential. This section maps the relationship between business functions, human roles, and enterprise agents across service, sales, and marketing.</p>
+    <p class="ex-section__support">The question is not whether an agent can perform a task. The question is where agentic execution improves the operating model without increasing risk or complexity.</p>
+    <div class="ex-pillars">
+      <div class="ex-pillar">
+        <h4 class="ex-pillar__h4">Service</h4>
+        <p class="ex-pillar__p">Use agents to accelerate case resolution, improve consistency, and reduce unnecessary handoffs while preserving clear escalation paths.</p>
+      </div>
+      <div class="ex-pillar">
+        <h4 class="ex-pillar__h4">Sales</h4>
+        <p class="ex-pillar__p">Use agents to surface recommendations, support seller productivity, and improve speed to action across prospecting, qualification, and opportunity progression.</p>
+      </div>
+      <div class="ex-pillar">
+        <h4 class="ex-pillar__h4">Marketing</h4>
+        <p class="ex-pillar__p">Use agents to improve segmentation, orchestration, content activation, and next-best-action recommendations across the customer lifecycle.</p>
+      </div>
+    </div>
+    <div class="ex-callout">Design principle: every agent should have a defined business owner, decision boundary, and performance metric.</div>
+    <!-- Interactive org chart preserved -->
+    <div id="vw-orgchart" style="margin-top:2rem">
+      <div class="tabs" style="margin-top:1.5rem">
+        <button class="tab on" onclick="sOV('service',this)">Service</button>
+        <button class="tab" onclick="sOV('sales',this)">Sales</button>
+        <button class="tab" onclick="sOV('marketing',this)">Marketing</button>
+        <button class="tab" onclick="sOV('all',this)">Combined</button>
+        <div class="sp"></div>
+      </div>
+      <div id="ot" class="oc" style="margin-top:1rem"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SECTION 4: DATA FOUNDATION ═══ -->
+<section class="ex-section ex-section--alt" id="s-data">
+  <div class="ex-section__inner">
+    <span class="ex-section__num">4</span>
+    <h2 class="ex-section__h2">Data Foundation</h2>
+    <p class="ex-section__body">Agentic systems are only as strong as the data they can access, trust, and act on. The purpose of this layer is to ensure that enterprise agents operate on clean, governed, and decision-ready data across customer, product, service, and interaction domains.</p>
+    <p class="ex-section__support">This framework uses a three-tier data model — raw ingestion, trusted operational data, and business-ready outputs — commonly known as the Medallion Architecture, a widely adopted pattern across modern data platforms including Salesforce Data Cloud and Databricks. Agents should read from validated and governed data products — not fragmented source data. But reading is only half the value. The new paradigm is agents that <strong>write back to source systems</strong>: issuing credits, changing plans, submitting orders, creating cases, and updating records. This is what unlocks real operational leverage — and it requires careful governance, explicit permissioning, and auditable action logs at every step.</p>
+    <div class="ex-pillars">
+      <div class="ex-pillar"><h4 class="ex-pillar__h4">Bronze</h4><p class="ex-pillar__p">Raw operational and event data from source systems. Agents read context from here via governed APIs — and write actions back (credits, orders, case updates) through permissioned, auditable channels.</p></div>
+      <div class="ex-pillar"><h4 class="ex-pillar__h4">Silver</h4><p class="ex-pillar__p">Cleaned, validated, conformed data used to support reliable agent reasoning and execution. This is the authoritative layer agents use for decision-making.</p></div>
+      <div class="ex-pillar"><h4 class="ex-pillar__h4">Gold</h4><p class="ex-pillar__p">Business-ready outputs, KPIs, and decision artifacts used for analytics, optimization, and reporting. Measures whether agent actions are producing the intended outcomes.</p></div>
+    </div>
+    <p class="ex-section__note">Example platform components: Salesforce Data Cloud for unified customer context and MuleSoft for system connectivity.</p>
+    <div class="ex-checklist">
+      <h4 class="ex-checklist__h4">Before scaling an agent, confirm six things:</h4>
+      <ul class="ex-checklist__list">
+        <li>Data is current enough for the use case</li>
+        <li>Core entities are defined consistently</li>
+        <li>Read access is governed and scoped to what the agent needs</li>
+        <li>Write-back actions are permissioned, threshold-gated, and auditable</li>
+        <li>Escalation and fallback logic are explicit</li>
+        <li>Outputs can be measured against business outcomes</li>
+      </ul>
+    </div>
+    <!-- Interactive data requirements preserved -->
+    <div id="vw-datareq" style="margin-top:2rem">
+      <div class="tabs" style="margin-top:1.5rem">
+        <button class="tab on" onclick="sDV('medallion',this)">Medallion Architecture</button>
+        <button class="tab" onclick="sDV('service',this)">Service Agents</button>
+        <button class="tab" onclick="sDV('sales',this)">Sales Agents</button>
+        <button class="tab" onclick="sDV('marketing',this)">Marketing Agents</button>
+        <div class="sp"></div>
+      </div>
+      <div style="margin-top:1rem">
+        <div class="dr-legend">
+          <span><span class="dr-dot dr-rt"></span> Real-time (&lt;5s)</span>
+          <span><span class="dr-dot dr-nrt"></span> Near-real-time (min–1hr)</span>
+          <span><span class="dr-dot dr-bt"></span> Batch (daily/weekly)</span>
+        </div>
+        <div id="drg"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SECTION 5: MEASUREMENT ═══ -->
+<section class="ex-section" id="s-measure">
+  <div class="ex-section__inner">
+    <span class="ex-section__num">5</span>
+    <h2 class="ex-section__h2">Measurement</h2>
+    <p class="ex-section__body">If agent adoption cannot be measured, it will not scale. Measurement must go beyond activity volume and capture whether agents are improving business outcomes, operating efficiency, trust, and customer experience.</p>
+    <div class="ex-pillars">
+      <div class="ex-pillar">
+        <h4 class="ex-pillar__h4">Business Performance</h4>
+        <p class="ex-pillar__p">Measure the impact on conversion, resolution speed, retention, deflection, productivity, and cost-to-serve. These metrics determine whether an agent is creating operational leverage.</p>
+      </div>
+      <div class="ex-pillar">
+        <h4 class="ex-pillar__h4">Agent Telemetry</h4>
+        <p class="ex-pillar__p">Track completion rates, escalation rates, latency, intervention frequency, confidence thresholds, error patterns, and handoff behavior. This is how you monitor quality and control risk.</p>
+      </div>
+      <div class="ex-pillar">
+        <h4 class="ex-pillar__h4">Value Realization</h4>
+        <p class="ex-pillar__p">Estimate value using a practical model tied to labor savings, revenue lift, service efficiency, and experience improvement. A value model should help leaders decide what to expand, refine, or stop.</p>
+      </div>
+    </div>
+    <div class="ex-callout">Rule of thumb: do not scale an agent that cannot be explained, monitored, and tied to a business outcome.</div>
+    <!-- Interactive analytics preserved -->
+    <div id="vw-analytics" style="margin-top:2rem">
+      <div class="ex-dash-label">Select a dashboard to explore</div>
+      <div class="ex-dash-nav">
+        <div class="ex-dash-card on" onclick="sAnaV('telemetry',this)">
+          <div class="ex-dash-card__icon">&#9881;</div>
+          <div class="ex-dash-card__body">
+            <div class="ex-dash-card__title">Agent Telemetry</div>
+            <div class="ex-dash-card__desc">Are agents running correctly? Monitor quality, reliability, and governance.</div>
+          </div>
+        </div>
+        <div class="ex-dash-card" onclick="sAnaV('performance',this)">
+          <div class="ex-dash-card__icon">&#128200;</div>
+          <div class="ex-dash-card__body">
+            <div class="ex-dash-card__title">Business Performance</div>
+            <div class="ex-dash-card__desc">Is the investment delivering value? Track outcomes across Service, Sales, and Marketing.</div>
+          </div>
+        </div>
+        <div class="ex-dash-card" onclick="sAnaV('calculator',this)">
+          <div class="ex-dash-card__icon">&#128176;</div>
+          <div class="ex-dash-card__body">
+            <div class="ex-dash-card__title">Value Calculator</div>
+            <div class="ex-dash-card__desc">Model the 3-year business case with scenario analysis and ROI projections.</div>
+          </div>
+        </div>
+      </div>
+      <div id="ana-ct" style="max-width:1440px;margin-top:1.5rem"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CLOSING CTA ═══ -->
+<section class="ex-cta">
+  <div class="ex-cta__inner">
+    <h2 class="ex-cta__h2">Move from AI experiments to an operating model for scale</h2>
+    <p class="ex-cta__p">The goal is not to deploy the most agents. The goal is to deploy the right agents in the right journeys — with the right data, controls, and measurement model behind them.</p>
+    <div class="ex-hero__ctas">
+      <a href="#s-journeys" class="ex-btn ex-btn--primary">Revisit priority journeys</a>
+      <a href="#s-data" class="ex-btn ex-btn--secondary">Review the data foundation</a>
+    </div>
+  </div>
+</section>
+
+<!-- MODAL (preserved) -->
 <div class="mo" id="modal" onclick="if(event.target===this)xM()"><div class="md"><div class="md__h"><div class="md__hi">Af</div><span class="md__t" id="mt"></span><button class="md__x" onclick="xM()">&times;</button></div><div class="md__bd" id="mb"></div></div></div>
 
 <script>
@@ -976,7 +1278,16 @@ const AGENT_TEL=[
 // ═══ APP LOGIC ═══
 let cCV='exec',cOV='service',cDV='medallion';
 
-function sT(t,b){document.querySelectorAll('.gh__ni').forEach(x=>x.classList.remove('on'));b.classList.add('on');document.querySelectorAll('.vw').forEach(v=>v.classList.remove('on'));document.getElementById('vw-'+t).classList.add('on')}
+// Scroll-based nav highlighting
+var exSections=['s-why','s-journeys','s-model','s-data','s-measure'];
+window.addEventListener('scroll',function(){
+  var scrollY=window.scrollY+100;
+  var current='';
+  exSections.forEach(function(id){var el=document.getElementById(id);if(el&&el.offsetTop<=scrollY)current=id});
+  document.querySelectorAll('.ex-nav__link').forEach(function(a){a.classList.toggle('on',a.getAttribute('href')==='#'+current)});
+});
+// Legacy tab switching (still used within sections for sub-tabs)
+function sT(){}
 function sOV(v,b){b.parentElement.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));b.classList.add('on');cOV=v;rOT(v)}
 function sDV(v,b){b.parentElement.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));b.classList.add('on');cDV=v;bDR()}
 
@@ -1090,8 +1401,7 @@ function xM(){document.getElementById('modal').classList.remove('op')}
 document.addEventListener('keydown',e=>{if(e.key==='Escape')xM()});
 
 // NAV TO ORG
-function nR(r){document.querySelectorAll('.gh__ni').forEach(b=>b.classList.remove('on'));document.querySelectorAll('.gh__ni')[1].classList.add('on');
-document.querySelectorAll('.vw').forEach(v=>v.classList.remove('on'));document.getElementById('vw-orgchart').classList.add('on');
+function nR(r){
 var f=fIT(O.service,r)?'service':fIT(O.sales,r)?'sales':fIT(O.marketing,r)?'marketing':'all';
 var ts=document.querySelectorAll('#vw-orgchart .tab');ts.forEach(t=>t.classList.remove('on'));
 ts[f==='service'?0:f==='sales'?1:f==='marketing'?2:3].classList.add('on');cOV=f;rOT(f);
@@ -1169,8 +1479,10 @@ fn.innerHTML='<strong style="color:var(--td)">Sources & Methodology</strong><br>
 'Qualtrics XM Institute, <em>State of Consumer Experience in Telecommunications</em>, 2025 (channel satisfaction and effort scores by journey stage); '+
 'T-Mobile Un-carrier research (publicly documented customer frustrations that informed their competitive positioning: hidden fees, coverage anxiety, contract resentment). '+
 '<br><sup>2</sup> Pain points, channels, and touchpoints are based on publicly available information from major U.S. carriers (T-Mobile, Verizon, AT&T) and industry analyst reports from COPC, Gartner, and Forrester. '+
-'<br><sup>3</sup> Agentforce agent mappings and org role assignments are illustrative recommendations, not Salesforce product specifications.';
-g.parentElement.appendChild(fn)}
+'<br><sup>3</sup> Agent mappings and org role assignments are illustrative recommendations, not Salesforce product specifications.';
+// Append footnote AFTER the .jm scroll container, not inside it
+var jmContainer=g.closest('.jm')||g.parentElement;
+if(jmContainer&&jmContainer.parentElement){jmContainer.parentElement.insertBefore(fn,jmContainer.nextSibling)}else{g.parentElement.appendChild(fn)}}
 
 // SILVER LAYER DATA OBJECTS (canonical)
 var SILVER=[
@@ -1201,10 +1513,7 @@ var GOLD=[
 
 // Navigate to Data tab for a specific agent
 function nD(agentName){
-  document.querySelectorAll('.gh__ni').forEach(b=>b.classList.remove('on'));
-  document.querySelectorAll('.gh__ni')[2].classList.add('on');
-  document.querySelectorAll('.vw').forEach(v=>v.classList.remove('on'));
-  document.getElementById('vw-datareq').classList.add('on');
+  // Scroll to data section
   // Switch to the right sub-tab
   var fn=findAgentFn(agentName);
   var tabs=document.querySelectorAll('#vw-datareq .tab');
@@ -1280,8 +1589,12 @@ h+='</div></div></div>'});
 c.innerHTML=h}
 
 // TELEMETRY DASHBOARD
-var anaView='performance';
-function sAnaV(v,b){b.parentElement.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));b.classList.add('on');anaView=v;bAna()}
+var anaView='telemetry';
+function sAnaV(v,el){
+  document.querySelectorAll('.ex-dash-card').forEach(x=>x.classList.remove('on'));
+  if(el)el.classList.add('on');
+  anaView=v;bAna();
+}
 
 // Simulated live data
 function rnd(min,max){return Math.floor(Math.random()*(max-min+1))+min}
@@ -1350,14 +1663,51 @@ var c=document.getElementById('ana-ct');if(!c)return;
 var h='';
 
 if(anaView==='performance'){
-// ══ PERFORMANCE KPIs ══
-h+='<div class="cd cd--intro" style="border-left-color:var(--ok)"><div class="cd__bd"><h3>Performance KPIs</h3><p>Business outcome metrics that answer "Is the agentic investment delivering value?" Organized by Service, Sales, and Marketing with targets and trend detection.</p></div></div>';
+// ══ PERFORMANCE KPIs — visual dashboard with popovers ══
+var pAgo=function(){return Math.floor(Math.random()*5+1)+'m ago'};
+h+='<div class="td-dash"><div class="td-grid">';
+
 PERF_KPIS.forEach(function(s){
-h+='<div class="tel-def"><div class="tel-def__hdr" onclick="this.parentElement.classList.toggle(\'cl\')"><div class="tel-def__icon '+s.icon+'">&#9881;</div><span class="tel-def__title">'+s.title+'</span><span class="tel-def__chev">&#9660;</span></div>';
-h+='<div class="tel-def__body" style="max-height:9999px"><table class="tb"><thead><tr><th>Metric</th><th>What It Measures</th><th>Target / Benchmark</th><th>Trend Detection</th></tr></thead><tbody>';
+var secCls=s.icon==='svc'?'s-quality':s.icon==='sal'?'s-infra':'s-govern';
+h+='<div class="td-section '+secCls+'"><span class="td-section__title">'+s.title+'</span></div>';
+
 s.metrics.forEach(function(m){
-h+='<tr><td>'+m.name+'</td><td style="font-size:.75rem;color:var(--ts)">'+m.desc+'</td><td class="good">'+m.good+'</td><td class="drift">'+m.drift+'</td></tr>'});
-h+='</tbody></table></div></div>'});
+  // Simulate values
+  var isRate=m.name.includes('Rate')||m.name.includes('Accuracy')||m.name.includes('Completion')||m.name.includes('Adherence')||m.name.includes('Completeness');
+  var isDelta=m.name.includes('Delta');
+  var simVal,simUnit,simTarget,simMax,simOk;
+  if(isDelta){simVal=rndF(3,8);simUnit='pts';simTarget=5;simMax=15;simOk=simVal<=10}
+  else if(m.name.includes('Conversion')){simVal=rndF(12,22);simUnit='%';simTarget=15;simMax=30;simOk=simVal>=15}
+  else if(m.name.includes('Onboarding')){simVal=rndF(75,90);simUnit='%';simTarget=80;simMax=100;simOk=simVal>=80}
+  else if(m.name.includes('Renewal')){simVal=rndF(65,80);simUnit='%';simTarget=70;simMax=100;simOk=simVal>=70}
+  else if(m.name.includes('Lead')){simVal=rndF(28,42);simUnit='%';simTarget=30;simMax=60;simOk=simVal>=30}
+  else if(m.name.includes('Save')){simVal=rndF(38,52);simUnit='%';simTarget=45;simMax=80;simOk=simVal>=45}
+  else if(m.name.includes('Cross-sell')){simVal=rndF(14,28);simUnit='%';simTarget=15;simMax=40;simOk=simVal>=15}
+  else if(m.name.includes('NBO')){simVal=rndF(18,32);simUnit='%';simTarget=20;simMax=50;simOk=simVal>=20}
+  else if(m.name.includes('ROI')){simVal=rndF(12,28);simUnit='%';simTarget=15;simMax=40;simOk=simVal>=15}
+  else if(m.name.includes('Credit')||m.name.includes('Governance')){simVal=rndF(88,98);simUnit='%';simTarget=90;simMax=100;simOk=simVal>=90}
+  else if(m.name.includes('Journey')){simVal=rndF(55,72);simUnit='%';simTarget=60;simMax=100;simOk=simVal>=60}
+  else if(m.name.includes('Completeness')){simVal=rndF(80,92);simUnit='%';simTarget=85;simMax=100;simOk=simVal>=85}
+  else{simVal=rndF(68,92);simUnit='%';simTarget=75;simMax=100;simOk=simVal>=75}
+
+  var stCls=simOk?'st-ok':'st-wn';
+  var fillPct=Math.min(simVal/simMax*100,100);
+  var markerPct=Math.min(simTarget/simMax*100,100);
+  var fillColor=simOk?'#059669':'#d97706';
+
+  h+='<div class="td-card '+stCls+'">';
+  h+='<div class="td-card__hdr"><span class="td-card__label">'+m.name+'</span><span class="td-card__info">i</span>';
+  h+='<div class="td-popover"><div class="td-popover__dt">Definition</div><div class="td-popover__dd">'+m.desc+'</div><div class="td-popover__dt">Target</div><div class="td-popover__dd good">'+m.good+'</div><div class="td-popover__dt">Trend Detection</div><div class="td-popover__dd warn">'+m.drift+'</div></div>';
+  h+='</div>';
+  h+='<div class="td-card__val">'+simVal+'<span class="td-card__unit">'+simUnit+'</span></div>';
+  h+='<div class="td-card__trend '+(simOk?'up':'dn')+'">'+rndF(0.5,3)+simUnit+' from last period</div>';
+  h+='<div class="td-bar"><div class="td-bar__fill" style="width:'+fillPct+'%;background:'+fillColor+'"></div><div class="td-bar__marker" style="left:'+markerPct+'%"></div><div class="td-bar__target-label" style="left:'+markerPct+'%">target: '+simTarget+simUnit+'</div></div>';
+  h+='<div class="td-card__ts">Updated '+pAgo()+'</div>';
+  h+='</div>';
+});
+});
+
+h+='</div></div>';
 c.innerHTML=h;return;
 }
 
@@ -1586,7 +1936,7 @@ function rCC(){
 
   // Dark exec summary
   h+='<div class="roi-exec">';
-  h+='<div class="roi-exec__title">3-Year Business Case — '+R.sc.label+' Scenario <span>Agentforce ROI</span></div>';
+  h+='<div class="roi-exec__title">3-Year Business Case — '+R.sc.label+' Scenario <span>Agentic ROI</span></div>';
   h+='<div class="roi-kpis">';
   h+='<div class="roi-kpi highlight"><div class="roi-kpi__label">3-Year Net Value</div><div class="roi-kpi__val" style="color:#22c55e">'+fM(R.netValue3Y)+'</div><div class="roi-kpi__sub">Total value minus investment</div></div>';
   h+='<div class="roi-kpi highlight"><div class="roi-kpi__label">ROI</div><div class="roi-kpi__val" style="color:#22c55e">'+R.roiPct+'%</div><div class="roi-kpi__sub">Return on investment</div></div>';
@@ -1651,7 +2001,7 @@ function rCC(){
   h+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">';
   // Investment
   h+='<div class="roi-inv"><div style="font-size:.875rem;font-weight:700;margin-bottom:.75rem">&#128176; 3-Year Investment</div>';
-  h+='<div class="roi-inv__row cost"><span class="label">Agentforce Licensing (Y1)</span><span class="val">'+fM(R.licensingAnnual)+'</span></div>';
+  h+='<div class="roi-inv__row cost"><span class="label">Agent Platform Licensing (Y1)</span><span class="val">'+fM(R.licensingAnnual)+'</span></div>';
   h+='<div class="roi-inv__row cost"><span class="label">Integration & Data Cloud</span><span class="val">'+fM(R.integrationY1)+'</span></div>';
   h+='<div class="roi-inv__row cost"><span class="label">Change Management</span><span class="val">'+fM(R.changeManagement)+'</span></div>';
   h+='<div class="roi-inv__row cost"><span class="label">Training</span><span class="val">'+fM(R.trainingInvestment)+'</span></div>';
@@ -1667,7 +2017,7 @@ function rCC(){
   h+='<div class="roi-inv__row total"><span class="label">Net 3-Year Value</span><span class="val">'+fM(R.netValue3Y)+'</span></div></div>';
   h+='</div>';
 
-  h+='<div class="nt"><strong>Methodology:</strong> FTE savings based on role-specific automatable percentages. Revenue impacts modeled as percentage lifts on current cost base as a proxy. Ramp follows 40/80/100% over 3 years. All values are annualized and scenario-adjusted. Investment includes Salesforce Agentforce licensing, Data Cloud integration, MuleSoft connectivity, change management, and training.</div>';
+  h+='<div class="nt"><strong>Methodology:</strong> FTE savings based on role-specific automatable percentages. Revenue impacts modeled as percentage lifts on current cost base as a proxy. Ramp follows 40/80/100% over 3 years. All values are annualized and scenario-adjusted. Investment includes agent platform licensing, Data Cloud integration, system connectivity, change management, and training.</div>';
 
   } else {
   // ═══ DETAILED INPUTS ═══
@@ -1711,6 +2061,18 @@ function rC(){calcScenario='moderate';rCC()}
 
 // INIT
 bJM();rOT('service');bDR();bAna();
+// Sync dual scrollbars for journey map
+setTimeout(function(){
+  var nav=document.getElementById('jm-nav'),scroll=document.getElementById('jm-scroll'),navInner=document.getElementById('jm-nav-inner');
+  if(nav&&scroll&&navInner){
+    navInner.style.width=scroll.scrollWidth+'px';
+    var syncing=false;
+    nav.addEventListener('scroll',function(){if(!syncing){syncing=true;scroll.scrollLeft=nav.scrollLeft;syncing=false}});
+    scroll.addEventListener('scroll',function(){if(!syncing){syncing=true;nav.scrollLeft=scroll.scrollLeft;syncing=false}});
+  }
+},200);
+// Remove error overlay if no errors
+var errEl=document.querySelector('[style*="position:fixed"]');if(errEl&&errEl.textContent.includes('JS Error'))errEl.remove();
 // Refresh telemetry periodically for live feel
 setInterval(function(){if(anaView==='telemetry'&&document.getElementById('vw-analytics').classList.contains('on')){AGENTS_HEALTH.forEach(a=>{a.containment=Math.min(100,Math.max(50,a.containment+rnd(-2,2)));a.latency=Math.max(0.2,parseFloat((a.latency+rndF(-0.2,0.2)).toFixed(1)));a.errors=Math.max(0,parseFloat((a.errors+rndF(-0.3,0.3)).toFixed(1)));a.status=a.errors>2?'cr':a.errors>1?'wn':'ok'});bAna()}},8000);
 </script>
