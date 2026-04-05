@@ -362,6 +362,80 @@ body{font-family:var(--f);font-size:.8125rem;color:var(--td);background:var(--pg
 .tdb-w .tdb-avt__bar{height:100%;border-radius:5px;transition:width .6s}
 .tdb-w .tdb-avt__marker{position:absolute;top:-2px;width:2px;height:14px;background:var(--td);border-radius:1px;opacity:.5}
 .tdb-w .tdb-chv{margin-left:auto;font-size:10px;color:var(--tw);transition:transform .2s}
+/* ═══ TELEMETRY DASHBOARD (clean, scannable, Datadog/Grafana-inspired) ═══ */
+@keyframes td-pulse{0%,100%{opacity:.6;transform:scale(1)}50%{opacity:0;transform:scale(1.8)}}
+@keyframes td-blink{50%{opacity:.3}}
+.td-dash{background:#f8f9fb;border-radius:var(--rl);padding:1.5rem}
+/* Grid: max 3 cards/row at 1440px, 320px min */
+.td-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:20px}
+/* Section headers: 32px gap above groups */
+.td-section{grid-column:1/-1;display:flex;align-items:center;gap:10px;padding:6px 0;border-bottom:1px solid #e5e7eb;margin-top:32px}
+.td-section:first-child{margin-top:0}
+.td-section::before{content:'';width:3px;height:18px;border-radius:2px}
+.td-section.s-quality::before{background:var(--af)}
+.td-section.s-infra::before{background:var(--b)}
+.td-section.s-govern::before{background:var(--bk)}
+.td-section__title{font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:#6b7280}
+
+/* ── METRIC CARD: clean, one job per card ── */
+.td-card{background:#fff;border:1px solid #e5e7eb;border-left:4px solid #e5e7eb;border-radius:6px;padding:16px 20px;position:relative;transition:box-shadow .2s,border-color .2s;min-height:120px}
+.td-card:hover{box-shadow:0 4px 12px rgba(0,0,0,.06);border-color:#d1d5db}
+/* Status via left border ONLY — no background tints at rest */
+.td-card.st-ok{border-left-color:#22c55e}
+.td-card.st-wn{border-left-color:#f59e0b;background:hsla(38,92%,50%,.03)}
+.td-card.st-cr{border-left-color:#ef4444;background:hsla(0,84%,60%,.04)}
+/* Header: label + info icon */
+.td-card__hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:4px}
+.td-card__label{font-size:.75rem;font-weight:500;text-transform:uppercase;letter-spacing:.025em;color:#6b7280}
+.td-card__info{width:18px;height:18px;border-radius:50%;border:1px solid #d1d5db;color:#9ca3af;font-size:10px;cursor:help;display:grid;place-items:center;transition:all .15s;opacity:.5}
+.td-card:hover .td-card__info{opacity:1}
+.td-card__info:hover{border-color:var(--af);color:var(--af);background:#faf5ff;opacity:1}
+/* Primary number: THE focal point */
+.td-card__val{font-family:'SF Mono',-apple-system,Consolas,monospace;font-variant-numeric:tabular-nums;font-size:2rem;font-weight:600;line-height:1.1;letter-spacing:-.02em;color:#111827;margin-top:2px}
+.td-card__unit{font-size:.8125rem;font-weight:400;color:#9ca3af;margin-left:3px}
+/* Hover-only details: trend, timestamp, threshold */
+.td-card__trend{font-size:.6875rem;display:flex;align-items:center;gap:3px;margin-top:6px;opacity:0;transition:opacity .15s}
+.td-card:hover .td-card__trend{opacity:1}
+.td-card__trend.up{color:#059669}.td-card__trend.up::before{content:"\25BC";font-size:7px}
+.td-card__trend.dn{color:#dc2626}.td-card__trend.dn::before{content:"\25B2";font-size:7px}
+.td-card__trend.flat{color:#9ca3af}.td-card__trend.flat::before{content:"\25C6";font-size:6px}
+/* Bottom bar: thin, at card bottom, status colored */
+.td-bar{height:3px;border-radius:2px;background:#f1f3f7;margin-top:12px;position:relative;overflow:visible}
+.td-bar__fill{height:100%;border-radius:2px;transition:width .6s cubic-bezier(.4,0,.2,1)}
+.td-bar__marker{position:absolute;top:-3px;width:2px;height:9px;background:#6b7280;border-radius:1px;opacity:0;transition:opacity .15s}
+.td-card:hover .td-bar__marker{opacity:1}
+.td-bar__target-label{position:absolute;top:-12px;font-size:.5rem;color:#9ca3af;transform:translateX(-50%);white-space:nowrap;opacity:0;transition:opacity .15s}
+.td-card:hover .td-bar__target-label{opacity:1}
+/* Timestamp: hover only */
+.td-card__ts{font-size:.5625rem;color:#9ca3af;margin-top:8px;opacity:0;transition:opacity .15s}
+.td-card:hover .td-card__ts{opacity:1}
+/* Status dot */
+.td-dot{width:8px;height:8px;border-radius:50%;display:inline-block;flex-shrink:0;position:relative}
+.td-dot.ok{background:#22c55e}.td-dot.ok::after{content:'';position:absolute;inset:-3px;border-radius:50%;border:1.5px solid #22c55e;animation:td-pulse 2s ease-in-out infinite}
+.td-dot.wn{background:#f59e0b;box-shadow:0 0 6px rgba(245,158,11,.4)}
+.td-dot.cr{background:#ef4444;animation:td-blink 1s step-end infinite}
+.td-dot.un{background:#d1d5db}
+/* Score pips */
+.td-pips{display:flex;gap:5px;align-items:center;margin-top:8px}
+.td-pip{width:10px;height:10px;border-radius:50%;background:#e5e7eb;transition:all .3s}
+.td-pip.filled{background:var(--pip-color,#22c55e)}
+.td-pip.current{transform:scale(1.3);box-shadow:0 0 0 3px hsla(142,76%,46%,.2)}
+.td-pip.target{border:2px solid #9ca3af}
+/* Health status rows */
+.td-health-row{display:flex;align-items:center;gap:12px;padding:10px 14px;border-radius:6px;transition:background .15s;font-size:.8125rem;border-bottom:1px solid #f3f4f6}
+.td-health-row:last-child{border-bottom:none}
+.td-health-row:hover{background:#f8f9fb}
+.td-health-row__name{font-weight:600;color:#111827;flex:1}
+.td-health-row__status{color:#6b7280;min-width:80px;font-size:.75rem}
+.td-health-row__ts{color:#9ca3af;font-size:.6875rem;min-width:50px;text-align:right;opacity:0;transition:opacity .15s}
+.td-health-row:hover .td-health-row__ts{opacity:1}
+/* Popover */
+.td-popover{position:absolute;top:calc(100% + 8px);left:0;z-index:100;width:320px;padding:16px;background:#fff;border:1px solid #e5e7eb;border-radius:8px;box-shadow:0 4px 6px -1px rgba(0,0,0,.08),0 10px 20px -2px rgba(0,0,0,.05);opacity:0;visibility:hidden;transform:translateY(4px);transition:all .15s;pointer-events:none}
+.td-card__info:hover~.td-popover,.td-popover:hover{opacity:1;visibility:visible;transform:translateY(0);pointer-events:auto;transition-delay:.2s}
+.td-popover__dt{font-size:.625rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:#6b7280;margin-top:10px}.td-popover__dt:first-child{margin-top:0}
+.td-popover__dd{font-size:.75rem;color:#374151;line-height:1.5;margin-top:3px}
+.td-popover__dd.good{color:#059669}.td-popover__dd.warn{color:#d97706}
+
 /* KPI Definitions table */
 .tel-def{background:var(--sf);border:1px solid var(--br);border-radius:var(--rl);margin-bottom:1.25rem;overflow:hidden;box-shadow:var(--sc)}
 .tel-def__hdr{padding:.75rem 1rem;display:flex;align-items:center;gap:.5rem;cursor:pointer;border-bottom:1px solid var(--br);transition:background .15s}
@@ -539,8 +613,7 @@ body{font-family:var(--f);font-size:.8125rem;color:var(--td);background:var(--pg
     <button class="gh__ni on" onclick="sT('journey',this)">Customer Journeys</button>
     <button class="gh__ni" onclick="sT('orgchart',this)">Enterprise Agentic Functions</button>
     <button class="gh__ni" onclick="sT('datareq',this)">Agent Data Requirements</button>
-    <button class="gh__ni" onclick="sT('telemetry',this)">Agent Telemetry</button>
-    <button class="gh__ni" onclick="sT('calculator',this)">Value Calculator</button>
+    <button class="gh__ni" onclick="sT('analytics',this)">Analytics</button>
   </nav>
   <div class="gh__trail"><span class="gh__badge">B2C Telco</span></div>
 </header>
@@ -569,17 +642,7 @@ body{font-family:var(--f);font-size:.8125rem;color:var(--td);background:var(--pg
 </div>
 
 <!-- TAB 3: VALUE CALCULATOR -->
-<div id="vw-calculator" class="vw">
-  <div class="tabs">
-    <button class="tab on" onclick="sCV('exec',this)">Executive Summary</button>
-    <button class="tab" onclick="sCV('detail',this)">Detailed Inputs</button>
-    <div class="sp"></div>
-    <div class="bg">
-      <button class="btn" onclick="rC()">Reset Defaults</button>
-    </div>
-  </div>
-  <div class="ct" id="calc-ct"></div>
-</div>
+<!-- Calculator is now inside Analytics tab -->
 
 <!-- TAB 4: AGENT DATA REQUIREMENTS -->
 <div id="vw-datareq" class="vw">
@@ -601,14 +664,15 @@ body{font-family:var(--f);font-size:.8125rem;color:var(--td);background:var(--pg
   </div>
 </div>
 
-<!-- TAB 5: AGENT TELEMETRY -->
-<div id="vw-telemetry" class="vw">
+<!-- TAB 5: ANALYTICS -->
+<div id="vw-analytics" class="vw">
   <div class="tabs">
-    <button class="tab on" onclick="sTelV('definitions',this)">KPI Definitions</button>
-    <button class="tab" onclick="sTelV('dashboard',this)">Live Dashboard</button>
+    <button class="tab on" onclick="sAnaV('performance',this)">Performance</button>
+    <button class="tab" onclick="sAnaV('telemetry',this)">Agent Telemetry</button>
+    <button class="tab" onclick="sAnaV('calculator',this)">Value Calculator</button>
     <div class="sp"></div>
   </div>
-  <div class="ct" id="tel-ct" style="max-width:1440px"></div>
+  <div class="ct" id="ana-ct" style="max-width:1440px"></div>
 </div>
 
 <!-- MODAL -->
@@ -859,40 +923,54 @@ sales:[
 {role:"Channel Perf Mgr",agents:"Channel Optimization",hitl:"Assistive",dF:2,dC:100000,dP:25}]};
 
 // TELEMETRY DATA
-const TEL=[
-{title:"Service — Care, Technical Support, Retention",icon:"svc",metrics:[
+// PERFORMANCE KPIs — business outcomes for executives
+const PERF_KPIS=[
+{title:"Service Performance",icon:"svc",metrics:[
 {name:"Containment Rate",desc:"% of interactions fully resolved by agent without human intervention",good:"65-85% (telco benchmark); track by intent category",drift:"Alert when any intent drops >5pts below 4-week rolling baseline"},
 {name:"Verified Resolution Rate",desc:"Confirmed resolution via surveys, no-callback within 48h, or QA review",good:"Within 10pts of raw containment; re-contact rate <15%",drift:"Gap widening between raw containment and verified resolution"},
-{name:"Escalation Quality Score",desc:"Rubric score for handoff completeness: context, issue ID, sentiment, history",good:"4+/5 rubric; post-escalation AHT ≤ direct-to-human AHT",drift:"Median drops below 3.5/5 or 'poor' escalations exceed 15%"},
 {name:"Resolution Accuracy",desc:"Factual correctness of agent's proposed resolution or action",good:"85%+ goal accuracy; 99%+ for billing/credit actions",drift:"Run daily golden-dataset evals; track by intent category"},
 {name:"CSAT / NPS Delta",desc:"Satisfaction gap between AI-handled and human-handled interactions",good:"AI CSAT within 5-10% of human CSAT; gap trending closed",drift:"AI CSAT drops >5% below baseline or gap widens >3pts"},
-{name:"Compliance & Policy Adherence",desc:"Consistency with regulatory disclosures, credit limits, escalation rules",good:"100% on mandatory disclosures; 99%+ internal policy adherence",drift:"Automated 100% compliance check; red-team monthly"},
-{name:"Credit / Discount Governance",desc:"Financial controls on AI-issued credits, discounts, and retention offers",good:"Within 10% of approved matrix; daily total within budget",drift:"Daily total exceeds 115% budget; avg credit deviates >$2 from target"},
-{name:"Hallucination Rate",desc:"% of responses with fabricated information (policies, prices, procedures)",good:"Below 2% for customer-facing agents",drift:"Daily automated eval against golden dataset; alert on any increase"},
-{name:"Human Override Rate & Reasons",desc:"Frequency and reasons humans override or correct agent actions",good:"Declining trend; <10% override rate for mature agents",drift:"Rising override rate or new override reason categories emerging"}]},
-{title:"Sales — Retail, Digital, Telesales",icon:"sal",metrics:[
-{name:"Quote / Order Accuracy",desc:"% of agent-generated quotes and orders that pass validation without errors",good:"95%+ first-pass accuracy; <3% fallout rate",drift:"Track by channel and order type; alert on fallout rate increase"},
-{name:"Conversion Impact",desc:"Conversion rate lift attributable to agent assistance vs. unassisted baseline",good:"10-20% conversion lift; controlled A/B measurement",drift:"Declining lift over time; compare agent-assisted vs control weekly"},
-{name:"Recommendation Relevance",desc:"% of plan/device/bundle recommendations accepted by customers",good:"25-40% acceptance rate; declining skip/dismiss rate",drift:"Acceptance rate dropping while recommendation volume stays constant"},
-{name:"Discount Governance",desc:"Agent adherence to approved discount matrices and promotional rules",good:"100% compliance with promo eligibility rules",drift:"Any unauthorized discount application; promo exception rate rising"},
-{name:"Disclosure Compliance",desc:"Completion of required disclosures (terms, fees, financing, trade-in conditions)",good:"100% mandatory disclosure completion",drift:"Automated audit of 100% of transactions; flag any omission"},
-{name:"Cross-sell / Upsell Acceptance",desc:"Rate at which cross-sell recommendations are accepted",good:"15-25% acceptance; positive ARPU impact without churn increase",drift:"Acceptance declining or post-sale churn increasing for cross-sold customers"}]},
-{title:"Marketing — Brand, Digital, CRM/Lifecycle",icon:"mkt",metrics:[
-{name:"Campaign Optimization Accuracy",desc:"% of agent bid/budget recommendations that improve CPA or ROAS",good:"70%+ of recommendations adopted improve performance",drift:"Track recommendation-to-outcome correlation weekly"},
-{name:"Segmentation Quality",desc:"Performance lift of agent-created segments vs. manual segments",good:"10-15% performance lift; <5% segment overlap",drift:"Segment performance lift declining; segment definitions becoming stale"},
+{name:"First Contact Resolution",desc:"Issues resolved on first AI contact without repeat contact within 48h",good:"70-75% industry standard; 80%+ for top performers",drift:"FCR trending down or re-contact rate rising above 15%"},
+{name:"Save Rate / Retention",desc:"% of at-risk customers successfully saved by retention agents",good:"45%+ save rate; positive margin per save",drift:"Save rate declining or post-save churn increasing"},
+{name:"Compliance Adherence",desc:"Aggregate regulatory and policy compliance posture",good:"100% on mandatory disclosures; 99%+ internal policy",drift:"Any compliance failure trend; regulatory audit findings"},
+{name:"Credit / Discount Governance",desc:"Total AI-issued credits and discounts vs approved policy matrix",good:"Within 10% of approved matrix; daily total within budget",drift:"Daily total exceeds 115% budget; avg credit deviates >$2"}]},
+{title:"Sales Performance",icon:"sal",metrics:[
+{name:"Quote / Order Accuracy",desc:"% of agent-generated quotes and orders passing validation error-free",good:"95%+ first-pass accuracy; <3% fallout rate",drift:"Track by channel and order type; alert on fallout increase"},
+{name:"Conversion Impact",desc:"Conversion rate lift attributable to agent assistance vs unassisted baseline",good:"10-20% conversion lift; controlled A/B measurement",drift:"Declining lift over time; compare agent vs control weekly"},
+{name:"Cross-sell / Upsell Acceptance",desc:"Rate at which cross-sell recommendations are accepted by customers",good:"15-25% acceptance; positive ARPU impact without churn increase",drift:"Acceptance declining or post-sale churn increasing"},
+{name:"Lead Qualification Rate",desc:"% of agent-scored leads that convert to qualified opportunities",good:"30-40% MQL-to-SQL conversion; declining false positive rate",drift:"Conversion rate dropping or sales team rejecting more leads"},
+{name:"Onboarding Completion",desc:"% of new customers completing full onboarding journey within 14 days",good:"80%+ completion; first-bill call-in rate <15%",drift:"Completion dropping or first-bill complaint rate rising"},
+{name:"Renewal Conversion",desc:"% of renewal-eligible customers who renew or upgrade",good:"70%+ renewal rate; proactive outreach success >20%",drift:"Renewal rate declining at device payment completion window"}]},
+{title:"Marketing Performance",icon:"mkt",metrics:[
 {name:"Journey Completion Rate",desc:"% of customers completing lifecycle communication journeys as designed",good:"60-70% welcome journey completion; <2% opt-out rate",drift:"Completion rate dropping or opt-out rate rising"},
-{name:"Personalization Relevance",desc:"Engagement lift from personalized vs. generic content",good:"2-3x engagement lift; declining unsubscribe rate",drift:"Engagement lift narrowing; unsubscribe rate increasing"},
-{name:"Attribution Model Accuracy",desc:"Alignment between attribution model predictions and actual outcomes",good:"Model predictions within 15% of actual channel contribution",drift:"Growing divergence between predicted and actual; recalibrate quarterly"},
-{name:"NBO Acceptance Rate",desc:"% of Next-Best-Action / Next-Best-Offer recommendations accepted",good:"20-30% acceptance; positive incremental revenue",drift:"Acceptance declining while volume constant; offers becoming repetitive"}]},
-{title:"Cross-functional Governance",icon:"gov",metrics:[
-{name:"Data Freshness Monitoring",desc:"Whether each data feed meets its SLA (real-time <5s, NRT <15min, batch <24h)",good:"99%+ data freshness SLA compliance across all feeds",drift:"Any feed missing SLA >3 consecutive intervals"},
-{name:"Model Drift Detection",desc:"Statistical divergence of model inputs/outputs from training distribution",good:"KL divergence and PSI within acceptable bounds; retrain triggers defined",drift:"Automated monitoring of input feature distributions; alert on statistical shift"},
+{name:"NBO Acceptance Rate",desc:"% of Next-Best-Offer recommendations accepted by customers",good:"20-30% acceptance; positive incremental revenue",drift:"Acceptance declining while volume constant; offers repetitive"},
+{name:"Campaign ROI",desc:"Return on investment for agent-optimized campaigns vs manually managed",good:"15-25% ROI improvement; declining CPA trend",drift:"ROI improvement narrowing; CPA creeping upward"},
+{name:"Customer 360 Completeness",desc:"% of customer profiles with unified, enriched data across all systems",good:"85%+ profile completeness; identity resolution >95%",drift:"Completeness declining; duplicate rate increasing"}]}
+];
+
+// AGENT TELEMETRY — operational metrics for platform teams
+const AGENT_TEL=[
+{title:"Agent Behavior & Quality",icon:"svc",metrics:[
+{name:"Hallucination Rate",desc:"% of responses with fabricated information (policies, prices, procedures)",good:"Below 2% for customer-facing agents",drift:"Daily automated eval against golden dataset; alert on any increase"},
+{name:"Human Override Rate",desc:"Frequency and reasons humans override or correct agent actions",good:"Declining trend; <10% override rate for mature agents",drift:"Rising override rate or new override reason categories emerging"},
+{name:"Escalation Quality Score",desc:"Rubric score for handoff completeness: context, issue ID, sentiment, history",good:"4+/5 rubric; post-escalation AHT ≤ direct-to-human AHT",drift:"Median drops below 3.5/5 or poor escalations exceed 15%"},
+{name:"Recommendation Relevance",desc:"% of agent recommendations accepted (plans, devices, offers, content)",good:"25-40% acceptance rate; declining skip/dismiss rate",drift:"Acceptance dropping while recommendation volume stays constant"},
+{name:"Disclosure Compliance",desc:"Completion of required regulatory disclosures in transactions",good:"100% mandatory disclosure completion",drift:"Automated audit of 100% of transactions; flag any omission"},
+{name:"Personalization Relevance",desc:"Engagement lift from personalized vs generic content",good:"2-3x engagement lift; declining unsubscribe rate",drift:"Engagement lift narrowing; unsubscribe rate increasing"}]},
+{title:"Infrastructure & Reliability",icon:"gov",metrics:[
+{name:"P95 Latency",desc:"95th percentile agent response time",good:"P95 <3s; P99 <5s",drift:"Response time degradation; increasing timeout rates"},
+{name:"Error Rate & Failure Modes",desc:"% of interactions with agent errors, tool call failures, or crashes",good:"<1% error rate; classified failure taxonomy maintained",drift:"New failure modes emerging; error rate trending up"},
+{name:"Data Freshness",desc:"Whether each data feed meets its SLA (RT <5s, NRT <15min, batch <24h)",good:"99%+ data freshness SLA compliance across all feeds",drift:"Any feed missing SLA >3 consecutive intervals"},
+{name:"Token Usage & Cost",desc:"LLM token consumption and associated cost per interaction",good:"Declining cost per resolution; within budget allocation",drift:"Cost per interaction rising without quality improvement"},
+{name:"Availability",desc:"Agent uptime and service availability",good:"99.9% availability; <4 minutes unplanned downtime per month",drift:"Availability SLA breach; increasing error responses"}]},
+{title:"Model Health & Governance",icon:"gov",metrics:[
+{name:"Model Drift Detection",desc:"Statistical divergence of model inputs/outputs from training distribution",good:"KL divergence and PSI within acceptable bounds",drift:"Automated monitoring of feature distributions; alert on shift"},
 {name:"Bias Monitoring",desc:"Outcome fairness across customer segments (demographics, tenure, value tier)",good:"No statistically significant outcome disparities across protected groups",drift:"Quarterly bias audits; continuous monitoring of outcomes by segment"},
 {name:"PII / Data Handling Compliance",desc:"Agent adherence to data minimization, masking, and access controls",good:"Zero PII exposure in logs/transcripts; 100% masking compliance",drift:"Automated PII scanning of all agent outputs and logs"},
-{name:"Token Usage & Cost",desc:"LLM token consumption and associated cost per interaction",good:"Declining cost per resolution; within budget allocation",drift:"Cost per interaction rising without quality improvement"},
-{name:"Latency & Availability",desc:"Agent response time and uptime SLA",good:"P95 response <3s; 99.9% availability",drift:"Response time degradation; increasing timeout/error rates"},
-{name:"Error Rate & Failure Modes",desc:"% of interactions with agent errors, tool call failures, or crashes",good:"<1% error rate; classified failure taxonomy maintained",drift:"New failure modes emerging; error rate trending up"},
-{name:"Feedback Loop Health",desc:"Whether human corrections are being incorporated into agent improvement",good:"90%+ of corrections reviewed within 7 days; retraining cycle <30 days",drift:"Growing backlog of unincorporated corrections; same errors recurring"}]}
+{name:"Feedback Loop Health",desc:"Whether human corrections are being incorporated into agent improvement",good:"90%+ of corrections reviewed within 7 days; retraining cycle <30 days",drift:"Growing backlog; same errors recurring"},
+{name:"Campaign Optimization Accuracy",desc:"% of agent bid/budget recommendations that improve CPA or ROAS",good:"70%+ of recommendations improve performance",drift:"Recommendation-to-outcome correlation declining"},
+{name:"Segmentation Quality",desc:"Performance lift of agent-created segments vs manual segments",good:"10-15% performance lift; <5% segment overlap",drift:"Segment performance lift declining; definitions stale"},
+{name:"Attribution Accuracy",desc:"Alignment between attribution model predictions and actual outcomes",good:"Model predictions within 15% of actual channel contribution",drift:"Growing divergence between predicted and actual"}]}
 ];
 
 // ═══ APP LOGIC ═══
@@ -900,7 +978,6 @@ let cCV='exec',cOV='service',cDV='medallion';
 
 function sT(t,b){document.querySelectorAll('.gh__ni').forEach(x=>x.classList.remove('on'));b.classList.add('on');document.querySelectorAll('.vw').forEach(v=>v.classList.remove('on'));document.getElementById('vw-'+t).classList.add('on')}
 function sOV(v,b){b.parentElement.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));b.classList.add('on');cOV=v;rOT(v)}
-function sCV(v,b){b.parentElement.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));b.classList.add('on');cCV=v;document.getElementById('cs').style.display=(v==='both'||v==='service')?'':'none';document.getElementById('cl').style.display=(v==='both'||v==='sales')?'':'none';rCC()}
 function sDV(v,b){b.parentElement.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));b.classList.add('on');cDV=v;bDR()}
 
 function gHC(h){if(!h)return'';var l=h.toLowerCase();return l.includes('autonomous')?'bd-au':l.includes('approval')?'bd-ap':l.includes('hybrid')?'bd-hy':l.includes('assistive')?'bd-as':''}
@@ -1203,8 +1280,8 @@ h+='</div></div></div>'});
 c.innerHTML=h}
 
 // TELEMETRY DASHBOARD
-var telView='definitions';
-function sTelV(v,b){b.parentElement.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));b.classList.add('on');telView=v;bTel()}
+var anaView='performance';
+function sAnaV(v,b){b.parentElement.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));b.classList.add('on');anaView=v;bAna()}
 
 // Simulated live data
 function rnd(min,max){return Math.floor(Math.random()*(max-min+1))+min}
@@ -1268,113 +1345,147 @@ function avtBar(actual,target,max,unit,inv){
     '<span class="tdb-avt__target">Target: '+target+unit+'</span></div>';
 }
 
-function bTel(){
-var c=document.getElementById('tel-ct');if(!c)return;
+function bAna(){
+var c=document.getElementById('ana-ct');if(!c)return;
 var h='';
 
-if(telView==='definitions'){
-// ══ KPI DEFINITIONS TAB ══
-h+='<div class="cd cd--intro" style="border-left-color:var(--bk)"><div class="cd__bd"><h3>Agent Telemetry & Governance — KPI Definitions</h3><p>Enterprise metrics to ensure agents work productively and don\'t drift. Organized by business function with benchmarks and drift detection guidance.</p></div></div>';
-TEL.forEach(function(s){
+if(anaView==='performance'){
+// ══ PERFORMANCE KPIs ══
+h+='<div class="cd cd--intro" style="border-left-color:var(--ok)"><div class="cd__bd"><h3>Performance KPIs</h3><p>Business outcome metrics that answer "Is the agentic investment delivering value?" Organized by Service, Sales, and Marketing with targets and trend detection.</p></div></div>';
+PERF_KPIS.forEach(function(s){
 h+='<div class="tel-def"><div class="tel-def__hdr" onclick="this.parentElement.classList.toggle(\'cl\')"><div class="tel-def__icon '+s.icon+'">&#9881;</div><span class="tel-def__title">'+s.title+'</span><span class="tel-def__chev">&#9660;</span></div>';
-h+='<div class="tel-def__body" style="max-height:9999px"><table class="tb"><thead><tr><th>Metric</th><th>What It Measures</th><th>Target / Benchmark</th><th>Drift Detection</th></tr></thead><tbody>';
+h+='<div class="tel-def__body" style="max-height:9999px"><table class="tb"><thead><tr><th>Metric</th><th>What It Measures</th><th>Target / Benchmark</th><th>Trend Detection</th></tr></thead><tbody>';
 s.metrics.forEach(function(m){
 h+='<tr><td>'+m.name+'</td><td style="font-size:.75rem;color:var(--ts)">'+m.desc+'</td><td class="good">'+m.good+'</td><td class="drift">'+m.drift+'</td></tr>'});
 h+='</tbody></table></div></div>'});
 c.innerHTML=h;return;
 }
 
-// ══ LIVE DASHBOARD TAB (white theme) ══
-h+='<div class="tdb-w">';
+if(anaView==='telemetry'){
+// ══ AGENT TELEMETRY DASHBOARD ══
+var ago=function(){return Math.floor(Math.random()*5+1)+'m ago'};
+h+='<div class="td-dash"><div class="td-grid">';
 
-// ── 1. KPI STRIP (always visible) ──
-var tA=AGENTS_HEALTH.length,okA=AGENTS_HEALTH.filter(a=>a.status==='ok').length;
-var avgC=Math.round(AGENTS_HEALTH.reduce((s,a)=>s+a.containment,0)/tA);
-var avgL=(AGENTS_HEALTH.reduce((s,a)=>s+a.latency,0)/tA).toFixed(1);
-var avgE=(AGENTS_HEALTH.reduce((s,a)=>s+a.errors,0)/tA).toFixed(1);
-var sp1=spark(8,60,95),sp2=spark(8,5,25),sp3=spark(8,30,80),sp4=spark(8,40,90);
-h+='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.75rem"><div style="font-size:1rem;font-weight:700;color:var(--td)">Agent Telemetry Dashboard</div><div style="font-size:.625rem;color:var(--tw)">Last updated: just now</div></div>';
-h+='<div class="tdb-kpi">';
-h+='<div class="tdb-kpi__card '+(okA>=tA-2?'ok':'wn')+'"><div class="tdb-kpi__label">Fleet Health</div><div class="tdb-kpi__val">'+okA+'/'+tA+'</div><div class="tdb-kpi__trend '+(okA>=tA-2?'up':'dn')+'">Target: '+tA+'/'+tA+'</div><div class="tdb-kpi__spark">'+sp1.map(v=>'<div class="tdb-kpi__spark-bar" style="height:'+barH(v,100,24)+'px;background:#22c55e"></div>').join('')+'</div></div>';
-h+='<div class="tdb-kpi__card '+(avgC>=75?'ok':'wn')+'"><div class="tdb-kpi__label">Containment</div><div class="tdb-kpi__val">'+avgC+'%</div><div class="tdb-kpi__trend '+(avgC>=75?'up':'dn')+'">Target: 75%</div><div class="tdb-kpi__spark">'+sp3.map(v=>'<div class="tdb-kpi__spark-bar" style="height:'+barH(v,100,24)+'px;background:#3b82f6"></div>').join('')+'</div></div>';
-h+='<div class="tdb-kpi__card '+(parseFloat(avgL)<=1.5?'ok':'wn')+'"><div class="tdb-kpi__label">P95 Latency</div><div class="tdb-kpi__val">'+avgL+'s</div><div class="tdb-kpi__trend '+(parseFloat(avgL)<=1.5?'up':'dn')+'">Target: ≤1.5s</div><div class="tdb-kpi__spark">'+sp2.map(v=>'<div class="tdb-kpi__spark-bar" style="height:'+barH(v,30,24)+'px;background:#f59e0b"></div>').join('')+'</div></div>';
-h+='<div class="tdb-kpi__card '+(parseFloat(avgE)<=1.0?'ok':'wn')+'"><div class="tdb-kpi__label">Error Rate</div><div class="tdb-kpi__val">'+avgE+'%</div><div class="tdb-kpi__trend '+(parseFloat(avgE)<=1.0?'up':'dn')+'">Target: ≤1.0%</div><div class="tdb-kpi__spark">'+sp4.map(v=>'<div class="tdb-kpi__spark-bar" style="height:'+barH(v,100,24)+'px;background:#ef4444"></div>').join('')+'</div></div>';
-h+='<div class="tdb-kpi__card info"><div class="tdb-kpi__label">Daily Volume</div><div class="tdb-kpi__val">47.2K</div><div class="tdb-kpi__trend up">Target: 45K</div><div class="tdb-kpi__spark">'+sp1.map(v=>'<div class="tdb-kpi__spark-bar" style="height:'+barH(v,100,24)+'px;background:#3b82f6"></div>').join('')+'</div></div>';
-h+='</div>';
+// ── SECTION: Agent Behavior & Quality ──
+h+='<div class="td-section s-quality"><span class="td-section__title">Agent Behavior & Quality</span></div>';
 
-// ── 2. AGENT HEALTH GRID (always visible) ──
-h+='<div class="tdb-section"><div class="tdb-section__hdr"><span class="tdb-section__hdr-icon">&#128994;</span> Agent Health Status</div>';
-h+='<div class="tdb-health">';
-AGENTS_HEALTH.sort((a,b)=>a.status==='cr'?-1:b.status==='cr'?1:a.status==='wn'?-1:b.status==='wn'?1:0);
-AGENTS_HEALTH.forEach(a=>{h+='<div class="tdb-health__card '+a.status+'"><span class="tdb-dot '+a.status+'"></span><span class="tdb-health__name">'+a.name+'</span><span class="tdb-health__stat">'+a.containment+'% · '+a.latency+'s</span></div>'});
-h+='</div></div>';
+// Hallucination Rate
+var halVal=rndF(0.8,2.2),halOk=halVal<2,halTint=halOk?'st-ok':'st-wn';
+h+='<div class="td-card '+halTint+'"><div class="td-card__hdr"><span class="td-card__label">Hallucination Rate</span><span class="td-card__info">i</span><div class="td-popover"><div class="td-popover__dt">Definition</div><div class="td-popover__dd">% of responses containing fabricated information — non-existent policies, incorrect prices, or invented procedures.</div><div class="td-popover__dt">Target</div><div class="td-popover__dd good">Below 2% for customer-facing agents</div><div class="td-popover__dt">Drift Detection</div><div class="td-popover__dd warn">Daily automated eval against golden dataset; alert on any increase</div></div></div>';
+h+='<div class="td-card__val">'+halVal+'<span class="td-card__unit">%</span></div>';
+h+='<div class="td-card__trend '+(halOk?'up':'dn')+'">'+rndF(0.1,0.4)+' from yesterday</div>';
+h+='<div class="td-bar"><div class="td-bar__fill" style="width:'+Math.min(halVal/4*100,100)+'%;background:'+(halOk?'#22c55e':'#f59e0b')+'"></div><div class="td-bar__marker" style="left:50%"></div><div class="td-bar__target-label" style="left:50%">target: &lt;2%</div></div>';
+h+='<div class="td-card__ts">Updated '+ago()+'</div></div>';
 
-// ── 3. MONTHLY KPI PERFORMANCE (collapsible, default open) ──
-h+='<div class="tdb-section" id="tel-kpi-sec"><div class="tdb-section__hdr" style="cursor:pointer" onclick="var b=this.nextElementSibling;b.style.display=b.style.display===\'none\'?\'grid\':\'none\';this.querySelector(\'.tdb-chv\').style.transform=b.style.display===\'none\'?\'rotate(-90deg)\':\'\'"><span class="tdb-section__hdr-icon">&#128202;</span> Monthly KPI Performance vs Target<span class="tdb-chv" style="margin-left:auto;font-size:10px;color:#64748b;transition:transform .2s">&#9660;</span></div>';
-h+='<div class="tdb-metrics">';
-var kpis=[
-{name:'Containment Rate',target:75,unit:'%',max:100,start:62,variance:3,inv:false,desc:'% resolved without human'},
-{name:'CSAT Score',target:82,unit:'%',max:100,start:71,variance:2.5,inv:false,desc:'AI interaction satisfaction'},
-{name:'First Contact Resolution',target:75,unit:'%',max:100,start:64,variance:3,inv:false,desc:'Resolved on first contact'},
-{name:'P95 Latency',target:1.5,unit:'s',max:4,start:2.8,variance:0.3,inv:true,desc:'95th percentile response'},
-{name:'Error Rate',target:1.0,unit:'%',max:5,start:3.2,variance:0.4,inv:true,desc:'Interactions with errors'},
-{name:'Resolution Accuracy',target:90,unit:'%',max:100,start:78,variance:2,inv:false,desc:'Factual correctness'},
-{name:'Compliance',target:99,unit:'%',max:100,start:94,variance:1,inv:false,desc:'Policy adherence'},
-{name:'Hallucination Rate',target:2.0,unit:'%',max:8,start:5.5,variance:0.5,inv:true,desc:'Fabricated responses'},
-{name:'Credit Governance',target:95,unit:'%',max:100,start:82,variance:2.5,inv:false,desc:'Within policy matrix'},
-{name:'Human Override',target:10,unit:'%',max:30,start:22,variance:2,inv:true,desc:'Actions overridden'},
-{name:'Save Rate',target:45,unit:'%',max:80,start:32,variance:3,inv:false,desc:'At-risk customers saved'},
-{name:'Order Accuracy',target:95,unit:'%',max:100,start:86,variance:2,inv:false,desc:'Orders error-free'}
+// Human Override Rate
+var hovVal=rndF(5,14),hovOk=hovVal<10;
+h+='<div class="td-card '+(hovOk?'st-ok':'st-wn')+'"><div class="td-card__hdr"><span class="td-card__label">Human Override Rate</span><span class="td-card__info">i</span><div class="td-popover"><div class="td-popover__dt">Definition</div><div class="td-popover__dd">Frequency humans override or correct agent actions — measures trust calibration.</div><div class="td-popover__dt">Target</div><div class="td-popover__dd good">Declining trend; &lt;10% for mature agents</div><div class="td-popover__dt">Drift Detection</div><div class="td-popover__dd warn">Rising override rate or new override categories emerging</div></div></div>';
+h+='<div class="td-card__val">'+hovVal+'<span class="td-card__unit">%</span></div>';
+h+='<div class="td-card__trend '+(hovOk?'up':'dn')+'">'+rndF(0.5,2)+' from last week</div>';
+h+='<div class="td-bar"><div class="td-bar__fill" style="width:'+Math.min(hovVal/20*100,100)+'%;background:'+(hovOk?'#22c55e':'#f59e0b')+'"></div><div class="td-bar__marker" style="left:50%"></div><div class="td-bar__target-label" style="left:50%">target: &lt;10%</div></div>';
+h+='<div class="td-card__ts">Updated '+ago()+'</div></div>';
+
+// Escalation Quality Score
+var eqVal=rndF(3.5,4.8);var eqOk=eqVal>=4;
+h+='<div class="td-card '+(eqOk?'st-ok':'st-wn')+'"><div class="td-card__hdr"><span class="td-card__label">Escalation Quality</span><span class="td-card__info">i</span><div class="td-popover"><div class="td-popover__dt">Definition</div><div class="td-popover__dd">Rubric score for handoff completeness: context accuracy, issue identification, sentiment summary, troubleshooting history.</div><div class="td-popover__dt">Target</div><div class="td-popover__dd good">4+/5 rubric; post-escalation AHT ≤ direct-to-human AHT</div><div class="td-popover__dt">Drift Detection</div><div class="td-popover__dd warn">Median drops below 3.5/5 or poor escalations exceed 15%</div></div></div>';
+h+='<div class="td-card__val">'+eqVal+'<span class="td-card__unit">/5</span></div>';
+h+='<div class="td-pips" style="--pip-color:'+(eqOk?'#22c55e':'#f59e0b')+'">';
+for(var p=1;p<=5;p++){h+='<div class="td-pip'+(p<=Math.round(eqVal)?' filled':'')+(p===Math.round(eqVal)?' current':'')+(p===4?' target':'')+'"></div>'}
+h+='</div><div class="td-card__ts">Updated '+ago()+'</div></div>';
+
+// Recommendation Relevance
+var rrVal=rndF(22,42),rrOk=rrVal>=25&&rrVal<=40;
+h+='<div class="td-card '+(rrOk?'st-ok':'st-wn')+'"><div class="td-card__hdr"><span class="td-card__label">Recommendation Relevance</span><span class="td-card__info">i</span><div class="td-popover"><div class="td-popover__dt">Definition</div><div class="td-popover__dd">% of agent recommendations (plans, devices, offers) accepted by customers.</div><div class="td-popover__dt">Target</div><div class="td-popover__dd good">25-40% acceptance rate</div><div class="td-popover__dt">Drift Detection</div><div class="td-popover__dd warn">Acceptance dropping while recommendation volume stays constant</div></div></div>';
+h+='<div class="td-card__val">'+rrVal+'<span class="td-card__unit">%</span></div>';
+h+='<div class="td-bar" style="overflow:visible"><div style="position:absolute;left:25%;right:60%;top:0;bottom:0;background:hsla(142,76%,46%,.12);border-left:2px solid #4ade80;border-right:2px solid #4ade80;border-radius:2px"></div><div class="td-bar__fill" style="width:'+rrVal+'%;background:'+(rrOk?'#22c55e':'#f59e0b')+';height:100%;position:relative;z-index:1"></div></div>';
+h+='<div style="display:flex;justify-content:space-between;font-size:.5rem;color:#9ca3af;margin-top:2px"><span>0%</span><span style="color:#22c55e">25-40% zone</span><span>100%</span></div>';
+h+='<div class="td-card__ts">Updated '+ago()+'</div></div>';
+
+// Disclosure Compliance
+var dcVal=rndF(98.5,100),dcOk=dcVal>=99.5;
+h+='<div class="td-card '+(dcOk?'st-ok':'st-wn')+'"><div class="td-card__hdr"><span class="td-card__label">Disclosure Compliance</span><span class="td-card__info">i</span><div class="td-popover"><div class="td-popover__dt">Definition</div><div class="td-popover__dd">Completion of required regulatory disclosures (terms, fees, financing, trade-in) in all transactions.</div><div class="td-popover__dt">Target</div><div class="td-popover__dd good">100% mandatory disclosure completion</div><div class="td-popover__dt">Drift Detection</div><div class="td-popover__dd warn">Automated audit of 100% of transactions; flag any omission</div></div></div>';
+h+='<div class="td-card__val">'+dcVal+'<span class="td-card__unit">%</span></div>';
+h+='<div class="td-card__trend '+(dcOk?'flat':'dn')+'">target: 100%</div>';
+h+='<div class="td-card__ts">Updated '+ago()+'</div></div>';
+
+// Personalization Relevance
+var prVal=rndF(1.5,3.5),prOk=prVal>=2;
+h+='<div class="td-card '+(prOk?'st-ok':'st-wn')+'"><div class="td-card__hdr"><span class="td-card__label">Personalization Lift</span><span class="td-card__info">i</span><div class="td-popover"><div class="td-popover__dt">Definition</div><div class="td-popover__dd">Engagement lift from personalized vs generic content — measures how well agents tailor communications.</div><div class="td-popover__dt">Target</div><div class="td-popover__dd good">2-3x engagement lift</div><div class="td-popover__dt">Drift Detection</div><div class="td-popover__dd warn">Engagement lift narrowing; unsubscribe rate increasing</div></div></div>';
+h+='<div class="td-card__val">'+prVal+'<span class="td-card__unit">x lift</span></div>';
+h+='<div class="td-card__trend '+(prOk?'up':'dn')+'">vs 1x baseline</div>';
+h+='<div class="td-card__ts">Updated '+ago()+'</div></div>';
+
+// ── SECTION: Infrastructure & Reliability ──
+h+='<div class="td-section s-infra"><span class="td-section__title">Infrastructure & Reliability</span></div>';
+
+// P95 Latency
+var latVal=rndF(1.2,3.5),latOk=latVal<3;
+h+='<div class="td-card '+(latOk?'st-ok':'st-cr')+'"><div class="td-card__hdr"><span class="td-card__label">P95 Latency</span><span class="td-card__info">i</span><div class="td-popover"><div class="td-popover__dt">Definition</div><div class="td-popover__dd">95th percentile agent response time — the speed experienced by the slowest 5% of interactions.</div><div class="td-popover__dt">Target</div><div class="td-popover__dd good">P95 &lt;3s; P99 &lt;5s</div><div class="td-popover__dt">Drift Detection</div><div class="td-popover__dd warn">Response time degradation; increasing timeout rates</div></div></div>';
+h+='<div class="td-card__val">'+latVal+'<span class="td-card__unit">s</span></div>';
+h+='<div class="td-bar"><div class="td-bar__fill" style="width:'+Math.min(latVal/5*100,100)+'%;background:'+(latOk?'#22c55e':latVal<4?'#f59e0b':'#ef4444')+'"></div><div class="td-bar__marker" style="left:60%"></div><div class="td-bar__target-label" style="left:60%">target: &lt;3s</div></div>';
+h+='<div class="td-card__ts">Updated '+ago()+'</div></div>';
+
+// Error Rate
+var errVal=rndF(0.2,1.5),errOk=errVal<1;
+h+='<div class="td-card '+(errOk?'st-ok':'st-wn')+'"><div class="td-card__hdr"><span class="td-card__label">Error Rate</span><span class="td-card__info">i</span><div class="td-popover"><div class="td-popover__dt">Definition</div><div class="td-popover__dd">% of interactions with agent errors, tool call failures, or crashes.</div><div class="td-popover__dt">Target</div><div class="td-popover__dd good">&lt;1% error rate</div><div class="td-popover__dt">Drift Detection</div><div class="td-popover__dd warn">New failure modes emerging; error rate trending up</div></div></div>';
+h+='<div class="td-card__val">'+errVal+'<span class="td-card__unit">%</span></div>';
+h+='<div class="td-bar"><div class="td-bar__fill" style="width:'+Math.min(errVal/3*100,100)+'%;background:'+(errOk?'#22c55e':'#f59e0b')+'"></div><div class="td-bar__marker" style="left:33%"></div><div class="td-bar__target-label" style="left:33%">target: &lt;1%</div></div>';
+h+='<div class="td-card__ts">Updated '+ago()+'</div></div>';
+
+// Data Freshness
+var dfVal=rndF(97,100),dfOk=dfVal>=99;
+h+='<div class="td-card '+(dfOk?'st-ok':'st-wn')+'"><div class="td-card__hdr"><span class="td-card__label">Data Freshness SLA</span><span class="td-card__info">i</span><div class="td-popover"><div class="td-popover__dt">Definition</div><div class="td-popover__dd">Whether each data feed meets its freshness SLA (RT &lt;5s, NRT &lt;15min, batch &lt;24h).</div><div class="td-popover__dt">Target</div><div class="td-popover__dd good">99%+ SLA compliance across all feeds</div><div class="td-popover__dt">Drift Detection</div><div class="td-popover__dd warn">Any feed missing SLA &gt;3 consecutive intervals</div></div></div>';
+h+='<div class="td-card__val">'+dfVal+'<span class="td-card__unit">%</span></div>';
+h+='<div class="td-card__trend '+(dfOk?'flat':'dn')+'">SLA compliance</div>';
+h+='<div class="td-card__ts">Updated '+ago()+'</div></div>';
+
+// Token Usage
+var tkVal=rndF(1.8,2.8),tkOk=tkVal<3;
+h+='<div class="td-card '+(tkOk?'st-ok':'st-wn')+'"><div class="td-card__hdr"><span class="td-card__label">Token Usage</span><span class="td-card__info">i</span><div class="td-popover"><div class="td-popover__dt">Definition</div><div class="td-popover__dd">LLM token consumption and cost per interaction. Tracks computational efficiency.</div><div class="td-popover__dt">Target</div><div class="td-popover__dd good">Within daily budget of 3M tokens</div><div class="td-popover__dt">Drift Detection</div><div class="td-popover__dd warn">Cost per interaction rising without quality improvement</div></div></div>';
+h+='<div class="td-card__val">'+tkVal+'<span class="td-card__unit">M/day</span></div>';
+h+='<div class="td-bar"><div class="td-bar__fill" style="width:'+Math.min(tkVal/4*100,100)+'%;background:'+(tkOk?'#3b82f6':'#f59e0b')+'"></div><div class="td-bar__marker" style="left:75%"></div><div class="td-bar__target-label" style="left:75%">budget: 3M</div></div>';
+h+='<div class="td-card__ts">Updated '+ago()+'</div></div>';
+
+// Availability
+var avVal=rndF(99.8,100);var avOk=avVal>=99.9;
+h+='<div class="td-card '+(avOk?'st-ok':'st-cr')+'"><div class="td-card__hdr"><span class="td-card__label">Availability</span><span class="td-card__info">i</span><div class="td-popover"><div class="td-popover__dt">Definition</div><div class="td-popover__dd">Agent uptime and service availability. Measures system reliability.</div><div class="td-popover__dt">Target</div><div class="td-popover__dd good">99.9% uptime; &lt;4 min unplanned downtime/month</div><div class="td-popover__dt">Drift Detection</div><div class="td-popover__dd warn">Availability SLA breach; increasing error responses</div></div></div>';
+h+='<div class="td-card__val">'+avVal+'<span class="td-card__unit">%</span></div>';
+h+='<div class="td-card__trend '+(avOk?'flat':'dn')+'">target: 99.9%</div>';
+h+='<div class="td-card__ts">Updated '+ago()+'</div></div>';
+
+// ── SECTION: Model Health & Governance ──
+h+='<div class="td-section s-govern"><span class="td-section__title">Model Health & Governance</span></div>';
+
+// Health status rows in a single card
+h+='<div class="td-card" style="grid-column:1/-1">';
+var healthItems=[
+{name:'Model Drift',status:'ok',label:'Stable',detail:'KL divergence within bounds'},
+{name:'Bias Monitoring',status:rnd(0,10)>8?'wn':'ok',label:rnd(0,10)>8?'Warning':'Passing',detail:rnd(0,10)>8?'Age segment +2.1% deviation':'No significant disparities'},
+{name:'PII Compliance',status:'ok',label:'Passing',detail:'0 incidents (30d)'},
+{name:'Feedback Loop',status:rnd(0,10)>7?'wn':'ok',label:rnd(0,10)>7?'Delayed':'Healthy',detail:rnd(0,10)>7?'12 corrections pending':'92% reviewed in 7d'},
+{name:'Campaign Optimization',status:'ok',label:rndF(70,95)+'%',detail:'Recommendations improving CPA'},
+{name:'Segmentation Quality',status:'ok',label:rndF(10,18)+'% lift',detail:'vs manual segments'},
+{name:'Attribution Accuracy',status:rnd(0,10)>6?'wn':'ok',label:rnd(0,10)>6?'Recalibrating':'Within 15%',detail:'Model predictions vs actuals'}
 ];
-kpis.forEach(k=>{
-  var data=moTrend(k.start,k.target,k.variance,k.max);
-  var cur=data[11];
-  var met=k.inv?(cur<=k.target):(cur>=k.target);
-  h+='<div class="tdb-metric"><div class="tdb-metric__top"><div class="tdb-metric__info">';
-  h+='<div class="tdb-metric__name" style="display:flex;align-items:center;gap:6px"><span class="tdb-dot '+(met?'ok':'wn')+'" style="width:6px;height:6px"></span>'+k.name+'</div>';
-  h+='<div class="tdb-metric__desc">'+k.desc+'</div></div>';
-  h+='<div style="text-align:right"><div style="font-size:1.25rem;font-weight:700;color:'+(met?'#22c55e':'#f59e0b')+'">'+cur.toFixed(1)+k.unit+'</div>';
-  h+='<div style="font-size:.5625rem;color:#64748b">Target: '+k.target+k.unit+'</div></div></div>';
-  h+=moChart(data,k.target,k.max,k.unit,k.inv);
-  h+='</div>'});
-h+='</div></div>';
-
-// ── 4. DATA PIPELINE FRESHNESS (collapsible, default open) ──
-h+='<div class="tdb-section"><div class="tdb-section__hdr" style="cursor:pointer" onclick="var b=this.nextElementSibling;b.style.display=b.style.display===\'none\'?\'grid\':\'none\';this.querySelector(\'.tdb-chv\').style.transform=b.style.display===\'none\'?\'rotate(-90deg)\':\'\'"><span class="tdb-section__hdr-icon">&#128200;</span> Data Pipeline Freshness — 12 Hours<span class="tdb-chv" style="margin-left:auto;font-size:10px;color:#64748b;transition:transform .2s">&#9660;</span></div>';
-h+='<div style="display:grid;grid-template-columns:140px 1fr;gap:.5rem;align-items:center">';
-["Customer Profile","Billing & Balance","Payment History","Order & Activation","Network Status","Device & SIM","Interaction History","Queue & Workforce","Product Catalog","Churn Scores","Campaign Data","Segments"].forEach(p=>{
-h+='<div style="font-size:.7rem;color:var(--tw);text-align:right;padding-right:.5rem">'+p+'</div><div class="tdb-heatmap">';
-for(var i=0;i<12;i++){var v=rnd(60,100);h+='<div class="tdb-hm-cell" style="'+hmColor(v)+'" title="'+v+'%"></div>'}
-h+='</div>'});
-h+='<div style="font-size:.7rem;color:var(--tw);text-align:right"></div><div class="tdb-heatmap"><div class="tdb-hm-label" style="display:flex;justify-content:space-between;font-size:.5625rem;color:var(--tw)"><span>12h ago</span><span>6h</span><span>Now</span></div></div>';
-h+='</div></div>';
-
-// ── 5. THROUGHPUT & ERRORS (collapsible, default open) ──
-h+='<div class="tdb-section"><div class="tdb-section__hdr" style="cursor:pointer" onclick="var b=this.nextElementSibling;b.style.display=b.style.display===\'none\'?\'grid\':\'none\';this.querySelector(\'.tdb-chv\').style.transform=b.style.display===\'none\'?\'rotate(-90deg)\':\'\'"><span class="tdb-section__hdr-icon">&#128202;</span> Throughput & Errors (24h)<span class="tdb-chv" style="margin-left:auto;font-size:10px;color:#64748b;transition:transform .2s">&#9660;</span></div>';
-h+='<div class="tdb-metrics">';
-h+='<div class="tdb-metric" style="grid-column:span 2"><div class="tdb-metric__top"><div class="tdb-metric__info"><div class="tdb-metric__name">Interactions per Hour</div><div class="tdb-metric__desc">Target: 2,000+</div></div></div>';
-h+='<div class="tdb-monthly"><div class="tdb-monthly__bars" style="position:relative">';
-h+='<div class="tdb-monthly__target" style="bottom:'+Math.round(2000/3500*48)+'px"><span class="tdb-monthly__target-label">Target: 2K/hr</span></div>';
-for(var i=0;i<24;i++){var v=rnd(800,3200);var vc=v>=2000?'#22c55e':v>=1500?'#f59e0b':'#ef4444';h+='<div class="tdb-monthly__bar" style="height:'+barH(v,3500,48)+'px;background:'+vc+'" data-tip="'+v+'"></div>'}
-h+='</div></div></div>';
-h+='<div class="tdb-metric"><div class="tdb-metric__top"><div class="tdb-metric__info"><div class="tdb-metric__name">Error Breakdown</div><div class="tdb-metric__desc">Target: each &lt;0.5%</div></div></div>';
-[{n:'Tool call failure',v:38,c:'#ef4444'},{n:'Timeout',v:22,c:'#f59e0b'},{n:'Hallucination',v:15,c:'#f97316'},{n:'Policy violation',v:12,c:'#a855f7'},{n:'Auth failure',v:8,c:'#6366f1'},{n:'Other',v:5,c:'#64748b'}].forEach(e=>{
-h+='<div style="display:flex;align-items:center;gap:.5rem;margin-top:4px"><span style="font-size:.65rem;color:var(--tw);width:90px;text-align:right">'+e.n+'</span><div style="flex:1;height:8px;background:var(--br);border-radius:4px;overflow:hidden"><div style="height:100%;width:'+e.v+'%;background:'+e.c+';border-radius:4px"></div></div><span style="font-size:.65rem;color:var(--td);width:28px">'+e.v+'%</span></div>'});
-h+='</div></div></div>';
-
-// ── 6. COST & RESOURCES (collapsible, default closed) ──
-h+='<div class="tdb-section"><div class="tdb-section__hdr" style="cursor:pointer" onclick="var b=this.nextElementSibling;b.style.display=b.style.display===\'none\'?\'grid\':\'none\';this.querySelector(\'.tdb-chv\').style.transform=b.style.display===\'none\'?\'rotate(-90deg)\':\'\'"><span class="tdb-section__hdr-icon">&#128176;</span> Cost & Resources vs Targets<span class="tdb-chv" style="margin-left:auto;font-size:10px;color:#64748b;transition:transform .2s;transform:rotate(-90deg)">&#9660;</span></div>';
-h+='<div class="tdb-metrics" style="display:none">';
-[{name:'Token Usage',actual:2.4,target:3.0,max:4,unit:'M/day',inv:true},{name:'Cost/Resolution',actual:0.42,target:0.60,max:1.0,unit:'',inv:true,prefix:'$'},{name:'Escalation Cost',actual:8.50,target:10.0,max:15,unit:'',inv:true,prefix:'$'},{name:'Compute',actual:67,target:85,max:100,unit:'%',inv:true}].forEach(m=>{
-var met=m.inv?(m.actual<=m.target):(m.actual>=m.target);var mc=met?'#22c55e':'#f59e0b';
-var aPct=Math.min(100,m.actual/m.max*100),tPct=Math.min(100,m.target/m.max*100);
-h+='<div class="tdb-metric"><div class="tdb-metric__name">'+m.name+'</div>';
-h+='<div style="display:flex;align-items:baseline;gap:.5rem;margin:.25rem 0"><span style="font-size:1.25rem;font-weight:700;color:'+mc+'">'+(m.prefix||'')+m.actual+m.unit+'</span><span style="font-size:.625rem;color:var(--tw)">Target: '+(m.prefix||'')+m.target+m.unit+'</span></div>';
-h+='<div class="tdb-avt__bar-wrap"><div class="tdb-avt__bar" style="width:'+aPct+'%;background:'+mc+'"></div><div class="tdb-avt__marker" style="left:'+tPct+'%"></div></div></div>'});
-h+='</div></div>';
-
+healthItems.forEach(function(item){
+h+='<div class="td-health-row"><span class="td-dot '+item.status+'"></span><span class="td-health-row__name">'+item.name+'</span><span class="td-health-row__status" style="color:'+(item.status==='ok'?'#22c55e':item.status==='wn'?'#f59e0b':'#ef4444')+'">'+item.label+'</span><span style="font-size:.625rem;color:#9ca3af;flex:1">'+item.detail+'</span><span class="td-health-row__ts">'+ago()+'</span></div>';
+});
 h+='</div>';
-c.innerHTML=h}
+
+h+='</div></div>'; // close grid and dash
+c.innerHTML=h;return;
+}
+
+if(anaView==='calculator'){
+// ══ VALUE CALCULATOR ══
+rCC();return;
+}
+}
+
+// Redirect rCC to render into ana-ct
+var _origRCC;
+function bTel(){bAna()}
+
 
 // ═══ ENTERPRISE ROI CALCULATOR ═══
 var calcScenario='moderate';
@@ -1461,7 +1572,7 @@ function calcROI(){
 }
 
 function rCC(){
-  var c=document.getElementById('calc-ct');if(!c)return;
+  var c=document.getElementById('ana-ct');if(!c)return;
   var R=calcROI(),h='';
 
   if(cCV==='exec'){
@@ -1599,9 +1710,9 @@ function sCV(v,b){b.parentElement.querySelectorAll('.tab').forEach(x=>x.classLis
 function rC(){calcScenario='moderate';rCC()}
 
 // INIT
-bJM();rOT('service');rCC();bDR();bTel();
+bJM();rOT('service');bDR();bAna();
 // Refresh telemetry periodically for live feel
-setInterval(function(){if(telView==='dashboard'&&document.getElementById('vw-telemetry').classList.contains('on')){AGENTS_HEALTH.forEach(a=>{a.containment=Math.min(100,Math.max(50,a.containment+rnd(-2,2)));a.latency=Math.max(0.2,parseFloat((a.latency+rndF(-0.2,0.2)).toFixed(1)));a.errors=Math.max(0,parseFloat((a.errors+rndF(-0.3,0.3)).toFixed(1)));a.status=a.errors>2?'cr':a.errors>1?'wn':'ok'});bTel()}},8000);
+setInterval(function(){if(anaView==='telemetry'&&document.getElementById('vw-analytics').classList.contains('on')){AGENTS_HEALTH.forEach(a=>{a.containment=Math.min(100,Math.max(50,a.containment+rnd(-2,2)));a.latency=Math.max(0.2,parseFloat((a.latency+rndF(-0.2,0.2)).toFixed(1)));a.errors=Math.max(0,parseFloat((a.errors+rndF(-0.3,0.3)).toFixed(1)));a.status=a.errors>2?'cr':a.errors>1?'wn':'ok'});bAna()}},8000);
 </script>
 </body>
 </html>
